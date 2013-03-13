@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+        <action>
+            <actionName>CUSTOM-nbm:cluster</actionName>
+            <displayName>nbm:cluster</displayName>
+            <goals>
+                <goal>nbm:cluster</goal>
+            </goals>
+        </action>
+        <action>
+            <actionName>CUSTOM-nbm:run-ide</actionName>
+            <displayName>nbm:run-ide</displayName>
+            <goals>
+                <goal>nbm:run-ide</goal>
+            </goals>
+        </action>
+    </actions>
