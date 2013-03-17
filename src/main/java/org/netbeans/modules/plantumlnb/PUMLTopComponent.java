@@ -4,11 +4,34 @@
  */
 package org.netbeans.modules.plantumlnb;
 
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.SwingUtilities;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import org.netbeans.api.settings.ConvertAsProperties;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
+import org.openide.filesystems.FileChangeAdapter;
+import org.openide.filesystems.FileChangeListener;
+import org.openide.filesystems.FileEvent;
+import org.openide.filesystems.FileObject;
+import org.openide.loaders.DataObject;
+import org.openide.loaders.DataObjectNotFoundException;
+import org.openide.util.Lookup;
+import org.openide.util.LookupEvent;
+import org.openide.util.LookupListener;
+import org.openide.util.NbBundle;
 import org.openide.windows.TopComponent;
 import org.openide.util.NbBundle.Messages;
+import org.openide.util.RequestProcessor;
 
 /**
  * Top component which displays something.
@@ -30,8 +53,46 @@ import org.openide.util.NbBundle.Messages;
 })
 public final class PUMLTopComponent extends TopComponent {
 
+      
+    
+    /**
+     * template for finding data in given context. Object used as example,
+     * replace with your own data source, for example JavaDataObject etc
+     */
+    private static final Lookup.Template MY_DATA = new Lookup.Template(pumlDataObject.class);
+    
+    /**
+     * current context to work on
+     */
+    private Lookup.Result currentContext;
+    
+    /**
+     * listener to context changes
+     */
+    private LookupListener contextListener;
+    
+    /**
+     * Listens for changes on image file.
+     */
+    private FileChangeListener fileChangeListener;
+    
+    /**
+      * holds UI of this panel
+      */
+    private ImagePreviewPanel panelUI;
+    
+    private DataObject currentDataObject;   
+    private long lastSaveTime = -1;
+    private static final RequestProcessor WORKER = new RequestProcessor(PUMLTopComponent.class.getName());
+    
+    private PUMLGenerator pumlGenerator = new PUMLGenerator();
+    private DataObject.Registry registries = DataObject.getRegistry();
+    private PUMLFileChangedListener pumlFileChangedListener = new PUMLFileChangedListener();
+    
+    
     public PUMLTopComponent() {
         initComponents();
+        addCustomComponents();
         setName(Bundle.CTL_PUMLTopComponent());
         setToolTipText(Bundle.HINT_PUMLTopComponent());
 
@@ -57,16 +118,81 @@ public final class PUMLTopComponent extends TopComponent {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private  void addCustomComponents(){        
+        panelUI = new ImagePreviewPanel();
+
+        javax.swing.GroupLayout panelUILayout = new javax.swing.GroupLayout(panelUI);
+        panelUI.setLayout(panelUILayout);
+        panelUILayout.setHorizontalGroup(
+            panelUILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        panelUILayout.setVerticalGroup(
+            panelUILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panelUI, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panelUI, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+    }// </editor-fold>
+
+        
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
     @Override
     public void componentOpened() {
-        // TODO add custom code on component opening
+          // lookup context and listen to result to get notified about context changes
+        currentContext = getLookup().lookup(MY_DATA);
+        currentContext.addLookupListener(getContextListener());
+        // get actual data and recompute content
+        Collection data = currentContext.allInstances();
+        currentDataObject = getDataObject(data);
+//        if (currentDataObject == null) {
+//            return;
+//        }
+//        if (fileChangeListener == null) {
+//            fileChangeListener = new PUMLTopComponent.PUMLFileChangeAdapter();
+//        }
+//        currentDataObject.getPrimaryFile().addFileChangeListener(fileChangeListener);
+        
+        /**
+         * Attach event handler
+         */        
+        registries.addChangeListener(pumlFileChangedListener);
+        
+        setNewContent(currentDataObject);
     }
 
     @Override
     public void componentClosed() {
-        // TODO add custom code on component closing
+        registries.removeChangeListener(pumlFileChangedListener);
+    }
+    
+    @Override
+    public void componentActivated(){
+        // lookup context and listen to result to get notified about context changes
+        currentContext = getLookup().lookup(MY_DATA);
+        currentContext.addLookupListener(getContextListener());
+        // get actual data and recompute content
+        Collection data = currentContext.allInstances();
+        currentDataObject = getDataObject(data);
+//        if (currentDataObject == null) {
+//            return;
+//        }
+//        if (fileChangeListener == null) {
+//            fileChangeListener = new PUMLTopComponent.PUMLFileChangeAdapter();
+//        }
+//        currentDataObject.getPrimaryFile().addFileChangeListener(fileChangeListener);
+        setNewContent(currentDataObject);
     }
 
     void writeProperties(java.util.Properties p) {
@@ -80,4 +206,204 @@ public final class PUMLTopComponent extends TopComponent {
         String version = p.getProperty("version");
         // TODO read your settings according to their version
     }
+        
+    public void getComponent() {
+        if (lastSaveTime == -1) {
+            lastSaveTime = System.currentTimeMillis();
+        }
+        if (panelUI == null) {
+            panelUI = new ImagePreviewPanel();
+        }
+        
+        add(panelUI);
+    }
+    
+    private void setNewContent(final DataObject dataObject) {
+        if (dataObject == null) {
+            return;
+        }
+
+        WORKER.post(new Runnable() {
+
+            @Override
+            public void run() {
+                InputStream inputStream = null;
+                BufferedImage image = null;
+                
+                try {
+//                    FileObject fileObject = dataObject.getPrimaryFile();
+//                    if (fileObject == null) {
+//                        return;
+//                    }
+//                    inputStream = fileObject.getInputStream(); //TODO: This should be enabled later.
+//                    if (inputStream == null) {
+//                        return;
+//                    }
+                                    
+                    Set fss = dataObject.files();
+                    Iterator iter = fss.iterator();
+                    while (iter.hasNext()) {
+                        FileObject fo = (FileObject) iter.next();
+                        setNewContent((InputStream) pumlGenerator.generate(fo));
+                    }
+                                       
+                    
+                    if (panelUI == null) {
+                        getComponent();
+                    }
+                    try {
+//                        image = ImageIO.read(inputStream);
+                        URL imageUrl = getClass().getResource("classes_001.png");
+                        
+                        image = ImageIO.read( getClass().getResourceAsStream("classes_001.png"));
+                        
+                    } catch (IllegalArgumentException iaex) {
+                        Logger.getLogger(PUMLTopComponent.class.getName()).info(NbBundle.getMessage(PUMLTopComponent.class, "ERR_IOFile"));
+                        inputStream.close();
+                    } 
+//                    inputStream.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(PUMLTopComponent.class.getName()).info(NbBundle.getMessage(PUMLTopComponent.class, "ERR_IOFile"));
+                } finally {
+                    final BufferedImage fImage = image;
+                    SwingUtilities.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            panelUI.setImage(fImage);
+                        }
+                    });
+                }
+            }
+        });
+
+    }
+    
+    private void setNewContent(final InputStream inputStream) {
+        if (inputStream == null) {
+            return;
+        }
+
+        WORKER.post(new Runnable() {
+
+            @Override
+            public void run() {
+                BufferedImage image = null;
+                try {                    
+                    if (panelUI == null) {
+                        getComponent();
+                    }                    
+                    image = ImageIO.read(inputStream);                                            
+                } catch (IllegalArgumentException iaex) {
+                    Logger.getLogger(PUMLTopComponent.class.getName()).info(NbBundle.getMessage(PUMLTopComponent.class, "ERR_IOFile"));                        
+                } catch (IOException ex) {
+                    Logger.getLogger(PUMLTopComponent.class.getName()).info(NbBundle.getMessage(PUMLTopComponent.class, "ERR_IOFile"));
+                } finally {
+                    
+                    try {
+                        inputStream.close();
+                    } catch (IOException ex) {
+                        Logger.getLogger(PUMLTopComponent.class.getName()).info(NbBundle.getMessage(PUMLTopComponent.class, "ERR_IOFile"));
+                    }
+                    
+                    final BufferedImage fImage = image;
+                    SwingUtilities.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            panelUI.setImage(fImage);
+                        }
+                    });
+                }
+            }
+        });
+
+    }
+    
+    private DataObject getDataObject(Collection data) {
+        DataObject dataObject = null;
+        Iterator it = data.iterator();
+        while (it.hasNext()) {
+            Object o = it.next();
+            if (o instanceof pumlDataObject) {
+                dataObject = (DataObject) o;
+                break;
+            }
+        }
+        return dataObject;
+    }
+    
+    
+    /**
+     * Accessor for listener to context
+     */
+    private LookupListener getContextListener() {
+        if (contextListener == null) {
+            contextListener = new PUMLTopComponent.ContextListener();
+        }
+        return contextListener;
+    }
+    
+    
+    
+    /**
+     * Listens to changes of context and triggers proper action
+     */
+    private class ContextListener implements LookupListener {
+
+        @Override
+        public void resultChanged(LookupEvent ev) {
+            Collection data = ((Lookup.Result) ev.getSource()).allInstances();
+            currentDataObject = getDataObject(data);
+            setNewContent(currentDataObject);
+        }
+    }
+    
+    
+    private class PUMLFileChangeAdapter extends FileChangeAdapter {
+
+        @Override
+        public void fileChanged(final FileEvent fe) {
+            if (fe.getTime() > lastSaveTime) {
+                lastSaveTime = System.currentTimeMillis();
+
+                // Refresh image viewer
+                SwingUtilities.invokeLater(new Runnable() {
+
+                    public void run() {
+                        try {
+                            currentDataObject = DataObject.find(fe.getFile());
+                            setNewContent(currentDataObject);
+                        } catch (DataObjectNotFoundException ex) {
+                            Logger.getLogger(PUMLTopComponent.class.getName()).info(NbBundle.getMessage(PUMLTopComponent.class, "ERR_DataObject"));
+                        }
+                    }
+                });
+            }
+        }
+    }
+    
+    
+    public class PUMLFileChangedListener implements ChangeListener{
+
+        @Override
+        public void stateChanged(ChangeEvent e) {
+            DataObject.Registry registries = DataObject.getRegistry();
+
+            DataObject[] objects = registries.getModified();
+            for (int i = 0; i < objects.length; i++) {
+                DataObject dataObj = objects[i];
+                Set fss = dataObj.files();
+                Iterator iter = fss.iterator();
+                while (iter.hasNext()) {
+                    FileObject fo = (FileObject) iter.next();
+                    setNewContent((InputStream) pumlGenerator.generate(fo));
+                }
+            }
+        }                    
+    
+    }
+
+    
 }
+
+
+    

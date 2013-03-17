@@ -85,6 +85,8 @@ public final class pumlVisualElement extends JPanel implements MultiViewElement 
 
     @Override
     public void componentOpened() {
+        System.out.println("fadfhdf");
+        getLookup().lookup(PUMLTopComponent.class);
     }
 
     @Override
