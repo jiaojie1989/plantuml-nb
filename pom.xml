@@ -95,12 +95,6 @@
             <version>RELEASE73-BETA2</version>
         </dependency>
         <dependency>
-            <groupId>org.netbeans.modules</groupId>
-            <artifactId>org-netbeans-modules-image</artifactId>
-            <version>RELEASE73-BETA2</version>
-            <type>nbm</type>
-        </dependency>
-        <dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-netbeans-modules-settings</artifactId>
             <version>RELEASE73-BETA2</version>
