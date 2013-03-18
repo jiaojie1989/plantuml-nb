@@ -5,6 +5,9 @@
 package org.netbeans.modules.plantumlnb;
 
 import java.awt.image.BufferedImage;
+import java.awt.peer.ComponentPeer;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -86,8 +89,10 @@ public final class PUMLTopComponent extends TopComponent {
     private static final RequestProcessor WORKER = new RequestProcessor(PUMLTopComponent.class.getName());
     
     private PUMLGenerator pumlGenerator = new PUMLGenerator();
-    private DataObject.Registry registries = DataObject.getRegistry();
+    private DataObject.Registry registries = DataObject.getRegistry();    
+    private TopComponent.Registry topComponentRegistry = TopComponent.getRegistry();
     private PUMLFileChangedListener pumlFileChangedListener = new PUMLFileChangedListener();
+    private PUMLTopComponentPropertyChangeListener pumlTopComponentPropertyChangeListener = new PUMLTopComponentPropertyChangeListener();
     
     
     public PUMLTopComponent() {
@@ -168,6 +173,7 @@ public final class PUMLTopComponent extends TopComponent {
          * Attach event handler
          */        
         registries.addChangeListener(pumlFileChangedListener);
+        topComponentRegistry.addPropertyChangeListener(pumlTopComponentPropertyChangeListener);
         
         setNewContent(currentDataObject);
     }
@@ -175,6 +181,7 @@ public final class PUMLTopComponent extends TopComponent {
     @Override
     public void componentClosed() {
         registries.removeChangeListener(pumlFileChangedListener);
+        topComponentRegistry.removePropertyChangeListener(pumlTopComponentPropertyChangeListener);
     }
     
     @Override
@@ -318,6 +325,28 @@ public final class PUMLTopComponent extends TopComponent {
 
     }
     
+    /**
+     * Method to call to render a default image when the file opened in the 
+     * editor is not a puml file.
+     */
+    private void setDefaultContent(){
+        if (panelUI == null) {
+            getComponent();
+        }                    
+        try {
+            final BufferedImage image = ImageIO.read(getClass().getResourceAsStream("default-icon.png")); 
+                        
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    panelUI.setImage(image);
+                }
+            });
+        } catch (IOException ex) {
+            Logger.getLogger(PUMLTopComponent.class.getName()).info(ex.toString());             
+        }
+    }
+    
     private DataObject getDataObject(Collection data) {
         DataObject dataObject = null;
         Iterator it = data.iterator();
@@ -395,11 +424,36 @@ public final class PUMLTopComponent extends TopComponent {
                 Iterator iter = fss.iterator();
                 while (iter.hasNext()) {
                     FileObject fo = (FileObject) iter.next();
-                    setNewContent((InputStream) pumlGenerator.generate(fo));
+                    if(fo.getExt().toLowerCase().equals("puml")){
+                        setNewContent((InputStream) pumlGenerator.generate(fo));
+                    } else {
+                        setDefaultContent();
+                    }
                 }
             }
         }                    
     
+    }
+    
+    public class PUMLTopComponentPropertyChangeListener implements PropertyChangeListener {
+
+        @Override
+        public void propertyChange(PropertyChangeEvent evt) {
+            System.out.println(evt.getPropertyName());
+            if(evt.getPropertyName().toLowerCase().equals(TopComponent.Registry.PROP_OPENED) 
+                    && evt.getNewValue() instanceof TopComponent){
+                TopComponent tc = (TopComponent) evt.getNewValue();
+                ComponentPeer cp = tc.getPeer();
+                
+//                String displayName = ((Node[]) evt.getNewValue())[0].getDisplayName();            
+
+//                if(displayName.toLowerCase().endsWith("puml")){
+//                    System.out.println("This gets Fired");
+//                }
+            }
+        }     
+        
+        
     }
 
     
