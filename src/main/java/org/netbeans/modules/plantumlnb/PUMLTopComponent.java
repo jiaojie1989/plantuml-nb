@@ -16,6 +16,7 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -83,6 +84,7 @@ public final class PUMLTopComponent extends TopComponent {
       * holds UI of this panel
       */
     private ImagePreviewPanel panelUI;
+    private JScrollPane scrollPane;
     
     private DataObject currentDataObject;   
     private long lastSaveTime = -1;
@@ -125,27 +127,30 @@ public final class PUMLTopComponent extends TopComponent {
 
     private  void addCustomComponents(){        
         panelUI = new ImagePreviewPanel();
+        scrollPane = new javax.swing.JScrollPane();
 
-        javax.swing.GroupLayout panelUILayout = new javax.swing.GroupLayout(panelUI);
-        panelUI.setLayout(panelUILayout);
-        panelUILayout.setHorizontalGroup(
-            panelUILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(panelUI);
+        panelUI.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 397, Short.MAX_VALUE)
         );
-        panelUILayout.setVerticalGroup(
-            panelUILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 297, Short.MAX_VALUE)
         );
+
+        scrollPane.setViewportView(panelUI);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelUI, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelUI, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
         );
     }// </editor-fold>
 
@@ -444,7 +449,7 @@ public final class PUMLTopComponent extends TopComponent {
                     && evt.getNewValue() instanceof TopComponent){
                 TopComponent tc = (TopComponent) evt.getNewValue();
                 ComponentPeer cp = tc.getPeer();
-                
+                System.out.println("This gets Fired");
 //                String displayName = ((Node[]) evt.getNewValue())[0].getDisplayName();            
 
 //                if(displayName.toLowerCase().endsWith("puml")){

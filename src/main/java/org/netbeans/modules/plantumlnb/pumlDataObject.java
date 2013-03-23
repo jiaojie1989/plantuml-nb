@@ -25,61 +25,61 @@ import org.openide.windows.TopComponent;
 })
 @MIMEResolver.ExtensionRegistration(
     displayName = "#LBL_puml_LOADER",
-mimeType = "text/plain",
+mimeType = "text/x-puml",
 extension = {"puml", "PUML"})
 @DataObject.Registration(
-    mimeType = "text/plain",
+    mimeType = "text/x-puml",
 iconBase = "org/netbeans/modules/plantumlnb/icon.png",
 displayName = "#LBL_puml_LOADER",
 position = 300)
 @ActionReferences({
     @ActionReference(
-        path = "Loaders/text/plain/Actions",
+        path = "Loaders/text/x-puml/Actions",
     id =
     @ActionID(category = "System", id = "org.openide.actions.OpenAction"),
     position = 100,
     separatorAfter = 200),
     @ActionReference(
-        path = "Loaders/text/plain/Actions",
+        path = "Loaders/text/x-puml/Actions",
     id =
     @ActionID(category = "Edit", id = "org.openide.actions.CutAction"),
     position = 300),
     @ActionReference(
-        path = "Loaders/text/plain/Actions",
+        path = "Loaders/text/x-puml/Actions",
     id =
     @ActionID(category = "Edit", id = "org.openide.actions.CopyAction"),
     position = 400,
     separatorAfter = 500),
     @ActionReference(
-        path = "Loaders/text/plain/Actions",
+        path = "Loaders/text/x-puml/Actions",
     id =
     @ActionID(category = "Edit", id = "org.openide.actions.DeleteAction"),
     position = 600),
     @ActionReference(
-        path = "Loaders/text/plain/Actions",
+        path = "Loaders/text/x-puml/Actions",
     id =
     @ActionID(category = "System", id = "org.openide.actions.RenameAction"),
     position = 700,
     separatorAfter = 800),
     @ActionReference(
-        path = "Loaders/text/plain/Actions",
+        path = "Loaders/text/x-puml/Actions",
     id =
     @ActionID(category = "System", id = "org.openide.actions.SaveAsTemplateAction"),
     position = 900,
     separatorAfter = 1000),
     @ActionReference(
-        path = "Loaders/text/plain/Actions",
+        path = "Loaders/text/x-puml/Actions",
     id =
     @ActionID(category = "System", id = "org.openide.actions.FileSystemAction"),
     position = 1100,
     separatorAfter = 1200),
     @ActionReference(
-        path = "Loaders/text/plain/Actions",
+        path = "Loaders/text/x-puml/Actions",
     id =
     @ActionID(category = "System", id = "org.openide.actions.ToolsAction"),
     position = 1300),
     @ActionReference(
-        path = "Loaders/text/plain/Actions",
+        path = "Loaders/text/x-puml/Actions",
     id =
     @ActionID(category = "System", id = "org.openide.actions.PropertiesAction"),
     position = 1400)
@@ -88,7 +88,7 @@ public class pumlDataObject extends MultiDataObject {
 
     public pumlDataObject(FileObject pf, MultiFileLoader loader) throws DataObjectExistsException, IOException {
         super(pf, loader);
-        registerEditor("text/plain", true);
+        registerEditor("text/x-puml", true);
     }
 
     @Override
@@ -102,7 +102,7 @@ public class pumlDataObject extends MultiDataObject {
     mimeType = "text/plain",
     persistenceType = TopComponent.PERSISTENCE_ONLY_OPENED,
     preferredID = "puml",
-    position = 1000)
+    position = 1200)
     @Messages("LBL_puml_EDITOR=Source")
     public static MultiViewEditorElement createEditor(Lookup lkp) {
         return new MultiViewEditorElement(lkp);
