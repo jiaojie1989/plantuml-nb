@@ -8,7 +8,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import net.sourceforge.plantuml.SourceStringReader;
-import org.openide.awt.QuickSearch.Callback;
 import org.openide.filesystems.FileObject;
 import org.openide.util.Exceptions;
 
@@ -49,7 +48,7 @@ public class PUMLGenerator {
 //            System.out.println(name);
         } catch (IOException ex) {
             Exceptions.printStackTrace(ex);
-        }
+        } 
         return pumlImageInputStream;
     }
     

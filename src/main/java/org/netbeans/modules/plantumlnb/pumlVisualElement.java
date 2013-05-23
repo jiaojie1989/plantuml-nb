@@ -13,7 +13,6 @@ import org.netbeans.core.spi.multiview.text.MultiViewEditorElement;
 import org.openide.util.Lookup;
 import org.openide.util.NbBundle.Messages;
 import org.openide.windows.TopComponent;
-import org.openide.windows.WindowManager;
 
 
 /**
@@ -45,7 +44,10 @@ public final class pumlVisualElement extends MultiViewEditorElement {
     @Override
     public void componentActivated() {
         super.componentActivated(); 
-        System.out.println(retrievePUMLTopComponent());
+        PUMLTopComponent pumltc = retrievePUMLTopComponent();
+        if(pumltc != null) {
+            pumltc.setNewContent(obj);
+        }
     }
 
     /**
@@ -58,20 +60,17 @@ public final class pumlVisualElement extends MultiViewEditorElement {
             SwingUtilities.invokeLater(new Runnable(){
                 @Override
                 public void run() {
-                    PUMLTopComponent pumltc = instantiatePUMLTopComponent();
-                    WindowManager.getDefault().findMode("properties").dockInto(pumltc);
+                    PUMLTopComponent pumltc = PUMLTopComponent.getInstance();
+                    
+                    // Register the instantiated PUMLTopComponent with Netbeans.
                     pumltc.open();
+                    pumltc.setNewContent(obj);
                 }
             });
             
         }
     }
-    
-    @TopComponent.Registration(mode = "properties", openAtStartup = false)
-    private PUMLTopComponent instantiatePUMLTopComponent(){
-        return new PUMLTopComponent();
-    }
-    
+
     public PUMLTopComponent retrievePUMLTopComponent() {
         Iterator i = topComponentRegistry.getOpened().iterator();
         

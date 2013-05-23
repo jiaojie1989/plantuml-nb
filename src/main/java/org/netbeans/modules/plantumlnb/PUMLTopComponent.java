@@ -10,13 +10,15 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.JButton;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JToolBar;
 import javax.swing.SwingUtilities;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -36,6 +38,9 @@ import org.openide.util.NbBundle;
 import org.openide.windows.TopComponent;
 import org.openide.util.NbBundle.Messages;
 import org.openide.util.RequestProcessor;
+import org.openide.util.lookup.AbstractLookup;
+import org.openide.util.lookup.InstanceContent;
+import org.openide.windows.WindowManager;
 
 /**
  * Top component which displays something.
@@ -51,12 +56,13 @@ import org.openide.util.RequestProcessor;
 @TopComponent.OpenActionRegistration( displayName = "#CTL_PUMLAction",
     preferredID = "PUMLTopComponent")
 @Messages({
-    "CTL_PUMLAction=PUML",
+    "CTL_PUMLAction=Plant UML",
     "CTL_PUMLTopComponent=PlantUML",
     "HINT_PUMLTopComponent=This is a PlantUML window"
 })
 public final class PUMLTopComponent extends TopComponent {
 
+    InstanceContent instanceContent = new InstanceContent();
       
     
     /**
@@ -96,13 +102,24 @@ public final class PUMLTopComponent extends TopComponent {
     private PUMLFileChangedListener pumlFileChangedListener = new PUMLFileChangedListener();
     private PUMLTopComponentPropertyChangeListener pumlTopComponentPropertyChangeListener = new PUMLTopComponentPropertyChangeListener();
     
+    private JToolBar jToolBar1 = null;
+    private JButton exportPNGButton = null;
     
-    public PUMLTopComponent() {
+    private static PUMLTopComponent pumltc = null;
+    
+    private static BufferedImage currentImage = null;
+    private static NBImageIcon currentNBImageIcon = null;
+    
+    private static PUMLTopComponent self = null;
+    
+    
+    private PUMLTopComponent() {        
         initComponents();
         addCustomComponents();
         setName(Bundle.CTL_PUMLTopComponent());
         setToolTipText(Bundle.HINT_PUMLTopComponent());
-
+//        associateLookup(new AbstractLookup(instanceContent));
+        WindowManager.getDefault().findMode("properties").dockInto(this);
     }
 
     /**
@@ -128,6 +145,8 @@ public final class PUMLTopComponent extends TopComponent {
     private  void addCustomComponents(){        
         panelUI = new ImagePreviewPanel();
         scrollPane = new javax.swing.JScrollPane();
+        
+        addToolbar();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(panelUI);
         panelUI.setLayout(jPanel1Layout);
@@ -147,13 +166,72 @@ public final class PUMLTopComponent extends TopComponent {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+//            .addComponent(jToolBar1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                .addGroup(layout.createSequentialGroup()
+                    .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)                
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+//                    .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                )               
         );
+        
+        /**
+         *         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 275, Short.MAX_VALUE))
+        );
+         */
+        
     }// </editor-fold>
+    
+    private void addToolbar() {
+//        jToolBar1 = new javax.swing.JToolBar();
+        jToolBar1 = Toolbar.instance().createToolBar();
+//        exportPNGButton = new javax.swing.JButton();
+//
+//        jToolBar1.setRollover(true);
+//
+//        
+////        org.openide.awt.Mnemonics.setLocalizedText(exportPNGButton, org.openide.util.NbBundle.getMessage(PUMLTopComponent.class, "PUMLTopComponent.exportPNGButton.text")); // NOI18N
+//        exportPNGButton.setFocusable(false);
+//        exportPNGButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+//        exportPNGButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+//        exportPNGButton.setIcon(new ImageIcon(getClass().getResource("png24.png")));
+//        exportPNGButton.addActionListener(new ActionListener(){
+//
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                SwingUtilities.invokeLater(new Runnable(){
+//                    
+//                    @Override
+//                    public void run(){
+//                        JFileChooser fileChooser = new JFileChooser();
+////                        fileChooser.adda
+//                        fileChooser.showSaveDialog(PUMLTopComponent.this);
+//                    }
+//                    
+//                });
+//            }
+//            
+//        });
+//        
+//        jToolBar1.add(exportPNGButton);
+    }
 
+    private void addButtonPanel() {
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(null);
+    }
         
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -166,6 +244,7 @@ public final class PUMLTopComponent extends TopComponent {
         // get actual data and recompute content
         Collection data = currentContext.allInstances();
         currentDataObject = getDataObject(data);
+//        PUMLTopComponent.createNBImageIcon(currentDataObject);
 //        if (currentDataObject == null) {
 //            return;
 //        }
@@ -197,6 +276,7 @@ public final class PUMLTopComponent extends TopComponent {
         // get actual data and recompute content
         Collection data = currentContext.allInstances();
         currentDataObject = getDataObject(data);
+//        PUMLTopComponent.createNBImageIcon(currentDataObject);
 //        if (currentDataObject == null) {
 //            return;
 //        }
@@ -230,10 +310,12 @@ public final class PUMLTopComponent extends TopComponent {
         add(panelUI);
     }
     
-    private void setNewContent(final DataObject dataObject) {
+    public void setNewContent(final DataObject dataObject) {
         if (dataObject == null) {
             return;
         }
+                
+        currentDataObject = dataObject;
 
         WORKER.post(new Runnable() {
 
@@ -242,7 +324,7 @@ public final class PUMLTopComponent extends TopComponent {
                 InputStream inputStream = null;
                 BufferedImage image = null;
                 
-                try {
+//                try {
 //                    FileObject fileObject = dataObject.getPrimaryFile();
 //                    if (fileObject == null) {
 //                        return;
@@ -263,28 +345,30 @@ public final class PUMLTopComponent extends TopComponent {
                     if (panelUI == null) {
                         getComponent();
                     }
-                    try {
-//                        image = ImageIO.read(inputStream);
-                        URL imageUrl = getClass().getResource("classes_001.png");
-                        
-                        image = ImageIO.read( getClass().getResourceAsStream("classes_001.png"));
-                        
-                    } catch (IllegalArgumentException iaex) {
-                        Logger.getLogger(PUMLTopComponent.class.getName()).info(NbBundle.getMessage(PUMLTopComponent.class, "ERR_IOFile"));
-                        inputStream.close();
-                    } 
+                    
+//                    TODO: Remove this code, its useless
+//                    try {
+////                        image = ImageIO.read(inputStream);
+//                        URL imageUrl = getClass().getResource("classes_001.png");
+//                        image = ImageIO.read( getClass().getResourceAsStream("classes_001.png"));
+//                        
+//                    } catch (IllegalArgumentException iaex) {
+//                        Logger.getLogger(PUMLTopComponent.class.getName()).info(NbBundle.getMessage(PUMLTopComponent.class, "ERR_IOFile"));
+//                        inputStream.close();
+//                    } 
 //                    inputStream.close();
-                } catch (IOException ex) {
-                    Logger.getLogger(PUMLTopComponent.class.getName()).info(NbBundle.getMessage(PUMLTopComponent.class, "ERR_IOFile"));
-                } finally {
-                    final BufferedImage fImage = image;
-                    SwingUtilities.invokeLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            panelUI.setImage(fImage);
-                        }
-                    });
-                }
+//                } catch (IOException ex) {
+//                    Logger.getLogger(PUMLTopComponent.class.getName()).info(NbBundle.getMessage(PUMLTopComponent.class, "ERR_IOFile"));
+//                } finally {
+//                    final BufferedImage fImage = image;
+//                    PUMLTopComponent.currentImage = image;
+//                    SwingUtilities.invokeLater(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            panelUI.setImage(fImage);
+//                        }
+//                    });
+//                }
             }
         });
 
@@ -295,6 +379,9 @@ public final class PUMLTopComponent extends TopComponent {
             return;
         }
 
+        /**
+         * TODO: Create a new thread class.
+         */
         WORKER.post(new Runnable() {
 
             @Override
@@ -318,6 +405,9 @@ public final class PUMLTopComponent extends TopComponent {
                     }
                     
                     final BufferedImage fImage = image;
+                    // TODO: This line causes the problem below.
+                    // http://stackoverflow.com/questions/16502071/netbeans-save-hangs
+//                    createNBImageIcon(currentDataObject);                    
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
@@ -340,7 +430,8 @@ public final class PUMLTopComponent extends TopComponent {
         }                    
         try {
             final BufferedImage image = ImageIO.read(getClass().getResourceAsStream("default-icon.png")); 
-                        
+            PUMLTopComponent.currentImage = image;
+            PUMLTopComponent.createNBImageIcon(currentDataObject);
             SwingUtilities.invokeLater(new Runnable() {
                 @Override
                 public void run() {
@@ -350,6 +441,16 @@ public final class PUMLTopComponent extends TopComponent {
         } catch (IOException ex) {
             Logger.getLogger(PUMLTopComponent.class.getName()).info(ex.toString());             
         }
+    }
+    
+    public DataObject getDataObject() {
+        currentContext = getLookup().lookup(MY_DATA);
+        currentContext.addLookupListener(getContextListener());
+        
+        // get actual data and recompute content
+        Collection data = currentContext.allInstances();
+        
+        return getDataObject(data);
     }
     
     private DataObject getDataObject(Collection data) {
@@ -376,6 +477,19 @@ public final class PUMLTopComponent extends TopComponent {
         return contextListener;
     }
     
+//    @Override
+//    public static Action openAction(TopComponent component, String displayName, String iconBase, boolean noIconInMenu) {
+//                
+//        if(pumltc == null) {
+//            PUMLTopComponent.pumltc = new PUMLTopComponent();
+//        }
+//        
+//        if(!pumltc.isShowing()) {
+//            pumltc.open();
+//        }
+//        
+//        return pumltc;
+//    }
     
     
     /**
@@ -402,6 +516,7 @@ public final class PUMLTopComponent extends TopComponent {
                 // Refresh image viewer
                 SwingUtilities.invokeLater(new Runnable() {
 
+                    @Override
                     public void run() {
                         try {
                             currentDataObject = DataObject.find(fe.getFile());
@@ -425,6 +540,7 @@ public final class PUMLTopComponent extends TopComponent {
             DataObject[] objects = registries.getModified();
             for (int i = 0; i < objects.length; i++) {
                 DataObject dataObj = objects[i];
+                getInstance().currentDataObject = dataObj;
                 Set fss = dataObj.files();
                 Iterator iter = fss.iterator();
                 while (iter.hasNext()) {
@@ -460,7 +576,76 @@ public final class PUMLTopComponent extends TopComponent {
         
         
     }
+    
+    public static void createNBImageIcon(DataObject dataObject){
+        try{
+            pumlDataObject pumlDataObject = (pumlDataObject) dataObject;
+            PUMLTopComponent.currentNBImageIcon = NBImageIcon.load(pumlDataObject);
+        } catch(ClassCastException e){
+            e.printStackTrace();    //TODO: Log this
+        } catch(IOException e){
+            e.printStackTrace();    //TODO: Log this
+        }
+        
+    }
+    
+    public static NBImageIcon getNBImageIcon() {
+        if(PUMLTopComponent.currentNBImageIcon == null && getInstance().getDataObject() != null) {
+            createNBImageIcon(getInstance().currentDataObject);
+        }
+        return PUMLTopComponent.currentNBImageIcon;
+    }    
 
+    public static PUMLTopComponent getInstance() {
+        if(PUMLTopComponent.self == null)
+            PUMLTopComponent.self = new PUMLTopComponent();
+        return self;
+    }
+        
+
+//    private void modify(){
+//        if(getLookup().lookup(PUMLSavable.class) == null){
+//            instanceContent.add(new PUMLSavable());
+//        }
+//    }
+    
+    
+//    private class PUMLSavable extends AbstractSavable {
+//        
+//        PUMLSavable(){
+//            register();
+//        }
+//
+//        @Override
+//        protected String findDisplayName() {            
+//            return "Plant UML"; 
+//        }
+//
+//        @Override
+//        protected void handleSave() throws IOException {
+//            tc().instanceContent.remove(this);
+//            unregister();
+//        }
+//        
+//        PUMLTopComponent tc() {
+//            return PUMLTopComponent.this;
+//        }
+//
+//        @Override
+//        public boolean equals(Object o) {
+//            if (o instanceof PUMLSavable) {
+//                PUMLSavable m = (PUMLSavable) o;
+//                return tc() == m.tc();
+//            }
+//            return false;
+//        }
+//
+//        @Override
+//        public int hashCode() {
+//            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//        }
+//        
+//    }
     
 }
 

@@ -4,7 +4,12 @@
  */
 package org.netbeans.modules.plantumlnb;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import org.netbeans.core.spi.multiview.MultiViewElement;
 import org.netbeans.core.spi.multiview.text.MultiViewEditorElement;
 import org.openide.awt.ActionID;
@@ -85,6 +90,8 @@ position = 300)
     position = 1400)
 })
 public class pumlDataObject extends MultiDataObject {
+    private String content;
+//    private final Saver saver = new Saver();
 
     public pumlDataObject(FileObject pf, MultiFileLoader loader) throws DataObjectExistsException, IOException {
         super(pf, loader);
@@ -95,16 +102,78 @@ public class pumlDataObject extends MultiDataObject {
     protected int associateLookup() {
         return 1;
     }
-
+    
     @MultiViewElement.Registration(
         displayName = "#LBL_puml_EDITOR",
     iconBase = "org/netbeans/modules/plantumlnb/icon.png",
-    mimeType = "text/plain",
+    mimeType = "text/x-puml",
     persistenceType = TopComponent.PERSISTENCE_ONLY_OPENED,
     preferredID = "puml",
     position = 1200)
     @Messages("LBL_puml_EDITOR=Source")
     public static MultiViewEditorElement createEditor(Lookup lkp) {
-        return new MultiViewEditorElement(lkp);
+        return ((MultiViewEditorElement ) new pumlVisualElement(lkp));
     }
+    
+    
+    
+    // Michael Wever 26/09/2001
+    /** Gets image for the image data 
+     * @return the image or <code>null</code> if image could not be created
+     * @return  java.io.IOException  if an error occurs during reading
+     */
+    public Image getImage() throws IOException {
+        InputStream inputStream = getPrimaryFile().getInputStream();
+        BufferedImage image = null;
+        try {            
+            image = ImageIO.read(inputStream);        
+        } catch(IOException e){
+            Logger.getLogger(pumlDataObject.class.getName()).info(e.getMessage());
+        }
+        
+        return image;       
+
+        
+//        InputStream input = getPrimaryFile().getInputStream();
+//        try {
+//            return javax.imageio.ImageIO.read(input);
+//        } catch (IndexOutOfBoundsException ioobe) {
+//            return null;
+//        } finally {
+//            input.close();
+//        }
+    }
+    
+//    synchronized void setContent(String text) {
+//        this.content = text;
+//        if (text != null) {
+//            setModified(true);
+//            getCookieSet().add(saver);
+//        } else {
+//            setModified(false);
+//            getCookieSet().remove(saver);
+//        }
+//    }
+//    
+//    private class Saver extends AbstractSavable {
+//
+//        @Override
+//        public void save() throws IOException {
+//            String txt;
+//            synchronized (pumlDataObject.this) {
+//                //synchronize access to the content field
+//                txt = content;
+//                setContent(null);
+//            }
+//            FileObject fo = getPrimaryFile();
+//            OutputStream out = new BufferedOutputStream(fo.getOutputStream());
+//            PrintWriter writer = new PrintWriter(out);
+//            try {
+//                writer.print(txt);
+//            } finally {
+//                writer.close();
+//                out.close();
+//            }
+//        }
+//    }
 }
