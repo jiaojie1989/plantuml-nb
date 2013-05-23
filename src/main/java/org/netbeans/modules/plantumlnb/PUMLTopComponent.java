@@ -382,41 +382,7 @@ public final class PUMLTopComponent extends TopComponent {
         /**
          * TODO: Create a new thread class.
          */
-        WORKER.post(new Runnable() {
-
-            @Override
-            public void run() {
-                BufferedImage image = null;
-                try {                    
-                    if (panelUI == null) {
-                        getComponent();
-                    }                    
-                    image = ImageIO.read(inputStream);                                            
-                } catch (IllegalArgumentException iaex) {
-                    Logger.getLogger(PUMLTopComponent.class.getName()).info(NbBundle.getMessage(PUMLTopComponent.class, "ERR_IOFile"));                        
-                } catch (IOException ex) {
-                    Logger.getLogger(PUMLTopComponent.class.getName()).info(NbBundle.getMessage(PUMLTopComponent.class, "ERR_IOFile"));
-                } finally {
-                    
-                    try {
-                        inputStream.close();
-                    } catch (IOException ex) {
-                        Logger.getLogger(PUMLTopComponent.class.getName()).info(NbBundle.getMessage(PUMLTopComponent.class, "ERR_IOFile"));
-                    }
-                    
-                    final BufferedImage fImage = image;
-                    // TODO: This line causes the problem below.
-                    // http://stackoverflow.com/questions/16502071/netbeans-save-hangs
-//                    createNBImageIcon(currentDataObject);                    
-                    SwingUtilities.invokeLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            panelUI.setImage(fImage);
-                        }
-                    });
-                }
-            }
-        });
+        WORKER.post(new RenderImageThread(this, inputStream));
 
     }
     
@@ -646,6 +612,10 @@ public final class PUMLTopComponent extends TopComponent {
 //        }
 //        
 //    }
+    
+    public ImagePreviewPanel getPanelUI() {
+        return panelUI;
+    }
     
 }
 
