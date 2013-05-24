@@ -1,1 +1,18 @@
-sample content
+
+@startuml
+    actor Foo1
+    boundary Foo2
+    control Foo3
+    entity Foo4
+
+    Foo1 -> Foo2 : To boundary
+    Foo1 -> Foo3 : To control
+    Foo1 -> Foo4 : To entity
+
+    Foo2 -> Foo4 : To entity
+
+    Foo3 -> Foo4 : Here
+
+    Foo2 -> Foo4 : Here
+
+@enduml
