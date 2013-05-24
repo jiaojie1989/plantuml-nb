@@ -244,6 +244,8 @@ public final class PUMLTopComponent extends TopComponent {
         // get actual data and recompute content
         Collection data = currentContext.allInstances();
         currentDataObject = getDataObject(data);
+//        Set<FileObject> fileObject = currentDataObject.files();
+
 //        PUMLTopComponent.createNBImageIcon(currentDataObject);
 //        if (currentDataObject == null) {
 //            return;
@@ -256,7 +258,8 @@ public final class PUMLTopComponent extends TopComponent {
         /**
          * Attach event handler
          */        
-        registries.addChangeListener(pumlFileChangedListener);
+//        registries.addChangeListener(pumlFileChangedListener);
+        
         topComponentRegistry.addPropertyChangeListener(pumlTopComponentPropertyChangeListener);
         
         setNewContent(currentDataObject);
@@ -264,7 +267,7 @@ public final class PUMLTopComponent extends TopComponent {
 
     @Override
     public void componentClosed() {
-        registries.removeChangeListener(pumlFileChangedListener);
+//        registries.removeChangeListener(pumlFileChangedListener);
         topComponentRegistry.removePropertyChangeListener(pumlTopComponentPropertyChangeListener);
     }
     
@@ -374,14 +377,11 @@ public final class PUMLTopComponent extends TopComponent {
 
     }
     
-    private void setNewContent(final InputStream inputStream) {
+    public void setNewContent(final InputStream inputStream) {
         if (inputStream == null) {
             return;
         }
-
-        /**
-         * TODO: Create a new thread class.
-         */
+        
         WORKER.post(new RenderImageThread(this, inputStream));
 
     }
@@ -390,7 +390,7 @@ public final class PUMLTopComponent extends TopComponent {
      * Method to call to render a default image when the file opened in the 
      * editor is not a puml file.
      */
-    private void setDefaultContent(){
+    public void setDefaultContent(){
         if (panelUI == null) {
             getComponent();
         }                    
@@ -563,8 +563,9 @@ public final class PUMLTopComponent extends TopComponent {
     }    
 
     public static PUMLTopComponent getInstance() {
-        if(PUMLTopComponent.self == null)
+        if(PUMLTopComponent.self == null) {
             PUMLTopComponent.self = new PUMLTopComponent();
+        }
         return self;
     }
         
@@ -616,8 +617,12 @@ public final class PUMLTopComponent extends TopComponent {
     public ImagePreviewPanel getPanelUI() {
         return panelUI;
     }
-    
-}
 
-
+    public PUMLGenerator getPumlGenerator() {
+        return pumlGenerator;
+    }
     
+    public void setCurrentDataObject(DataObject currentDataObject) {
+        this.currentDataObject = currentDataObject;
+    }
+}   

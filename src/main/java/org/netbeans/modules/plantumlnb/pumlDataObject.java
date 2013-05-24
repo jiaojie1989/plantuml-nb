@@ -8,6 +8,8 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Iterator;
+import java.util.Set;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import org.netbeans.core.spi.multiview.MultiViewElement;
@@ -15,7 +17,11 @@ import org.netbeans.core.spi.multiview.text.MultiViewEditorElement;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
 import org.openide.awt.ActionReferences;
+import org.openide.filesystems.FileAttributeEvent;
+import org.openide.filesystems.FileChangeListener;
+import org.openide.filesystems.FileEvent;
 import org.openide.filesystems.FileObject;
+import org.openide.filesystems.FileRenameEvent;
 import org.openide.filesystems.MIMEResolver;
 import org.openide.loaders.DataObject;
 import org.openide.loaders.DataObjectExistsException;
@@ -89,12 +95,16 @@ position = 300)
     @ActionID(category = "System", id = "org.openide.actions.PropertiesAction"),
     position = 1400)
 })
-public class pumlDataObject extends MultiDataObject {
+public class pumlDataObject extends MultiDataObject implements FileChangeListener {
     private String content;
+    
+    private FileObject fileObject;
 //    private final Saver saver = new Saver();
 
     public pumlDataObject(FileObject pf, MultiFileLoader loader) throws DataObjectExistsException, IOException {
         super(pf, loader);
+        fileObject = pf;
+        pf.addFileChangeListener(this);
         registerEditor("text/x-puml", true);
     }
 
@@ -176,4 +186,33 @@ public class pumlDataObject extends MultiDataObject {
 //            }
 //        }
 //    }
+
+    @Override
+    public void fileFolderCreated(FileEvent fe) {}
+
+    @Override
+    public void fileDataCreated(FileEvent fe) {}
+
+    @Override
+    public void fileChanged(FileEvent fe) {
+        
+        DataObject.Registry registries = DataObject.getRegistry();
+        PUMLTopComponent tc = PUMLTopComponent.getInstance();
+
+        DataObject[] objects = registries.getModified();
+
+        tc.setCurrentDataObject(this);
+
+        tc.setNewContent((InputStream) tc.getPumlGenerator().generate(fileObject));
+        
+    }
+
+    @Override
+    public void fileDeleted(FileEvent fe) {}
+
+    @Override
+    public void fileRenamed(FileRenameEvent fre) {}
+
+    @Override
+    public void fileAttributeChanged(FileAttributeEvent fae) {}
 }

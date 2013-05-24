@@ -1,0 +1,11 @@
+Netbeans Windows API: http://bits.netbeans.org/dev/javadoc/org-openide-windows/org/openide/windows/doc-files/api.html
+
+DataObject Reference: http://wiki.netbeans.org/DevFaqDataObject
+
+Listen for File Save Events : http://wiki.netbeans.org/DevFaqListenForSaveEvents
+
+nbm javacc lexer: http://platform.netbeans.org/tutorials/nbm-javacc-lexer.html
+
+nbm javacc parser: http://platform.netbeans.org/tutorials/nbm-javacc-parser.html
+
+

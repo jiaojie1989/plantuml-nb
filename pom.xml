@@ -110,7 +110,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <additionalArguments>${netbeans.run.params.ide}</additionalArguments>
-                    <netbeansInstallation>/home/venkat/Programs/netbeans-7.3beta2/</netbeansInstallation>
+                    <netbeansInstallation>/home/venkat/Programs/netbeans-7.3/</netbeansInstallation>
 <!--                        <nbmBuildDir>${project.build.directory}/netbeans_clusters/</nbmBuildDir>-->
                     <keystore>keystore</keystore>
                     <keystorealias>ezondaice</keystorealias>
