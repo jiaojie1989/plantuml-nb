@@ -10,6 +10,7 @@ import javax.swing.SwingUtilities;
 import org.netbeans.core.spi.multiview.MultiViewElement;
 import org.netbeans.core.spi.multiview.MultiViewElementCallback;
 import org.netbeans.core.spi.multiview.text.MultiViewEditorElement;
+import org.openide.awt.UndoRedo;
 import org.openide.util.Lookup;
 import org.openide.util.NbBundle.Messages;
 import org.openide.windows.TopComponent;
@@ -21,13 +22,13 @@ import org.openide.windows.TopComponent;
  */
 
 @MultiViewElement.Registration(
-    displayName = "#LBL_puml_SOURCE",
+    displayName = "#LBL_PUML_SOURCE",
 iconBase = "org/netbeans/modules/plantumlnb/icon.png",
 mimeType = "text/x-puml",
 persistenceType = TopComponent.PERSISTENCE_NEVER,
-preferredID = "pumlSource",
+preferredID = "PUMLSource",
 position = 2000)
-@Messages("LBL_puml_SOURCE=Source")
+@Messages("LBL_PUML_SOURCE=Source")
 public final class pumlVisualElement extends MultiViewEditorElement {
 
     private pumlDataObject obj;
@@ -40,6 +41,7 @@ public final class pumlVisualElement extends MultiViewEditorElement {
         obj = lkp.lookup(pumlDataObject.class);
         assert obj != null;
     }
+    
 
     @Override
     public void componentActivated() {
@@ -69,8 +71,14 @@ public final class pumlVisualElement extends MultiViewEditorElement {
             });
             
         }
+
     }
 
+    @Override
+    public Lookup getLookup() {
+        return obj.getLookup();
+    }
+        
     public PUMLTopComponent retrievePUMLTopComponent() {
         Iterator i = topComponentRegistry.getOpened().iterator();
         
@@ -88,5 +96,18 @@ public final class pumlVisualElement extends MultiViewEditorElement {
 //        return obj.getLookup().lookup(PUMLTopComponent.class);
     }
     
+    @Override
+    public void componentDeactivated() {
+    }
     
+    @Override
+    public UndoRedo getUndoRedo() {
+        return UndoRedo.NONE;
+    }
+
+    @Override
+    public void setMultiViewCallback(MultiViewElementCallback callback) {
+        this.callback = callback;
+    }
+
 }

@@ -32,16 +32,16 @@ import org.openide.util.NbBundle.Messages;
 import org.openide.windows.TopComponent;
 
 @Messages({
-    "LBL_puml_LOADER=Files of puml"
+    "LBL_PUML_LOADER=Files of PUML"
 })
 @MIMEResolver.ExtensionRegistration(
-    displayName = "#LBL_puml_LOADER",
+        displayName = "#LBL_PUML_LOADER",
 mimeType = "text/x-puml",
 extension = {"puml", "PUML"})
 @DataObject.Registration(
     mimeType = "text/x-puml",
 iconBase = "org/netbeans/modules/plantumlnb/icon.png",
-displayName = "#LBL_puml_LOADER",
+displayName = "#LBL_PUML_LOADER",
 position = 300)
 @ActionReferences({
     @ActionReference(
