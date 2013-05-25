@@ -155,6 +155,20 @@ public interface PUMLParserConstants {
   /** RegularExpression Id. */
   int COLON_MESSAGE = 75;
 
+    /**
+    * Types
+    */
+   int ACTOR = 76;
+   int PARTICIPANT = 77;
+   int USECASE = 78;
+   int CLASS = 79;
+   int INTERFACE = 80;
+   int ABSTRACT = 81;
+   int ENUM = 82;
+   int COMPONENT = 83;
+   int STATE = 84;
+   int OBJECT = 85;
+  
   /** Lexical state. */
   int DEFAULT = 0;
   /** Lexical state. */
@@ -240,6 +254,17 @@ public interface PUMLParserConstants {
     "\"->>\"",
     "\"<<-\"",
     "\":\"",
+    
+    "\"actor\"",
+    "\"participant\"",
+    "\"usecase\"",
+    "\"class\"",
+    "\"interface\"",
+    "\"abstract\"",
+    "\"enum\"",
+    "\"component\"",
+    "\"state\"",
+    "\"object\"",
   };
 
 }

@@ -4,11 +4,12 @@
  */
 package org.netbeans.modules.plantumlnb.lexer;
 
+import org.netbeans.modules.plantumlnb.pumllexer.JavaCharStream;
+import org.netbeans.modules.plantumlnb.pumllexer.PUMLParserTokenManager;
+import org.netbeans.modules.plantumlnb.pumllexer.Token;
 import org.netbeans.spi.lexer.Lexer;
 import org.netbeans.spi.lexer.LexerRestartInfo;
-import org.tutorial.pumllexer.JavaCharStream;
-import org.tutorial.pumllexer.Token;
-import org.tutorial.pumllexer.PUMLParserTokenManager;
+
 
 /**
  *

@@ -36,9 +36,9 @@ options {
   BUILD_PARSER = false;
 }
 
-PARSER_BEGIN(PlantUMLParser)
+PARSER_BEGIN(PUMLParser)
 
-package org.tutorial.pumllexer;
+package org.netbeans.modules.plantumlnb.pumllexer;
 
 import java.io.*;
 
@@ -47,9 +47,9 @@ import java.io.*;
  * @author Sreenivasa Viswanadha - Simplified and enhanced for 1.5
  */
 
-public class PlantUMLParser {}
+public class PUMLParser {}
 
-PARSER_END(PlantUMLParser)
+PARSER_END(PUMLParser)
 
 /* WHITE SPACE */
 
@@ -70,6 +70,18 @@ TOKEN :
   <SINGLE_LINE_COMMENT: "'" (~["\n", "\r"])* ("\n" | "\r" | "\r\n")?>
 }
 
+
+<IN_MULTI_LINE_COMMENT>
+TOKEN :
+{
+  <MULTI_LINE_COMMENT: "'/" > : DEFAULT
+}
+
+<IN_FORMAL_COMMENT,IN_MULTI_LINE_COMMENT>
+MORE :
+{
+  < ~[] >
+}
 
 /* RESERVED WORDS AND LITERALS */
 
@@ -133,6 +145,37 @@ TOKEN :
     | < ENDWHILE : "endwhile" >
     | < FORK : "fork" >
     | < AGAIN : "again" >
+}
+
+
+/* OPERATORS */
+
+TOKEN :
+{
+    < FORWARD_CALL_MESSAGE : "->" >
+    | < FORWARD_CALL_DOTTED_MESSAGE : "-->" >
+    | < REVERSE_CALL_MESSAGE : "<-" >
+    | < REVERSE_CALL_DOTTED_MESSAGE : "<--" >
+    | < FORWARD_ASYNCHRONOUS_CALL_MESSAGE : "->>" >
+    | < REVERSE_ASYNCHRONOUS_CALL_MESSAGE : "<<-" >
+    | < COLON_MESSAGE : ":" >
+}
+
+
+/* TYPES */
+
+TOKEN :
+{
+    < ACTOR : "actor" >
+    | < PARTICIPANT : "participant" >
+    | < USECASE : "usecase" >
+    | < CLASS : "class" >
+    | < INTERFACE : "interface" >
+    | < ABSTRACT : "abstract" >
+    | < ENUM : "enum" >
+    | < COMPONENT : "component" >
+    | < STATE : "state" >
+    | < OBJECT : "object" >
 }
 
 /* LITERALS */
@@ -791,33 +834,5 @@ TOKEN :
 /* SEPARATORS */
 
 
-/* OPERATORS */
-
-TOKEN :
-{
-    < FORWARD_CALL_MESSAGE : "->" >
-    | < FORWARD_CALL_DOTTED_MESSAGE : "-->" >
-    | < REVERSE_CALL_MESSAGE : "<-" >
-    | < REVERSE_CALL_DOTTED_MESSAGE : "<--" >
-    | < FORWARD_ASYNCHRONOUS_CALL_MESSAGE : "->>" >
-    | < REVERSE_ASYNCHRONOUS_CALL_MESSAGE : "<<-" >
-    | < COLON_MESSAGE : ":" >
-}
-
-/* TYPES */
-
-TOKEN :
-{
-    < ACTOR : "actor" >
-    | < PARTICIPANT : "participant" >
-    | < USECASE : "usecase" >
-    | < CLASS : "class" >
-    | < INTERFACE : "interface" >
-    | < ABSTRACT : "abstract" >
-    | < ENUM : "enum");
-    | < COMPONENT : "component" >
-    | < STATE : "state" >
-    | < OBJECT : "object" >
-}
 
 
