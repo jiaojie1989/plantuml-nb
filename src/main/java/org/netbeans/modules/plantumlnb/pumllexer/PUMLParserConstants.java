@@ -257,6 +257,7 @@ public interface PUMLParserConstants {
     "<IDENTIFIER>",
     "<LETTER>",
     "<PART_LETTER>",
+    "<token of kind 81>",
   };
 
 }

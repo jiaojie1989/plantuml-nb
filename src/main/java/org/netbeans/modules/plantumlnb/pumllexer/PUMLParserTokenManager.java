@@ -1577,11 +1577,17 @@ public static final String[] jjstrLiteralImages = {
 "\141\143\164\157\162", "\160\141\162\164\151\143\151\160\141\156\164", 
 "\165\163\145\143\141\163\145", "\143\154\141\163\163", "\151\156\164\145\162\146\141\143\145", 
 "\141\142\163\164\162\141\143\164", "\145\156\165\155", "\143\157\155\160\157\156\145\156\164", 
-"\163\164\141\164\145", "\157\142\152\145\143\164", null, null, null, };
+"\163\164\141\164\145", "\157\142\152\145\143\164", null, null, null, null, };
 
 /** Lexer state names. */
 public static final String[] lexStateNames = {
    "DEFAULT",
+};
+static final long[] jjtoToken = {
+   0xffffffffffffffffL, 0x7fffL, 
+};
+static final long[] jjtoSkip = {
+   0x0L, 0x20000L, 
 };
 protected JavaCharStream input_stream;
 private final int[] jjrounds = new int[13];
@@ -1686,12 +1692,23 @@ public Token getNextToken()
    jjmatchedKind = 0x7fffffff;
    jjmatchedPos = 0;
    curPos = jjMoveStringLiteralDfa0_0();
+   if (jjmatchedPos == 0 && jjmatchedKind > 81)
+   {
+      jjmatchedKind = 81;
+   }
    if (jjmatchedKind != 0x7fffffff)
    {
       if (jjmatchedPos + 1 < curPos)
          input_stream.backup(curPos - jjmatchedPos - 1);
+      if ((jjtoToken[jjmatchedKind >> 6] & (1L << (jjmatchedKind & 077))) != 0L)
+      {
          matchedToken = jjFillToken();
          return matchedToken;
+      }
+      else
+      {
+         continue EOFLoop;
+      }
    }
    int error_line = input_stream.getEndLine();
    int error_column = input_stream.getEndColumn();
