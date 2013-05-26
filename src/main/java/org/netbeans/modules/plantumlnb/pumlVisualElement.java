@@ -19,16 +19,10 @@ import org.openide.windows.TopComponent;
 /**
  * https://blogs.oracle.com/geertjan/entry/multiview_of_the_next_release
  * @author venkat
+ * 
+ * NOTE: We don't need VisualElement Registration here.MultiViewEditorElement displays two views already.
  */
 
-@MultiViewElement.Registration(
-    displayName = "#LBL_PUML_SOURCE",
-iconBase = "org/netbeans/modules/plantumlnb/icon.png",
-mimeType = "text/x-puml",
-persistenceType = TopComponent.PERSISTENCE_NEVER,
-preferredID = "PUMLSource",
-position = 2000)
-@Messages("LBL_PUML_SOURCE=Source")
 public final class pumlVisualElement extends MultiViewEditorElement {
 
     private pumlDataObject obj;
