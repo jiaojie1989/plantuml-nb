@@ -15,135 +15,135 @@ public interface PUMLParserConstants {
   /** RegularExpression Id. */
   int SINGLE_LINE_COMMENT = 2;
   /** RegularExpression Id. */
-  int START_UML = 3;
+  int MESSAGE = 3;
   /** RegularExpression Id. */
-  int END_UML = 4;
+  int START_UML = 4;
   /** RegularExpression Id. */
-  int AS = 5;
+  int END_UML = 5;
   /** RegularExpression Id. */
-  int ALSO = 6;
+  int AS = 6;
   /** RegularExpression Id. */
-  int AUTO_NUMBER = 7;
+  int ALSO = 7;
   /** RegularExpression Id. */
-  int TITLE = 8;
+  int AUTO_NUMBER = 8;
   /** RegularExpression Id. */
-  int NEW_PAGE = 9;
+  int TITLE = 9;
   /** RegularExpression Id. */
-  int BOX = 10;
+  int NEW_PAGE = 10;
   /** RegularExpression Id. */
-  int ALT = 11;
+  int BOX = 11;
   /** RegularExpression Id. */
-  int ELSE = 12;
+  int ALT = 12;
   /** RegularExpression Id. */
-  int OPT = 13;
+  int ELSE = 13;
   /** RegularExpression Id. */
-  int LOOP = 14;
+  int OPT = 14;
   /** RegularExpression Id. */
-  int PAR = 15;
+  int LOOP = 15;
   /** RegularExpression Id. */
-  int BREAK = 16;
+  int PAR = 16;
   /** RegularExpression Id. */
-  int CRITICAL = 17;
+  int BREAK = 17;
   /** RegularExpression Id. */
-  int NOTE = 18;
+  int CRITICAL = 18;
   /** RegularExpression Id. */
-  int GROUP = 19;
+  int NOTE = 19;
   /** RegularExpression Id. */
-  int LEFT = 20;
+  int GROUP = 20;
   /** RegularExpression Id. */
-  int RIGHT = 21;
+  int LEFT = 21;
   /** RegularExpression Id. */
-  int OF = 22;
+  int RIGHT = 22;
   /** RegularExpression Id. */
-  int ON = 23;
+  int OF = 23;
   /** RegularExpression Id. */
-  int LINK = 24;
+  int ON = 24;
   /** RegularExpression Id. */
-  int OVER = 25;
+  int LINK = 25;
   /** RegularExpression Id. */
-  int END = 26;
+  int OVER = 26;
   /** RegularExpression Id. */
-  int ACTIVATE = 27;
+  int END = 27;
   /** RegularExpression Id. */
-  int DEACTIVATE = 28;
+  int ACTIVATE = 28;
   /** RegularExpression Id. */
-  int DESTROY = 29;
+  int DEACTIVATE = 29;
   /** RegularExpression Id. */
-  int CREATE = 30;
+  int DESTROY = 30;
   /** RegularExpression Id. */
-  int FOOTBOX = 31;
+  int CREATE = 31;
   /** RegularExpression Id. */
-  int HIDE = 32;
+  int FOOTBOX = 32;
   /** RegularExpression Id. */
-  int SHOW = 33;
+  int HIDE = 33;
   /** RegularExpression Id. */
-  int SKIN_PARAM = 34;
+  int SHOW = 34;
   /** RegularExpression Id. */
-  int SKIN = 35;
+  int SKIN_PARAM = 35;
   /** RegularExpression Id. */
-  int TOP = 36;
+  int SKIN = 36;
   /** RegularExpression Id. */
-  int BOTTOM = 37;
+  int TOP = 37;
   /** RegularExpression Id. */
-  int TOP_TO_BOTTOM_DIRECTION = 38;
+  int BOTTOM = 38;
   /** RegularExpression Id. */
-  int PACKAGE = 39;
+  int TOP_TO_BOTTOM_DIRECTION = 39;
   /** RegularExpression Id. */
-  int NAMESPACE = 40;
+  int PACKAGE = 40;
   /** RegularExpression Id. */
-  int PAGE = 41;
+  int NAMESPACE = 41;
   /** RegularExpression Id. */
-  int UP = 42;
+  int PAGE = 42;
   /** RegularExpression Id. */
-  int DOWN = 43;
+  int UP = 43;
   /** RegularExpression Id. */
-  int IF = 44;
+  int DOWN = 44;
   /** RegularExpression Id. */
-  int ENDIF = 45;
+  int IF = 45;
   /** RegularExpression Id. */
-  int PARTITION = 46;
+  int ENDIF = 46;
   /** RegularExpression Id. */
-  int FOOTER = 47;
+  int PARTITION = 47;
   /** RegularExpression Id. */
-  int HEADER = 48;
+  int FOOTER = 48;
   /** RegularExpression Id. */
-  int CENTER = 49;
+  int HEADER = 49;
   /** RegularExpression Id. */
-  int ROTATE = 50;
+  int CENTER = 50;
   /** RegularExpression Id. */
-  int REF = 51;
+  int ROTATE = 51;
   /** RegularExpression Id. */
-  int RETURN = 52;
+  int REF = 52;
   /** RegularExpression Id. */
-  int IS = 53;
+  int RETURN = 53;
   /** RegularExpression Id. */
-  int REPEAT = 54;
+  int IS = 54;
   /** RegularExpression Id. */
-  int START = 55;
+  int REPEAT = 55;
   /** RegularExpression Id. */
-  int STOP = 56;
+  int START = 56;
   /** RegularExpression Id. */
-  int WHILE = 57;
+  int STOP = 57;
   /** RegularExpression Id. */
-  int ENDWHILE = 58;
+  int WHILE = 58;
   /** RegularExpression Id. */
-  int FORK = 59;
+  int ENDWHILE = 59;
   /** RegularExpression Id. */
-  int AGAIN = 60;
+  int FORK = 60;
   /** RegularExpression Id. */
-  int FORWARD_CALL_MESSAGE = 61;
+  int AGAIN = 61;
   /** RegularExpression Id. */
-  int FORWARD_CALL_DOTTED_MESSAGE = 62;
+  int FORWARD_CALL_MESSAGE = 62;
   /** RegularExpression Id. */
-  int REVERSE_CALL_MESSAGE = 63;
+  int FORWARD_CALL_DOTTED_MESSAGE = 63;
   /** RegularExpression Id. */
-  int REVERSE_CALL_DOTTED_MESSAGE = 64;
+  int REVERSE_CALL_MESSAGE = 64;
   /** RegularExpression Id. */
-  int FORWARD_ASYNCHRONOUS_CALL_MESSAGE = 65;
+  int REVERSE_CALL_DOTTED_MESSAGE = 65;
   /** RegularExpression Id. */
-  int REVERSE_ASYNCHRONOUS_CALL_MESSAGE = 66;
+  int FORWARD_ASYNCHRONOUS_CALL_MESSAGE = 66;
   /** RegularExpression Id. */
-  int COLON_MESSAGE = 67;
+  int REVERSE_ASYNCHRONOUS_CALL_MESSAGE = 67;
   /** RegularExpression Id. */
   int ACTOR = 68;
   /** RegularExpression Id. */
@@ -179,6 +179,7 @@ public interface PUMLParserConstants {
     "<EOF>",
     "<WHITESPACE>",
     "<SINGLE_LINE_COMMENT>",
+    "<MESSAGE>",
     "\"@startuml\"",
     "\"@enduml\"",
     "\"as\"",
@@ -243,7 +244,6 @@ public interface PUMLParserConstants {
     "\"<--\"",
     "\"->>\"",
     "\"<<-\"",
-    "\":\"",
     "\"actor\"",
     "\"participant\"",
     "\"usecase\"",

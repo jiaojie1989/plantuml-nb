@@ -9,4 +9,5 @@
     <fontcolor name="operator" default="operator"/>
     <fontcolor name="whitespace" default="whitespace"/>
     <fontcolor name="type" default="method"/>
+    <fontcolor name="message" default="message" foreColor="blue"/>
 </fontscolors>

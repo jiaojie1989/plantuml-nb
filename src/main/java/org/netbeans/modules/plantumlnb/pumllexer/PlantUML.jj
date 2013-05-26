@@ -70,6 +70,11 @@ TOKEN :
   <SINGLE_LINE_COMMENT: "'" (~["\n", "\r"])* ("\n" | "\r" | "\r\n")?>
 }
 
+TOKEN :
+{
+  <MESSAGE: ":" (~["\n", "\r"])* ("\n" | "\r" | "\r\n")?>
+}
+
 /* RESERVED WORDS AND LITERALS */
 
 TOKEN :
@@ -144,8 +149,7 @@ TOKEN :
     | < REVERSE_CALL_MESSAGE : "<-" >
     | < REVERSE_CALL_DOTTED_MESSAGE : "<--" >
     | < FORWARD_ASYNCHRONOUS_CALL_MESSAGE : "->>" >
-    | < REVERSE_ASYNCHRONOUS_CALL_MESSAGE : "<<-" >
-    | < COLON_MESSAGE : ":" >
+    | < REVERSE_ASYNCHRONOUS_CALL_MESSAGE : "<<-" >    
 }
 
 
