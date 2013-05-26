@@ -15,181 +15,170 @@ public interface PUMLParserConstants {
   /** RegularExpression Id. */
   int SINGLE_LINE_COMMENT = 2;
   /** RegularExpression Id. */
-  int FORMAL_COMMENT = 3;
+  int START_UML = 3;
   /** RegularExpression Id. */
-  int MULTI_LINE_COMMENT = 4;
+  int END_UML = 4;
   /** RegularExpression Id. */
-  int START_UML = 6;
+  int AS = 5;
   /** RegularExpression Id. */
-  int END_UML = 7;
+  int ALSO = 6;
   /** RegularExpression Id. */
-  int AS = 8;
+  int AUTO_NUMBER = 7;
   /** RegularExpression Id. */
-  int ALSO = 9;
+  int TITLE = 8;
   /** RegularExpression Id. */
-  int AUTO_NUMBER = 10;
+  int NEW_PAGE = 9;
   /** RegularExpression Id. */
-  int TITLE = 11;
+  int BOX = 10;
   /** RegularExpression Id. */
-  int NEW_PAGE = 12;
+  int ALT = 11;
   /** RegularExpression Id. */
-  int BOX = 13;
+  int ELSE = 12;
   /** RegularExpression Id. */
-  int ALT = 14;
+  int OPT = 13;
   /** RegularExpression Id. */
-  int ELSE = 15;
+  int LOOP = 14;
   /** RegularExpression Id. */
-  int OPT = 16;
+  int PAR = 15;
   /** RegularExpression Id. */
-  int LOOP = 17;
+  int BREAK = 16;
   /** RegularExpression Id. */
-  int PAR = 18;
+  int CRITICAL = 17;
   /** RegularExpression Id. */
-  int BREAK = 19;
+  int NOTE = 18;
   /** RegularExpression Id. */
-  int CRITICAL = 20;
+  int GROUP = 19;
   /** RegularExpression Id. */
-  int NOTE = 21;
+  int LEFT = 20;
   /** RegularExpression Id. */
-  int GROUP = 22;
+  int RIGHT = 21;
   /** RegularExpression Id. */
-  int LEFT = 23;
+  int OF = 22;
   /** RegularExpression Id. */
-  int RIGHT = 24;
+  int ON = 23;
   /** RegularExpression Id. */
-  int OF = 25;
+  int LINK = 24;
   /** RegularExpression Id. */
-  int ON = 26;
+  int OVER = 25;
   /** RegularExpression Id. */
-  int LINK = 27;
+  int END = 26;
   /** RegularExpression Id. */
-  int OVER = 28;
+  int ACTIVATE = 27;
   /** RegularExpression Id. */
-  int END = 29;
+  int DEACTIVATE = 28;
   /** RegularExpression Id. */
-  int ACTIVATE = 30;
+  int DESTROY = 29;
   /** RegularExpression Id. */
-  int DEACTIVATE = 31;
+  int CREATE = 30;
   /** RegularExpression Id. */
-  int DESTROY = 32;
+  int FOOTBOX = 31;
   /** RegularExpression Id. */
-  int CREATE = 33;
+  int HIDE = 32;
   /** RegularExpression Id. */
-  int FOOTBOX = 34;
+  int SHOW = 33;
   /** RegularExpression Id. */
-  int HIDE = 35;
+  int SKIN_PARAM = 34;
   /** RegularExpression Id. */
-  int SHOW = 36;
+  int SKIN = 35;
   /** RegularExpression Id. */
-  int SKIN_PARAM = 37;
+  int TOP = 36;
   /** RegularExpression Id. */
-  int SKIN = 38;
+  int BOTTOM = 37;
   /** RegularExpression Id. */
-  int TOP = 39;
+  int TOP_TO_BOTTOM_DIRECTION = 38;
   /** RegularExpression Id. */
-  int BOTTOM = 40;
+  int PACKAGE = 39;
   /** RegularExpression Id. */
-  int TOP_TO_BOTTOM_DIRECTION = 41;
+  int NAMESPACE = 40;
   /** RegularExpression Id. */
-  int PACKAGE = 42;
+  int PAGE = 41;
   /** RegularExpression Id. */
-  int NAMESPACE = 43;
+  int UP = 42;
   /** RegularExpression Id. */
-  int PAGE = 44;
+  int DOWN = 43;
   /** RegularExpression Id. */
-  int UP = 45;
+  int IF = 44;
   /** RegularExpression Id. */
-  int DOWN = 46;
+  int ENDIF = 45;
   /** RegularExpression Id. */
-  int IF = 47;
+  int PARTITION = 46;
   /** RegularExpression Id. */
-  int ENDIF = 48;
+  int FOOTER = 47;
   /** RegularExpression Id. */
-  int PARTITION = 49;
+  int HEADER = 48;
   /** RegularExpression Id. */
-  int FOOTER = 50;
+  int CENTER = 49;
   /** RegularExpression Id. */
-  int HEADER = 51;
+  int ROTATE = 50;
   /** RegularExpression Id. */
-  int CENTER = 52;
+  int REF = 51;
   /** RegularExpression Id. */
-  int ROTATE = 53;
+  int RETURN = 52;
   /** RegularExpression Id. */
-  int REF = 54;
+  int IS = 53;
   /** RegularExpression Id. */
-  int RETURN = 55;
+  int REPEAT = 54;
   /** RegularExpression Id. */
-  int IS = 56;
+  int START = 55;
   /** RegularExpression Id. */
-  int REPEAT = 57;
+  int STOP = 56;
   /** RegularExpression Id. */
-  int START = 58;
+  int WHILE = 57;
   /** RegularExpression Id. */
-  int STOP = 59;
+  int ENDWHILE = 58;
   /** RegularExpression Id. */
-  int WHILE = 60;
+  int FORK = 59;
   /** RegularExpression Id. */
-  int ENDWHILE = 61;
+  int AGAIN = 60;
   /** RegularExpression Id. */
-  int FORK = 62;
+  int FORWARD_CALL_MESSAGE = 61;
   /** RegularExpression Id. */
-  int AGAIN = 63;
+  int FORWARD_CALL_DOTTED_MESSAGE = 62;
   /** RegularExpression Id. */
-  int FORWARD_CALL_MESSAGE = 64;
+  int REVERSE_CALL_MESSAGE = 63;
   /** RegularExpression Id. */
-  int FORWARD_CALL_DOTTED_MESSAGE = 65;
+  int REVERSE_CALL_DOTTED_MESSAGE = 64;
   /** RegularExpression Id. */
-  int REVERSE_CALL_MESSAGE = 66;
+  int FORWARD_ASYNCHRONOUS_CALL_MESSAGE = 65;
   /** RegularExpression Id. */
-  int REVERSE_CALL_DOTTED_MESSAGE = 67;
+  int REVERSE_ASYNCHRONOUS_CALL_MESSAGE = 66;
   /** RegularExpression Id. */
-  int FORWARD_ASYNCHRONOUS_CALL_MESSAGE = 68;
+  int COLON_MESSAGE = 67;
   /** RegularExpression Id. */
-  int REVERSE_ASYNCHRONOUS_CALL_MESSAGE = 69;
+  int ACTOR = 68;
   /** RegularExpression Id. */
-  int COLON_MESSAGE = 70;
+  int PARTICIPANT = 69;
   /** RegularExpression Id. */
-  int ACTOR = 71;
+  int USECASE = 70;
   /** RegularExpression Id. */
-  int PARTICIPANT = 72;
+  int CLASS = 71;
   /** RegularExpression Id. */
-  int USECASE = 73;
+  int INTERFACE = 72;
   /** RegularExpression Id. */
-  int CLASS = 74;
+  int ABSTRACT = 73;
   /** RegularExpression Id. */
-  int INTERFACE = 75;
+  int ENUM = 74;
   /** RegularExpression Id. */
-  int ABSTRACT = 76;
+  int COMPONENT = 75;
   /** RegularExpression Id. */
-  int ENUM = 77;
+  int STATE = 76;
   /** RegularExpression Id. */
-  int COMPONENT = 78;
+  int OBJECT = 77;
   /** RegularExpression Id. */
-  int STATE = 79;
+  int IDENTIFIER = 78;
   /** RegularExpression Id. */
-  int OBJECT = 80;
+  int LETTER = 79;
   /** RegularExpression Id. */
-  int IDENTIFIER = 81;
-  /** RegularExpression Id. */
-  int LETTER = 82;
-  /** RegularExpression Id. */
-  int PART_LETTER = 83;
+  int PART_LETTER = 80;
 
   /** Lexical state. */
   int DEFAULT = 0;
-  /** Lexical state. */
-  int IN_FORMAL_COMMENT = 84;
-  /** Lexical state. */
-  int IN_MULTI_LINE_COMMENT = 85;
 
   /** Literal token values. */
   String[] tokenImage = {
     "<EOF>",
     "<WHITESPACE>",
     "<SINGLE_LINE_COMMENT>",
-    "\"\\\'/\"",
-    "\"\\\'/\"",
-    "<token of kind 5>",
     "\"@startuml\"",
     "\"@enduml\"",
     "\"as\"",

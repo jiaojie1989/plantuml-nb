@@ -28,7 +28,7 @@
 
 options {
   JAVA_UNICODE_ESCAPE = true;
-  ERROR_REPORTING = false;
+  ERROR_REPORTING = true;
   STATIC = false;
   COMMON_TOKEN_ACTION = false;
   TOKEN_FACTORY = "Token";
@@ -68,19 +68,6 @@ TOKEN :
 TOKEN :
 {
   <SINGLE_LINE_COMMENT: "'" (~["\n", "\r"])* ("\n" | "\r" | "\r\n")?>
-}
-
-
-<IN_MULTI_LINE_COMMENT>
-TOKEN :
-{
-  <MULTI_LINE_COMMENT: "'/" > : DEFAULT
-}
-
-<IN_FORMAL_COMMENT,IN_MULTI_LINE_COMMENT>
-MORE :
-{
-  < ~[] >
 }
 
 /* RESERVED WORDS AND LITERALS */
@@ -832,7 +819,6 @@ TOKEN :
 }
 
 /* SEPARATORS */
-
 
 
 
