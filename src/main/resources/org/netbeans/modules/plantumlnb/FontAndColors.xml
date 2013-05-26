@@ -6,7 +6,7 @@
     <fontcolor name="literal" default="keyword" />
     <fontcolor name="comment" default="comment"/>
     <fontcolor name="number" default="number"/>
-    <fontcolor name="operator" default="operator"/>
+    <fontcolor name="operator" default="operator" foreColor="009900"/>
     <fontcolor name="whitespace" default="whitespace"/>
     <fontcolor name="type" default="method"/>
     <fontcolor name="message" default="message" foreColor="blue"/>

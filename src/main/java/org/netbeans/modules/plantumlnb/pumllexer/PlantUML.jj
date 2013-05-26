@@ -65,6 +65,25 @@ TOKEN :
 
 /* COMMENTS */
 
+/*
+MORE :
+{
+  <"/'"> { input_stream.backup(1); } : IN_MULTI_LINE_COMMENT
+}
+
+<IN_MULTI_LINE_COMMENT>
+TOKEN :
+{
+  <MULTI_LINE_COMMENT: "'/" > : DEFAULT
+}
+
+<IN_MULTI_LINE_COMMENT>
+MORE :
+{
+  < ~[] >
+}
+
+*/
 TOKEN :
 {
   <SINGLE_LINE_COMMENT: "'" (~["\n", "\r"])* ("\n" | "\r" | "\r\n")?>
