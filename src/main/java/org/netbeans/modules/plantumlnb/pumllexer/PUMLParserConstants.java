@@ -145,34 +145,64 @@ public interface PUMLParserConstants {
   /** RegularExpression Id. */
   int REVERSE_ASYNCHRONOUS_CALL_MESSAGE = 67;
   /** RegularExpression Id. */
-  int ACTOR = 68;
+  int DOTS_DASHES = 68;
   /** RegularExpression Id. */
-  int PARTICIPANT = 69;
+  int LEFT_COMPOSITION = 69;
   /** RegularExpression Id. */
-  int USECASE = 70;
+  int RIGHT_COMPOSITION = 70;
   /** RegularExpression Id. */
-  int CLASS = 71;
+  int ACTOR = 71;
   /** RegularExpression Id. */
-  int INTERFACE = 72;
+  int PARTICIPANT = 72;
   /** RegularExpression Id. */
-  int ABSTRACT = 73;
+  int USECASE = 73;
   /** RegularExpression Id. */
-  int ENUM = 74;
+  int CLASS = 74;
   /** RegularExpression Id. */
-  int COMPONENT = 75;
+  int INTERFACE = 75;
   /** RegularExpression Id. */
-  int STATE = 76;
+  int ABSTRACT = 76;
   /** RegularExpression Id. */
-  int OBJECT = 77;
+  int ENUM = 77;
   /** RegularExpression Id. */
-  int IDENTIFIER = 78;
+  int COMPONENT = 78;
   /** RegularExpression Id. */
-  int LETTER = 79;
+  int STATE = 79;
   /** RegularExpression Id. */
-  int PART_LETTER = 80;
+  int OBJECT = 80;
+  /** RegularExpression Id. */
+  int ARTIFACT = 81;
+  /** RegularExpression Id. */
+  int FOLDER = 82;
+  /** RegularExpression Id. */
+  int RECT = 83;
+  /** RegularExpression Id. */
+  int NODE = 84;
+  /** RegularExpression Id. */
+  int FRAME = 85;
+  /** RegularExpression Id. */
+  int CLOUD = 86;
+  /** RegularExpression Id. */
+  int DATABASE = 87;
+  /** RegularExpression Id. */
+  int STORAGE = 88;
+  /** RegularExpression Id. */
+  int AGENT = 89;
+  /** RegularExpression Id. */
+  int BOUNDARY = 90;
+  /** RegularExpression Id. */
+  int CONTROL = 91;
+  /** RegularExpression Id. */
+  int ENTITY = 92;
+  /** RegularExpression Id. */
+  int IDENTIFIER = 93;
+  /** RegularExpression Id. */
+  int LETTER = 94;
+  /** RegularExpression Id. */
+  int PART_LETTER = 95;
 
   /** Lexical state. */
-  int DEFAULT = 0;
+  int DEFAULT = 96;
 
   /** Literal token values. */
   String[] tokenImage = {
@@ -244,6 +274,9 @@ public interface PUMLParserConstants {
     "\"<--\"",
     "\"->>\"",
     "\"<<-\"",
+    "<DOTS_DASHES>",
+    "<LEFT_COMPOSITION>",
+    "<RIGHT_COMPOSITION>",
     "\"actor\"",
     "\"participant\"",
     "\"usecase\"",
@@ -254,10 +287,22 @@ public interface PUMLParserConstants {
     "\"component\"",
     "\"state\"",
     "\"object\"",
+    "\"artifact\"",
+    "\"folder\"",
+    "\"rect\"",
+    "\"node\"",
+    "\"frame\"",
+    "\"cloud\"",
+    "\"database\"",
+    "\"storage\"",
+    "\"agent\"",
+    "\"boundary\"",
+    "\"control\"",
+    "\"entity\"",
     "<IDENTIFIER>",
     "<LETTER>",
     "<PART_LETTER>",
-    "<token of kind 81>",
+    "<token of kind 96>",
   };
 
 }

@@ -168,7 +168,11 @@ TOKEN :
     | < REVERSE_CALL_MESSAGE : "<-" >
     | < REVERSE_CALL_DOTTED_MESSAGE : "<--" >
     | < FORWARD_ASYNCHRONOUS_CALL_MESSAGE : "->>" >
-    | < REVERSE_ASYNCHRONOUS_CALL_MESSAGE : "<<-" >    
+    | < REVERSE_ASYNCHRONOUS_CALL_MESSAGE : "<<-" >  
+    | < #DOTS_DASHES : [ ".", "-" ] >
+    | < LEFT_COMPOSITION : "O" ( < DOTS_DASHES > )+ >
+    | < RIGHT_COMPOSITION : ( < DOTS_DASHES > )+ "O" >
+
 }
 
 
@@ -186,6 +190,24 @@ TOKEN :
     | < COMPONENT : "component" >
     | < STATE : "state" >
     | < OBJECT : "object" >
+}
+
+/* PARTS */
+
+TOKEN : 
+{
+    < ARTIFACT : "artifact" >
+    | < FOLDER : "folder" >
+    | < RECT : "rect" >
+    | < NODE : "node" >
+    | < FRAME : "frame" >
+    | < CLOUD : "cloud" >
+    | < DATABASE : "database" >
+    | < STORAGE : "storage" >
+    | < AGENT : "agent" >
+    | < BOUNDARY : "boundary" >
+    | < CONTROL : "control" >
+    | < ENTITY : "entity" >
 }
 
 /* LITERALS */

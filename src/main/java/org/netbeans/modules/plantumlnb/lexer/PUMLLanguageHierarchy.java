@@ -95,25 +95,43 @@ public class PUMLLanguageHierarchy extends LanguageHierarchy<PUMLTokenId> {
             new PUMLTokenId("REVERSE_CALL_MESSAGE", "operator" ,64),
             new PUMLTokenId("REVERSE_CALL_DOTTED_MESSAGE", "operator" ,65),
             new PUMLTokenId("FORWARD_ASYNCHRONOUS_CALL_MESSAGE", "operator" ,66),
-            new PUMLTokenId("REVERSE_ASYNCHRONOUS_CALL_MESSAGE", "operator" ,67),            
+            new PUMLTokenId("REVERSE_ASYNCHRONOUS_CALL_MESSAGE", "operator" ,67),                   
+            new PUMLTokenId("DOTS_DASHES", "operator", 68),            
+            new PUMLTokenId("LEFT_COMPOSITION", "operator", 69),
+            new PUMLTokenId("RIGHT_COMPOSITION", "operator", 70),
 
-            new PUMLTokenId("ACTOR", "type" ,68),
-            new PUMLTokenId("PARTICIPANT", "type" ,69),
-            new PUMLTokenId("USECASE", "type" ,70),
-            new PUMLTokenId("CLASS", "type" ,71),
-            new PUMLTokenId("INTERFACE", "type" ,72),
-            new PUMLTokenId("ABSTRACT", "type" ,73),
-            new PUMLTokenId("ENUM", "type" ,74),
-            new PUMLTokenId("COMPONENT", "type" ,75),
-            new PUMLTokenId("STATE", "type" ,76),
-            new PUMLTokenId("OBJECT", "type" ,77),
-            new PUMLTokenId("IDENTIFIER", "type" ,78),
-            new PUMLTokenId("LETTER", "type" ,79),
-            new PUMLTokenId("PART_LETTER", "type" ,80),
+            new PUMLTokenId("ACTOR", "type" ,71),
+            new PUMLTokenId("PARTICIPANT", "type" ,72),
+            new PUMLTokenId("USECASE", "type" ,73),
+            new PUMLTokenId("CLASS", "type" ,74),
+            new PUMLTokenId("INTERFACE", "type" ,75),
+            new PUMLTokenId("ABSTRACT", "type" ,76),
+            new PUMLTokenId("ENUM", "type" ,77),
+            new PUMLTokenId("COMPONENT", "type" ,78),
+            new PUMLTokenId("STATE", "type" ,79),
+            new PUMLTokenId("OBJECT", "type" ,80),
+            
+            new PUMLTokenId("ARTIFACT", "part" ,81),            
+            new PUMLTokenId("FOLDER", "part" ,82),            
+            new PUMLTokenId("RECT", "part" ,83),            
+            new PUMLTokenId("NODE", "part" ,84),            
+            new PUMLTokenId("FRAME", "part" ,85),            
+            new PUMLTokenId("CLOUD", "part" ,86),            
+            new PUMLTokenId("DATABASE", "part" ,87),            
+            new PUMLTokenId("STORAGE", "part" ,88),            
+            new PUMLTokenId("AGENT", "part" ,89),            
+            new PUMLTokenId("BOUNDARY", "part" ,90),            
+            new PUMLTokenId("CONTROL", "part" ,91),            
+            new PUMLTokenId("ENTITY", "part" ,92),          
+            
+            new PUMLTokenId("IDENTIFIER", "identifier" ,93),            
+            
+            new PUMLTokenId("LETTER", "literal" ,94),
+            new PUMLTokenId("PART_LETTER", "literal" ,95),
                       
 
             /** Lexical state. */
-            new PUMLTokenId("DEFAULT", "whitespace" ,81)
+            new PUMLTokenId("DEFAULT", "whitespace" ,96)
 
 
 
