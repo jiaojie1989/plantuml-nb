@@ -8,4 +8,4 @@ Netbeans plugin that wraps PlantUML to provide its functionality from within Net
 * Save a PUML file
 * Save as png 
 * Save as svg
-*  
+* Syntax Highlighting for Keywords, connectors, types, parts identifiers 
