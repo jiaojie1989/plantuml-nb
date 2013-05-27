@@ -10,6 +10,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Set;
@@ -38,7 +39,6 @@ import org.openide.util.NbBundle;
 import org.openide.windows.TopComponent;
 import org.openide.util.NbBundle.Messages;
 import org.openide.util.RequestProcessor;
-import org.openide.util.lookup.AbstractLookup;
 import org.openide.util.lookup.InstanceContent;
 import org.openide.windows.WindowManager;
 
@@ -49,7 +49,7 @@ import org.openide.windows.WindowManager;
     autostore = false)
 @TopComponent.Description( preferredID = "PUMLTopComponent",
     iconBase = "org/netbeans/modules/plantumlnb/icon.png",
-    persistenceType = TopComponent.PERSISTENCE_ALWAYS)
+    persistenceType = TopComponent.PERSISTENCE_NEVER)
 @TopComponent.Registration(mode = "properties", openAtStartup = false) //rightSlidingSide
 @ActionID(category = "Window", id = "org.netbeans.modules.plantumlnb.PUMLTopComponent")
 @ActionReference(path = "Menu/Window" /*, position = 333 */)
@@ -60,7 +60,9 @@ import org.openide.windows.WindowManager;
     "CTL_PUMLTopComponent=PlantUML",
     "HINT_PUMLTopComponent=This is a PlantUML window"
 })
-public final class PUMLTopComponent extends TopComponent {
+public final class PUMLTopComponent extends TopComponent implements Serializable {
+    
+    private static final long serialVersionUID = -99094945997905090L;
 
     InstanceContent instanceContent = new InstanceContent();
       

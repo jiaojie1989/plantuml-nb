@@ -24,6 +24,8 @@ import org.openide.windows.TopComponent;
  */
 
 public final class pumlVisualElement extends MultiViewEditorElement {
+    
+    private static final long serialVersionUID = -6918553698868162650L;
 
     private pumlDataObject obj;
     private JToolBar toolbar = new JToolBar();
