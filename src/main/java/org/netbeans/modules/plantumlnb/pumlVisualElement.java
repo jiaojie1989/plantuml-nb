@@ -7,12 +7,10 @@ package org.netbeans.modules.plantumlnb;
 import java.util.Iterator;
 import javax.swing.JToolBar;
 import javax.swing.SwingUtilities;
-import org.netbeans.core.spi.multiview.MultiViewElement;
 import org.netbeans.core.spi.multiview.MultiViewElementCallback;
 import org.netbeans.core.spi.multiview.text.MultiViewEditorElement;
 import org.openide.awt.UndoRedo;
 import org.openide.util.Lookup;
-import org.openide.util.NbBundle.Messages;
 import org.openide.windows.TopComponent;
 
 
@@ -29,7 +27,7 @@ public final class pumlVisualElement extends MultiViewEditorElement {
 
     private pumlDataObject obj;
     private JToolBar toolbar = new JToolBar();
-    private transient MultiViewElementCallback callback;
+//    private transient MultiViewElementCallback callback;
     private TopComponent.Registry topComponentRegistry = TopComponent.getRegistry();
 
     public pumlVisualElement(Lookup lkp) {
@@ -94,16 +92,17 @@ public final class pumlVisualElement extends MultiViewEditorElement {
     
     @Override
     public void componentDeactivated() {
+        super.componentDeactivated();
     }
     
     @Override
     public UndoRedo getUndoRedo() {
-        return UndoRedo.NONE;
+        return super.getUndoRedo();
     }
 
-    @Override
-    public void setMultiViewCallback(MultiViewElementCallback callback) {
-        this.callback = callback;
-    }
+//    @Override
+//    public void setMultiViewCallback(MultiViewElementCallback callback) {
+//        this.callback = callback;
+//    }
 
 }

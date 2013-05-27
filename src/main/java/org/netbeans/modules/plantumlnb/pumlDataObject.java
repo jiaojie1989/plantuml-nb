@@ -8,10 +8,10 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.concurrent.Callable;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import org.netbeans.core.api.multiview.MultiViews;
 import org.netbeans.core.spi.multiview.MultiViewElement;
 import org.netbeans.core.spi.multiview.text.MultiViewEditorElement;
 import org.openide.awt.ActionID;
@@ -27,6 +27,8 @@ import org.openide.loaders.DataObject;
 import org.openide.loaders.DataObjectExistsException;
 import org.openide.loaders.MultiDataObject;
 import org.openide.loaders.MultiFileLoader;
+import org.openide.text.CloneableEditorSupport;
+import org.openide.text.CloneableEditorSupport.Pane;
 import org.openide.util.Lookup;
 import org.openide.util.NbBundle.Messages;
 import org.openide.windows.TopComponent;
@@ -95,7 +97,7 @@ position = 300)
     @ActionID(category = "System", id = "org.openide.actions.PropertiesAction"),
     position = 1400)
 })
-public class pumlDataObject extends MultiDataObject implements FileChangeListener {
+public class pumlDataObject extends MultiDataObject implements FileChangeListener, Callable<CloneableEditorSupport.Pane> {
     private String content;
     
     private FileObject fileObject;
@@ -125,7 +127,7 @@ public class pumlDataObject extends MultiDataObject implements FileChangeListene
         return ((MultiViewEditorElement ) new pumlVisualElement(lkp));
     }
     
-    
+
     
     // Michael Wever 26/09/2001
     /** Gets image for the image data 
@@ -157,7 +159,7 @@ public class pumlDataObject extends MultiDataObject implements FileChangeListene
 //    synchronized void setContent(String text) {
 //        this.content = text;
 //        if (text != null) {
-//            setModified(true);
+//            setModified(true);    
 //            getCookieSet().add(saver);
 //        } else {
 //            setModified(false);
@@ -215,4 +217,14 @@ public class pumlDataObject extends MultiDataObject implements FileChangeListene
 
     @Override
     public void fileAttributeChanged(FileAttributeEvent fae) {}
+
+    /**
+     * https://blogs.oracle.com/geertjan/entry/adding_a_history_tab_to
+     * @return
+     * @throws Exception 
+     */
+    @Override
+    public Pane call() throws Exception {
+        return (Pane) MultiViews.createCloneableMultiView("text/x-puml", this);
+    }
 }
