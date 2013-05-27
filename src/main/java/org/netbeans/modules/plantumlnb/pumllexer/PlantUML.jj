@@ -169,9 +169,14 @@ TOKEN :
     | < REVERSE_CALL_DOTTED_MESSAGE : "<--" >
     | < FORWARD_ASYNCHRONOUS_CALL_MESSAGE : "->>" >
     | < REVERSE_ASYNCHRONOUS_CALL_MESSAGE : "<<-" >  
-    | < #DOTS_DASHES : [ ".", "-" ] >
-    | < LEFT_COMPOSITION : "O" ( < DOTS_DASHES > )+ >
-    | < RIGHT_COMPOSITION : ( < DOTS_DASHES > )+ "O" >
+    | < DOTS_DASHES : (" ") ( "." | "-" )+ (" ")+ >
+    | < LEFT_AGGREGATION :  (" ")+ "o" ( "." | "-" )+ (" ")+ >
+    | < LEFT_EXTENSION :  (" ")+ "<|"  ( "." | "-" )+ (" ")+ >
+    | < LEFT_COMPOSITION : (" ")+ "*" ( "." | "-" )+ (" ")+ >
+    | < RIGHT_AGGREGATION : (" ")+ ( "." | "-" )+ "o" (" ")+ >
+    | < RIGHT_EXTENSION : (" ")+ ( "." | "-" )+ "*" (" ")+ >
+    | < RIGHT_COMPOSITION : (" ")+ ( "." | "-" )+ "|>" (" ")+ >
+    
 
 }
 
@@ -193,7 +198,7 @@ TOKEN :
 }
 
 /* PARTS */
-
+/* http://plantuml.sourceforge.net/qa/?qa=1015/what-do-they-keywords-fall-under */
 TOKEN : 
 {
     < ARTIFACT : "artifact" >

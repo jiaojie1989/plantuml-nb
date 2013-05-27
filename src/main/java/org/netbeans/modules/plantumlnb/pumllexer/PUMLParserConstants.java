@@ -147,62 +147,70 @@ public interface PUMLParserConstants {
   /** RegularExpression Id. */
   int DOTS_DASHES = 68;
   /** RegularExpression Id. */
-  int LEFT_COMPOSITION = 69;
+  int LEFT_AGGREGATION = 69;
   /** RegularExpression Id. */
-  int RIGHT_COMPOSITION = 70;
+  int LEFT_EXTENSION = 70;
   /** RegularExpression Id. */
-  int ACTOR = 71;
+  int LEFT_COMPOSITION = 71;
   /** RegularExpression Id. */
-  int PARTICIPANT = 72;
+  int RIGHT_AGGREGATION = 72;
   /** RegularExpression Id. */
-  int USECASE = 73;
+  int RIGHT_EXTENSION = 73;
   /** RegularExpression Id. */
-  int CLASS = 74;
+  int RIGHT_COMPOSITION = 74;
   /** RegularExpression Id. */
-  int INTERFACE = 75;
+  int ACTOR = 75;
   /** RegularExpression Id. */
-  int ABSTRACT = 76;
+  int PARTICIPANT = 76;
   /** RegularExpression Id. */
-  int ENUM = 77;
+  int USECASE = 77;
   /** RegularExpression Id. */
-  int COMPONENT = 78;
+  int CLASS = 78;
   /** RegularExpression Id. */
-  int STATE = 79;
+  int INTERFACE = 79;
   /** RegularExpression Id. */
-  int OBJECT = 80;
+  int ABSTRACT = 80;
   /** RegularExpression Id. */
-  int ARTIFACT = 81;
+  int ENUM = 81;
   /** RegularExpression Id. */
-  int FOLDER = 82;
+  int COMPONENT = 82;
   /** RegularExpression Id. */
-  int RECT = 83;
+  int STATE = 83;
   /** RegularExpression Id. */
-  int NODE = 84;
+  int OBJECT = 84;
   /** RegularExpression Id. */
-  int FRAME = 85;
+  int ARTIFACT = 85;
   /** RegularExpression Id. */
-  int CLOUD = 86;
+  int FOLDER = 86;
   /** RegularExpression Id. */
-  int DATABASE = 87;
+  int RECT = 87;
   /** RegularExpression Id. */
-  int STORAGE = 88;
+  int NODE = 88;
   /** RegularExpression Id. */
-  int AGENT = 89;
+  int FRAME = 89;
   /** RegularExpression Id. */
-  int BOUNDARY = 90;
+  int CLOUD = 90;
   /** RegularExpression Id. */
-  int CONTROL = 91;
+  int DATABASE = 91;
   /** RegularExpression Id. */
-  int ENTITY = 92;
+  int STORAGE = 92;
   /** RegularExpression Id. */
-  int IDENTIFIER = 93;
+  int AGENT = 93;
   /** RegularExpression Id. */
-  int LETTER = 94;
+  int BOUNDARY = 94;
   /** RegularExpression Id. */
-  int PART_LETTER = 95;
+  int CONTROL = 95;
+  /** RegularExpression Id. */
+  int ENTITY = 96;
+  /** RegularExpression Id. */
+  int IDENTIFIER = 97;
+  /** RegularExpression Id. */
+  int LETTER = 98;
+  /** RegularExpression Id. */
+  int PART_LETTER = 99;
 
   /** Lexical state. */
-  int DEFAULT = 96;
+  int DEFAULT = 100;
 
   /** Literal token values. */
   String[] tokenImage = {
@@ -275,7 +283,11 @@ public interface PUMLParserConstants {
     "\"->>\"",
     "\"<<-\"",
     "<DOTS_DASHES>",
+    "<LEFT_AGGREGATION>",
+    "<LEFT_EXTENSION>",
     "<LEFT_COMPOSITION>",
+    "<RIGHT_AGGREGATION>",
+    "<RIGHT_EXTENSION>",
     "<RIGHT_COMPOSITION>",
     "\"actor\"",
     "\"participant\"",
@@ -302,7 +314,7 @@ public interface PUMLParserConstants {
     "<IDENTIFIER>",
     "<LETTER>",
     "<PART_LETTER>",
-    "<token of kind 96>",
+    "<token of kind 100>",
   };
 
 }
