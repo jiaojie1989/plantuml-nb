@@ -168,14 +168,14 @@ public final class PUMLTopComponent extends TopComponent implements Serializable
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
-//            .addComponent(jToolBar1)
+            .addComponent(jToolBar1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)                
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-//                    .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 )               
         );
         
@@ -198,6 +198,7 @@ public final class PUMLTopComponent extends TopComponent implements Serializable
     
     private void addToolbar() {
 //        jToolBar1 = new javax.swing.JToolBar();
+        final PUMLTopComponent that = this;
         jToolBar1 = Toolbar.instance().createToolBar();
 //        exportPNGButton = new javax.swing.JButton();
 //
@@ -266,7 +267,7 @@ public final class PUMLTopComponent extends TopComponent implements Serializable
         
         setNewContent(currentDataObject);
     }
-
+       
     @Override
     public void componentClosed() {
 //        registries.removeChangeListener(pumlFileChangedListener);
@@ -291,7 +292,7 @@ public final class PUMLTopComponent extends TopComponent implements Serializable
 //        currentDataObject.getPrimaryFile().addFileChangeListener(fileChangeListener);
         setNewContent(currentDataObject);
     }
-
+    
     void writeProperties(java.util.Properties p) {
         // better to version settings since initial version as advocated at
         // http://wiki.apidesign.org/wiki/PropertyFiles
@@ -328,52 +329,18 @@ public final class PUMLTopComponent extends TopComponent implements Serializable
             public void run() {
                 InputStream inputStream = null;
                 BufferedImage image = null;
-                
-//                try {
-//                    FileObject fileObject = dataObject.getPrimaryFile();
-//                    if (fileObject == null) {
-//                        return;
-//                    }
-//                    inputStream = fileObject.getInputStream(); //TODO: This should be enabled later.
-//                    if (inputStream == null) {
-//                        return;
-//                    }
-                                    
-                    Set fss = dataObject.files();
-                    Iterator iter = fss.iterator();
-                    while (iter.hasNext()) {
-                        FileObject fo = (FileObject) iter.next();
-                        setNewContent((InputStream) pumlGenerator.generate(fo));
-                    }
-                                       
+                                                    
+                Set fss = dataObject.files();
+                Iterator iter = fss.iterator();
+                while (iter.hasNext()) {
+                    FileObject fo = (FileObject) iter.next();
+                    setNewContent((InputStream) pumlGenerator.generate(fo));
+                }
+
+                if (panelUI == null) {
+                    getComponent();
+                }
                     
-                    if (panelUI == null) {
-                        getComponent();
-                    }
-                    
-//                    TODO: Remove this code, its useless
-//                    try {
-////                        image = ImageIO.read(inputStream);
-//                        URL imageUrl = getClass().getResource("classes_001.png");
-//                        image = ImageIO.read( getClass().getResourceAsStream("classes_001.png"));
-//                        
-//                    } catch (IllegalArgumentException iaex) {
-//                        Logger.getLogger(PUMLTopComponent.class.getName()).info(NbBundle.getMessage(PUMLTopComponent.class, "ERR_IOFile"));
-//                        inputStream.close();
-//                    } 
-//                    inputStream.close();
-//                } catch (IOException ex) {
-//                    Logger.getLogger(PUMLTopComponent.class.getName()).info(NbBundle.getMessage(PUMLTopComponent.class, "ERR_IOFile"));
-//                } finally {
-//                    final BufferedImage fImage = image;
-//                    PUMLTopComponent.currentImage = image;
-//                    SwingUtilities.invokeLater(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            panelUI.setImage(fImage);
-//                        }
-//                    });
-//                }
             }
         });
 
@@ -411,6 +378,12 @@ public final class PUMLTopComponent extends TopComponent implements Serializable
         }
     }
     
+    /**
+     * TODO: I have a suspicion that a new lookup listener is being added to Context
+     * object, verify.
+     * 
+     * @return {DataObject} 
+     */
     public DataObject getDataObject() {
         currentContext = getLookup().lookup(MY_DATA);
         currentContext.addLookupListener(getContextListener());
