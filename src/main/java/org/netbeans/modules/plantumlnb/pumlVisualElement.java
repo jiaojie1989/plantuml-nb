@@ -7,11 +7,13 @@ package org.netbeans.modules.plantumlnb;
 import java.util.Iterator;
 import javax.swing.JToolBar;
 import javax.swing.SwingUtilities;
-import org.netbeans.core.spi.multiview.MultiViewElementCallback;
 import org.netbeans.core.spi.multiview.text.MultiViewEditorElement;
 import org.openide.awt.UndoRedo;
+import org.openide.loaders.DataObject;
 import org.openide.util.Lookup;
+import org.openide.windows.CloneableTopComponent;
 import org.openide.windows.TopComponent;
+import org.openide.windows.WindowManager;
 
 
 /**
@@ -33,7 +35,7 @@ public final class pumlVisualElement extends MultiViewEditorElement {
     public pumlVisualElement(Lookup lkp) {
         super(lkp);
         obj = lkp.lookup(pumlDataObject.class);
-        assert obj != null;
+        assert obj != null;        
     }
     
 
@@ -104,5 +106,23 @@ public final class pumlVisualElement extends MultiViewEditorElement {
 //    public void setMultiViewCallback(MultiViewElementCallback callback) {
 //        this.callback = callback;
 //    }
+    
+    public static pumlDataObject getActivePUMLEditorDataObject(){
+        
+        WindowManager defaultWM = WindowManager.getDefault();
+        TopComponent[] openedTCs = defaultWM.getOpenedTopComponents(defaultWM.findMode("editor"));
+        
+        TopComponent showingTC = null;
+        for(int i = 0; i < openedTCs.length; i++ ) {
+            if(openedTCs[i].isShowing()) {
+                showingTC = openedTCs[i];
+                break;
+            }
+        }
+        
+        pumlDataObject dataObject = showingTC.getLookup().lookup(pumlDataObject.class);
+        
+        return dataObject == null ? null : (pumlDataObject) dataObject;
+    }
 
 }

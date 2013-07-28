@@ -6,8 +6,12 @@ package org.netbeans.modules.plantumlnb;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+import org.openide.util.Exceptions;
 
 /**
  *
@@ -18,7 +22,7 @@ public class ExportAction implements ActionListener {
     private JPanel panel;
     private PUMLGenerator pumlGenerator = new PUMLGenerator();
     private DataObjectAccess doa;
-    
+        
     public ExportAction(JPanel panel, DataObjectAccess doa) {
         this.panel = panel;
         this.doa = doa;
@@ -26,12 +30,37 @@ public class ExportAction implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        JFileChooser fc = new JFileChooser();
-        System.out.println(doa.getDataObject().toString());
+        final JFileChooser fc = new JFileChooser();     
+        fc.setMultiSelectionEnabled(false);
+        fc.setAcceptAllFileFilterUsed(false);
+        fc.addChoosableFileFilter(new SVGFileFilter());
+        fc.addChoosableFileFilter(new PNGFileFilter());
+        final pumlDataObject dataObject = pumlVisualElement.getActivePUMLEditorDataObject();
+        
         int returnVal = fc.showSaveDialog(panel);        
-
         if(returnVal == JFileChooser.APPROVE_OPTION) {
-            System.out.println(fc.getSelectedFile());            
+                        
+            SwingUtilities.invokeLater(new Runnable() {
+
+                @Override
+                public void run() {
+                    try {
+                        File file = fc.getSelectedFile().getCanonicalFile();
+                        if(file.getName().indexOf(".") == -1) {
+                            file = new File(file.getCanonicalPath() + "." + fc.getFileFilter().getDescription());
+                        }                                                
+                        PUMLGenerator pumlGenerator = new PUMLGenerator();
+                        FileFormatable f = ((FileFormatable) fc.getFileFilter());
+                        pumlGenerator.generateFile(dataObject.getPrimaryFile(), f.getFileFormat(), file);
+                       
+                    } catch (IOException ex) {
+                        Exceptions.printStackTrace(ex);
+                    }
+                    
+                }
+            
+            });
+            
         }
     }
     

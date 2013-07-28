@@ -49,9 +49,7 @@ public class Toolbar {
     
     private DataObjectAccess dataObjectAccess;
 
-    private Toolbar() {
-    
-    }
+    private Toolbar() {}
         
     public JToolBar createToolBar() {
         // Definition of toolbar.
