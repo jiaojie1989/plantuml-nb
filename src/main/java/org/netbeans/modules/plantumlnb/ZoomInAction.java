@@ -72,7 +72,7 @@ public class ZoomInAction extends CallableSystemAction {
     public void performAction() {
         TopComponent curComponent = TopComponent.getRegistry().getActivated();
         if (curComponent instanceof PUMLTopComponent) {
-            org.netbeans.modules.plantumlnb.Toolbar.instance().zoomIn();
+            org.netbeans.modules.plantumlnb.ui.Toolbar.instance().zoomIn();
         }
     }
     

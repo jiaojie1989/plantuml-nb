@@ -72,7 +72,7 @@ public class ZoomOutAction extends CallableSystemAction {
     public void performAction() {
         TopComponent curComponent = TopComponent.getRegistry().getActivated();
         if(curComponent instanceof PUMLTopComponent) {
-            org.netbeans.modules.plantumlnb.Toolbar.instance().zoomOut();
+            org.netbeans.modules.plantumlnb.ui.Toolbar.instance().zoomOut();
         }
         
     }

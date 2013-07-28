@@ -2,8 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.netbeans.modules.plantumlnb;
+package org.netbeans.modules.plantumlnb.ui.io;
 
+import org.netbeans.modules.plantumlnb.ui.ImageUtils;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -31,6 +32,7 @@ import javax.xml.transform.stream.StreamResult;
 import net.sourceforge.plantuml.FileFormat;
 import net.sourceforge.plantuml.FileFormatOption;
 import net.sourceforge.plantuml.SourceStringReader;
+import org.netbeans.modules.plantumlnb.PrettyPrinter;
 import org.openide.filesystems.FileObject;
 import org.xml.sax.InputSource;
 

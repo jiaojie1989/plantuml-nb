@@ -136,7 +136,7 @@ public class CustomZoomAction extends CallableSystemAction {
     private void performZoom(int enlargeFactor, int decreaseFactor) {
         TopComponent currentComponent = TopComponent.getRegistry().getActivated();
         if(currentComponent instanceof PUMLTopComponent)
-            org.netbeans.modules.plantumlnb.Toolbar.instance().customZoom(enlargeFactor, decreaseFactor);
+            org.netbeans.modules.plantumlnb.ui.Toolbar.instance().customZoom(enlargeFactor, decreaseFactor);
     }
 
     /** Gets action name. Implements superclass abstract method. */

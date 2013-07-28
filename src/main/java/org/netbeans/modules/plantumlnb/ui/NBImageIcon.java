@@ -43,13 +43,14 @@
  */
 
 
-package org.netbeans.modules.plantumlnb;
+package org.netbeans.modules.plantumlnb.ui;
 
 
 import java.awt.Image;
 import java.io.IOException;
 import java.io.Serializable;
 import javax.swing.ImageIcon;
+import org.netbeans.modules.plantumlnb.pumlDataObject;
 
 
 /**
@@ -58,7 +59,7 @@ import javax.swing.ImageIcon;
  * @author Petr Hamernik, Michael Wever
  * @author  Marian Petras
  */
-class NBImageIcon extends ImageIcon implements Serializable {
+public class NBImageIcon extends ImageIcon implements Serializable {
 
     /** generated Serialized Version UID */
     static final long serialVersionUID = -1730253055388017036L;

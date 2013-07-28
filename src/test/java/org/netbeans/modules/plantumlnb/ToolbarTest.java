@@ -4,6 +4,7 @@
  */
 package org.netbeans.modules.plantumlnb;
 
+import org.netbeans.modules.plantumlnb.ui.Toolbar;
 import javax.swing.JToolBar;
 import org.junit.After;
 import org.junit.AfterClass;

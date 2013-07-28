@@ -4,6 +4,9 @@
  */
 package org.netbeans.modules.plantumlnb;
 
+import org.netbeans.modules.plantumlnb.ui.io.PUMLGenerator;
+import org.netbeans.modules.plantumlnb.ui.NBImageIcon;
+import org.netbeans.modules.plantumlnb.ui.Toolbar;
 import java.awt.image.BufferedImage;
 import java.awt.peer.ComponentPeer;
 import java.beans.PropertyChangeEvent;

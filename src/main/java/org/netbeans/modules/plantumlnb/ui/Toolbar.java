@@ -2,8 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.netbeans.modules.plantumlnb;
+package org.netbeans.modules.plantumlnb.ui;
 
+import org.netbeans.modules.plantumlnb.ui.ExportAction;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -16,6 +17,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JToolBar;
+import org.netbeans.modules.plantumlnb.CustomZoomAction;
+import org.netbeans.modules.plantumlnb.DataObjectAccess;
+import org.netbeans.modules.plantumlnb.PUMLTopComponent;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.SystemAction;
 

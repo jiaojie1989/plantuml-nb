@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.netbeans.modules.plantumlnb;
+package org.netbeans.modules.plantumlnb.ui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,6 +11,10 @@ import java.io.IOException;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import org.netbeans.modules.plantumlnb.DataObjectAccess;
+import org.netbeans.modules.plantumlnb.ui.io.PUMLGenerator;
+import org.netbeans.modules.plantumlnb.pumlDataObject;
+import org.netbeans.modules.plantumlnb.pumlVisualElement;
 import org.openide.util.Exceptions;
 
 /**

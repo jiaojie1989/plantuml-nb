@@ -2,10 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.netbeans.modules.plantumlnb;
+package org.netbeans.modules.plantumlnb.ui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import org.netbeans.modules.plantumlnb.PUMLTopComponent;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
 import org.openide.awt.ActionReferences;

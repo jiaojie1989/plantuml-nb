@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.netbeans.modules.plantumlnb;
+package org.netbeans.modules.plantumlnb.ui;
 
 import java.io.File;
 

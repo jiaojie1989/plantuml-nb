@@ -2,8 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.netbeans.modules.plantumlnb;
+package org.netbeans.modules.plantumlnb.ui;
 
+import org.netbeans.modules.plantumlnb.ui.FileFormatable;
 import java.io.File;
 import javax.swing.filechooser.FileFilter;
 import net.sourceforge.plantuml.FileFormat;
