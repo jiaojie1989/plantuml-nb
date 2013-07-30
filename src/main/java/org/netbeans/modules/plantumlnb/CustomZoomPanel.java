@@ -50,7 +50,6 @@ import javax.swing.JPanel;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
-
 import org.openide.util.NbBundle;
 
 

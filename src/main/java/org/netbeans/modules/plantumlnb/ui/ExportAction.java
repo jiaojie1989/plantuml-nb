@@ -12,9 +12,9 @@ import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import org.netbeans.modules.plantumlnb.DataObjectAccess;
-import org.netbeans.modules.plantumlnb.ui.io.PUMLGenerator;
 import org.netbeans.modules.plantumlnb.pumlDataObject;
 import org.netbeans.modules.plantumlnb.pumlVisualElement;
+import org.netbeans.modules.plantumlnb.ui.io.PUMLGenerator;
 import org.openide.util.Exceptions;
 
 /**

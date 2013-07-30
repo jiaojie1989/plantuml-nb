@@ -4,13 +4,13 @@
  */
 package org.netbeans.modules.plantumlnb;
 
-import org.netbeans.modules.plantumlnb.ui.Toolbar;
 import javax.swing.JToolBar;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.netbeans.modules.plantumlnb.ui.Toolbar;
 
 /**
  *

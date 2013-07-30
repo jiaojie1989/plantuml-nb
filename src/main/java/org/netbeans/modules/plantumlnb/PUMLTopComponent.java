@@ -4,9 +4,6 @@
  */
 package org.netbeans.modules.plantumlnb;
 
-import org.netbeans.modules.plantumlnb.ui.io.PUMLGenerator;
-import org.netbeans.modules.plantumlnb.ui.NBImageIcon;
-import org.netbeans.modules.plantumlnb.ui.Toolbar;
 import java.awt.image.BufferedImage;
 import java.awt.peer.ComponentPeer;
 import java.beans.PropertyChangeEvent;
@@ -27,6 +24,9 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import org.netbeans.api.settings.ConvertAsProperties;
+import org.netbeans.modules.plantumlnb.ui.NBImageIcon;
+import org.netbeans.modules.plantumlnb.ui.Toolbar;
+import org.netbeans.modules.plantumlnb.ui.io.PUMLGenerator;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
 import org.openide.filesystems.FileChangeAdapter;
@@ -39,10 +39,10 @@ import org.openide.util.Lookup;
 import org.openide.util.LookupEvent;
 import org.openide.util.LookupListener;
 import org.openide.util.NbBundle;
-import org.openide.windows.TopComponent;
 import org.openide.util.NbBundle.Messages;
 import org.openide.util.RequestProcessor;
 import org.openide.util.lookup.InstanceContent;
+import org.openide.windows.TopComponent;
 import org.openide.windows.WindowManager;
 
 /**

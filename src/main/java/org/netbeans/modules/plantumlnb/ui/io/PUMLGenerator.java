@@ -4,7 +4,6 @@
  */
 package org.netbeans.modules.plantumlnb.ui.io;
 
-import org.netbeans.modules.plantumlnb.ui.ImageUtils;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -23,18 +22,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.IIOException;
 import javax.swing.filechooser.FileFilter;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Source;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.sax.SAXSource;
-import javax.xml.transform.sax.SAXTransformerFactory;
-import javax.xml.transform.stream.StreamResult;
 import net.sourceforge.plantuml.FileFormat;
 import net.sourceforge.plantuml.FileFormatOption;
 import net.sourceforge.plantuml.SourceStringReader;
 import org.netbeans.modules.plantumlnb.PrettyPrinter;
+import org.netbeans.modules.plantumlnb.ui.ImageUtils;
 import org.openide.filesystems.FileObject;
-import org.xml.sax.InputSource;
 
 /**
  *

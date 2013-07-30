@@ -4,7 +4,6 @@
  */
 package org.netbeans.modules.plantumlnb.ui;
 
-import org.netbeans.modules.plantumlnb.ui.FileFormatable;
 import java.io.File;
 import javax.swing.filechooser.FileFilter;
 import net.sourceforge.plantuml.FileFormat;
