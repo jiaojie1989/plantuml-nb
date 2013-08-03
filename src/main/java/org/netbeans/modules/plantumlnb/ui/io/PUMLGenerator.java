@@ -149,79 +149,90 @@ public class PUMLGenerator {
     }
     
     public void generateFile(FileObject fo, FileFormat fileFormat, File file) {        
+        try {
+            String methodName = "generate" + fileFormat.name() + "File";
+            Class c = getClass();            
+            c.getMethod(methodName).invoke(fo, file);            
+        } catch (NoSuchMethodException ex) {
+            logger.log(Level.WARNING, ex.getMessage());
+        } catch (SecurityException ex) {
+            logger.log(Level.WARNING, ex.getMessage());
+        }  catch (IllegalAccessException ex) {
+            logger.log(Level.WARNING, ex.getMessage());
+        } catch (IllegalArgumentException ex) {
+            logger.log(Level.WARNING, ex.getMessage());
+        } catch (InvocationTargetException ex) {
+            logger.log(Level.WARNING, ex.getMessage());
+        }
+        
+    }     
+            
+    
+    public void generatePNGFile(FileObject fo, File file) { 
         ByteArrayOutputStream os = new ByteArrayOutputStream();
         FileOutputStream fos = null;
         BufferedOutputStream bos = null;        
         
-        if(fileFormat == FileFormat.SVG) {
-            FileWriter fw = null;
-            BufferedWriter bw = null;
+        try {
+            SourceStringReader reader = new SourceStringReader(fo.asText());
+            // Write the first image to "os"
+            String desc = reader.generateImage(os, new FileFormatOption(FileFormat.PNG));
+
+            file.createNewFile();
+            fos = new FileOutputStream(file);
+            bos = new BufferedOutputStream(fos);
+            bos.write(os.toByteArray());
+
+        } catch (IOException ex) {
+            logger.log(Level.WARNING, ex.getMessage());
+        } finally {
             try {
-                SourceStringReader reader = new SourceStringReader(fo.asText());
-                // Write the first image to "os"
-                String desc = reader.generateImage(os, new FileFormatOption(fileFormat));
-                String svg = new String(os.toByteArray());
-
-                file.createNewFile();
-                fw = new FileWriter(file);
-                bw = new BufferedWriter(fw);
-                bw.write(PrettyPrinter.formatXml(svg));
-                bw.flush();
-
+                os.close();
+                if (fos != null) {
+                    fos.close();
+                }
+                if (bos != null) {
+                    bos.close();
+                }
             } catch (IOException ex) {
                 logger.log(Level.WARNING, ex.getMessage());
-            } finally {
-                try {
-                    os.close();
-                    if (fw != null) {
-                        fw.close();
-                    }
-                    if (bw != null) {
-                        bw.close();
-                    }
-                } catch (IOException ex) {
-                    logger.log(Level.WARNING, ex.getMessage());
-                }
-            }        
-            
-        } else if ( fileFormat == FileFormat.PNG) {
-            try {
-                SourceStringReader reader = new SourceStringReader(fo.asText());
-                // Write the first image to "os"
-                String desc = reader.generateImage(os, new FileFormatOption(fileFormat));
-
-                file.createNewFile();
-                fos = new FileOutputStream(file);
-                bos = new BufferedOutputStream(fos);
-                bos.write(os.toByteArray());
-
-            } catch (IOException ex) {
-                logger.log(Level.WARNING, ex.getMessage());
-            } finally {
-                try {
-                    os.close();
-                    if (fos != null) {
-                        fos.close();
-                    }
-                    if (bos != null) {
-                        bos.close();
-                    }
-                } catch (IOException ex) {
-                    logger.log(Level.WARNING, ex.getMessage());
-                }
             }
-        } 
-    }     
-            
+        }
+    }
     
-//    public void generatePNGFile(InputStream is) {        
-//        generateFile(is, FileFormat.PNG);
-//    }
-//    
-//    public void generateSVGFile(InputStream is) {
-//        generateFile(is, FileFormat.SVG);
-//    }
-//    
+    public void generateSVGFile(FileObject fo, File file) {
+        ByteArrayOutputStream os = new ByteArrayOutputStream();
+        FileWriter fw = null;
+        BufferedWriter bw = null;
+        try {
+            SourceStringReader reader = new SourceStringReader(fo.asText());
+            // Write the first image to "os"
+            String desc = reader.generateImage(os, new FileFormatOption(FileFormat.SVG));
+            String svg = new String(os.toByteArray());
+
+            file.createNewFile();
+            fw = new FileWriter(file);
+            bw = new BufferedWriter(fw);
+            bw.write(PrettyPrinter.formatXml(svg));
+            bw.flush();
+
+        } catch (IOException ex) {
+            logger.log(Level.WARNING, ex.getMessage());
+        } finally {
+            try {
+                os.close();
+                if (fw != null) {
+                    fw.close();
+                }
+                if (bw != null) {
+                    bw.close();
+                }
+            } catch (IOException ex) {
+                logger.log(Level.WARNING, ex.getMessage());
+            }
+        }  
+    }
+    
 //    public void generatePDFFile(InputStream is) {
 //        generateFile(is, FileFormat.PDF);
 //    }
