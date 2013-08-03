@@ -46,6 +46,7 @@
 package org.netbeans.modules.plantumlnb;
 
 
+import org.netbeans.modules.plantumlnb.ui.PUMLTopComponent;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionRegistration;
 import org.openide.util.HelpCtx;

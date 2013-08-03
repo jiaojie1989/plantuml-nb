@@ -6,7 +6,6 @@ package org.netbeans.modules.plantumlnb.ui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import org.netbeans.modules.plantumlnb.PUMLTopComponent;
 
 //@ActionID(
 //        category = "Window",

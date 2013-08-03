@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.netbeans.modules.plantumlnb;
+package org.netbeans.modules.plantumlnb.ui;
 
 import java.awt.image.BufferedImage;
 import java.awt.peer.ComponentPeer;
@@ -24,6 +24,9 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import org.netbeans.api.settings.ConvertAsProperties;
+import org.netbeans.modules.plantumlnb.ImagePreviewPanel;
+import org.netbeans.modules.plantumlnb.RenderImageThread;
+import org.netbeans.modules.plantumlnb.pumlDataObject;
 import org.netbeans.modules.plantumlnb.ui.NBImageIcon;
 import org.netbeans.modules.plantumlnb.ui.Toolbar;
 import org.netbeans.modules.plantumlnb.ui.io.PUMLGenerator;

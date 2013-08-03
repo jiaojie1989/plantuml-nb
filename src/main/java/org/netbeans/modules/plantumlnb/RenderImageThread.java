@@ -4,6 +4,7 @@
  */
 package org.netbeans.modules.plantumlnb;
 
+import org.netbeans.modules.plantumlnb.ui.PUMLTopComponent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;

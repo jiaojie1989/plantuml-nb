@@ -18,7 +18,6 @@ import javax.swing.JPanel;
 import javax.swing.JToolBar;
 import org.netbeans.modules.plantumlnb.CustomZoomAction;
 import org.netbeans.modules.plantumlnb.DataObjectAccess;
-import org.netbeans.modules.plantumlnb.PUMLTopComponent;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.SystemAction;
 

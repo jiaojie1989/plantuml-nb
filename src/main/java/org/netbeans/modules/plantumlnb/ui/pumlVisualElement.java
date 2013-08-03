@@ -2,12 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.netbeans.modules.plantumlnb;
+package org.netbeans.modules.plantumlnb.ui;
 
 import java.util.Iterator;
 import javax.swing.JToolBar;
 import javax.swing.SwingUtilities;
 import org.netbeans.core.spi.multiview.text.MultiViewEditorElement;
+import org.netbeans.modules.plantumlnb.pumlDataObject;
 import org.openide.awt.UndoRedo;
 import org.openide.util.Lookup;
 import org.openide.windows.TopComponent;
