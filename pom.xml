@@ -4,7 +4,7 @@
 
     <groupId>org.netbeans.modules</groupId>
     <artifactId>PlantUML-NB</artifactId>
-    <version>1.0</version>
+    <version>1.1.0</version>
     <packaging>nbm</packaging>
 
     <name>PlantUML-NB</name>
@@ -163,12 +163,14 @@
                 <version>3.7</version>
                 <extensions>true</extensions>
                 <configuration>
+                    <useDefaultManifestFile>true</useDefaultManifestFile>
                     <additionalArguments>${netbeans.run.params.ide}</additionalArguments>
                     <netbeansInstallation>/home/venkat/Programs/netbeans-7.3/</netbeansInstallation>
 <!--                        <nbmBuildDir>${project.build.directory}/netbeans_clusters/</nbmBuildDir>-->
-                    <keystore>keystore</keystore>
-                    <keystorealias>ezondaice</keystorealias>
-                    <keystorepassword>ezondaice</keystorepassword>
+                    <keystore>nbproject/private/keystore</keystore>
+                    <keystorealias>venkat</keystorealias>
+                    <keystorepassword>plantumlnb</keystorepassword>
+                    <author>Venkat R Akkineni</author>
                 </configuration>
             </plugin>
 
