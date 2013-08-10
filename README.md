@@ -3,6 +3,7 @@
 Netbeans plugin that wraps PlantUML to provide its functionality from within Netbeans.
 
 
+
 ### Version 1.1.0
 
 Added saveas button, dialog. 
