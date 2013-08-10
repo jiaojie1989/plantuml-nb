@@ -152,7 +152,7 @@ public class PUMLGenerator {
         try {
             String methodName = "generate" + fileFormat.name() + "File";
             Class c = getClass();            
-            c.getMethod(methodName).invoke(fo, file);            
+            c.getMethod(methodName, FileObject.class, File.class).invoke(this, fo, file);            
         } catch (NoSuchMethodException ex) {
             logger.log(Level.WARNING, ex.getMessage());
         } catch (SecurityException ex) {
@@ -231,6 +231,38 @@ public class PUMLGenerator {
                 logger.log(Level.WARNING, ex.getMessage());
             }
         }  
+    }
+    
+    public void generateEPSFile(FileObject fo, File file) {
+        ByteArrayOutputStream os = new ByteArrayOutputStream();
+        FileOutputStream fos = null;
+        BufferedOutputStream bos = null;        
+        
+        try {
+            SourceStringReader reader = new SourceStringReader(fo.asText());
+            // Write the first image to "os"
+            String desc = reader.generateImage(os, new FileFormatOption(FileFormat.EPS));
+
+            file.createNewFile();
+            fos = new FileOutputStream(file);
+            bos = new BufferedOutputStream(fos);
+            bos.write(os.toByteArray());
+
+        } catch (IOException ex) {
+            logger.log(Level.WARNING, ex.getMessage());
+        } finally {
+            try {
+                os.close();
+                if (fos != null) {
+                    fos.close();
+                }
+                if (bos != null) {
+                    bos.close();
+                }
+            } catch (IOException ex) {
+                logger.log(Level.WARNING, ex.getMessage());
+            }
+        }
     }
     
 //    public void generatePDFFile(InputStream is) {

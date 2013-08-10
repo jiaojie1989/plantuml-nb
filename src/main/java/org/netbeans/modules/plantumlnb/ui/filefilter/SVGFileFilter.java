@@ -2,17 +2,19 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.netbeans.modules.plantumlnb.ui;
+package org.netbeans.modules.plantumlnb.ui.filefilter;
 
 import java.io.File;
 import javax.swing.filechooser.FileFilter;
 import net.sourceforge.plantuml.FileFormat;
+import org.netbeans.modules.plantumlnb.ui.FileFormatable;
+import org.netbeans.modules.plantumlnb.ui.ImageUtils;
 
 /**
  *
  * @author venkat
  */
-public class PNGFileFilter extends FileFilter implements FileFormatable {
+public class SVGFileFilter extends FileFilter implements FileFormatable {
 
     @Override
     public boolean accept(File f) {
@@ -22,8 +24,8 @@ public class PNGFileFilter extends FileFilter implements FileFormatable {
  
         String extension = ImageUtils.getExtension(f);
         if (extension != null) {
-            if(extension.equals(ImageUtils.png)) {
-                    return true;
+            if(extension.equals(ImageUtils.svg)) {
+                return true;
             } else {
                 return false;
             }
@@ -34,12 +36,12 @@ public class PNGFileFilter extends FileFilter implements FileFormatable {
 
     @Override
     public String getDescription() {
-        return ImageUtils.png;
+        return ImageUtils.svg;
     }
 
     @Override
     public FileFormat getFileFormat() {
-        return FileFormat.PNG;
+        return FileFormat.SVG;
     }
     
 }

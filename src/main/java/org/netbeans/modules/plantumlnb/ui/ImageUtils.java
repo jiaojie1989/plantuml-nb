@@ -14,6 +14,7 @@ public class ImageUtils {
     
     public final static String png = "png";
     public final static String svg = "svg";
+    public final static String eps = "eps";
     
     /*
      * Get the extension of a file.

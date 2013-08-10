@@ -24,7 +24,6 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import org.netbeans.api.settings.ConvertAsProperties;
-import org.netbeans.modules.plantumlnb.ImagePreviewPanel;
 import org.netbeans.modules.plantumlnb.RenderImageThread;
 import org.netbeans.modules.plantumlnb.pumlDataObject;
 import org.netbeans.modules.plantumlnb.ui.NBImageIcon;

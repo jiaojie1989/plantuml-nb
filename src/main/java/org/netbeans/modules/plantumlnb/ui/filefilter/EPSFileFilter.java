@@ -1,0 +1,49 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package org.netbeans.modules.plantumlnb.ui.filefilter;
+
+import java.io.File;
+import javax.swing.filechooser.FileFilter;
+import net.sourceforge.plantuml.FileFormat;
+import org.netbeans.modules.plantumlnb.ui.FileFormatable;
+import org.netbeans.modules.plantumlnb.ui.ImageUtils;
+
+/**
+ *
+ * @author venkat
+ */
+public class EPSFileFilter extends FileFilter implements FileFormatable {
+
+    @Override
+    public boolean accept(File f) {
+        if (f.isDirectory()) {
+            return true;
+        }
+ 
+        String extension = ImageUtils.getExtension(f);
+        if (extension != null) {
+            if(extension.equals(ImageUtils.eps)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+ 
+        return false;
+    }
+
+    @Override
+    public String getDescription() {
+        return ImageUtils.eps;
+    }
+
+    @Override
+    public FileFormat getFileFormat() {
+        return FileFormat.EPS;
+    }
+    
+    
+    
+}

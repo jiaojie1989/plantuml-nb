@@ -14,8 +14,9 @@ import javax.swing.SwingUtilities;
 import org.netbeans.modules.plantumlnb.DataObjectAccess;
 import org.netbeans.modules.plantumlnb.pumlDataObject;
 import org.netbeans.modules.plantumlnb.ui.FileFormatable;
-import org.netbeans.modules.plantumlnb.ui.PNGFileFilter;
-import org.netbeans.modules.plantumlnb.ui.SVGFileFilter;
+import org.netbeans.modules.plantumlnb.ui.filefilter.EPSFileFilter;
+import org.netbeans.modules.plantumlnb.ui.filefilter.PNGFileFilter;
+import org.netbeans.modules.plantumlnb.ui.filefilter.SVGFileFilter;
 import org.netbeans.modules.plantumlnb.ui.io.PUMLGenerator;
 import org.netbeans.modules.plantumlnb.ui.pumlVisualElement;
 import org.openide.util.Exceptions;
@@ -42,6 +43,7 @@ public class ExportAction implements ActionListener {
         fc.setAcceptAllFileFilterUsed(false);
         fc.addChoosableFileFilter(new SVGFileFilter());
         fc.addChoosableFileFilter(new PNGFileFilter());
+        fc.addChoosableFileFilter(new EPSFileFilter());
         final pumlDataObject dataObject = pumlVisualElement.getActivePUMLEditorDataObject();
         
         int returnVal = fc.showSaveDialog(panel);        
