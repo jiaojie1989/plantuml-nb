@@ -153,6 +153,32 @@
             <version>4.10</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>batik</groupId>
+            <artifactId>batik-swing</artifactId>
+            <version>1.6-1</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>batik</groupId>
+            <artifactId>batik-script</artifactId>
+            <version>1.6-1</version>
+            <!-- exclude xerces as Netbeans includes it -->
+            <exclusions>
+                <exclusion>
+                    <groupId>xerces</groupId>
+                    <artifactId>xercesImpl</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- include xerces in test scope as unittests need it -->
+        <dependency>
+            <groupId>xerces</groupId>
+            <artifactId>xercesImpl</artifactId>
+            <version>2.5.0</version>
+            <type>jar</type>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -165,7 +191,7 @@
                 <configuration>
                     <useDefaultManifestFile>true</useDefaultManifestFile>
                     <additionalArguments>${netbeans.run.params.ide}</additionalArguments>
-                    <netbeansInstallation>/home/venkat/Programs/netbeans-7.3/</netbeansInstallation>
+                    <netbeansInstallation>/home/venkat/Programs/netbeans-7.4beta/</netbeansInstallation>
 <!--                        <nbmBuildDir>${project.build.directory}/netbeans_clusters/</nbmBuildDir>-->
                     <keystore>nbproject/private/keystore</keystore>
                     <keystorealias>venkat</keystorealias>

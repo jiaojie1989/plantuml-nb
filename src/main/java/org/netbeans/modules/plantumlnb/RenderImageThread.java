@@ -4,13 +4,10 @@
  */
 package org.netbeans.modules.plantumlnb;
 
-import org.netbeans.modules.plantumlnb.ui.PUMLTopComponent;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 import javax.swing.SwingUtilities;
+import org.netbeans.modules.plantumlnb.ui.PUMLTopComponent;
 import org.openide.util.NbBundle;
 
 /**
@@ -20,11 +17,11 @@ import org.openide.util.NbBundle;
 public class RenderImageThread extends Thread {
     
     PUMLTopComponent topComponent;
-    InputStream inputStream;
+    String imageContent;
     
-    public RenderImageThread(PUMLTopComponent tc, InputStream is) {
+    public RenderImageThread(PUMLTopComponent tc, String ic) {
         topComponent = tc;
-        inputStream = is;
+        imageContent = ic;
     }
 
     @Override
@@ -34,27 +31,18 @@ public class RenderImageThread extends Thread {
             if (topComponent.getPanelUI() == null) {
                 topComponent.getComponent();
             }
-            image = ImageIO.read(inputStream);
         } catch (IllegalArgumentException iaex) {
             Logger.getLogger(PUMLTopComponent.class.getName()).info(NbBundle.getMessage(PUMLTopComponent.class, "ERR_IOFile"));
-        } catch (IOException ex) {
-            Logger.getLogger(PUMLTopComponent.class.getName()).info(NbBundle.getMessage(PUMLTopComponent.class, "ERR_IOFile"));
         } finally {
-
-            try {
-                inputStream.close();
-            } catch (IOException ex) {
-                Logger.getLogger(PUMLTopComponent.class.getName()).info(NbBundle.getMessage(PUMLTopComponent.class, "ERR_IOFile"));
-            }
 
             final BufferedImage fImage = image;
             // TODO: This line causes the problem below.
             // http://stackoverflow.com/questions/16502071/netbeans-save-hangs
-//                    createNBImageIcon(currentDataObject);                    
             SwingUtilities.invokeLater(new Runnable() {
                 @Override
                 public void run() {
-                    topComponent.getPanelUI().setImage(fImage);
+                    topComponent.getPanelUI().renderSVGFile(imageContent);
+                    topComponent.repaint();
                 }
             });
         }

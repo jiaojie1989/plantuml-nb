@@ -28,6 +28,7 @@ import net.sourceforge.plantuml.SourceStringReader;
 import org.netbeans.modules.plantumlnb.PrettyPrinter;
 import org.netbeans.modules.plantumlnb.ui.ImageUtils;
 import org.openide.filesystems.FileObject;
+import org.openide.util.Exceptions;
 
 /**
  *
@@ -85,6 +86,24 @@ public class PUMLGenerator {
             logger.log(Level.WARNING, ex.getMessage());
         } 
         return pumlImageInputStream;
+    }
+    
+    public String generateSVG(FileObject fo) {
+        SourceStringReader reader;
+        String svg = null;
+        
+        try {
+            reader = new SourceStringReader(fo.asText());
+            ByteArrayOutputStream os = new ByteArrayOutputStream();
+
+            // Write the first image to "os"
+            String desc = reader.generateImage(os, new FileFormatOption(FileFormat.SVG));
+            svg = new String(os.toByteArray());
+        } catch (IOException ex) {
+            Exceptions.printStackTrace(ex);
+        }
+        
+        return svg;       
     }
     
     /**

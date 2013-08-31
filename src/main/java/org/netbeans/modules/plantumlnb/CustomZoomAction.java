@@ -46,10 +46,10 @@
 package org.netbeans.modules.plantumlnb;
 
 
-import org.netbeans.modules.plantumlnb.ui.PUMLTopComponent;
 import java.awt.Dialog;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import org.netbeans.modules.plantumlnb.ui.PUMLTopComponent;
 import org.openide.DialogDescriptor;
 import org.openide.DialogDisplayer;
 import org.openide.NotifyDescriptor;

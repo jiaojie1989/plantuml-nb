@@ -25,9 +25,8 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import org.netbeans.api.settings.ConvertAsProperties;
 import org.netbeans.modules.plantumlnb.RenderImageThread;
+import org.netbeans.modules.plantumlnb.SVGImagePreviewPanel;
 import org.netbeans.modules.plantumlnb.pumlDataObject;
-import org.netbeans.modules.plantumlnb.ui.NBImageIcon;
-import org.netbeans.modules.plantumlnb.ui.Toolbar;
 import org.netbeans.modules.plantumlnb.ui.io.PUMLGenerator;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
@@ -96,7 +95,7 @@ public final class PUMLTopComponent extends TopComponent implements Serializable
     /**
       * holds UI of this panel
       */
-    private ImagePreviewPanel panelUI;
+    private SVGImagePreviewPanel panelUI;
     private JScrollPane scrollPane;
     
     private DataObject currentDataObject;   
@@ -150,7 +149,7 @@ public final class PUMLTopComponent extends TopComponent implements Serializable
     }// </editor-fold>//GEN-END:initComponents
 
     private  void addCustomComponents(){        
-        panelUI = new ImagePreviewPanel();
+        panelUI = new SVGImagePreviewPanel();
         scrollPane = new javax.swing.JScrollPane();
         
         addToolbar();
@@ -315,10 +314,9 @@ public final class PUMLTopComponent extends TopComponent implements Serializable
             lastSaveTime = System.currentTimeMillis();
         }
         if (panelUI == null) {
-            panelUI = new ImagePreviewPanel();
+            panelUI = new SVGImagePreviewPanel();
         }
-        
-        add(panelUI);
+        add("Center", panelUI);
     }
     
     public void setNewContent(final DataObject dataObject) {
@@ -339,7 +337,7 @@ public final class PUMLTopComponent extends TopComponent implements Serializable
                 Iterator iter = fss.iterator();
                 while (iter.hasNext()) {
                     FileObject fo = (FileObject) iter.next();
-                    setNewContent((InputStream) pumlGenerator.generate(fo));
+                    setNewContent(pumlGenerator.generateSVG(fo));
                 }
 
                 if (panelUI == null) {
@@ -351,12 +349,12 @@ public final class PUMLTopComponent extends TopComponent implements Serializable
 
     }
     
-    public void setNewContent(final InputStream inputStream) {
-        if (inputStream == null) {
+    public void setNewContent(final String imageContent) {
+        if (imageContent == null) {
             return;
         }
         
-        WORKER.post(new RenderImageThread(this, inputStream));
+        WORKER.post(new RenderImageThread(this, imageContent));
 
     }
     
@@ -375,7 +373,7 @@ public final class PUMLTopComponent extends TopComponent implements Serializable
             SwingUtilities.invokeLater(new Runnable() {
                 @Override
                 public void run() {
-                    panelUI.setImage(image);
+//                    panelUI.setImage(image);                    
                 }
             });
         } catch (IOException ex) {
@@ -492,7 +490,7 @@ public final class PUMLTopComponent extends TopComponent implements Serializable
                 while (iter.hasNext()) {
                     FileObject fo = (FileObject) iter.next();
                     if(fo.getExt().toLowerCase().equals("puml")){
-                        setNewContent((InputStream) pumlGenerator.generate(fo));
+                        setNewContent(pumlGenerator.generateSVG(fo));
                     } else {
                         setDefaultContent();
                     }
@@ -594,7 +592,7 @@ public final class PUMLTopComponent extends TopComponent implements Serializable
 //        
 //    }
     
-    public ImagePreviewPanel getPanelUI() {
+    public SVGImagePreviewPanel getPanelUI() {
         return panelUI;
     }
 
