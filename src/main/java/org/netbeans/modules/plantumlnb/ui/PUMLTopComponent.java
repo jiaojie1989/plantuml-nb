@@ -503,17 +503,14 @@ public final class PUMLTopComponent extends TopComponent implements Serializable
     public class PUMLTopComponentPropertyChangeListener implements PropertyChangeListener {
 
         @Override
-        public void propertyChange(PropertyChangeEvent evt) {
-            System.out.println(evt.getPropertyName());
+        public void propertyChange(PropertyChangeEvent evt) {            
             if(evt.getPropertyName().toLowerCase().equals(TopComponent.Registry.PROP_OPENED) 
                     && evt.getNewValue() instanceof TopComponent){
                 TopComponent tc = (TopComponent) evt.getNewValue();
-                ComponentPeer cp = tc.getPeer();
-                System.out.println("This gets Fired");
+                ComponentPeer cp = tc.getPeer();                
 //                String displayName = ((Node[]) evt.getNewValue())[0].getDisplayName();            
 
 //                if(displayName.toLowerCase().endsWith("puml")){
-//                    System.out.println("This gets Fired");
 //                }
             }
         }     

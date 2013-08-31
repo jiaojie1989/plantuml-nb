@@ -81,7 +81,6 @@ public class PUMLGenerator {
 //                    bw.close();
             pumlReader.generateImage(pumlImageOutputStream);
             pumlImageInputStream = new ByteArrayInputStream(pumlImageOutputStream.toByteArray());
-//            System.out.println(name);
         } catch (IOException ex) {
             logger.log(Level.WARNING, ex.getMessage());
         } 

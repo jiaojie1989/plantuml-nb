@@ -84,7 +84,6 @@ public final class pumlVisualElement extends MultiViewEditorElement {
                 pumltc = (PUMLTopComponent) tc;
                 break;
             }                
-//            System.out.println(((TopComponent) i.next()).getClass());
         }
         
         return pumltc;
