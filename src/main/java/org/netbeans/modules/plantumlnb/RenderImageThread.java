@@ -4,10 +4,12 @@
  */
 package org.netbeans.modules.plantumlnb;
 
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.util.logging.Logger;
 import javax.swing.SwingUtilities;
 import org.netbeans.modules.plantumlnb.ui.PUMLTopComponent;
+import org.netbeans.modules.plantumlnb.ui.Toolbar;
 import org.openide.util.NbBundle;
 
 /**
@@ -41,7 +43,8 @@ public class RenderImageThread extends Thread {
             SwingUtilities.invokeLater(new Runnable() {
                 @Override
                 public void run() {
-                    topComponent.getPanelUI().renderSVGFile(imageContent);
+                    AffineTransform at = topComponent.getPanelUI().renderSVGFile(imageContent);
+                    Toolbar.instance().setSvgImagePreviewPanel(topComponent.getPanelUI());
                     topComponent.repaint();
                 }
             });

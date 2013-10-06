@@ -203,7 +203,8 @@ public final class PUMLTopComponent extends TopComponent implements Serializable
     private void addToolbar() {
 //        jToolBar1 = new javax.swing.JToolBar();
         final PUMLTopComponent that = this;
-        jToolBar1 = Toolbar.instance().createToolBar();
+        Toolbar.instance().setSvgImagePreviewPanel(panelUI);
+        jToolBar1 = Toolbar.instance().createToolBar();        
 //        exportPNGButton = new javax.swing.JButton();
 //
 //        jToolBar1.setRollover(true);

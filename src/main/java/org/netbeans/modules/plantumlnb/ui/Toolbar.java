@@ -4,10 +4,8 @@
  */
 package org.netbeans.modules.plantumlnb.ui;
 
-import java.awt.Dimension;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.geom.AffineTransform;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,11 +14,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JToolBar;
-import org.netbeans.modules.plantumlnb.CustomZoomAction;
+import org.apache.batik.swing.JSVGCanvas;
 import org.netbeans.modules.plantumlnb.DataObjectAccess;
+import org.netbeans.modules.plantumlnb.SVGImagePreviewPanel;
 import org.netbeans.modules.plantumlnb.ui.actions.ExportAction;
 import org.openide.util.NbBundle;
-import org.openide.util.actions.SystemAction;
 
 /**
  *
@@ -51,6 +49,9 @@ public class Toolbar {
     private boolean showGrid = false;
     
     private DataObjectAccess dataObjectAccess;
+    private AffineTransform currentAt = null;    
+    private JSVGCanvas canvas = null;
+    private SVGImagePreviewPanel svgImagePreviewPanel = null;
 
     private Toolbar() {}
         
@@ -64,6 +65,10 @@ public class Toolbar {
         JButton button;
 
         toolBar.add(getExportButton());
+        toolBar.add(getZoomInButton());
+        toolBar.add(getZoomOutButton());
+        toolBar.add(getResetButton());
+        toolBar.add(getRotateButton());
 
         return toolBar;
     }
@@ -87,167 +92,71 @@ public class Toolbar {
 
         return button;
     }
+    
+    private JButton getZoomInButton() {
+        JButton button = new JButton();
 
-    /**
-     * Gets zoom button.
-     */
-    private JButton getZoomButton(final int xf, final int yf) {
-        // PENDING buttons should have their own icons.
-        JButton button = new JButton("" + xf + ":" + yf); // NOI18N
-        if (xf < yf) {
-            button.setToolTipText(NbBundle.getBundle(Toolbar.class).getString("LBL_ZoomOut") + " " + xf + " : " + yf);
-        } else {
-            button.setToolTipText(NbBundle.getBundle(Toolbar.class).getString("LBL_ZoomIn") + " " + xf + " : " + yf);
+        try {
+            Image img = ImageIO.read(getClass().getResource("/org/netbeans/modules/plantumlnb/zoom-in.png"));
+            button.setIcon(new ImageIcon(img));
+            button.setToolTipText("Zoom in");
+        } catch (IOException e) {
+            e.printStackTrace(); //TODO log this.
         }
-        button.getAccessibleContext().setAccessibleDescription(NbBundle.getBundle(Toolbar.class).getString("ACS_Zoom_BTN"));
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                customZoom(xf, yf);
-            }
-        });
+
+        button.addActionListener(svgImagePreviewPanel.getZoomInActionInstance());
+
+        return button;
+    }
+    
+    private JButton getZoomOutButton() {
+        JButton button = new JButton();
+
+        try {
+            Image img = ImageIO.read(getClass().getResource("/org/netbeans/modules/plantumlnb/zoom-out.png"));
+            button.setIcon(new ImageIcon(img));
+            button.setToolTipText("Zoom Out");
+        } catch (IOException e) {
+            e.printStackTrace(); //TODO log this.
+        }
+
+        button.addActionListener(svgImagePreviewPanel.getZoomOutActionInstance());
 
         return button;
     }
 
-    private JButton getZoomButton() {
-        // PENDING buttons should have their own icons.
-        JButton button = new JButton(NbBundle.getBundle(CustomZoomAction.class).getString("LBL_XtoY")); // NOI18N
-        button.setToolTipText(NbBundle.getBundle(Toolbar.class).getString("LBL_CustomZoom"));
-        button.getAccessibleContext().setAccessibleDescription(NbBundle.getBundle(Toolbar.class).getString("ACS_Zoom_BTN"));
-        button.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                CustomZoomAction sa = (CustomZoomAction) SystemAction.get(CustomZoomAction.class);
-                sa.performAction();
-            }
-        });
+    private JButton getRotateButton() {
+        JButton button = new JButton();
+
+        try {
+            Image img = ImageIO.read(getClass().getResource("/org/netbeans/modules/plantumlnb/rotate.png"));
+            button.setIcon(new ImageIcon(img));
+            button.setToolTipText("Rotate");
+        } catch (IOException e) {
+            e.printStackTrace(); //TODO log this.
+        }
+
+        button.addActionListener(svgImagePreviewPanel.getRotateActionInstance());
 
         return button;
     }
 
-    /**
-     * Draws zoom in scaled image.
-     */
-    public void zoomIn() {
-        scaleIn();
-        resizePanel();
-        panel.repaint(0, 0, panel.getWidth(), panel.getHeight());
-    }
+    private JButton getResetButton() {
+        JButton button = new JButton();
 
-    /**
-     * Draws zoom out scaled image.
-     */
-    public void zoomOut() {
-        double oldScale = scale;
-
-        scaleOut();
-
-        // You can't still make picture smaller, but bigger why not?
-        if (!isNewSizeOK()) {
-            scale = oldScale;
-
-            return;
+        try {
+            Image img = ImageIO.read(getClass().getResource("/org/netbeans/modules/plantumlnb/zoom-fit.png"));
+            button.setIcon(new ImageIcon(img));
+            button.setToolTipText("Reset");
+        } catch (IOException e) {
+            e.printStackTrace(); //TODO log this.
         }
 
-        resizePanel();
-        panel.repaint(0, 0, panel.getWidth(), panel.getHeight());
-    }
-
-    /**
-     * Change proportion "out"
-     */
-    private void scaleOut() {
-        scale = scale / changeFactor;
-    }
-
-    /**
-     * Change proportion "in"
-     */
-    private void scaleIn() {
-        double oldComputedScale = getScale();
-
-        scale = changeFactor * scale;
-
-        double newComputedScale = getScale();
-
-        if (newComputedScale == oldComputedScale) // Has to increase.
-        {
-            scale = newComputedScale + 1.0D;
-        }
-    }
-
-    /**
-     * Resizes panel.
-     */
-    private void resizePanel() {
-        panel.setPreferredSize(new Dimension(
-                (int) (getScale() * retrieveImage().getIconWidth()),
-                (int) (getScale() * retrieveImage().getIconHeight())));
-        panel.revalidate();
-    }
-
-    /**
-     * Tests new size of image. If image is smaller than minimum size(1x1)
-     * zooming will be not performed.
-     */
-    private boolean isNewSizeOK() {
-        if (retrieveImage() == null) {
-            return false;
-        }
-
-        if (((getScale() * retrieveImage().getIconWidth()) > 1)
-                && ((getScale() * retrieveImage().getIconHeight()) > 1)) {
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * Return zooming factor.
-     */
-    private double getScale() {
-        return scale;
-    }
-
-    /**
-     * Perform zoom with specific proportion.
-     *
-     * @param fx numerator for scaled
-     * @param fy denominator for scaled
-     */
-    public void customZoom(int fx, int fy) {
-        double oldScale = scale;
-
-        scale = (double) fx / (double) fy;
-        if (!isNewSizeOK()) {
-            scale = oldScale;
-
-            return;
-        }
-
-        resizePanel();
-        panel.repaint(0, 0, panel.getWidth(), panel.getHeight());
-    }
-
-    /**
-     * Gets grid button.
-     */
-    private JButton getGridButton() {
-        // PENDING buttons should have their own icons.
-        final JButton button = new JButton(" # "); // NOI18N
-        button.setToolTipText(NbBundle.getBundle(Toolbar.class).getString("LBL_ShowHideGrid"));
-        button.getAccessibleContext().setAccessibleDescription(NbBundle.getBundle(Toolbar.class).getString("ACS_Grid_BTN"));
-        button.setMnemonic(NbBundle.getBundle(Toolbar.class).getString("ACS_Grid_BTN_Mnem").charAt(0));
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                showGrid = !showGrid;
-                panel.repaint(0, 0, panel.getWidth(), panel.getHeight());
-            }
-        });
+        button.addActionListener(svgImagePreviewPanel.getResetTransformAction());
 
         return button;
     }
+     
 
     private NBImageIcon retrieveImage() {
         return PUMLTopComponent.getNBImageIcon();
@@ -269,5 +178,28 @@ public class Toolbar {
     public void setDataObjectAccess(DataObjectAccess dataObjectAccess) {
         this.dataObjectAccess = dataObjectAccess;
     }    
-    
+
+    public AffineTransform getCurrentAt() {
+        return currentAt;
+    }
+
+    public void setCurrentAt(AffineTransform currentAt) {
+        this.currentAt = currentAt;
+    }
+
+    public JSVGCanvas getCanvas() {
+        return canvas;
+    }
+
+    public void setCanvas(JSVGCanvas canvas) {
+        this.canvas = canvas;
+    }
+
+    public SVGImagePreviewPanel getSvgImagePreviewPanel() {
+        return svgImagePreviewPanel;
+    }
+
+    public void setSvgImagePreviewPanel(SVGImagePreviewPanel svgImagePreviewPanel) {
+        this.svgImagePreviewPanel = svgImagePreviewPanel;
+    }
 }
