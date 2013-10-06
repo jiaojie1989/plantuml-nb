@@ -10,6 +10,7 @@ Netbeans plugin that wraps PlantUML to provide its functionality from within Net
         - Rotate ( CTRL + Right Click ) 
         - Reset ( CTRL + SHIFT + Right Click )
     * Added toolbar buttons for zoom-in, zoom-out, reset, rotate.
+    * Added open in browser toolbar button.
 
 ### Version 1.1.0
 

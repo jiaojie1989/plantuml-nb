@@ -1,7 +1,19 @@
 Manifest-Version: 1.0
-OpenIDE-Module-Localizing-Bundle: org/netbeans/modules/plantumlnb/Bundle.properties
+OpenIDE-Module-Localizing-Bundle: org/netbeans/modules/plantumlnb/ui/Bundle.properties
 OpenIDE-Module-Layer: org/netbeans/modules/plantumlnb/layer.xml
 OpenIDE-Module-Requires: org.openide.windows.WindowManager
 OpenIDE-Module-Short-Description: PlantUML functionality inside Netbeans.
-OpenIDE-Module-Long-Description: Netbeans plugin that wraps PlantUML to provide its functionality from within Netbeans.
-OpenIDE-Module-Specification-Version: 0.1.2
+OpenIDE-Module-Long-Description: Create and edit UML files using 
+ Plant UML within the IDE. <br>
+ <strong>Author:</strong> Venkat R Akkineni <br>
+ <strong>Website:</strong> https://sourceforge.net/projects/plantumlnb/ <br><br>
+ <strong>Help </strong> <br>
+    <ul>
+        <li>Zoom ( Ctrl + Left Click ) </li> 
+        <li>Realize zoom ( Shift + Right Click  ) </li> 
+        <li>Pan ( SHIFT + Left Click ) </li> 
+        <li>Rotate ( CTRL + Right Click ) </li> 
+        <li>Reset ( CTRL + SHIFT + Right Click ) </li> 
+    </ul>
+    
+OpenIDE-Module-Specification-Version: 1.1.2
