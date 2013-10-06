@@ -4,6 +4,7 @@
  */
 package org.netbeans.modules.plantumlnb;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ComponentEvent;
@@ -49,7 +50,10 @@ public class SVGImagePreviewPanel extends JPanel {
     public SVGImagePreviewPanel() {
 //        super(new FlowLayout(FlowLayout.CENTER));       
         canvas = new JSVGCanvas();
+//        canvas.setBackground(Color.red);
+//        setBackground(Color.blue);
 //        scroller = new JSVGScrollPane(canvas);      
+        addComponentListener(new ResizeListener());
         add("Center", canvas);        
     }          
     
@@ -61,10 +65,6 @@ public class SVGImagePreviewPanel extends JPanel {
         currentImageContent = imageContent;
         canvas.setSize(getSize());
         canvas.setSVGDocument(createSVGDocument(new StringReader(imageContent)));
-                
-//        canvas.addMouseListener(listener);
-        
-//        canvas.addComponentListener(new ResizeListener());
                 
         canvas.revalidate();
         canvas.repaint();
@@ -119,70 +119,6 @@ public class SVGImagePreviewPanel extends JPanel {
     public void setCanvas(JSVGCanvas canvas) {
         this.canvas = canvas;
     }
-    
-    private final class ZoomMouseWheelListener extends MouseAdapter implements MouseWheelListener {
-
-        @Override
-        public void mouseWheelMoved(MouseWheelEvent evt) {
-            int notches = evt.getWheelRotation();
-            AffineTransform at = canvas.getRenderingTransform();
-            if (at != null) {
-                Point2D p2d = new Point2D.Double(evt.getX(), evt.getY());
-
-                at.preConcatenate(AffineTransform.getTranslateInstance(-p2d.getX(), -p2d.getY()));
-               
-                // Mouse wheel moved up, so zoom in.
-                if (notches < 0) {
-                    at.preConcatenate(AffineTransform.getScaleInstance(1.25, 1.25));
-                } else {
-                    // Mouse wheel moved up, so zoom out.
-                    at.preConcatenate(AffineTransform.getScaleInstance(.8, .8));
-                }
-
-                at.preConcatenate(AffineTransform.getTranslateInstance(p2d.getX(), p2d.getY()));
-                canvas.setRenderingTransform(at);
-            }
-        }
-    }
-    
-    private final class PanMouseMotionListener extends MouseAdapter implements MouseMotionListener {
-        
-        private Point2D startPoint = null;
-        private Point2D endPoint = null;
-        
-        @Override
-        public void mouseClicked(MouseEvent evt) {
-            if(evt.getButton() == 3) {
-                startPoint = new Point2D.Double(evt.getX(), evt.getY());
-            }
-        }
-        
-        @Override
-        public void mouseDragged(MouseEvent evt) {
-            updateSize(evt);           
-        }
-        
-        @Override
-        public void mouseReleased(MouseEvent evt) {
-            updateSize(evt);
-        }
-        
-        private void updateSize(MouseEvent evt) {
-            if(evt.getButton() == 3) {
-                endPoint = new Point2D.Double(evt.getX(), evt.getY());
-                
-                AffineTransform at = canvas.getRenderingTransform();
-            
-                double dx = endPoint.getX() - startPoint.getX();
-                double dy = endPoint.getY() - startPoint.getY();
-
-                at.preConcatenate(AffineTransform.getTranslateInstance(dx, dy));
-            }
-                        
-        }
-                
-    }
-    
     
     private class ResizeListener implements ComponentListener {
         
