@@ -141,7 +141,7 @@ public class SVGImagePreviewPanel extends JPanel {
         
         @Override
         public void componentResized(ComponentEvent evt) {
-            renderSVGFile(currentImageContent);
+//            renderSVGFile(currentImageContent);
         }
         
         
