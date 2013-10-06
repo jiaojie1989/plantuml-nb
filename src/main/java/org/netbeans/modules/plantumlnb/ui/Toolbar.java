@@ -9,6 +9,8 @@ import java.awt.geom.AffineTransform;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -47,14 +49,16 @@ public class Toolbar {
      * On/off grid.
      */
     private boolean showGrid = false;
-    
+
     private DataObjectAccess dataObjectAccess;
-    private AffineTransform currentAt = null;    
+    private AffineTransform currentAt = null;
     private JSVGCanvas canvas = null;
     private SVGImagePreviewPanel svgImagePreviewPanel = null;
+    
+    private static final Logger logger = Logger.getLogger(SVGImagePreviewPanel.class.getName());
 
     private Toolbar() {}
-        
+
     public JToolBar createToolBar() {
         // Definition of toolbar.
         JToolBar toolBar = new JToolBar();
@@ -69,10 +73,11 @@ public class Toolbar {
         toolBar.add(getZoomOutButton());
         toolBar.add(getResetButton());
         toolBar.add(getRotateButton());
+        toolBar.add(getOpenInBrowserButton());
 
         return toolBar;
     }
-    
+
     public JToolBar createToolBar(DataObjectAccess doa) {
         this.dataObjectAccess = doa;
         return createToolBar();
@@ -85,14 +90,14 @@ public class Toolbar {
             Image img = ImageIO.read(getClass().getResource("/org/netbeans/modules/plantumlnb/save.png"));
             button.setIcon(new ImageIcon(img));
         } catch (IOException e) {
-            e.printStackTrace(); //TODO log this.
+            logger.log(Level.SEVERE, e.getLocalizedMessage()); //TODO log this.
         }
 
         button.addActionListener(new ExportAction(panel, dataObjectAccess));
 
         return button;
     }
-    
+
     private JButton getZoomInButton() {
         JButton button = new JButton();
 
@@ -101,14 +106,14 @@ public class Toolbar {
             button.setIcon(new ImageIcon(img));
             button.setToolTipText("Zoom in");
         } catch (IOException e) {
-            e.printStackTrace(); //TODO log this.
+            logger.log(Level.SEVERE, e.getLocalizedMessage()); //TODO log this.
         }
 
         button.addActionListener(svgImagePreviewPanel.getZoomInActionInstance());
 
         return button;
     }
-    
+
     private JButton getZoomOutButton() {
         JButton button = new JButton();
 
@@ -117,7 +122,7 @@ public class Toolbar {
             button.setIcon(new ImageIcon(img));
             button.setToolTipText("Zoom Out");
         } catch (IOException e) {
-            e.printStackTrace(); //TODO log this.
+            logger.log(Level.SEVERE, e.getLocalizedMessage()); //TODO log this.
         }
 
         button.addActionListener(svgImagePreviewPanel.getZoomOutActionInstance());
@@ -133,7 +138,7 @@ public class Toolbar {
             button.setIcon(new ImageIcon(img));
             button.setToolTipText("Rotate");
         } catch (IOException e) {
-            e.printStackTrace(); //TODO log this.
+            logger.log(Level.SEVERE, e.getLocalizedMessage()); //TODO log this.
         }
 
         button.addActionListener(svgImagePreviewPanel.getRotateActionInstance());
@@ -149,14 +154,29 @@ public class Toolbar {
             button.setIcon(new ImageIcon(img));
             button.setToolTipText("Reset");
         } catch (IOException e) {
-            e.printStackTrace(); //TODO log this.
+            logger.log(Level.SEVERE, e.getLocalizedMessage()); //TODO log this.
         }
 
         button.addActionListener(svgImagePreviewPanel.getResetTransformAction());
 
         return button;
     }
-     
+
+    private JButton getOpenInBrowserButton() {
+        JButton button = new JButton();
+
+        try {
+            Image img = ImageIO.read(getClass().getResource("/org/netbeans/modules/plantumlnb/browser_generic_16x.png"));
+            button.setIcon(new ImageIcon(img));
+            button.setToolTipText("Open in Browser");
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, e.getLocalizedMessage()); //TODO log this.
+        }
+
+        button.addActionListener(svgImagePreviewPanel.getOpenInBrowserAction());
+
+        return button;
+    }
 
     private NBImageIcon retrieveImage() {
         return PUMLTopComponent.getNBImageIcon();
@@ -177,7 +197,7 @@ public class Toolbar {
 
     public void setDataObjectAccess(DataObjectAccess dataObjectAccess) {
         this.dataObjectAccess = dataObjectAccess;
-    }    
+    }
 
     public AffineTransform getCurrentAt() {
         return currentAt;

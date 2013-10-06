@@ -4,24 +4,25 @@
  */
 package org.netbeans.modules.plantumlnb;
 
-import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
-import java.awt.event.MouseWheelEvent;
-import java.awt.event.MouseWheelListener;
 import java.awt.geom.AffineTransform;
-import java.awt.geom.Point2D;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.io.StringReader;
+import java.io.UnsupportedEncodingException;
+import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.JPanel;
 import org.apache.batik.dom.svg.SAXSVGDocumentFactory;
@@ -29,6 +30,7 @@ import org.apache.batik.swing.JSVGCanvas;
 import org.apache.batik.swing.JSVGScrollPane;
 import org.apache.batik.util.XMLResourceDescriptor;
 import org.openide.util.Exceptions;
+import org.openide.util.Utilities;
 import org.w3c.dom.svg.SVGDocument;
 
 /**
@@ -42,6 +44,8 @@ public class SVGImagePreviewPanel extends JPanel {
     private JSVGScrollPane scroller;
     private String currentImageContent = "";
     private SVGDocument currentDocument = null;
+    private AffineTransform currentAT = null;
+    private static final Logger logger = Logger.getLogger(SVGImagePreviewPanel.class.getName());
     
     /**
      * 
@@ -65,12 +69,17 @@ public class SVGImagePreviewPanel extends JPanel {
         currentImageContent = imageContent;
         canvas.setSize(getSize());
         canvas.setSVGDocument(createSVGDocument(new StringReader(imageContent)));
-                
-        canvas.revalidate();
-        canvas.repaint();
+        
         revalidate();
         repaint();   
-       
+        canvas.revalidate();
+        canvas.repaint();
+        
+               
+        if(currentAT != null) {
+            canvas.setRenderingTransform(currentAT);
+        }
+        
         return canvas.getRenderingTransform();
     }
     
@@ -119,6 +128,14 @@ public class SVGImagePreviewPanel extends JPanel {
     public void setCanvas(JSVGCanvas canvas) {
         this.canvas = canvas;
     }
+
+    public AffineTransform getCurrentAT() {
+        return currentAT;
+    }
+
+    public void setCurrentAT(AffineTransform currentAT) {
+        this.currentAT = currentAT;
+    }
     
     private class ResizeListener implements ComponentListener {
         
@@ -157,7 +174,9 @@ public class SVGImagePreviewPanel extends JPanel {
       * the display.
       */
      public class AffineAction extends AbstractAction {
-         AffineTransform at;
+         
+         private AffineTransform at;
+         
          public AffineAction(AffineTransform at) {
              this.at = at;
          }
@@ -169,7 +188,7 @@ public class SVGImagePreviewPanel extends JPanel {
 //             }
              AffineTransform rat = canvas.getRenderingTransform();
              if (at != null) {
-                 Dimension dim = getSize();
+                 Dimension dim = canvas.getSize();
                  int x = dim.width / 2;
                  int y = dim.height / 2;
                  AffineTransform t = AffineTransform.getTranslateInstance(x, y);
@@ -177,7 +196,8 @@ public class SVGImagePreviewPanel extends JPanel {
                  t.translate(-x, -y);
                  t.concatenate(rat);
                  canvas.setRenderingTransform(t);
-             }
+                 SVGImagePreviewPanel.this.setCurrentAT(t);
+             }            
          }
      }
  
@@ -217,6 +237,46 @@ public class SVGImagePreviewPanel extends JPanel {
          }
      }
     
+     /**
+      * http://stackoverflow.com/questions/2885173/java-how-to-create-and-write-to-a-file
+      * http://www.coderanch.com/t/478152/java/java/Path-Temporary-Directory
+      * http://stackoverflow.com/questions/10967451/open-a-link-in-browser-with-java-button
+      */
+     public class OpenInBrowserAction implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            File tmpFile = null;
+            try {
+                String tempDir = System.getProperty("java.io.tmpdir");  
+                tmpFile = new File(tempDir, UUID.randomUUID().toString() + ".png");  
+                PrintWriter writer = new PrintWriter(tmpFile, "UTF-8");
+                
+                writer.write(currentImageContent); 
+                writer.close();
+            } catch (FileNotFoundException ex) {
+                logger.log(Level.SEVERE, ex.getLocalizedMessage());// TODO: Add a user notification
+            } catch (UnsupportedEncodingException ex) {
+                logger.log(Level.SEVERE, ex.getLocalizedMessage());// TODO: Add a user notification
+            } 
+
+            if(tmpFile != null) {
+                Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
+
+                if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
+                    try {
+                        desktop.browse(Utilities.toURI(tmpFile));
+                    } catch (IOException e) {
+                        logger.log(Level.SEVERE, e.getLocalizedMessage());
+                    }
+                }
+            } else {
+                // TODO: Add a user notification                
+            }
+        }
+         
+     }
+    
      
      public ZoomInAction getZoomInActionInstance() {
          return new ZoomInAction();
@@ -232,5 +292,9 @@ public class SVGImagePreviewPanel extends JPanel {
      
      public ResetTransformAction getResetTransformAction() {
          return new ResetTransformAction();
+     }
+     
+     public OpenInBrowserAction getOpenInBrowserAction() {
+         return new OpenInBrowserAction();
      }
 }
