@@ -2,6 +2,9 @@
 
 Netbeans plugin that wraps PlantUML to provide its functionality from within Netbeans.
 
+### Version 1.2.1
+    * Fixed the zoom persistence issue.
+
 ### Version 1.2.0
     * Added zoom in / out, pan and rotate support.
         - Zoom ( Ctrl + Left Click )
