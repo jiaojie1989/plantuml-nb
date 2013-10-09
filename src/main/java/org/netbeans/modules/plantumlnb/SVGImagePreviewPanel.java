@@ -43,7 +43,7 @@ public class SVGImagePreviewPanel extends JPanel {
     private JSVGCanvas canvas;
     private String currentImageContent = "";
     private SVGDocument currentDocument = null;
-    private AffineTransform currentAT = null;
+    private pumlDataObject currentDataObject;
     private static final Logger logger = Logger.getLogger(SVGImagePreviewPanel.class.getName());
     
     /**
@@ -119,15 +119,22 @@ public class SVGImagePreviewPanel extends JPanel {
     public void setCanvas(JSVGCanvas canvas) {
         this.canvas = canvas;
     }
-
-    public AffineTransform getCurrentAT() {
-        return currentAT;
+        
+    public pumlDataObject getCurrentDataObject() {
+        return currentDataObject;
     }
 
-    public void setCurrentAT(AffineTransform currentAT) {
-        this.currentAT = currentAT;
-    }
+    public void setCurrentDataObject(pumlDataObject currentDataObject) {
+        this.currentDataObject = currentDataObject;
+    }   
     
+    //============================================================================
+    // Listeners and actions.
+    //============================================================================
+    
+    /**
+     * 
+     */
     private class ResizeListener implements ComponentListener {
         
         @Override
@@ -187,7 +194,9 @@ public class SVGImagePreviewPanel extends JPanel {
                  t.translate(-x, -y);
                  t.concatenate(rat);
                  canvas.setRenderingTransform(t);
-                 SVGImagePreviewPanel.this.setCurrentAT(t);
+                 if(SVGImagePreviewPanel.this.currentDataObject != null ) {
+                     SVGImagePreviewPanel.this.currentDataObject.setCurrentAT(t);
+                 }
              }            
          }
      }
@@ -278,8 +287,8 @@ public class SVGImagePreviewPanel extends JPanel {
 
             @Override
             public void gvtRenderingCompleted(GVTTreeRendererEvent gvttre) {
-                if (currentAT != null) {
-                    canvas.setRenderingTransform(currentAT);
+                if (currentDataObject.getCurrentAT() != null) {
+                    canvas.setRenderingTransform(currentDataObject.getCurrentAT());
                 }
             }
 

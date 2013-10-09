@@ -601,4 +601,9 @@ public final class PUMLTopComponent extends TopComponent implements Serializable
     public void setCurrentDataObject(DataObject currentDataObject) {
         this.currentDataObject = currentDataObject;
     }
+
+    public DataObject getCurrentDataObject() {
+        return currentDataObject;
+    }
+       
 }   

@@ -5,6 +5,7 @@
 package org.netbeans.modules.plantumlnb;
 
 import java.awt.Image;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
@@ -103,13 +104,17 @@ public class pumlDataObject extends MultiDataObject implements FileChangeListene
     private String content;
     
     private FileObject fileObject;
+    private AffineTransform currentAT;
 //    private final Saver saver = new Saver();
 
     public pumlDataObject(FileObject pf, MultiFileLoader loader) throws DataObjectExistsException, IOException {
-        super(pf, loader);
+        super(pf, loader);        
         fileObject = pf;
         pf.addFileChangeListener(this);
         registerEditor("text/x-puml", true);
+        
+        this.currentAT = new AffineTransform();
+//        this.currentAT.setToIdentity();
     }
 
     @Override
@@ -229,4 +234,13 @@ public class pumlDataObject extends MultiDataObject implements FileChangeListene
     public Pane call() throws Exception {
         return (Pane) MultiViews.createCloneableMultiView("text/x-puml", this);
     }
+
+    public AffineTransform getCurrentAT() {
+        return currentAT;
+    }
+
+    public void setCurrentAT(AffineTransform currentAT) {
+        this.currentAT = currentAT;
+    }
+    
 }
