@@ -27,7 +27,8 @@ import javax.swing.AbstractAction;
 import javax.swing.JPanel;
 import org.apache.batik.dom.svg.SAXSVGDocumentFactory;
 import org.apache.batik.swing.JSVGCanvas;
-import org.apache.batik.swing.JSVGScrollPane;
+import org.apache.batik.swing.gvt.GVTTreeRendererEvent;
+import org.apache.batik.swing.gvt.GVTTreeRendererListener;
 import org.apache.batik.util.XMLResourceDescriptor;
 import org.openide.util.Exceptions;
 import org.openide.util.Utilities;
@@ -38,10 +39,8 @@ import org.w3c.dom.svg.SVGDocument;
  * @author venkat
  */
 public class SVGImagePreviewPanel extends JPanel {
-
-    private File svgFile;
+    
     private JSVGCanvas canvas;
-    private JSVGScrollPane scroller;
     private String currentImageContent = "";
     private SVGDocument currentDocument = null;
     private AffineTransform currentAT = null;
@@ -52,11 +51,13 @@ public class SVGImagePreviewPanel extends JPanel {
      * @param svgFile 
      */
     public SVGImagePreviewPanel() {
-//        super(new FlowLayout(FlowLayout.CENTER));       
         canvas = new JSVGCanvas();
-//        canvas.setBackground(Color.red);
-//        setBackground(Color.blue);
-//        scroller = new JSVGScrollPane(canvas);      
+
+        //http://mail-archives.apache.org/mod_mbox/xmlgraphics-batik-users/200811.mbox/%3C82615BD530B1FA449BAEB584F01FFDBA0169E9FE@UHQEX30.ad.jfcom.mil%3E
+        //http://mcc.id.au/2007/09/batik-course/
+        
+        
+        canvas.addGVTTreeRendererListener(new ResizeGVTTreeRendererListener());
         addComponentListener(new ResizeListener());
         add("Center", canvas);        
     }          
@@ -68,17 +69,7 @@ public class SVGImagePreviewPanel extends JPanel {
     public AffineTransform renderSVGFile(String imageContent) {    
         currentImageContent = imageContent;
         canvas.setSize(getSize());
-        canvas.setSVGDocument(createSVGDocument(new StringReader(imageContent)));
-        
-        revalidate();
-        repaint();   
-        canvas.revalidate();
-        canvas.repaint();
-        
-               
-        if(currentAT != null) {
-            canvas.setRenderingTransform(currentAT);
-        }
+        canvas.setSVGDocument(createSVGDocument(new StringReader(imageContent)));       
         
         return canvas.getRenderingTransform();
     }
@@ -141,7 +132,7 @@ public class SVGImagePreviewPanel extends JPanel {
         
         @Override
         public void componentResized(ComponentEvent evt) {
-//            renderSVGFile(currentImageContent);
+            renderSVGFile(currentImageContent);
         }
         
         
@@ -276,6 +267,29 @@ public class SVGImagePreviewPanel extends JPanel {
         }
          
      }
+     
+     public class ResizeGVTTreeRendererListener implements GVTTreeRendererListener{
+
+            @Override
+            public void gvtRenderingPrepare(GVTTreeRendererEvent gvttre) {}
+
+            @Override
+            public void gvtRenderingStarted(GVTTreeRendererEvent gvttre) {}
+
+            @Override
+            public void gvtRenderingCompleted(GVTTreeRendererEvent gvttre) {
+                if (currentAT != null) {
+                    canvas.setRenderingTransform(currentAT);
+                }
+            }
+
+            @Override
+            public void gvtRenderingCancelled(GVTTreeRendererEvent gvttre) {}
+
+            @Override
+            public void gvtRenderingFailed(GVTTreeRendererEvent gvttre) {}
+            
+        }
     
      
      public ZoomInAction getZoomInActionInstance() {

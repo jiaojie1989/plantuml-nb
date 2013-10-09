@@ -14,5 +14,7 @@
     Foo3 -> Foo4 : Here
 
     Foo2 -> Foo4 : Here
+    Foo2 -> Foo5 : Here
+    Foo2 -> Foo6 : Here
 
 @enduml
