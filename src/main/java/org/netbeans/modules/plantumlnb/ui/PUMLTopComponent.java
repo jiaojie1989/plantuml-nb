@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.netbeans.modules.plantumlnb.ui;
 
 import java.awt.image.BufferedImage;
@@ -14,6 +10,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
@@ -70,7 +67,7 @@ public final class PUMLTopComponent extends TopComponent implements Serializable
 
     InstanceContent instanceContent = new InstanceContent();
       
-    
+    private static final Logger logger = Logger.getLogger(SVGImagePreviewPanel.class.getName());
     /**
      * template for finding data in given context. Object used as example,
      * replace with your own data source, for example JavaDataObject etc
@@ -523,10 +520,8 @@ public final class PUMLTopComponent extends TopComponent implements Serializable
         try{
             pumlDataObject pumlDataObject = (pumlDataObject) dataObject;
             PUMLTopComponent.currentNBImageIcon = NBImageIcon.load(pumlDataObject);
-        } catch(ClassCastException e){
-            e.printStackTrace();    //TODO: Log this
-        } catch(IOException e){
-            e.printStackTrace();    //TODO: Log this
+        } catch( ClassCastException | IOException e){
+            logger.log(Level.SEVERE, e.getLocalizedMessage());
         }
         
     }

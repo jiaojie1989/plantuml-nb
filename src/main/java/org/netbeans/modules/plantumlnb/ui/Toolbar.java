@@ -29,26 +29,11 @@ import org.openide.util.NbBundle;
 public class Toolbar {
 
     private final Collection toolbarButtons = new ArrayList(11);
-    /**
-     * Scale of image.
-     */
-    private double scale = 1.0D;
+    
     /**
      * Component showing image.
      */
-    private JPanel panel;
-    /**
-     * Viewed image.
-     */
-    private NBImageIcon storedImage; //TODO: Remove, not used anymore
-    /**
-     * Increase/decrease factor.
-     */
-    private final double changeFactor = Math.sqrt(2.0D);
-    /**
-     * On/off grid.
-     */
-    private boolean showGrid = false;
+    private JPanel panel;    
 
     private DataObjectAccess dataObjectAccess;
     private AffineTransform currentAt = null;
@@ -90,7 +75,7 @@ public class Toolbar {
             Image img = ImageIO.read(getClass().getResource("/org/netbeans/modules/plantumlnb/save.png"));
             button.setIcon(new ImageIcon(img));
         } catch (IOException e) {
-            logger.log(Level.SEVERE, e.getLocalizedMessage()); //TODO log this.
+            logger.log(Level.SEVERE, e.getLocalizedMessage()); 
         }
 
         button.addActionListener(new ExportAction(panel, dataObjectAccess));
@@ -106,7 +91,7 @@ public class Toolbar {
             button.setIcon(new ImageIcon(img));
             button.setToolTipText("Zoom in");
         } catch (IOException e) {
-            logger.log(Level.SEVERE, e.getLocalizedMessage()); //TODO log this.
+            logger.log(Level.SEVERE, e.getLocalizedMessage());
         }
 
         button.addActionListener(svgImagePreviewPanel.getZoomInActionInstance());
@@ -122,7 +107,7 @@ public class Toolbar {
             button.setIcon(new ImageIcon(img));
             button.setToolTipText("Zoom Out");
         } catch (IOException e) {
-            logger.log(Level.SEVERE, e.getLocalizedMessage()); //TODO log this.
+            logger.log(Level.SEVERE, e.getLocalizedMessage());
         }
 
         button.addActionListener(svgImagePreviewPanel.getZoomOutActionInstance());
@@ -138,7 +123,7 @@ public class Toolbar {
             button.setIcon(new ImageIcon(img));
             button.setToolTipText("Rotate");
         } catch (IOException e) {
-            logger.log(Level.SEVERE, e.getLocalizedMessage()); //TODO log this.
+            logger.log(Level.SEVERE, e.getLocalizedMessage());
         }
 
         button.addActionListener(svgImagePreviewPanel.getRotateActionInstance());
@@ -154,7 +139,7 @@ public class Toolbar {
             button.setIcon(new ImageIcon(img));
             button.setToolTipText("Reset");
         } catch (IOException e) {
-            logger.log(Level.SEVERE, e.getLocalizedMessage()); //TODO log this.
+            logger.log(Level.SEVERE, e.getLocalizedMessage());
         }
 
         button.addActionListener(svgImagePreviewPanel.getResetTransformAction());
@@ -170,7 +155,7 @@ public class Toolbar {
             button.setIcon(new ImageIcon(img));
             button.setToolTipText("Open in Browser");
         } catch (IOException e) {
-            logger.log(Level.SEVERE, e.getLocalizedMessage()); //TODO log this.
+            logger.log(Level.SEVERE, e.getLocalizedMessage());
         }
 
         button.addActionListener(svgImagePreviewPanel.getOpenInBrowserAction());

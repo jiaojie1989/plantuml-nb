@@ -5,12 +5,12 @@
     <folder name="Editors">
         <folder name="text">
             <folder name="x-puml">
-                <attr name="SystemFileSystem.localizingBundle" stringvalue="org.netbeans.modules.plantumlnb.Bundle"/>
+                <attr name="SystemFileSystem.localizingBundle" stringvalue="org.netbeans.modules.plantumlnb.ui.Bundle"/>
                 <folder name="FontsColors">
                     <folder name="NetBeans">
                         <folder name="Defaults">
                             <file name="FontAndColors.xml" url="FontAndColors.xml">
-                                <attr name="SystemFileSystem.localizingBundle" stringvalue="org.netbeans.modules.plantumlnb.Bundle"/>
+                                <attr name="SystemFileSystem.localizingBundle" stringvalue="org.netbeans.modules.plantumlnb.ui.Bundle"/>
                             </file>
                         </folder>
                     </folder>
