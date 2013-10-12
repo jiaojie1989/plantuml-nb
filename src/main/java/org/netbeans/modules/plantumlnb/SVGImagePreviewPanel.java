@@ -161,6 +161,7 @@ public class SVGImagePreviewPanel extends JPanel {
          public void actionPerformed(ActionEvent evt) {
              canvas.setFragmentIdentifier(null);
              canvas.resetRenderingTransform();
+             currentDataObject.getCurrentAT().setToIdentity();
          }
      }
  
@@ -254,9 +255,7 @@ public class SVGImagePreviewPanel extends JPanel {
                 
                 writer.write(currentImageContent); 
                 writer.close();
-            } catch (FileNotFoundException ex) {
-                logger.log(Level.SEVERE, ex.getLocalizedMessage());// TODO: Add a user notification
-            } catch (UnsupportedEncodingException ex) {
+            } catch (    FileNotFoundException | UnsupportedEncodingException ex) {
                 logger.log(Level.SEVERE, ex.getLocalizedMessage());// TODO: Add a user notification
             } 
 

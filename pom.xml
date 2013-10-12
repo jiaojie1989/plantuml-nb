@@ -190,7 +190,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <useDefaultManifestFile>true</useDefaultManifestFile>
-                    <additionalArguments>${netbeans.run.params.ide}</additionalArguments>
+                    <!--<additionalArguments>${netbeans.run.params.ide}</additionalArguments>-->
                     <netbeansInstallation>/home/venkat/Programs/netbeans-7.4rc1/</netbeansInstallation>
 <!--                        <nbmBuildDir>${project.build.directory}/netbeans_clusters/</nbmBuildDir>-->
                     <keystore>nbproject/private/keystore</keystore>
