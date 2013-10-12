@@ -44,6 +44,7 @@ public class SVGImagePreviewPanel extends JPanel {
     private String currentImageContent = "";
     private SVGDocument currentDocument = null;
     private pumlDataObject currentDataObject;
+    private double zoomOutFactor = 0.1;
     private static final Logger logger = Logger.getLogger(SVGImagePreviewPanel.class.getName());
     
     /**
@@ -57,7 +58,7 @@ public class SVGImagePreviewPanel extends JPanel {
         //http://mcc.id.au/2007/09/batik-course/
         
         
-        canvas.addGVTTreeRendererListener(new ResizeGVTTreeRendererListener());
+        canvas.addGVTTreeRendererListener(new ResizeGVTTreeRendererListener());       
         addComponentListener(new ResizeListener());
         add("Center", canvas);        
     }          
@@ -219,14 +220,14 @@ public class SVGImagePreviewPanel extends JPanel {
       * A swing action to zoom in the canvas.
       */
      public class ZoomInAction extends ZoomAction {
-         ZoomInAction() { super(2); }
+         ZoomInAction() { super(1/zoomOutFactor); }
      }
  
      /**
       * A swing action to zoom out the canvas.
       */
      public class ZoomOutAction extends ZoomAction {
-         ZoomOutAction() { super(.5); }
+         ZoomOutAction() { super(zoomOutFactor); }
      }
  
      /**
@@ -287,7 +288,7 @@ public class SVGImagePreviewPanel extends JPanel {
             @Override
             public void gvtRenderingCompleted(GVTTreeRendererEvent gvttre) {
                 if (currentDataObject.getCurrentAT() != null) {
-                    canvas.setRenderingTransform(currentDataObject.getCurrentAT());
+                    canvas.setRenderingTransform(currentDataObject.getCurrentAT());                    
                 }
             }
 

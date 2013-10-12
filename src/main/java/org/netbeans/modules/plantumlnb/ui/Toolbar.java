@@ -5,6 +5,8 @@
 package org.netbeans.modules.plantumlnb.ui;
 
 import java.awt.Image;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.geom.AffineTransform;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,6 +17,8 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JSlider;
+import javax.swing.JToggleButton;
 import javax.swing.JToolBar;
 import org.apache.batik.swing.JSVGCanvas;
 import org.netbeans.modules.plantumlnb.DataObjectAccess;
@@ -39,6 +43,7 @@ public class Toolbar {
     private AffineTransform currentAt = null;
     private JSVGCanvas canvas = null;
     private SVGImagePreviewPanel svgImagePreviewPanel = null;
+    private JSlider zoomSlider = new JSlider(JSlider.HORIZONTAL, 0, 1000, 10);
     
     private static final Logger logger = Logger.getLogger(SVGImagePreviewPanel.class.getName());
 
@@ -59,6 +64,7 @@ public class Toolbar {
         toolBar.add(getResetButton());
         toolBar.add(getRotateButton());
         toolBar.add(getOpenInBrowserButton());
+        toolBar.add(getRealTimeZoomButton());
 
         return toolBar;
     }
@@ -160,6 +166,34 @@ public class Toolbar {
 
         button.addActionListener(svgImagePreviewPanel.getOpenInBrowserAction());
 
+        return button;
+    }
+    
+    private JToggleButton getRealTimeZoomButton() {
+        final JToggleButton button = new JToggleButton();
+
+        try {
+            Image img = ImageIO.read(getClass().getResource("/org/netbeans/modules/plantumlnb/magnifier_zoom.png"));
+            button.setIcon(new ImageIcon(img));
+            button.setToolTipText("Real Time Zoom");            
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, e.getLocalizedMessage());
+        }
+
+        button.addItemListener(new ItemListener() {
+
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if(button.isSelected()) {
+                    button.getParent().add(zoomSlider);
+                } else {
+                    button.getParent().remove(zoomSlider);   
+                }
+                button.getParent().repaint();
+            }
+            
+        });
+        
         return button;
     }
 
