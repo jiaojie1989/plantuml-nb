@@ -113,7 +113,13 @@ TOKEN :
     | < PAR : "par" >
     | < BREAK : "break" >
     | < CRITICAL : "critical" >
-    | < NOTE : "note" >
+    | < NOTE_LEFT : "note left" (" of")? >
+    | < NOTE_RIGHT : "note right" (" of")? >
+    | < NOTE_OVER : "note over" >
+    | < END_NOTE : "end note" >
+    | < REF_OVER : "ref over" >
+    | < DELAY : "..." >
+    | < SPACE : ( "|||" | "||" ([0..9])+ "||"  >
     | < GROUP : "group" >
     | < LEFT : "left" >
     | < RIGHT : "right" >
