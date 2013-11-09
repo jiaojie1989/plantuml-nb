@@ -42,6 +42,7 @@ import javax.swing.JToolBar;
 import org.netbeans.modules.plantumlnb.DataObjectAccess;
 import org.netbeans.modules.plantumlnb.SVGImagePreviewPanel;
 import org.netbeans.modules.plantumlnb.ui.actions.ExportAction;
+import org.openide.util.ImageUtilities;
 import org.openide.util.NbBundle;
 
 /**
@@ -69,7 +70,6 @@ public class Toolbar {
 
     public JToolBar createToolBar() {
         
-//        zoomSlider.addChangeListener(svgImagePreviewPanel.getZoomChangeListener());
         // Definition of toolbar.
         JToolBar toolBar = new JToolBar();
         toolBar.putClientProperty("JToolBar.isRollover", Boolean.TRUE); //NOI18N
@@ -81,9 +81,9 @@ public class Toolbar {
         toolBar.add(getZoomInButton());
         toolBar.add(getZoomOutButton());
         toolBar.add(getResetButton());
-        toolBar.add(getRotateButton());
+        toolBar.add(getCWRotateButton());
+        toolBar.add(getCCWRotateButton());
         toolBar.add(getOpenInBrowserButton());
-//        toolBar.add(getRealTimeZoomButton());
 
         return toolBar;
     }
@@ -140,18 +140,29 @@ public class Toolbar {
         return button;
     }
 
-    private JButton getRotateButton() {
+    /**
+     * CCW = Counter Clockwise
+     * @return 
+     */
+    private JButton getCCWRotateButton() {
         JButton button = new JButton();
+        button.setIcon(ImageUtilities.loadImageIcon("/org/netbeans/modules/plantumlnb/rotate_ccw.png", true));
+        button.setToolTipText("Rotate Counter Clockwise");
+        button.addActionListener(svgImagePreviewPanel.getCCWRotateActionInstance());
 
-        try {
-            Image img = ImageIO.read(getClass().getResource("/org/netbeans/modules/plantumlnb/rotate.png"));
-            button.setIcon(new ImageIcon(img));
-            button.setToolTipText("Rotate");
-        } catch (IOException e) {
-            logger.log(Level.SEVERE, e.getLocalizedMessage());
-        }
+        return button;
+    }
 
-        button.addActionListener(svgImagePreviewPanel.getRotateActionInstance());
+    /**
+     * Clockwise
+     * 
+     * @return 
+     */
+    private JButton getCWRotateButton() {
+        JButton button = new JButton();
+        button.setIcon(ImageUtilities.loadImageIcon("/org/netbeans/modules/plantumlnb/rotate_cw.png", true));
+        button.setToolTipText("Rotate Clockwise");
+        button.addActionListener(svgImagePreviewPanel.getCWRotateActionInstance());
 
         return button;
     }
@@ -185,34 +196,6 @@ public class Toolbar {
 
         button.addActionListener(svgImagePreviewPanel.getOpenInBrowserAction());
 
-        return button;
-    }
-    
-    private JToggleButton getRealTimeZoomButton() {
-        final JToggleButton button = new JToggleButton();
-
-        try {
-            Image img = ImageIO.read(getClass().getResource("/org/netbeans/modules/plantumlnb/magnifier_zoom.png"));
-            button.setIcon(new ImageIcon(img));
-            button.setToolTipText("Real Time Zoom");            
-        } catch (IOException e) {
-            logger.log(Level.SEVERE, e.getLocalizedMessage());
-        }
-
-        button.addItemListener(new ItemListener() {
-
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                if(button.isSelected()) {
-                    button.getParent().add(zoomSlider);
-                } else {
-                    button.getParent().remove(zoomSlider);   
-                }
-                button.getParent().repaint();
-            }
-            
-        });
-        
         return button;
     }
 

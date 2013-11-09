@@ -48,7 +48,7 @@ public class RenderImageThread extends Thread {
         
         SVGImagePreviewPanel panelUI = SVGImagePreviewPanel.getInstance();
         panelUI.setCurrentDataObject((pumlDataObject) topComponent.getCurrentDataObject());
-        AffineTransform at = panelUI.renderSVGFile(imageContent);
+        panelUI.renderSVGFileOnTabSwitch(imageContent);
         Toolbar.instance().setSvgImagePreviewPanel(panelUI);
         topComponent.repaint();
     }

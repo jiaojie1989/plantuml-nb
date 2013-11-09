@@ -39,6 +39,9 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.util.Locale;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -64,8 +67,10 @@ public class SVGImagePreviewPanel extends JPanel {
     private String currentImageContent = "";
     private SVGDocument currentDocument = null;
     private pumlDataObject currentDataObject;
-    private double zoomOutFactor = 0.1;
+    private static final double ZOOM_OUT_FACTOR = 0.9;
+    private static final String ROTATE_FACTOR = "0.0872664626";
     private static final Logger logger = Logger.getLogger(SVGImagePreviewPanel.class.getName());
+    private final RenderWithTransformGVTTreeRendererListener gvttrListener = new RenderWithTransformGVTTreeRendererListener();
     
     private static SVGImagePreviewPanel instance = null;
     
@@ -80,23 +85,33 @@ public class SVGImagePreviewPanel extends JPanel {
         //http://mcc.id.au/2007/09/batik-course/
         
         
-        canvas.addGVTTreeRendererListener(new ResizeGVTTreeRendererListener());       
+//        canvas.addGVTTreeRendererListener(new ResizeGVTTreeRendererListener());       
         addComponentListener(new ResizeListener());
+        canvas.setEnableImageZoomInteractor(true);
+        canvas.setEnablePanInteractor(true);
+        canvas.setEnableResetTransformInteractor(true);
+        canvas.setEnableRotateInteractor(true);
+        canvas.setEnableZoomInteractor(true);
         add("Center", canvas);        
     }          
+    
+    public void renderSVGFileOnTabSwitch(@NonNull String imageContent) {
+        canvas.addGVTTreeRendererListener(gvttrListener);
+        renderSVGFile(imageContent);
+    }
     
     /**
      * 
      * @param svgFile 
      */
-    public AffineTransform renderSVGFile(@NonNull String imageContent) {    
+    public void renderSVGFile(@NonNull String imageContent) {    
         if(!"".equals(imageContent)) {
-            currentImageContent = imageContent;
+            currentImageContent = imageContent;            
             canvas.setSize(getSize());
-            canvas.setSVGDocument(createSVGDocument(new StringReader(imageContent)));       
+            canvas.setSVGDocument(createSVGDocument(new StringReader(imageContent)));               
+        } else {
+            logger.log(Level.INFO, "Svg image content is either null or empty, so, refraining for rendering the current plantuml image. ");
         }
-        
-        return canvas.getRenderingTransform();
     }
     
     public SVGDocument createSVGDocument(StringReader sr) {
@@ -157,7 +172,7 @@ public class SVGImagePreviewPanel extends JPanel {
      * 
      * @param currentDataObject 
      */
-    public void setCurrentDataObject(pumlDataObject newDataObject) {
+    public void setCurrentDataObject(@NonNull pumlDataObject newDataObject) {
         canvas.removePropertyChangeListener(PUMLJSVGCanvas.renderingTransformPropertyName, this.currentDataObject);
         this.currentDataObject = newDataObject;
         canvas.addPropertyChangeListener(PUMLJSVGCanvas.renderingTransformPropertyName, this.currentDataObject);
@@ -262,14 +277,14 @@ public class SVGImagePreviewPanel extends JPanel {
       * A swing action to zoom in the canvas.
       */
      public class ZoomInAction extends ZoomAction {
-         ZoomInAction() { super(1/zoomOutFactor); }
+         ZoomInAction() { super(1/ZOOM_OUT_FACTOR); }
      }
  
      /**
       * A swing action to zoom out the canvas.
       */
      public class ZoomOutAction extends ZoomAction {
-         ZoomOutAction() { super(zoomOutFactor); }
+         ZoomOutAction() { super(ZOOM_OUT_FACTOR); }
      }
  
      /**
@@ -319,7 +334,7 @@ public class SVGImagePreviewPanel extends JPanel {
          
      }
      
-     public class ResizeGVTTreeRendererListener implements GVTTreeRendererListener{
+     public class RenderWithTransformGVTTreeRendererListener implements GVTTreeRendererListener{
 
             @Override
             public void gvtRenderingPrepare(GVTTreeRendererEvent gvttre) {}
@@ -332,6 +347,12 @@ public class SVGImagePreviewPanel extends JPanel {
                 if (currentDataObject.getCurrentAT() != null) {
                     canvas.setRenderingTransform(currentDataObject.getCurrentAT());                    
                 }
+                
+                /** 
+                 * Remove the listener so that it doesn't affect the normal
+                 * zoom, rotate and reset transforms.
+                 */
+                canvas.removeGVTTreeRendererListener(this);
             }
 
             @Override
@@ -351,8 +372,31 @@ public class SVGImagePreviewPanel extends JPanel {
          return new ZoomOutAction();
      }
      
-     public RotateAction getRotateActionInstance() {
-         return new RotateAction(0.0872664626d);
+     /**
+      * CCW = Counter Clockwise
+      * @return RotateAction
+      */
+     public RotateAction getCCWRotateActionInstance() {
+         return new RotateAction(parseRotateFactor("-" + ROTATE_FACTOR));
+     }
+     
+     /**
+      * CW = Clockwise
+      * 
+      * @return RotateAction
+      */
+     public RotateAction getCWRotateActionInstance() {
+         return new RotateAction(parseRotateFactor(ROTATE_FACTOR));
+     }
+     
+     private double parseRotateFactor(String radians) {
+        double d = 0.0d;
+        try {
+            d = NumberFormat.getInstance(Locale.US).parse(radians).doubleValue();
+        } catch (ParseException ex) {
+            logger.log(Level.INFO, "Cannot parse the rotate factor in SVGImagePreviewPanel.getRotateActionInstance");
+        } 
+        return d;
      }
      
      public ResetTransformAction getResetTransformAction() {
