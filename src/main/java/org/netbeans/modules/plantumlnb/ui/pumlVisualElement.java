@@ -12,6 +12,7 @@ import org.netbeans.core.spi.multiview.text.MultiViewEditorElement;
 import org.netbeans.modules.plantumlnb.pumlDataObject;
 import org.openide.awt.UndoRedo;
 import org.openide.util.Lookup;
+import org.openide.windows.Mode;
 import org.openide.windows.TopComponent;
 import org.openide.windows.WindowManager;
 
@@ -26,6 +27,8 @@ import org.openide.windows.WindowManager;
 public final class pumlVisualElement extends MultiViewEditorElement {
     
     private static final long serialVersionUID = -6918553698868162650L;
+    
+    public static pumlVisualElement currentlyActivePUMLVisualElement = null;
 
     private pumlDataObject obj;
     private JToolBar toolbar = new JToolBar();
@@ -33,19 +36,19 @@ public final class pumlVisualElement extends MultiViewEditorElement {
     private TopComponent.Registry topComponentRegistry = TopComponent.getRegistry();
 
     public pumlVisualElement(Lookup lkp) {
-        super(lkp);
-        obj = lkp.lookup(pumlDataObject.class);
-        assert obj != null;        
+        super(lkp);             
     }
     
 
     @Override
     public void componentActivated() {
         super.componentActivated(); 
-        PUMLTopComponent pumltc = retrievePUMLTopComponent();
+        PUMLTopComponent pumltc = PUMLTopComponent.getInstance();
+        this.obj = getLookup().lookup(pumlDataObject.class);
         if(pumltc != null) {
             pumltc.setNewContent(obj);
         }
+        currentlyActivePUMLVisualElement = this;
     }
 
     /**
@@ -54,26 +57,22 @@ public final class pumlVisualElement extends MultiViewEditorElement {
     @Override
     public void componentOpened() {
         super.componentOpened(); 
-        if(retrievePUMLTopComponent() == null) {
-            SwingUtilities.invokeLater(new Runnable(){
-                @Override
-                public void run() {
-                    PUMLTopComponent pumltc = PUMLTopComponent.getInstance();
-                    
-                    // Register the instantiated PUMLTopComponent with Netbeans.
-                    pumltc.open();
-                    pumltc.setNewContent(obj);
-                }
-            });
-            
-        }
+        
+        SwingUtilities.invokeLater(new Runnable(){
+            @Override
+            public void run() {
+                PUMLTopComponent pumltc = PUMLTopComponent.getInstance();
+
+                // Register the instantiated PUMLTopComponent with Netbeans.
+                Mode propertiesMode = WindowManager.getDefault().findMode("properties");
+                propertiesMode.dockInto(pumltc);
+                pumltc.open();
+                pumltc.setNewContent(obj);
+            }
+        });
 
     }
 
-    @Override
-    public Lookup getLookup() {
-        return obj.getLookup();
-    }
         
     public PUMLTopComponent retrievePUMLTopComponent() {
         Iterator i = topComponentRegistry.getOpened().iterator();

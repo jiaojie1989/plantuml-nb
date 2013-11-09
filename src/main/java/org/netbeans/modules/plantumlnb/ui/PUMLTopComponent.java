@@ -50,12 +50,12 @@ import org.openide.windows.WindowManager;
     autostore = false)
 @TopComponent.Description( preferredID = "PUMLTopComponent",
     iconBase = "org/netbeans/modules/plantumlnb/icon.png",
-    persistenceType = TopComponent.PERSISTENCE_NEVER)
+    persistenceType = TopComponent.PERSISTENCE_ALWAYS)
 @TopComponent.Registration(mode = "properties", openAtStartup = false) //rightSlidingSide
 @ActionID(category = "Window", id = "org.netbeans.modules.plantumlnb.PUMLTopComponent")
-@ActionReference(path = "Menu/Window" /*, position = 333 */)
-@TopComponent.OpenActionRegistration( displayName = "#CTL_PUMLAction",
-    preferredID = "PUMLTopComponent")
+    @ActionReference(path = "Menu/Window" /*, position = 333 */)
+@TopComponent.OpenActionRegistration( displayName = "#CTL_PUMLAction", 
+        preferredID = "PUMLTopComponent")
 @Messages({
     "CTL_PUMLAction=Plant UML",
     "CTL_PUMLTopComponent=PlantUML",
@@ -146,7 +146,7 @@ public final class PUMLTopComponent extends TopComponent implements Serializable
     }// </editor-fold>//GEN-END:initComponents
 
     private  void addCustomComponents(){        
-        panelUI = new SVGImagePreviewPanel();
+        panelUI = getPanelUI();
         scrollPane = new javax.swing.JScrollPane();
         
         addToolbar();
@@ -306,15 +306,22 @@ public final class PUMLTopComponent extends TopComponent implements Serializable
         String version = p.getProperty("version");
         // TODO read your settings according to their version
     }
-        
+    
+    /**
+     * Not sure why this is needed but seems like it is.
+     */
     public void getComponent() {
         if (lastSaveTime == -1) {
             lastSaveTime = System.currentTimeMillis();
-        }
+        }        
+        add("Center", getPanelUI());
+    }
+        
+    public SVGImagePreviewPanel getPanelUI() {
         if (panelUI == null) {
             panelUI = new SVGImagePreviewPanel();
-        }
-        add("Center", panelUI);
+        }        
+        return panelUI;
     }
     
     public void setNewContent(final DataObject dataObject) {
@@ -339,7 +346,7 @@ public final class PUMLTopComponent extends TopComponent implements Serializable
                 }
 
                 if (panelUI == null) {
-                    getComponent();
+                    getPanelUI();
                 }
                     
             }
@@ -362,7 +369,7 @@ public final class PUMLTopComponent extends TopComponent implements Serializable
      */
     public void setDefaultContent(){
         if (panelUI == null) {
-            getComponent();
+            getPanelUI();
         }                    
         try {
             final BufferedImage image = ImageIO.read(getClass().getResourceAsStream("default-icon.png")); 
@@ -532,12 +539,9 @@ public final class PUMLTopComponent extends TopComponent implements Serializable
         }
         return PUMLTopComponent.currentNBImageIcon;
     }    
-
+    
     public static PUMLTopComponent getInstance() {
-        if(PUMLTopComponent.self == null) {
-            PUMLTopComponent.self = new PUMLTopComponent();
-        }
-        return self;
+        return (PUMLTopComponent) WindowManager.getDefault().findTopComponent("PUMLTopComponent");
     }
         
 
@@ -584,10 +588,6 @@ public final class PUMLTopComponent extends TopComponent implements Serializable
 //        }
 //        
 //    }
-    
-    public SVGImagePreviewPanel getPanelUI() {
-        return panelUI;
-    }
 
     public PUMLGenerator getPumlGenerator() {
         return pumlGenerator;
