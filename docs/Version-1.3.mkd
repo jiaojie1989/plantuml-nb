@@ -1,0 +1,12 @@
+Version 1.3
+============
+
+- Fix the mouse event handlers
+- Fix the syntax colors, make them more diverse.
+- Improve Lexer grammer
+- Check to see if it is possible to retrive compilation error line number from PlantUML.
+- Provide auto-complete for keywords.
+- Provide code complete where ever possible.
+- Add a help hover button below to show the keyboard shortcuts.
+- Add a loading gif.
+ 
