@@ -4,7 +4,7 @@
 
     <groupId>org.netbeans.modules</groupId>
     <artifactId>PlantUML-NB</artifactId>
-    <version>1.2.1</version>
+    <version>1.3-SNAPSHOT</version>
     <packaging>nbm</packaging>
 
     <name>PlantUML-NB</name>
@@ -186,12 +186,12 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>nbm-maven-plugin</artifactId>
-                <version>3.7</version>
+                <version>3.11</version>
                 <extensions>true</extensions>
                 <configuration>
                     <useDefaultManifestFile>true</useDefaultManifestFile>
-                    <!--<additionalArguments>${netbeans.run.params.ide}</additionalArguments>-->
-                    <netbeansInstallation>/home/venkat/Programs/netbeans-7.4rc1/</netbeansInstallation>
+                    <additionalArguments>${netbeans.run.params.ide}</additionalArguments>
+                    <netbeansInstallation>/home/venkat/Programs/netbeans-7.4/</netbeansInstallation>
 <!--                        <nbmBuildDir>${project.build.directory}/netbeans_clusters/</nbmBuildDir>-->
                     <keystore>nbproject/private/keystore</keystore>
                     <keystorealias>venkat</keystorealias>
