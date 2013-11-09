@@ -12,8 +12,8 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <netbeans.platform.version>RELEASE73-BETA2</netbeans.platform.version>
-        <netbeans.run.params>${netbeans.run.params.ide}</netbeans.run.params>
-        <netbeans.run.params.ide/>
+        <netbeans.run.params>-J-noverify -J-javaagent:e:/tools/jrebel/jrebel.jar -J-Drebel.log=true ${netbeans.run.params.ide}</netbeans.run.params>
+        <netbeans.run.params.ide/>  
     </properties>
 
     <repositories>

@@ -30,16 +30,12 @@ public class RenderImageThread extends Thread {
     public void run() {
         // TODO: This line causes the problem below.
         // http://stackoverflow.com/questions/16502071/netbeans-save-hangs
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                SVGImagePreviewPanel panelUI = topComponent.getPanelUI();
-                panelUI.setCurrentDataObject((pumlDataObject) topComponent.getCurrentDataObject());
-                AffineTransform at = panelUI.renderSVGFile(imageContent);
-                Toolbar.instance().setSvgImagePreviewPanel(panelUI);
-                topComponent.repaint();
-            }
-        });
+        
+        SVGImagePreviewPanel panelUI = topComponent.getPanelUI();
+        panelUI.setCurrentDataObject((pumlDataObject) topComponent.getCurrentDataObject());
+        AffineTransform at = panelUI.renderSVGFile(imageContent);
+        Toolbar.instance().setSvgImagePreviewPanel(panelUI);
+        topComponent.repaint();
     }
 
 }
