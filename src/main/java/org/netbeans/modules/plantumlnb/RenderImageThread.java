@@ -17,10 +17,10 @@ import org.openide.util.NbBundle;
  * @author venkat
  */
 public class RenderImageThread extends Thread {
-    
+
     PUMLTopComponent topComponent;
     String imageContent;
-    
+
     public RenderImageThread(PUMLTopComponent tc, String ic) {
         topComponent = tc;
         imageContent = ic;
@@ -28,28 +28,18 @@ public class RenderImageThread extends Thread {
 
     @Override
     public void run() {
-        BufferedImage image = null;
-        try {
-            if (topComponent.getPanelUI() == null) {
-                topComponent.getComponent();
+        // TODO: This line causes the problem below.
+        // http://stackoverflow.com/questions/16502071/netbeans-save-hangs
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                SVGImagePreviewPanel panelUI = topComponent.getPanelUI();
+                panelUI.setCurrentDataObject((pumlDataObject) topComponent.getCurrentDataObject());
+                AffineTransform at = panelUI.renderSVGFile(imageContent);
+                Toolbar.instance().setSvgImagePreviewPanel(panelUI);
+                topComponent.repaint();
             }
-        } catch (IllegalArgumentException iaex) {
-            Logger.getLogger(PUMLTopComponent.class.getName()).info(NbBundle.getMessage(PUMLTopComponent.class, "ERR_IOFile"));
-        } finally {
-
-            final BufferedImage fImage = image;
-            // TODO: This line causes the problem below.
-            // http://stackoverflow.com/questions/16502071/netbeans-save-hangs
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {             
-                    SVGImagePreviewPanel panelUI = topComponent.getPanelUI();
-                    panelUI.setCurrentDataObject((pumlDataObject) topComponent.getCurrentDataObject());
-                    AffineTransform at = panelUI.renderSVGFile(imageContent);
-                    Toolbar.instance().setSvgImagePreviewPanel(panelUI);
-                    topComponent.repaint();
-                }
-            });
-        }
+        });
     }
+
 }
