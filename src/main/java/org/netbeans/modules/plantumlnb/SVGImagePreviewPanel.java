@@ -30,6 +30,7 @@ import org.apache.batik.swing.JSVGCanvas;
 import org.apache.batik.swing.gvt.GVTTreeRendererEvent;
 import org.apache.batik.swing.gvt.GVTTreeRendererListener;
 import org.apache.batik.util.XMLResourceDescriptor;
+import org.netbeans.api.annotations.common.NonNull;
 import org.openide.util.Exceptions;
 import org.openide.util.Utilities;
 import org.w3c.dom.svg.SVGDocument;
@@ -67,10 +68,12 @@ public class SVGImagePreviewPanel extends JPanel {
      * 
      * @param svgFile 
      */
-    public AffineTransform renderSVGFile(String imageContent) {    
-        currentImageContent = imageContent;
-        canvas.setSize(getSize());
-        canvas.setSVGDocument(createSVGDocument(new StringReader(imageContent)));       
+    public AffineTransform renderSVGFile(@NonNull String imageContent) {    
+        if(!"".equals(imageContent)) {
+            currentImageContent = imageContent;
+            canvas.setSize(getSize());
+            canvas.setSVGDocument(createSVGDocument(new StringReader(imageContent)));       
+        }
         
         return canvas.getRenderingTransform();
     }
