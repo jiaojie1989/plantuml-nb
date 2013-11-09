@@ -4,6 +4,7 @@
  */
 package org.netbeans.modules.plantumlnb.ui;
 
+import java.io.IOException;
 import java.util.Iterator;
 import javax.swing.JToolBar;
 import javax.swing.SwingUtilities;
@@ -19,7 +20,7 @@ import org.openide.windows.WindowManager;
  * https://blogs.oracle.com/geertjan/entry/multiview_of_the_next_release
  * @author venkat
  * 
- * NOTE: We don't need VisualElement Registration here.MultiViewEditorElement displays two views already.
+ * NOTE: We don't need VisualElement Registration here. MultiViewEditorElement displays two views already.
  */
 
 public final class pumlVisualElement extends MultiViewEditorElement {
@@ -121,6 +122,28 @@ public final class pumlVisualElement extends MultiViewEditorElement {
         pumlDataObject dataObject = showingTC.getLookup().lookup(pumlDataObject.class);
         
         return dataObject == null ? null : (pumlDataObject) dataObject;
+    }
+    
+    /**
+     * TODO: Implement this method.
+     * 
+     * http://stackoverflow.com/questions/16765304/topcomponent-not-serializable
+     * @param out
+     * @throws IOException 
+     */
+    private void writeObject(java.io.ObjectOutputStream out) throws IOException {
+        
+    }
+
+    /**
+     * TODO: Implement this method. Refer to the link in writeObject comment.
+     * 
+     * @param in
+     * @throws IOException
+     * @throws ClassNotFoundException 
+     */
+    private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
+        
     }
 
 }

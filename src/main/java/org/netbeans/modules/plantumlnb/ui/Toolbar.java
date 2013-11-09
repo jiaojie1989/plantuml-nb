@@ -20,7 +20,6 @@ import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.JToggleButton;
 import javax.swing.JToolBar;
-import org.apache.batik.swing.JSVGCanvas;
 import org.netbeans.modules.plantumlnb.DataObjectAccess;
 import org.netbeans.modules.plantumlnb.SVGImagePreviewPanel;
 import org.netbeans.modules.plantumlnb.ui.actions.ExportAction;
@@ -41,7 +40,7 @@ public class Toolbar {
 
     private DataObjectAccess dataObjectAccess;
     private AffineTransform currentAt = null;
-    private JSVGCanvas canvas = null;
+    private PUMLJSVGCanvas canvas = null;
     private SVGImagePreviewPanel svgImagePreviewPanel = null;
     private JSlider zoomSlider = new JSlider(JSlider.HORIZONTAL, 0, 1000, 10);
     
@@ -50,21 +49,22 @@ public class Toolbar {
     private Toolbar() {}
 
     public JToolBar createToolBar() {
+        
+//        zoomSlider.addChangeListener(svgImagePreviewPanel.getZoomChangeListener());
         // Definition of toolbar.
         JToolBar toolBar = new JToolBar();
         toolBar.putClientProperty("JToolBar.isRollover", Boolean.TRUE); //NOI18N
         toolBar.setFloatable(false);
         toolBar.setName(NbBundle.getBundle(Toolbar.class).getString("ACSN_Toolbar"));
 
-        JButton button;
-
+        
         toolBar.add(getExportButton());
         toolBar.add(getZoomInButton());
         toolBar.add(getZoomOutButton());
         toolBar.add(getResetButton());
         toolBar.add(getRotateButton());
         toolBar.add(getOpenInBrowserButton());
-        toolBar.add(getRealTimeZoomButton());
+//        toolBar.add(getRealTimeZoomButton());
 
         return toolBar;
     }
@@ -226,11 +226,11 @@ public class Toolbar {
         this.currentAt = currentAt;
     }
 
-    public JSVGCanvas getCanvas() {
+    public PUMLJSVGCanvas getCanvas() {
         return canvas;
     }
 
-    public void setCanvas(JSVGCanvas canvas) {
+    public void setCanvas(PUMLJSVGCanvas canvas) {
         this.canvas = canvas;
     }
 

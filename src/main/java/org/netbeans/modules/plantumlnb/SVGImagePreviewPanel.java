@@ -26,11 +26,11 @@ import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.JPanel;
 import org.apache.batik.dom.svg.SAXSVGDocumentFactory;
-import org.apache.batik.swing.JSVGCanvas;
 import org.apache.batik.swing.gvt.GVTTreeRendererEvent;
 import org.apache.batik.swing.gvt.GVTTreeRendererListener;
 import org.apache.batik.util.XMLResourceDescriptor;
 import org.netbeans.api.annotations.common.NonNull;
+import org.netbeans.modules.plantumlnb.ui.PUMLJSVGCanvas;
 import org.openide.util.Exceptions;
 import org.openide.util.Utilities;
 import org.w3c.dom.svg.SVGDocument;
@@ -41,7 +41,7 @@ import org.w3c.dom.svg.SVGDocument;
  */
 public class SVGImagePreviewPanel extends JPanel {
     
-    private JSVGCanvas canvas;
+    private PUMLJSVGCanvas canvas;
     private String currentImageContent = "";
     private SVGDocument currentDocument = null;
     private pumlDataObject currentDataObject;
@@ -53,7 +53,7 @@ public class SVGImagePreviewPanel extends JPanel {
      * @param svgFile 
      */
     public SVGImagePreviewPanel() {
-        canvas = new JSVGCanvas();
+        canvas = new PUMLJSVGCanvas();
 
         //http://mail-archives.apache.org/mod_mbox/xmlgraphics-batik-users/200811.mbox/%3C82615BD530B1FA449BAEB584F01FFDBA0169E9FE@UHQEX30.ad.jfcom.mil%3E
         //http://mcc.id.au/2007/09/batik-course/
@@ -116,11 +116,11 @@ public class SVGImagePreviewPanel extends JPanel {
         return new StringReader(puml);
     }
 
-    public JSVGCanvas getCanvas() {
+    public PUMLJSVGCanvas getCanvas() {
         return canvas;
     }
 
-    public void setCanvas(JSVGCanvas canvas) {
+    public void setCanvas(PUMLJSVGCanvas canvas) {
         this.canvas = canvas;
     }
         
