@@ -1,6 +1,25 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/* 
+ * The MIT License
+ *
+ * Copyright 2013 Venkat Ram Akkineni.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
  */
 package org.netbeans.modules.plantumlnb;
 
@@ -105,7 +124,6 @@ public class pumlDataObject extends MultiDataObject implements FileChangeListene
     
     private FileObject fileObject;
     private AffineTransform currentAT;
-//    private final Saver saver = new Saver();
 
     public pumlDataObject(FileObject pf, MultiFileLoader loader) throws DataObjectExistsException, IOException {
         super(pf, loader);        
@@ -114,7 +132,6 @@ public class pumlDataObject extends MultiDataObject implements FileChangeListene
         registerEditor("text/x-puml", true);
         
         this.currentAT = new AffineTransform();
-//        this.currentAT.setToIdentity();
     }
 
     @Override
@@ -151,50 +168,7 @@ public class pumlDataObject extends MultiDataObject implements FileChangeListene
         }
         
         return image;       
-
-        
-//        InputStream input = getPrimaryFile().getInputStream();
-//        try {
-//            return javax.imageio.ImageIO.read(input);
-//        } catch (IndexOutOfBoundsException ioobe) {
-//            return null;
-//        } finally {
-//            input.close();
-//        }
     }
-    
-//    synchronized void setContent(String text) {
-//        this.content = text;
-//        if (text != null) {
-//            setModified(true);    
-//            getCookieSet().add(saver);
-//        } else {
-//            setModified(false);
-//            getCookieSet().remove(saver);
-//        }
-//    }
-//    
-//    private class Saver extends AbstractSavable {
-//
-//        @Override
-//        public void save() throws IOException {
-//            String txt;
-//            synchronized (pumlDataObject.this) {
-//                //synchronize access to the content field
-//                txt = content;
-//                setContent(null);
-//            }
-//            FileObject fo = getPrimaryFile();
-//            OutputStream out = new BufferedOutputStream(fo.getOutputStream());
-//            PrintWriter writer = new PrintWriter(out);
-//            try {
-//                writer.print(txt);
-//            } finally {
-//                writer.close();
-//                out.close();
-//            }
-//        }
-//    }
 
     @Override
     public void fileFolderCreated(FileEvent fe) {}
