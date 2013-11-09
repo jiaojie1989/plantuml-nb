@@ -26,9 +26,13 @@ package org.netbeans.modules.plantumlnb;
 import java.awt.Image;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.concurrent.Callable;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import org.netbeans.core.api.multiview.MultiViews;
@@ -119,9 +123,9 @@ position = 300)
     @ActionID(category = "System", id = "org.openide.actions.PropertiesAction"),
     position = 1400)
 })
-public class pumlDataObject extends MultiDataObject implements FileChangeListener, Callable<CloneableEditorSupport.Pane> {
+public class pumlDataObject extends MultiDataObject implements FileChangeListener, Callable<CloneableEditorSupport.Pane>, PropertyChangeListener {
     private String content;
-    
+    private static final Logger LOG = Logger.getLogger(pumlDataObject.class.getName());
     private FileObject fileObject;
     private AffineTransform currentAT;
 
@@ -215,6 +219,14 @@ public class pumlDataObject extends MultiDataObject implements FileChangeListene
 
     public void setCurrentAT(AffineTransform currentAT) {
         this.currentAT = currentAT;
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        this.currentAT = (AffineTransform) evt.getNewValue();
+        double[] flatMatrix = new double[6];
+        this.currentAT.getMatrix(flatMatrix);
+        LOG.log(Level.INFO, "Current Transform: " + Arrays.toString(flatMatrix));
     }
     
 }

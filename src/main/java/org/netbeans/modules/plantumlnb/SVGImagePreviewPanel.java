@@ -149,8 +149,18 @@ public class SVGImagePreviewPanel extends JPanel {
         return currentDataObject;
     }
 
-    public void setCurrentDataObject(pumlDataObject currentDataObject) {
-        this.currentDataObject = currentDataObject;
+    /**
+     * Unbind the currentDataObject and bind the new one. This way everytime
+     * a tab switch happens, correct dataObject ( i.e. the dataObject of the plantuml
+     * currently displaying inside the Preview panel ) is listening to changes in the 
+     * AffineTransform.
+     * 
+     * @param currentDataObject 
+     */
+    public void setCurrentDataObject(pumlDataObject newDataObject) {
+        canvas.removePropertyChangeListener(PUMLJSVGCanvas.renderingTransformPropertyName, this.currentDataObject);
+        this.currentDataObject = newDataObject;
+        canvas.addPropertyChangeListener(PUMLJSVGCanvas.renderingTransformPropertyName, this.currentDataObject);
     }   
 
     public static SVGImagePreviewPanel getInstance() {
