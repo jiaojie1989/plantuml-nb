@@ -146,7 +146,7 @@ public final class PUMLTopComponent extends TopComponent implements Serializable
     }// </editor-fold>//GEN-END:initComponents
 
     private  void addCustomComponents(){        
-        panelUI = getPanelUI();
+        panelUI = SVGImagePreviewPanel.getInstance();
         scrollPane = new javax.swing.JScrollPane();
         
         addToolbar();
@@ -314,14 +314,7 @@ public final class PUMLTopComponent extends TopComponent implements Serializable
         if (lastSaveTime == -1) {
             lastSaveTime = System.currentTimeMillis();
         }        
-        add("Center", getPanelUI());
-    }
-        
-    public SVGImagePreviewPanel getPanelUI() {
-        if (panelUI == null) {
-            panelUI = new SVGImagePreviewPanel();
-        }        
-        return panelUI;
+        add("Center", SVGImagePreviewPanel.getInstance());
     }
     
     public void setNewContent(final DataObject dataObject) {
@@ -346,7 +339,7 @@ public final class PUMLTopComponent extends TopComponent implements Serializable
                 }
 
                 if (panelUI == null) {
-                    getPanelUI();
+                    SVGImagePreviewPanel.getInstance();
                 }
                     
             }
@@ -369,7 +362,7 @@ public final class PUMLTopComponent extends TopComponent implements Serializable
      */
     public void setDefaultContent(){
         if (panelUI == null) {
-            getPanelUI();
+            SVGImagePreviewPanel.getInstance();
         }                    
         try {
             final BufferedImage image = ImageIO.read(getClass().getResourceAsStream("default-icon.png")); 

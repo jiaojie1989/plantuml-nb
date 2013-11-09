@@ -48,11 +48,13 @@ public class SVGImagePreviewPanel extends JPanel {
     private double zoomOutFactor = 0.1;
     private static final Logger logger = Logger.getLogger(SVGImagePreviewPanel.class.getName());
     
+    private static SVGImagePreviewPanel instance = null;
+    
     /**
      * 
      * @param svgFile 
      */
-    public SVGImagePreviewPanel() {
+    private SVGImagePreviewPanel() {
         canvas = new PUMLJSVGCanvas();
 
         //http://mail-archives.apache.org/mod_mbox/xmlgraphics-batik-users/200811.mbox/%3C82615BD530B1FA449BAEB584F01FFDBA0169E9FE@UHQEX30.ad.jfcom.mil%3E
@@ -131,6 +133,14 @@ public class SVGImagePreviewPanel extends JPanel {
     public void setCurrentDataObject(pumlDataObject currentDataObject) {
         this.currentDataObject = currentDataObject;
     }   
+
+    public static SVGImagePreviewPanel getInstance() {
+        if(null == instance) {
+            instance = new SVGImagePreviewPanel();
+        }
+        
+        return instance;
+    }
     
     //============================================================================
     // Listeners and actions.

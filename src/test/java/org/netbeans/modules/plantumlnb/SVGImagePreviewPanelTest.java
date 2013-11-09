@@ -28,7 +28,7 @@ public class SVGImagePreviewPanelTest {
     
     @Before
     public void setUp() {
-        svgImagePreviewPanel = new SVGImagePreviewPanel();
+        svgImagePreviewPanel = SVGImagePreviewPanel.getInstance();
     }
     
     @After
