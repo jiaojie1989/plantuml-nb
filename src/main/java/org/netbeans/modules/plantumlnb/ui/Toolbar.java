@@ -24,8 +24,6 @@
 package org.netbeans.modules.plantumlnb.ui;
 
 import java.awt.Image;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.awt.geom.AffineTransform;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,9 +33,9 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
-import javax.swing.JToggleButton;
 import javax.swing.JToolBar;
 import org.netbeans.modules.plantumlnb.DataObjectAccess;
 import org.netbeans.modules.plantumlnb.SVGImagePreviewPanel;
@@ -84,6 +82,7 @@ public class Toolbar {
         toolBar.add(getCWRotateButton());
         toolBar.add(getCCWRotateButton());
         toolBar.add(getOpenInBrowserButton());
+        toolBar.add(getQuickHelpLabel());
 
         return toolBar;
     }
@@ -91,6 +90,22 @@ public class Toolbar {
     public JToolBar createToolBar(DataObjectAccess doa) {
         this.dataObjectAccess = doa;
         return createToolBar();
+    }
+    
+    public JLabel getQuickHelpLabel() {
+        JLabel label = new JLabel(ImageUtilities.loadImageIcon("/org/netbeans/modules/plantumlnb/help.png", true));
+        label.setToolTipText("<html><body>"
+                + "<h4>Shortcuts</h4>"
+                + "<br>"
+                + "&rarr; <strong>Zoom</strong>         ( Ctrl + Left Click )<br>" 
+                + "&rarr; <strong>Realize zoom</strong> ( Shift + Right Click  )<br>" 
+                + "&rarr; <strong>Pan</strong>          ( SHIFT + Left Click )<br>" 
+                + "&rarr; <strong>Rotate</strong>       ( CTRL + Right Click )<br>" 
+                + "&rarr; <strong>Reset</strong>        ( CTRL + SHIFT + Right Click )<br>" 
+                + "<br>"
+                + "</body></html>"
+        );
+        return label;
     }
 
     public JButton getExportButton() {
