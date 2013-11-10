@@ -46,3 +46,17 @@ Syntax Highlighting
 * Anything enclosed in between << >>
     - << Application >>
 * 
+
+###### Component ######
+
+ * [ component name ]
+
+###### Classes #####
+
+ * Access modifiers
+    + `- private`
+    + `# protected`
+    + `~ package protected`
+    + `+ public`
+    + {abstract}
+    + {static}

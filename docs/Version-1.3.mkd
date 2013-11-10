@@ -1,26 +1,27 @@
 Version 1.3
 ============
 
-- [ Done ] Fix the mouse event handlers
-- Fix the syntax colors, make them more diverse.
-- Improve Lexer grammer
-- Check to see if it is possible to retrive compilation error line number from PlantUML.
-- Provide auto-complete for keywords.
-- Provide code complete where ever possible.
-- [ Done ] Add a help hover button below to show the keyboard shortcuts.
-- Add a loading gif.
-- Show document name on Preview panel.
-- Test it on windows before release.
++ __[ Done ]__  Fix the mouse event handlers
++ Fix the syntax colors, make them more diverse.
++ Improve Lexer grammer
++ Check to see if it is possible to retrive compilation error line number from PlantUML.
++ Provide auto-complete for keywords.
++ Provide code complete where ever possible.
++ __[ Done ]__ Add a help hover button below to show the keyboard shortcuts.
++ Add a loading gif.
++ __[ Done ]__ Show document name on Preview panel.
++ Test it on windows before release.
++ __[ Done ]__ upgrade plantuml version to 7985.
  
 
-+ [ Done ] Change the references to PUMLJSVGCanvas from JSVGCanvas.
-+ [ Done ] Implement propertyChangeListener inside DataObject.
-+ [ Done ] Fix module.xml errors shown on the build log.
-+ [ Done ] Clean up RenderImageThread run method.
-+ [ Done ] Apply /home/venkat/SVGImagePreviewPanel patch.
-+ [ Done ] Try and remove getComponent method inside PUMLTopComponent class and use a single getPanelUI method.
++ __[ Done ]__ Change the references to PUMLJSVGCanvas from JSVGCanvas.
++ __[ Done ]__ Implement propertyChangeListener inside DataObject.
++ __[ Done ]__ Fix module.xml errors shown on the build log.
++ __[ Done ]__ Clean up RenderImageThread run method.
++ __[ Done ]__ Apply /home/venkat/SVGImagePreviewPanel patch.
++ __[ Done ]__ Try and remove getComponent method inside PUMLTopComponent class and use a single getPanelUI method.
 
-+ [ Done ] Fix the below exception.
++ __[ Done ]__ Fix the below exception.
 
         java.lang.NullPointerException
             at org.netbeans.modules.plantumlnb.ui.pumlVisualElement.getLookup(pumlVisualElement.java:75)

@@ -114,12 +114,19 @@ TOKEN :
     | < BREAK : "break" >
     | < CRITICAL : "critical" >
     | < NOTE_LEFT : "note left" (" of")? >
+    | < NOTE_LEFT_ON_LINK : "note left on link" >
     | < NOTE_RIGHT : "note right" (" of")? >
+    | < NOTE_RIGHT_ON_LINK : "note right on link" >
+    | < NOTE_TOP : "note top" (" of")? >
+    | < NOTE_TOP_ON_LINK : "note top on link" >
+    | < NOTE_BOTTOM : "note bottom" (" of")? >
+    | < NOTE_BOTTOM_ON_LINK : "note bottom on link" >
     | < NOTE_OVER : "note over" >
+    | < NOTE_ON_LINK : "note on" >
     | < END_NOTE : "end note" >
     | < REF_OVER : "ref over" >
     | < DELAY : "..." >
-    | < SPACE : ( "|||" | "||" ([0..9])+ "||"  >
+/*    | < SPACE : ( "|||" | "||" ([0..9])+ "||"  > */
     | < GROUP : "group" >
     | < LEFT : "left" >
     | < RIGHT : "right" >
@@ -132,9 +139,7 @@ TOKEN :
     | < DEACTIVATE : "deactivate" >
     | < DESTROY : "destroy" >
     | < CREATE : "create" >
-    | < FOOTBOX : "footbox" >
-    | < HIDE : "hide" >
-    | < SHOW : "show" >
+    | < FOOTBOX : "footbox" >    
     | < SKIN_PARAM : "skinparam" >
     | < SKIN : "skin" >
     | < TOP : "top" >
@@ -182,7 +187,6 @@ TOKEN :
     | < RIGHT_AGGREGATION : (" ")+ ( "." | "-" )+ "o" (" ")+ >
     | < RIGHT_EXTENSION : (" ")+ ( "." | "-" )+ "*" (" ")+ >
     | < RIGHT_COMPOSITION : (" ")+ ( "." | "-" )+ "|>" (" ")+ >
-    
 
 }
 
@@ -197,6 +201,7 @@ TOKEN :
     | < CLASS : "class" >
     | < INTERFACE : "interface" >
     | < ABSTRACT : "abstract" >
+    | < ANNOTATION : "annotation" >
     | < ENUM : "enum" >
     | < COMPONENT : "component" >
     | < STATE : "state" >
@@ -219,6 +224,16 @@ TOKEN :
     | < BOUNDARY : "boundary" >
     | < CONTROL : "control" >
     | < ENTITY : "entity" >
+}
+
+/* VISIBILITY */
+TOKEN :
+{
+    < SHOW : "show" > 
+    | < HIDE : "hide" >
+    | < SHOW_EMPTY_MEMBERS : <SHOW> " " <EMPTY_MEMBERS> >
+    | < HIDE_EMPTY_MEMBERS : <HIDE> " " <EMPTY_MEMBERS> >
+    | <#EMPTY_MEMBERS : "empty members">
 }
 
 /* LITERALS */
