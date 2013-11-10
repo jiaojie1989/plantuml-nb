@@ -23,7 +23,7 @@
  */
 package org.netbeans.modules.plantumlnb;
 
-import java.awt.geom.AffineTransform;
+import javax.swing.SwingUtilities;
 import org.netbeans.modules.plantumlnb.ui.PUMLTopComponent;
 import org.netbeans.modules.plantumlnb.ui.Toolbar;
 
@@ -50,6 +50,21 @@ public class RenderImageThread extends Thread {
         panelUI.setCurrentDataObject((pumlDataObject) topComponent.getCurrentDataObject());
         panelUI.renderSVGFileOnTabSwitch(imageContent);
         Toolbar.instance().setSvgImagePreviewPanel(panelUI);
+        
+        /**
+         * This needs to be in awt thread, otherwise netbeans complains.
+         * 
+         * java.lang.IllegalStateException: Problem in some module which uses 
+         * Window System: Window System API is required to be called from AWT 
+         * thread only, see http://core.netbeans.org/proposals/threading/
+         */
+        SwingUtilities.invokeLater(new Runnable(){
+            @Override
+            public void run() {
+                topComponent.setDisplayName(((pumlDataObject) topComponent.getCurrentDataObject()).getPrimaryFile().getName());
+            }
+        });
+        
         topComponent.repaint();
     }
 
