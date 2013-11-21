@@ -5,14 +5,21 @@
  */
 package org.netbeans.modules.plantumlnb.ui.wizard;
 
+import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import org.openide.util.NbBundle;
 
 public final class PlantUMLVisualPanel1 extends JPanel {
     
     private PlantUMLWizardPanel1 plantUMLWizardPanel1;
+    private final JFileChooser fileChooser = new JFileChooser();
+    private static final Logger LOG = Logger.getLogger(PlantUMLVisualPanel1.class.getName());
 
     /**
      * Creates new form PlantUMLVisualPanel1
@@ -49,6 +56,21 @@ public final class PlantUMLVisualPanel1 extends JPanel {
         }
     }
 
+    private String showOpenDialog(String dialogTitle) {
+        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        fileChooser.setDialogTitle(dialogTitle);
+        int returnVal = fileChooser.showOpenDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File file = fileChooser.getSelectedFile();
+            //This is where a real application would open the file.
+            LOG.log(Level.INFO, "Opening: {0}.", new Object[]{file.getName()});
+            return fileChooser.getSelectedFile().getAbsolutePath();
+        } 
+        
+        LOG.log(Level.INFO, "Open command cancelled by user.");
+        return null;
+               
+    }
     
     /**
      * This method is called from within the constructor to initialize the form. WARNING: Do NOT modify this code. The
@@ -72,6 +94,11 @@ public final class PlantUMLVisualPanel1 extends JPanel {
         org.openide.awt.Mnemonics.setLocalizedText(existingSourcesPaneLabel, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel1.class, "PlantUMLVisualPanel1.existingSourcesPaneLabel.text")); // NOI18N
 
         org.openide.awt.Mnemonics.setLocalizedText(packageSelectionButton, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel1.class, "PlantUMLVisualPanel1.packageSelectionButton.text")); // NOI18N
+        packageSelectionButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                packageSelectionButtonActionPerformed(evt);
+            }
+        });
 
         packageSelectionInputDirectory.setText(org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel1.class, "PlantUMLVisualPanel1.packageSelectionInputDirectory.text")); // NOI18N
 
@@ -85,6 +112,11 @@ public final class PlantUMLVisualPanel1 extends JPanel {
         destinationDirectoryTextField.setText(org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel1.class, "PlantUMLVisualPanel1.destinationDirectoryTextField.text")); // NOI18N
 
         org.openide.awt.Mnemonics.setLocalizedText(destinationDirectoryButton, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel1.class, "PlantUMLVisualPanel1.destinationDirectoryButton.text")); // NOI18N
+        destinationDirectoryButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                destinationDirectoryButtonActionPerformed(evt);
+            }
+        });
 
         org.openide.awt.Mnemonics.setLocalizedText(pumlFileNameLabel, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel1.class, "PlantUMLVisualPanel1.pumlFileNameLabel.text")); // NOI18N
 
@@ -155,6 +187,20 @@ public final class PlantUMLVisualPanel1 extends JPanel {
     private void updateGeneratedFileNameDisplayLabel(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_updateGeneratedFileNameDisplayLabel
         generatedFileNameDisplayTextField.setText(plantumlFileNameTextField.getText() + ".puml");
     }//GEN-LAST:event_updateGeneratedFileNameDisplayLabel
+
+    private void destinationDirectoryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_destinationDirectoryButtonActionPerformed
+        String returnVal = showOpenDialog(NbBundle.getMessage(PlantUMLVisualPanel1.class, "PlantUMLVisualPanel1.destinationDirectoryButton.text"));
+        if(returnVal != null) {
+            destinationDirectoryTextField.setText(returnVal);
+        }
+    }//GEN-LAST:event_destinationDirectoryButtonActionPerformed
+
+    private void packageSelectionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_packageSelectionButtonActionPerformed
+        String returnVal = showOpenDialog(NbBundle.getMessage(PlantUMLVisualPanel1.class, "PlantUMLVisualPanel1.packageSelectionButton.text"));
+        if(returnVal != null) {
+            packageSelectionInputDirectory.setText(returnVal);
+        }
+    }//GEN-LAST:event_packageSelectionButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton destinationDirectoryButton;

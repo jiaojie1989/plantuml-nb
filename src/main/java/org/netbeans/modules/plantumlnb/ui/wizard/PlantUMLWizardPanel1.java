@@ -54,7 +54,7 @@ public class PlantUMLWizardPanel1 implements WizardDescriptor.Panel<WizardDescri
         String fileName = component.getPlantumlFileNameTextField().getText();
         String packageName = component.getPackageSelectionInputDirectory().getText();
         String destinationDirectory = component.getDestinationDirectoryTextField().getText();
-        System.out.println("dgasgasgfas ================");
+
         if(fileName.equals("") || fileName == null
                 || packageName.equals("") || packageName == null
                 || destinationDirectory.equals("") || destinationDirectory == null) {
