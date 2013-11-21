@@ -45,6 +45,12 @@
             <type>jar</type>
         </dependency>
         <dependency>
+            <groupId>net.sourceforge.plantuml-dependency</groupId>
+            <artifactId>plantuml-dependency</artifactId>
+            <version>1.2.0</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-openide-filesystems</artifactId>
             <version>RELEASE73</version>
@@ -178,6 +184,11 @@
             <version>2.5.0</version>
             <type>jar</type>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-netbeans-modules-projectapi</artifactId>
+            <version>RELEASE73</version>
         </dependency>
     </dependencies>
 
