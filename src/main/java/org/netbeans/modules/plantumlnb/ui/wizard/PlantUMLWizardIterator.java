@@ -19,7 +19,10 @@ import org.openide.WizardDescriptor;
 import org.openide.util.NbBundle.Messages;
 
 // TODO define position attribute
-@TemplateRegistration(folder = "PlantUML", displayName = "#PlantUMLWizardIterator_displayName", iconBase = "org/netbeans/modules/plantumlnb/icon.png", description = "plantUML.html")
+@TemplateRegistration(folder = "PlantUML", 
+        displayName = "#PlantUMLWizardIterator_displayName", 
+        iconBase = "org/netbeans/modules/plantumlnb/icon.png", 
+        description = "PlantUMLFromExistingSourcesDescription.html")
 @Messages("PlantUMLWizardIterator_displayName=PlantUML from existing java sources")
 public final class PlantUMLWizardIterator implements WizardDescriptor.InstantiatingIterator<WizardDescriptor> {
 
