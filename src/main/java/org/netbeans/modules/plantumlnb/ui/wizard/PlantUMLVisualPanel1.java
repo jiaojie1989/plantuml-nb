@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import org.openide.util.NbBundle;
+import static org.netbeans.modules.plantumlnb.ui.wizard.Bundle.*;
 
 public final class PlantUMLVisualPanel1 extends JPanel {
     
@@ -188,15 +189,17 @@ public final class PlantUMLVisualPanel1 extends JPanel {
         generatedFileNameDisplayTextField.setText(plantumlFileNameTextField.getText() + ".puml");
     }//GEN-LAST:event_updateGeneratedFileNameDisplayLabel
 
+    @NbBundle.Messages("PlantUMLVisualPanel1.destinationDirectoryButton.text=Select Folder")
     private void destinationDirectoryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_destinationDirectoryButtonActionPerformed
-        String returnVal = showOpenDialog(NbBundle.getMessage(PlantUMLVisualPanel1.class, "PlantUMLVisualPanel1.destinationDirectoryButton.text"));
+        String returnVal = showOpenDialog(PlantUMLVisualPanel1_destinationDirectoryButton_text());
         if(returnVal != null) {
             destinationDirectoryTextField.setText(returnVal);
         }
     }//GEN-LAST:event_destinationDirectoryButtonActionPerformed
 
+    @NbBundle.Messages("PlantUMLVisualPanel1.packageSelectionButton.text=Select Package")
     private void packageSelectionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_packageSelectionButtonActionPerformed
-        String returnVal = showOpenDialog(NbBundle.getMessage(PlantUMLVisualPanel1.class, "PlantUMLVisualPanel1.packageSelectionButton.text"));
+        String returnVal = showOpenDialog(PlantUMLVisualPanel1_packageSelectionButton_text());
         if(returnVal != null) {
             packageSelectionInputDirectory.setText(returnVal);
         }

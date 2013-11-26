@@ -9,7 +9,6 @@ package org.netbeans.modules.plantumlnb.generate;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.text.ParseException;
-
 import net.sourceforge.mazix.cli.command.CommandLine;
 import net.sourceforge.mazix.cli.command.impl.CommandLineImpl;
 import net.sourceforge.mazix.cli.exception.CommandLineException;

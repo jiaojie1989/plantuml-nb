@@ -65,6 +65,7 @@ import org.openide.util.RequestProcessor;
 import org.openide.util.lookup.InstanceContent;
 import org.openide.windows.TopComponent;
 import org.openide.windows.WindowManager;
+import static org.netbeans.modules.plantumlnb.ui.Bundle.*;
 
 /**
  * Top component which displays something.
@@ -474,6 +475,7 @@ public final class PUMLTopComponent extends TopComponent implements Serializable
     private class PUMLFileChangeAdapter extends FileChangeAdapter {
 
         @Override
+        @Messages("ERR_DataObject=Can't find the data object")
         public void fileChanged(final FileEvent fe) {
             if (fe.getTime() > lastSaveTime) {
                 lastSaveTime = System.currentTimeMillis();
@@ -487,7 +489,7 @@ public final class PUMLTopComponent extends TopComponent implements Serializable
                             currentDataObject = DataObject.find(fe.getFile());
                             setNewContent(currentDataObject);
                         } catch (DataObjectNotFoundException ex) {
-                            Logger.getLogger(PUMLTopComponent.class.getName()).info(NbBundle.getMessage(PUMLTopComponent.class, "ERR_DataObject"));
+                            Logger.getLogger(PUMLTopComponent.class.getName()).info(ERR_DataObject());
                         }
                     }
                 });

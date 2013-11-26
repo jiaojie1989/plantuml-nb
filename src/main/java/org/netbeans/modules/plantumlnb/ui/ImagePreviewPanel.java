@@ -33,6 +33,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import org.openide.util.NbBundle;
+import static org.netbeans.modules.plantumlnb.ui.Bundle.*;
 
 /**
  * JPanel used for image preview in Navigator window
@@ -51,6 +52,7 @@ public class ImagePreviewPanel extends JPanel {
     }
 
     @Override
+    @NbBundle.Messages("ERR_Thumbnail=Thumbnail is not available")
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         if (image != null) {
@@ -76,7 +78,7 @@ public class ImagePreviewPanel extends JPanel {
         } else {
             g.setColor(Color.RED);
             FontMetrics fm = this.getFontMetrics(g.getFont()) ;
-            String errMessage = NbBundle.getMessage(ImagePreviewPanel.class, "ERR_Thumbnail");
+            String errMessage = ERR_Thumbnail();
             int stringWidth = fm.stringWidth(errMessage);
             BufferedImage defaultIcon = null;
             try {
