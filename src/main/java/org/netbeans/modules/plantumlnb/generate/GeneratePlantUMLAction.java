@@ -29,13 +29,13 @@ import org.openide.util.NbBundle.Messages;
  *
  * @author Venkat Ram Akkineni
  */
-@ActionID(
-        category = "Build",
-        id = "org.netbeans.modules.plantumlnb.GeneratePlantUMLAction")
-@ActionRegistration( displayName = "#CTL_OnJavaPackageAction")
-@ActionReferences({
-    @ActionReference(path = "Projects/package/Actions", position = 1400)
-})
+//@ActionID(
+//        category = "Build",
+//        id = "org.netbeans.modules.plantumlnb.GeneratePlantUMLAction")
+//@ActionRegistration( displayName = "#CTL_OnJavaPackageAction")
+//@ActionReferences({
+//    @ActionReference(path = "Projects/package/Actions", position = 1400)
+//})
 @Messages("CTL_OnJavaPackageAction=Generate Plant UML")
 public final class GeneratePlantUMLAction implements ActionListener {
     

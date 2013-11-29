@@ -20,6 +20,10 @@ Version 1.3
 + __[ Done ]__ Clean up RenderImageThread run method.
 + __[ Done ]__ Apply /home/venkat/SVGImagePreviewPanel patch.
 + __[ Done ]__ Try and remove getComponent method inside PUMLTopComponent class and use a single getPanelUI method.
++ Add support for PlantUML Dependency
+    - Create a new file wizard.
+        * If the user clicks ok with no directory selected, it should default to Main Project directory or the user home directory.
+        * If the user creates a new file by right clicking on a directory or a package then the wizard should be prefilled appropriately.
 
 + __[ Done ]__ Fix the below exception.
 

@@ -13,13 +13,16 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import org.netbeans.api.project.Project;
+import org.netbeans.api.project.ui.OpenProjects;
 import org.openide.util.NbBundle;
 import static org.netbeans.modules.plantumlnb.ui.wizard.Bundle.*;
+import org.openide.filesystems.FileUtil;
 
 public final class PlantUMLVisualPanel1 extends JPanel {
     
     private PlantUMLWizardPanel1 plantUMLWizardPanel1;
-    private final JFileChooser fileChooser = new JFileChooser();
+    private JFileChooser fileChooser = null;
     private static final Logger LOG = Logger.getLogger(PlantUMLVisualPanel1.class.getName());
 
     /**
@@ -58,8 +61,17 @@ public final class PlantUMLVisualPanel1 extends JPanel {
     }
 
     private String showOpenDialog(String dialogTitle) {
+        fileChooser = new JFileChooser(new File(System.getProperty("user.home")));
         fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         fileChooser.setDialogTitle(dialogTitle);
+        Project mainProject = OpenProjects.getDefault().getMainProject();
+        File currentDirectory = new File(System.getProperty("user.home"));
+        
+        if(mainProject != null) {
+            currentDirectory = FileUtil.toFile(mainProject.getProjectDirectory());
+        } 
+        
+        fileChooser.setCurrentDirectory(currentDirectory);        
         int returnVal = fileChooser.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();
@@ -105,7 +117,7 @@ public final class PlantUMLVisualPanel1 extends JPanel {
 
         plantumlFileNameTextField.setText(org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel1.class, "PlantUMLVisualPanel1.plantumlFileNameTextField.text")); // NOI18N
         plantumlFileNameTextField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
                 updateGeneratedFileNameDisplayLabel(evt);
             }
         });
@@ -168,8 +180,8 @@ public final class PlantUMLVisualPanel1 extends JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(generatedFileNameLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(generatedFileNameDisplayTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(generatedFileNameDisplayTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(destinationDirectoryLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -184,11 +196,7 @@ public final class PlantUMLVisualPanel1 extends JPanel {
                 .addContainerGap(55, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void updateGeneratedFileNameDisplayLabel(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_updateGeneratedFileNameDisplayLabel
-        generatedFileNameDisplayTextField.setText(plantumlFileNameTextField.getText() + ".puml");
-    }//GEN-LAST:event_updateGeneratedFileNameDisplayLabel
-
+   
     @NbBundle.Messages("PlantUMLVisualPanel1.destinationDirectoryButton.text=Select Folder")
     private void destinationDirectoryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_destinationDirectoryButtonActionPerformed
         String returnVal = showOpenDialog(PlantUMLVisualPanel1_destinationDirectoryButton_text());
@@ -204,6 +212,10 @@ public final class PlantUMLVisualPanel1 extends JPanel {
             packageSelectionInputDirectory.setText(returnVal);
         }
     }//GEN-LAST:event_packageSelectionButtonActionPerformed
+
+    private void updateGeneratedFileNameDisplayLabel(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_updateGeneratedFileNameDisplayLabel
+        generatedFileNameDisplayTextField.setText(plantumlFileNameTextField.getText() + ".puml");
+    }//GEN-LAST:event_updateGeneratedFileNameDisplayLabel
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton destinationDirectoryButton;

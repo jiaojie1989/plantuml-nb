@@ -6,16 +6,24 @@
 package org.netbeans.modules.plantumlnb.ui.wizard;
 
 import java.awt.Component;
+import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
 import javax.swing.JComponent;
 import javax.swing.event.ChangeListener;
+import net.sourceforge.mazix.cli.exception.CommandLineException;
 import org.netbeans.api.templates.TemplateRegistration;
+import org.netbeans.modules.plantumlnb.generate.PlantUMLDependencyService;
 import org.openide.WizardDescriptor;
+import org.openide.filesystems.FileObject;
+import org.openide.filesystems.FileUtil;
+import org.openide.util.Exceptions;
 import org.openide.util.NbBundle.Messages;
 
 // TODO define position attribute
@@ -33,7 +41,7 @@ public final class PlantUMLWizardIterator implements WizardDescriptor.Instantiat
 
     private List<WizardDescriptor.Panel<WizardDescriptor>> getPanels() {
         if (panels == null) {
-            panels = new ArrayList<WizardDescriptor.Panel<WizardDescriptor>>();
+            panels = new ArrayList<>();
             panels.add(new PlantUMLWizardPanel1());
             panels.add(new PlantUMLWizardPanel2());
             String[] steps = createSteps();
@@ -58,10 +66,24 @@ public final class PlantUMLWizardIterator implements WizardDescriptor.Instantiat
         return panels;
     }
 
+    // TODO return set of FileObject (or DataObject) you have created    
     @Override
     public Set<?> instantiate() throws IOException {
-        // TODO return set of FileObject (or DataObject) you have created
-        return Collections.emptySet();
+        System.out.println("This is called when finish is clicked.");
+        PlantUMLVisualPanel1 firstPanel = (PlantUMLVisualPanel1) panels.get(0).getComponent();
+        String destinationDirectory = firstPanel.getDestinationDirectoryTextField().getText();
+        String outputFileName = firstPanel.getPlantumlFileNameTextField().getText();
+        File outputFile = new File(destinationDirectory + "/" + outputFileName + ".puml");
+        File packageDirectory = new File(firstPanel.getPackageSelectionInputDirectory().getText());
+        try {
+            PlantUMLDependencyService.generate(packageDirectory, outputFile);
+        } catch (MalformedURLException | CommandLineException | ParseException ex) {
+            Exceptions.printStackTrace(ex);
+        }
+        
+        Set<FileObject> fileSet = new HashSet<>();
+        fileSet.add(FileUtil.toFileObject(outputFile));
+        return fileSet;
     }
 
     @Override

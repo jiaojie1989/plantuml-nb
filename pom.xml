@@ -12,8 +12,8 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <netbeans.platform.version>RELEASE73-BETA2</netbeans.platform.version>
-        <netbeans.run.params>-J-noverify -J-javaagent:e:/tools/jrebel/jrebel.jar -J-Drebel.log=true ${netbeans.run.params.ide}</netbeans.run.params>
-        <netbeans.run.params.ide/>  
+        <netbeans.run.params>${netbeans.run.params.ide}</netbeans.run.params>
+        <netbeans.run.params.ide>  </netbeans.run.params.ide>
     </properties>
 
     <repositories>
@@ -190,6 +190,12 @@
             <artifactId>org-netbeans-modules-projectapi</artifactId>
             <version>RELEASE73</version>
         </dependency>
+        <dependency>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-netbeans-modules-projectuiapi</artifactId>
+            <version>RELEASE74</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
 
     <build>
@@ -201,7 +207,6 @@
                 <extensions>true</extensions>
                 <configuration>
                     <useDefaultManifestFile>true</useDefaultManifestFile>
-                    <additionalArguments>${netbeans.run.params.ide}</additionalArguments>
                     <netbeansInstallation>/home/venkat/Programs/netbeans-7.4/</netbeansInstallation>
 <!--                        <nbmBuildDir>${project.build.directory}/netbeans_clusters/</nbmBuildDir>-->
                     <moduleType>normal</moduleType>

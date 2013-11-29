@@ -56,8 +56,8 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="generatedFileNameLabel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="generatedFileNameDisplayTextField" min="-2" pref="12" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="generatedFileNameDisplayTextField" min="-2" pref="18" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="destinationDirectoryLabel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -108,7 +108,7 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="updateGeneratedFileNameDisplayLabel"/>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="updateGeneratedFileNameDisplayLabel"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="destinationDirectoryTextField">
