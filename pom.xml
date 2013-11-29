@@ -13,7 +13,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <netbeans.platform.version>RELEASE73-BETA2</netbeans.platform.version>
         <netbeans.run.params>-J-noverify -J-javaagent:e:/tools/jrebel/jrebel.jar -J-Drebel.log=true ${netbeans.run.params.ide}</netbeans.run.params>
-        <netbeans.run.params.ide/>  
+        <netbeans.run.params.ide/>
     </properties>
 
     <repositories>
@@ -189,6 +189,18 @@
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-netbeans-modules-projectapi</artifactId>
             <version>RELEASE73</version>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.modules</groupId>
+            <artifactId>org-netbeans-modules-editor-mimelookup-impl</artifactId>
+            <version>RELEASE74</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-netbeans-modules-editor-completion</artifactId>
+            <version>RELEASE74</version>
+            <type>jar</type>
         </dependency>
     </dependencies>
 
