@@ -11,9 +11,9 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <netbeans.platform.version>RELEASE73-BETA2</netbeans.platform.version>
-        <netbeans.run.params>-J-noverify -J-javaagent:e:/tools/jrebel/jrebel.jar -J-Drebel.log=true ${netbeans.run.params.ide}</netbeans.run.params>
-        <netbeans.run.params.ide/>
+        <netbeans.run.params.ide>  </netbeans.run.params.ide>
+        <netbeans.platform.version>RELEASE74</netbeans.platform.version>
+        <netbeans.run.params>${netbeans.run.params.ide}</netbeans.run.params>        
     </properties>
 
     <repositories>
@@ -36,7 +36,7 @@
         <dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-netbeans-api-annotations-common</artifactId>
-            <version>RELEASE73-BETA2</version>
+            <version>${netbeans.platform.version}</version>
         </dependency>
         <dependency>
             <groupId>net.sourceforge.plantuml</groupId>
@@ -53,104 +53,104 @@
         <dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-openide-filesystems</artifactId>
-            <version>RELEASE73</version>
+            <version>${netbeans.platform.version}</version>
         </dependency>
         <dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-openide-loaders</artifactId>
-            <version>RELEASE73</version>
+            <version>${netbeans.platform.version}</version>
         </dependency>
         <dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-openide-nodes</artifactId>
-            <version>RELEASE73</version>
+            <version>${netbeans.platform.version}</version>
         </dependency>
         <dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-openide-util</artifactId>
-            <version>RELEASE73</version>
+            <version>${netbeans.platform.version}</version>
         </dependency>
         <dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-openide-util-lookup</artifactId>
-            <version>RELEASE73</version>
+            <version>${netbeans.platform.version}</version>
         </dependency>
         <dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-openide-text</artifactId>
-            <version>RELEASE73</version>
+            <version>${netbeans.platform.version}</version>
         </dependency>
         <dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-openide-windows</artifactId>
-            <version>RELEASE73</version>
+            <version>${netbeans.platform.version}</version>
         </dependency>
         <dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-netbeans-core-multiview</artifactId>
-            <version>RELEASE73</version>
+            <version>${netbeans.platform.version}</version>
         </dependency>
         <dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-openide-awt</artifactId>
-            <version>RELEASE73</version>
+            <version>${netbeans.platform.version}</version>
         </dependency>
         <dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-openide-dialogs</artifactId>
-            <version>RELEASE73</version>
+            <version>${netbeans.platform.version}</version>
         </dependency>
         <dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-netbeans-modules-settings</artifactId>
-            <version>RELEASE73</version>
+            <version>${netbeans.platform.version}</version>
         </dependency>
         <dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-netbeans-modules-lexer</artifactId>
-            <version>RELEASE73</version>
+            <version>${netbeans.platform.version}</version>
             <type>jar</type>
         </dependency>
         <dependency>
             <groupId>org.netbeans.modules</groupId>
             <artifactId>org-netbeans-modules-lexer-nbbridge</artifactId>
-            <version>RELEASE73</version>
+            <version>${netbeans.platform.version}</version>
             <type>jar</type>
         </dependency>
         <dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-netbeans-modules-csl-api</artifactId>
-            <version>RELEASE73</version>
+            <version>${netbeans.platform.version}</version>
             <type>jar</type>
         </dependency>
         <dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-netbeans-modules-parsing-api</artifactId>
-            <version>RELEASE73</version>
+            <version>${netbeans.platform.version}</version>
             <type>jar</type>
         </dependency>
         <dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-netbeans-modules-editor</artifactId>
-            <version>RELEASE73</version>
+            <version>${netbeans.platform.version}</version>
             <type>jar</type>
         </dependency>
         <dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-netbeans-modules-editor-codetemplates</artifactId>
-            <version>RELEASE73</version>
+            <version>${netbeans.platform.version}</version>
             <type>jar</type>
         </dependency>
         <dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-netbeans-modules-editor-errorstripe-api</artifactId>
-            <version>RELEASE73</version>
+            <version>${netbeans.platform.version}</version>
             <type>jar</type>
         </dependency>
         <dependency>
             <groupId>org.netbeans.modules</groupId>
             <artifactId>org-netbeans-modules-editor-errorstripe</artifactId>
-            <version>RELEASE73</version>
+            <version>${netbeans.platform.version}</version>
             <type>jar</type>
         </dependency>
         <dependency>
@@ -188,18 +188,24 @@
         <dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-netbeans-modules-projectapi</artifactId>
-            <version>RELEASE73</version>
+            <version>${netbeans.platform.version}</version>
         </dependency>
         <dependency>
             <groupId>org.netbeans.modules</groupId>
             <artifactId>org-netbeans-modules-editor-mimelookup-impl</artifactId>
-            <version>RELEASE74</version>
+            <version>${netbeans.platform.version}</version>
             <type>jar</type>
         </dependency>
         <dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-netbeans-modules-editor-completion</artifactId>
-            <version>RELEASE74</version>
+            <version>${netbeans.platform.version}</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-netbeans-modules-projectuiapi</artifactId>
+            <version>${netbeans.platform.version}</version>
             <type>jar</type>
         </dependency>
     </dependencies>
@@ -209,11 +215,12 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>nbm-maven-plugin</artifactId>
-                <version>3.11</version>
+                <version>3.11.1</version>
                 <extensions>true</extensions>
                 <configuration>
                     <useDefaultManifestFile>true</useDefaultManifestFile>
                     <netbeansInstallation>/home/venkat/Programs/netbeans-7.4/</netbeansInstallation>
+                    <!--<debugAdditionalArguments>true</debugAdditionalArguments>-->
 <!--                        <nbmBuildDir>${project.build.directory}/netbeans_clusters/</nbmBuildDir>-->
                     <moduleType>normal</moduleType>
                     <licenseName> Apache License, Version 2.0</licenseName>
