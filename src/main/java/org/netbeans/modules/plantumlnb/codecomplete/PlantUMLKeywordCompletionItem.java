@@ -46,8 +46,9 @@ public class PlantUMLKeywordCompletionItem implements CompletionItem {
             StyledDocument doc = (StyledDocument) component.getDocument();
             //Here we remove the characters starting at the start offset
             //and ending at the point where the caret is currently found:
-            doc.remove(dotOffset, caretOffset - dotOffset);
+//            doc.remove(dotOffset, caretOffset - dotOffset);
             doc.insertString(dotOffset, text, null);
+            //This statement will close the code completion box:
             Completion.get().hideAll();
         } catch (BadLocationException ex) {
             Exceptions.printStackTrace(ex);

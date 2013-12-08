@@ -44,8 +44,7 @@ public class PlantUMLKeywordsTest {
      * Test of find method, of class PlantUMLKeywords.
      */
     @Test
-    public void testFind_String() {
-        System.out.println("find");
+    public void testFind_String() {        
         String input = "";
         List<String> expResult = null;
         List<String> result = PlantUMLKeywords.find("@");

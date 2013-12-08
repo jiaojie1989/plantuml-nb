@@ -68,8 +68,7 @@ public final class PlantUMLWizardIterator implements WizardDescriptor.Instantiat
 
     // TODO return set of FileObject (or DataObject) you have created    
     @Override
-    public Set<?> instantiate() throws IOException {
-        System.out.println("This is called when finish is clicked.");
+    public Set<?> instantiate() throws IOException {        
         PlantUMLVisualPanel1 firstPanel = (PlantUMLVisualPanel1) panels.get(0).getComponent();
         String destinationDirectory = firstPanel.getDestinationDirectoryTextField().getText();
         String outputFileName = firstPanel.getPlantumlFileNameTextField().getText();

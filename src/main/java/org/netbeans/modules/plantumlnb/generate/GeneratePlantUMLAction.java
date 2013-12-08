@@ -53,8 +53,7 @@ public final class GeneratePlantUMLAction implements ActionListener {
         
         for(ListIterator contextIter = context.listIterator(); contextIter.hasNext();){
             DataFolder dataFolder = (DataFolder) contextIter.next();
-//            System.out.println("URI: " + dataFolder.getPrimaryFile().toURI());
-//            System.out.println("URL: " + dataFolder.getPrimaryFile().toURL());
+
             File dir = FileUtil.toFile(dataFolder.getPrimaryFile());
             
 //            File[] javaFiles = dir.listFiles(new FilenameFilter() { 
@@ -66,11 +65,6 @@ public final class GeneratePlantUMLAction implements ActionListener {
 //            });
 //            
 //            
-//            System.out.println("Java files count: " + javaFiles.length);
-//            
-//            for(File javaFile : javaFiles) {
-//                System.out.println("Java File: " + javaFile.getAbsolutePath());
-//            }
 //            
             javaFiles.addAll(list(dir));
             try {
@@ -94,8 +88,7 @@ public final class GeneratePlantUMLAction implements ActionListener {
             }
         } else {
             if(file.getName().endsWith(".java")) {
-                javaFiles.add(file);
-                System.out.println(file.getName());
+                javaFiles.add(file);                
             }
         }
         return javaFiles;

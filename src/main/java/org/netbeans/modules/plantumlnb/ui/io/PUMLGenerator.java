@@ -78,7 +78,6 @@ public class PUMLGenerator {
         ByteArrayInputStream pumlImageInputStream = null;
         
         try {
-//                    System.out.println("\tset file object: " + fo.asText());
             SourceStringReader pumlReader = new SourceStringReader(fo.asText());
 //            String name = fo.getName();
 //            name = "file://" + fo.getParent().getPath() + "/" + name + ".png";

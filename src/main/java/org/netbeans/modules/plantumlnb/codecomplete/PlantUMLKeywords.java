@@ -155,63 +155,35 @@ public class PlantUMLKeywords {
         return allMatches;
     }
 
-    public static CompletionResultSet find(CompletionResultSet crs, int caretOffset, Document document) {
+    public static CompletionResultSet find(CompletionResultSet crs, Document document, int caretOffset) {
 
-        String filter = null;
-        int startOffset = caretOffset - 1;
-
-        try {
-            final StyledDocument bDoc = (StyledDocument) document;
-            final int lineStartOffset = getRowFirstNonWhite(bDoc, caretOffset);
-            final char[] line = bDoc.getText(lineStartOffset, caretOffset - lineStartOffset).toCharArray();
-            final int whiteOffset = indexOfWhite(line);
-            filter = new String(line, whiteOffset + 1, line.length - whiteOffset - 1);
-            if (whiteOffset > 0) {
-                startOffset = lineStartOffset + whiteOffset + 1;
-            } else {
-                startOffset = lineStartOffset;
-            }
-        } catch (BadLocationException ex) {
-            Exceptions.printStackTrace(ex);
-        }
+//        String filter = null;
+//        int startOffset = caretOffset - 1;
+//
+//        try {
+//            final StyledDocument bDoc = (StyledDocument) document;
+//            final int lineStartOffset = getRowFirstNonWhite(bDoc, caretOffset);
+//            final char[] line = bDoc.getText(lineStartOffset, caretOffset - lineStartOffset).toCharArray();
+//            final int whiteOffset = indexOfWhite(line);
+//            filter = new String(line, whiteOffset + 1, line.length - whiteOffset - 1);
+//            if (whiteOffset > 0) {
+//                startOffset = lineStartOffset + whiteOffset + 1;
+//            } else {
+//                startOffset = lineStartOffset;
+//            }
+//        } catch (BadLocationException ex) {
+//            Exceptions.printStackTrace(ex);
+//        }
 
         for (String keyword : keywords) {
-            if (keyword.contains(filter)) {
-                crs.addItem(new PlantUMLKeywordCompletionItem(keyword, startOffset, caretOffset));
-            }
+//            if (keyword.contains(filter)) {
+                crs.addItem(new PlantUMLKeywordCompletionItem(keyword, 0, 0));
+//            }
         }
 
         return crs;
     }
 
-    static int getRowFirstNonWhite(StyledDocument doc, int offset) throws BadLocationException {
-        Element lineElement = doc.getParagraphElement(offset);
-        int start = lineElement.getStartOffset();
-        while (start + 1 < lineElement.getEndOffset()) {
-            try {
-                if (doc.getText(start, 1).charAt(0) != ' ') {
-                    break;
-                }
-            } catch (BadLocationException ex) {
-                throw (BadLocationException) new BadLocationException(
-                        "calling getText(" + start + ", " + (start + 1)
-                        + ") on doc of length: " + doc.getLength(), start
-                ).initCause(ex);
-            }
-            start++;
-        }
-        return start;
-    }
-
-    static int indexOfWhite(char[] line) {
-        int i = line.length;
-        while (--i > -1) {
-            final char c = line[i];
-            if (Character.isWhitespace(c)) {
-                return i;
-            }
-        }
-        return -1;
-    }
+    
 
 }

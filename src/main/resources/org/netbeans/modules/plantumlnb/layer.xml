@@ -15,6 +15,9 @@
                         </folder>
                     </folder>
                 </folder>
+<!--                <folder name="CodeTemplates">
+                    <file name="org-netbeans-modules-htmleditor-snippets.xml" url="org-netbeans-modules-htmleditor-snippets.xml"/>
+                </folder>-->
             </folder>
         </folder>
     </folder>

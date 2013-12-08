@@ -35,6 +35,7 @@ import java.util.concurrent.Callable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.SwingUtilities;
 import org.netbeans.core.api.multiview.MultiViews;
 import org.netbeans.core.spi.multiview.MultiViewElement;
 import org.netbeans.core.spi.multiview.text.MultiViewEditorElement;
@@ -183,14 +184,22 @@ public class pumlDataObject extends MultiDataObject implements FileChangeListene
     @Override
     public void fileChanged(FileEvent fe) {
         
-        DataObject.Registry registries = DataObject.getRegistry();
-        PUMLTopComponent tc = PUMLTopComponent.getInstance();
+        final DataObject.Registry registries = DataObject.getRegistry();
+        
+        SwingUtilities.invokeLater(new Runnable(){
 
-        DataObject[] objects = registries.getModified();
+            @Override
+            public void run() {
+                PUMLTopComponent tc = PUMLTopComponent.getInstance();
 
-        tc.setCurrentDataObject(this);
+                DataObject[] objects = registries.getModified();
 
-        tc.setNewContent(tc.getPumlGenerator().generateSVG(fileObject));
+                tc.setCurrentDataObject(pumlDataObject.this);
+
+                tc.setNewContent(tc.getPumlGenerator().generateSVG(fileObject));
+            }
+            
+        });        
         
     }
 
