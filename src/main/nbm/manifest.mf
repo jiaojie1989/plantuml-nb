@@ -15,5 +15,29 @@ OpenIDE-Module-Long-Description: Create and edit UML files using
         <li>Rotate ( CTRL + Right Click ) </li> 
         <li>Reset ( CTRL + SHIFT + Right Click ) </li> 
     </ul>
+  <h3>Version 1.3</h3>   
+  <p><strong>What's new</strong></p>
+    <ul>
+        <li>Fixed mouse event handlers. You can now use mouse and keyboard combination to perform zoo / rotate / pan.</li>  
+        <li>Improved Lexer grammer.</li>
+        <li>Added a help hover button below to show the keyboard shortcuts.</li>
+        <li>Added code template support..</li>
+        <li>Showing document name on Preview panel titlebar.</li>
+        <li>Upgraded plantuml version to 7985.</li>
+        <li>Add support for PlantUML Dependency. Users can now create plantuml files from existing java files. Go to New File ></li>
+    </ul>
+  
+  <p><strong>Known Issues</strong></p>
+    <ul>
+      <li>Scrollbar on the canvas is not working properly.
+      <ul>
+        <li><strong>WorkAround:</strong> Use pan in the mean time.</li>
+      </ul>
+    </ul>  
+  
+  <p><strong>NOTE</strong></p>
+    <ul>
+      <li>I have not researched into all possible code templates. If you, as a plantuml user, find code snippets that could be included inside the plugin, please share these with me via a sourceforge issue, so that everybody can benefit from your contribution.  </li>
+    </ul>
     
 OpenIDE-Module-Specification-Version: 1.3

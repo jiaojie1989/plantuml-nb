@@ -2,6 +2,28 @@
 
 Netbeans plugin that wraps PlantUML to provide its functionality from within Netbeans.
 
+### Version 1.3
+
+    ### What's new
+
+        * Fixed mouse event handlers. You can now use mouse and keyboard combination to perform zoo / rotate / pan.
+        * Improved Lexer grammer.
+        * Added a help hover button below to show the keyboard shortcuts.
+        * Added code template support..
+        * Showing document name on Preview panel titlebar.
+        * Upgraded plantuml version to 7985.
+        * Add support for PlantUML Dependency. Users can now create plantuml files from existing java files. Go to New File >
+
+    ### Known Issues
+
+    * Scrollbar on the canvas is not working properly.
+        - WorkAround: Use pan in the mean time.
+
+    ### NOTE
+
+    * I have not researched into all possible code templates. If you, as a plantuml user, find code snippets that could be included inside the plugin, please share these with me via a sourceforge issue, so that everybody can benefit from your contribution.
+
+
 ### Version 1.2.1
     * Fixed the zoom persistence issue.
 

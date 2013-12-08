@@ -8,6 +8,7 @@ Version 1.3
 + Provide auto-complete for keywords.
 + Provide code complete where ever possible.
 + __[ Done ]__ Add a help hover button below to show the keyboard shortcuts.
++ __[ Done ]__ Add code template support.
 + Add a loading gif.
 + __[ Done ]__ Show document name on Preview panel.
 + Test it on windows before release.
