@@ -34,9 +34,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.JFileChooser;
-import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-import org.netbeans.modules.plantumlnb.DataObjectAccess;
 import org.netbeans.modules.plantumlnb.pumlDataObject;
 import org.netbeans.modules.plantumlnb.ui.FileFormatable;
 import org.netbeans.modules.plantumlnb.ui.filefilter.EPSFileFilter;
@@ -44,41 +42,68 @@ import org.netbeans.modules.plantumlnb.ui.filefilter.PNGFileFilter;
 import org.netbeans.modules.plantumlnb.ui.filefilter.SVGFileFilter;
 import org.netbeans.modules.plantumlnb.ui.io.PUMLGenerator;
 import org.netbeans.modules.plantumlnb.ui.pumlVisualElement;
+import org.openide.awt.ActionID;
+import org.openide.awt.ActionReference;
+import org.openide.awt.ActionReferences;
+import org.openide.awt.ActionRegistration;
 import org.openide.awt.NotificationDisplayer;
 import org.openide.awt.StatusDisplayer;
 import org.openide.util.Exceptions;
 import org.openide.util.ImageUtilities;
+import org.openide.util.NbBundle;
 
 /**
  *
  * @author venkat
  */
+@ActionID(
+        category = "PUML",
+        id = "org.netbeans.modules.plantumlnb.ui.actions.ExportAction"
+)
+@ActionRegistration(
+        displayName = "#CTL_ExportAction"
+)
+@ActionReferences({
+    @ActionReference(path = "Loaders/text/x-puml/Actions", position = 0),
+    @ActionReference(path = "Editors/text/x-puml/Popup", position = 400)
+})
+@NbBundle.Messages("CTL_ExportAction=Export as image...")
 public class ExportAction implements ActionListener {
     
-    private JPanel panel;
     private PUMLGenerator pumlGenerator = new PUMLGenerator();
-    private DataObjectAccess doa;
     private static final Logger LOG = Logger.getLogger(ExportAction.class.getName());
     
         
-    public ExportAction(JPanel panel, DataObjectAccess doa) {
-        this.panel = panel;
-        this.doa = doa;
+    private final pumlDataObject context;
+
+    public ExportAction(pumlDataObject context) {
+        this.context = context;
     }
 
+    public ExportAction() {
+        this.context = null;
+    }
+    
     @Override
     public void actionPerformed(ActionEvent e) {
+        pumlDataObject dataObject;
+        if (null != context) {
+            dataObject = context;
+        } else {
+            //fallback
+            dataObject = pumlVisualElement.getActivePUMLEditorDataObject();
+        }
         final JFileChooser fc = new JFileChooser();     
         fc.setMultiSelectionEnabled(false);
         fc.setAcceptAllFileFilterUsed(false);
         fc.addChoosableFileFilter(new SVGFileFilter());
         fc.addChoosableFileFilter(new PNGFileFilter());
         fc.addChoosableFileFilter(new EPSFileFilter());
-        final pumlDataObject dataObject = pumlVisualElement.getActivePUMLEditorDataObject();
         
-        int returnVal = fc.showSaveDialog(panel);        
+        int returnVal = fc.showSaveDialog(null);        
         if(returnVal == JFileChooser.APPROVE_OPTION) {
                         
+            final pumlDataObject finalDataObject=dataObject;
             SwingUtilities.invokeLater(new Runnable() {
 
                 @Override
@@ -90,7 +115,7 @@ public class ExportAction implements ActionListener {
                         }                                                
                         PUMLGenerator pumlGenerator = new PUMLGenerator();
                         FileFormatable f = ((FileFormatable) fc.getFileFilter());
-                        pumlGenerator.generateFile(dataObject.getPrimaryFile(), f.getFileFormat(), file);
+                        pumlGenerator.generateFile(finalDataObject.getPrimaryFile(), f.getFileFormat(), file);
                         
                         final String filePath = file.getAbsolutePath();
                         String notificationText = "File " + filePath+ " successully exported";

@@ -118,7 +118,7 @@ public class Toolbar {
             logger.log(Level.SEVERE, e.getLocalizedMessage()); 
         }
 
-        button.addActionListener(new ExportAction(panel, dataObjectAccess));
+        button.addActionListener(new ExportAction());
 
         return button;
     }
