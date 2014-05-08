@@ -23,44 +23,16 @@
  */
 package org.netbeans.modules.plantumlnb.ui.filefilter;
 
-import java.io.File;
-import javax.swing.filechooser.FileFilter;
 import net.sourceforge.plantuml.FileFormat;
-import org.netbeans.modules.plantumlnb.ui.FileFormatable;
 import org.netbeans.modules.plantumlnb.ui.ImageUtils;
 
 /**
  *
  * @author venkat
  */
-public class PNGFileFilter extends FileFilter implements FileFormatable {
+public class PNGFileFilter extends AbstractImageFileFilter {
 
-    @Override
-    public boolean accept(File f) {
-        if (f.isDirectory()) {
-            return true;
-        }
- 
-        String extension = ImageUtils.getExtension(f);
-        if (extension != null) {
-            if(extension.equals(ImageUtils.png)) {
-                    return true;
-            } else {
-                return false;
-            }
-        }
- 
-        return false;
+    public PNGFileFilter() {
+        super(ImageUtils.png, FileFormat.PNG);
     }
-
-    @Override
-    public String getDescription() {
-        return ImageUtils.png;
-    }
-
-    @Override
-    public FileFormat getFileFormat() {
-        return FileFormat.PNG;
-    }
-    
 }
