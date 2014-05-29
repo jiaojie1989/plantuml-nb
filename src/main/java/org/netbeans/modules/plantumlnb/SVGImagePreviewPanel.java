@@ -41,12 +41,15 @@ import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.text.NumberFormat;
 import java.text.ParseException;
+import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import org.apache.batik.dom.svg.SAXSVGDocumentFactory;
 import org.apache.batik.swing.gvt.GVTTreeRendererEvent;
 import org.apache.batik.swing.gvt.GVTTreeRendererListener;
@@ -54,6 +57,7 @@ import org.apache.batik.util.XMLResourceDescriptor;
 import org.netbeans.api.annotations.common.NonNull;
 import org.netbeans.modules.plantumlnb.ui.PUMLJSVGCanvas;
 import org.openide.util.Exceptions;
+import org.openide.util.Lookup;
 import org.openide.util.Utilities;
 import org.w3c.dom.svg.SVGDocument;
 
@@ -92,6 +96,13 @@ public class SVGImagePreviewPanel extends JPanel {
         canvas.setEnableResetTransformInteractor(true);
         canvas.setEnableRotateInteractor(true);
         canvas.setEnableZoomInteractor(true);
+        
+        //add popup menu
+        List<? extends Action> actionsForPath = Utilities.actionsForPath("Actions/PlantUML/ImageView/Popupmenu");
+        if (!actionsForPath.isEmpty()) {
+            Action[] actions = actionsForPath.toArray(new Action[actionsForPath.size()]);
+            canvas.setComponentPopupMenu(Utilities.actionsToPopup(actions, Lookup.EMPTY));
+        }
         add("Center", canvas);        
     }          
     
