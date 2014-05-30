@@ -116,7 +116,7 @@ public class PUMLGenerator {
             // Write the first image to "os"
             String desc = reader.generateImage(os, new FileFormatOption(FileFormat.SVG));
             svg = new String(os.toByteArray());
-        } catch (IOException ex) {
+        } catch (Throwable ex) {
             Exceptions.printStackTrace(ex);
         }
         

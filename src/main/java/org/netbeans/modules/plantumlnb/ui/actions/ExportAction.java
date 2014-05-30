@@ -30,6 +30,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
@@ -39,6 +41,7 @@ import javax.swing.SwingUtilities;
 import org.netbeans.modules.plantumlnb.DataObjectAccess;
 import org.netbeans.modules.plantumlnb.pumlDataObject;
 import org.netbeans.modules.plantumlnb.ui.FileFormatable;
+import org.netbeans.modules.plantumlnb.ui.filefilter.AbstractImageFileFilter;
 import org.netbeans.modules.plantumlnb.ui.filefilter.EPSFileFilter;
 import org.netbeans.modules.plantumlnb.ui.filefilter.PNGFileFilter;
 import org.netbeans.modules.plantumlnb.ui.filefilter.SVGFileFilter;
@@ -46,21 +49,22 @@ import org.netbeans.modules.plantumlnb.ui.io.PUMLGenerator;
 import org.netbeans.modules.plantumlnb.ui.pumlVisualElement;
 import org.openide.awt.NotificationDisplayer;
 import org.openide.awt.StatusDisplayer;
+import org.openide.filesystems.FileUtil;
 import org.openide.util.Exceptions;
 import org.openide.util.ImageUtilities;
 
 /**
  *
  * @author venkat
+ * @author markiewb
  */
 public class ExportAction implements ActionListener {
-    
-    private JPanel panel;
-    private PUMLGenerator pumlGenerator = new PUMLGenerator();
-    private DataObjectAccess doa;
+
+    private final JPanel panel;
+    private final DataObjectAccess doa;
     private static final Logger LOG = Logger.getLogger(ExportAction.class.getName());
-    
-        
+    private static final Collection<AbstractImageFileFilter> availableFilters = Arrays.asList(new SVGFileFilter(), new PNGFileFilter(), new EPSFileFilter());
+
     public ExportAction(JPanel panel, DataObjectAccess doa) {
         this.panel = panel;
         this.doa = doa;
@@ -68,67 +72,90 @@ public class ExportAction implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        final JFileChooser fc = new JFileChooser();     
+        final pumlDataObject dataObject = pumlVisualElement.getActivePUMLEditorDataObject();
+        if (null == dataObject) {
+            return;
+        }
+        if (null == dataObject.getPrimaryFile()) {
+            return;
+        }
+        final File sourceFile = FileUtil.toFile(dataObject.getPrimaryFile());
+
+        final JFileChooser fc = new JFileChooser();
         fc.setMultiSelectionEnabled(false);
         fc.setAcceptAllFileFilterUsed(false);
-        fc.addChoosableFileFilter(new SVGFileFilter());
-        fc.addChoosableFileFilter(new PNGFileFilter());
-        fc.addChoosableFileFilter(new EPSFileFilter());
-        final pumlDataObject dataObject = pumlVisualElement.getActivePUMLEditorDataObject();
-        
-        int returnVal = fc.showSaveDialog(panel);        
+        //open in directory of current *.puml file
+        fc.setCurrentDirectory(sourceFile);
+        for (AbstractImageFileFilter filter : availableFilters) {
+            fc.addChoosableFileFilter(filter);
+        }
+
+        int returnVal = fc.showSaveDialog(panel);
         if(returnVal == JFileChooser.APPROVE_OPTION) {
-                        
+
             SwingUtilities.invokeLater(new Runnable() {
 
                 @Override
                 public void run() {
                     try {
-                        File file = fc.getSelectedFile().getCanonicalFile();
-                        if(file.getName().indexOf(".") == -1) {
-                            file = new File(file.getCanonicalPath() + "." + fc.getFileFilter().getDescription());
-                        }                                                
-                        PUMLGenerator pumlGenerator = new PUMLGenerator();
-                        FileFormatable f = ((FileFormatable) fc.getFileFilter());
-                        pumlGenerator.generateFile(dataObject.getPrimaryFile(), f.getFileFormat(), file);
-                        
-                        final String filePath = file.getAbsolutePath();
-                        String notificationText = "File " + filePath+ " successully exported";
+                        File outputFile = fc.getSelectedFile().getCanonicalFile();
+                        outputFile = addImageExtToFileNameIfNeeded(outputFile, fc.getFileFilter().getDescription());
+                        FileFormatable f = getFileFormatableForFile(outputFile, availableFilters);
+                        new PUMLGenerator().generateFile(dataObject.getPrimaryFile(), f.getFileFormat(), outputFile);
+
+                        final String filePath = outputFile.getAbsolutePath();
+                        String notificationText = "File " + filePath + " successully exported";
                         StatusDisplayer.getDefault().setStatusText("File saved to " + notificationText);
                         Icon successIcon = ImageUtilities.loadImageIcon("org/netbeans/modules/plantumlnb/ui/actions/check.png", true);
-                        NotificationDisplayer.getDefault().notify("File Export", successIcon, notificationText, new ActionListener(){
-
-                            @Override
-                            public void actionPerformed(ActionEvent e) {                                
-                                try {
-                                    Desktop.getDesktop().browse(new URI("file://" + filePath));
-                                } catch ( IOException | URISyntaxException ex) {
-                                    LOG.log(Level.INFO, ex.getMessage());
-                                }
-                            }
-                        
-                        });
-                       
-                    } catch (IOException ex) {
-                        Exceptions.printStackTrace(ex);
-                        String failNotificationText = "File saved failed. ";
-                        StatusDisplayer.getDefault().setStatusText(failNotificationText);
-                        Icon failIcon = ImageUtilities.loadImageIcon("org/netbeans/modules/plantumlnb/ui/actions/close_delete.png", true);
-                        NotificationDisplayer.getDefault().notify("File Export", failIcon, failNotificationText, new ActionListener(){
+                        NotificationDisplayer.getDefault().notify("File Export", successIcon, notificationText, new ActionListener() {
 
                             @Override
                             public void actionPerformed(ActionEvent e) {
-                                
+                                try {
+                                    Desktop.getDesktop().browse(new URI("file://" + filePath));
+                                } catch (IOException | URISyntaxException ex) {
+                                    LOG.log(Level.INFO, ex.getMessage());
+                                }
                             }
-                        
+
                         });
+
+                    } catch (Throwable ex) {
+                        Exceptions.printStackTrace(ex);
+                        String failNotificationText = "File " + sourceFile.getAbsolutePath() + " saved failed. ";
+                        StatusDisplayer.getDefault().setStatusText(failNotificationText);
+                        Icon failIcon = ImageUtilities.loadImageIcon("org/netbeans/modules/plantumlnb/ui/actions/close_delete.png", true);
+                        NotificationDisplayer.getDefault().notify("File Export", failIcon, failNotificationText, null);
                     }
-                    
+
                 }
-            
+
             });
-            
+
         }
     }
-    
+
+    private File addImageExtToFileNameIfNeeded(File file, String ext) throws IOException {
+        //add default file extension, if no extension is provided
+        if (!file.getName().contains(".")) {
+            file = new File(file.getCanonicalPath() + "." + ext);
+        }
+        return file;
+    }
+
+    /**
+     * Gets the format for the given file.
+     *
+     * @param file
+     * @param availableFilters
+     * @return
+     */
+    private FileFormatable getFileFormatableForFile(File file, Collection<AbstractImageFileFilter> availableFilters) {
+        for (AbstractImageFileFilter filter : availableFilters) {
+            if (filter.accept(file)) {
+                return filter;
+            }
+        }
+        return null;
+    }
 }
