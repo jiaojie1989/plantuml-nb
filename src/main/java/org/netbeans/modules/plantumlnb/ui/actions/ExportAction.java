@@ -56,7 +56,6 @@ import org.openide.util.ImageUtilities;
 public class ExportAction implements ActionListener {
     
     private JPanel panel;
-    private PUMLGenerator pumlGenerator = new PUMLGenerator();
     private DataObjectAccess doa;
     private static final Logger LOG = Logger.getLogger(ExportAction.class.getName());
     
@@ -88,9 +87,9 @@ public class ExportAction implements ActionListener {
                         if(file.getName().indexOf(".") == -1) {
                             file = new File(file.getCanonicalPath() + "." + fc.getFileFilter().getDescription());
                         }                                                
-                        PUMLGenerator pumlGenerator = new PUMLGenerator();
+                        PUMLGenerator pumlGenerator = PUMLGenerator.getInstance();
                         FileFormatable f = ((FileFormatable) fc.getFileFilter());
-                        pumlGenerator.generateFile(dataObject.getPrimaryFile(), f.getFileFormat(), file);
+                        pumlGenerator.generateIntoFile(dataObject.getPrimaryFile(), file, f.getFileFormat());
                         
                         final String filePath = file.getAbsolutePath();
                         String notificationText = "File " + filePath+ " successully exported";
