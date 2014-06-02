@@ -60,45 +60,24 @@ public class PUMLGenerator {
     private PUMLGenerator() {
     }
 
-            // Write the first image to "os"
-            String desc = reader.generateImage(os, new FileFormatOption(FileFormat.SVG));
-            svg = new String(os.toByteArray());
-        } catch (Throwable ex) {
-            Exceptions.printStackTrace(ex);
-        }
-        
-        return svg;       
-    }
-    
-    /**
-     * As the name suggests reads the supplied inputStream and returns a string
-     * representation of the contents of the inputStream.
-     * 
-     * @param is
-     * @return 
-     */
-    public String stringify(InputStream is) {        
-        InputStreamReader isr = new InputStreamReader(is);
-        StringBuilder sb=new StringBuilder();
-        BufferedReader br = new BufferedReader(isr);
-        String read = null;
+    public String generateIntoString(FileObject inputFile, FileFormat fileFormat) {
+        ByteArrayOutputStream os = new ByteArrayOutputStream();
         try {
 
             final boolean manual = NbPreferences.forModule(PlantUMLPanel.class).getBoolean(PlantUMLPanel.DOT_MANUAL_MODE, false);
-            if (manual){
+            if (manual) {
                 String path = NbPreferences.forModule(PlantUMLPanel.class).get(DOT_MANUAL_MODE_DOT_PATH, "");
                 System.setProperty("GRAPHVIZ_DOT", path);
-            }else{
+            } else {
                 System.clearProperty("GRAPHVIZ_DOT");
             }
-            
+
             SourceStringReader reader = new SourceStringReader(inputFile.asText());
             // Write the first image to "os"
             String desc = reader.generateImage(os, new FileFormatOption(fileFormat));
             return new String(os.toByteArray());
         } catch (IOException ex) {
             logger.log(Level.WARNING, ex.getMessage());
-
         } finally {
             try {
                 os.close();
@@ -106,11 +85,11 @@ public class PUMLGenerator {
                 logger.log(Level.WARNING, ex.getMessage());
             }
         }
-
         return null;
     }
 
-    public void generateIntoFile(FileObject inputFile, File outputFile, FileFormat fileFormat) {
+
+public void generateIntoFile(FileObject inputFile, File outputFile, FileFormat fileFormat) {
         String content = generateIntoString(inputFile, fileFormat);
         FileWriter fw = null;
         BufferedWriter bw = null;

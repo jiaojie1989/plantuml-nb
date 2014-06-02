@@ -77,7 +77,7 @@ import org.openide.util.NbBundle;
 @NbBundle.Messages("CTL_ExportAction=Export as image...")
 public class ExportAction implements ActionListener {
 
-    private PUMLGenerator pumlGenerator = new PUMLGenerator();
+    private PUMLGenerator pumlGenerator = PUMLGenerator.getInstance();
     
     private static final Logger LOG = Logger.getLogger(ExportAction.class.getName());
     private static final Collection<AbstractImageFileFilter> availableFilters = Arrays.asList(new SVGFileFilter(), new PNGFileFilter(), new EPSFileFilter());
@@ -119,7 +119,7 @@ public class ExportAction implements ActionListener {
                         File outputFile = fc.getSelectedFile().getCanonicalFile();
                         outputFile = addImageExtToFileNameIfNeeded(outputFile, fc.getFileFilter().getDescription());
                         FileFormatable f = getFileFormatableForFile(outputFile, availableFilters);
-                        new PUMLGenerator().generateFile(finalDataObject.getPrimaryFile(), f.getFileFormat(), outputFile);
+                        PUMLGenerator.getInstance().generateIntoFile(dataObject.getPrimaryFile(), outputFile, f.getFileFormat());
 
                         final String filePath = outputFile.getAbsolutePath();
                         String notificationText = "File " + filePath + " successully exported";

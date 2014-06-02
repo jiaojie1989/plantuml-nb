@@ -213,6 +213,11 @@
             <artifactId>org-openide-explorer</artifactId>
             <version>${netbeans.platform.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-netbeans-modules-options-api</artifactId>
+            <version>${netbeans.platform.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
