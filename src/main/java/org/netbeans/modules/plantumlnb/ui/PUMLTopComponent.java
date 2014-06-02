@@ -44,10 +44,12 @@ import javax.swing.JToolBar;
 import javax.swing.SwingUtilities;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import net.sourceforge.plantuml.FileFormat;
 import org.netbeans.api.settings.ConvertAsProperties;
 import org.netbeans.modules.plantumlnb.RenderImageThread;
 import org.netbeans.modules.plantumlnb.SVGImagePreviewPanel;
 import org.netbeans.modules.plantumlnb.pumlDataObject;
+import static org.netbeans.modules.plantumlnb.ui.Bundle.*;
 import org.netbeans.modules.plantumlnb.ui.io.PUMLGenerator;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
@@ -69,7 +71,6 @@ import org.openide.util.lookup.InstanceContent;
 import org.openide.util.lookup.ProxyLookup;
 import org.openide.windows.TopComponent;
 import org.openide.windows.WindowManager;
-import static org.netbeans.modules.plantumlnb.ui.Bundle.*;
 
 /**
  * Top component which displays something.
@@ -127,7 +128,6 @@ public final class PUMLTopComponent extends TopComponent implements Serializable
     private long lastSaveTime = -1;
     private static final RequestProcessor WORKER = new RequestProcessor(PUMLTopComponent.class.getName());
     
-    private PUMLGenerator pumlGenerator = new PUMLGenerator();
     private DataObject.Registry registries = DataObject.getRegistry();    
     private TopComponent.Registry topComponentRegistry = TopComponent.getRegistry();
     private PUMLFileChangedListener pumlFileChangedListener = new PUMLFileChangedListener();
@@ -372,7 +372,7 @@ public final class PUMLTopComponent extends TopComponent implements Serializable
                 Iterator iter = fss.iterator();
                 while (iter.hasNext()) {
                     FileObject fo = (FileObject) iter.next();
-                    setNewContent(pumlGenerator.generateSVG(fo));
+                    setNewContent(PUMLGenerator.getInstance().generateIntoString(fo, FileFormat.SVG));
                 }
 
                 if (panelUI == null) {
@@ -530,7 +530,7 @@ public final class PUMLTopComponent extends TopComponent implements Serializable
                 while (iter.hasNext()) {
                     FileObject fo = (FileObject) iter.next();
                     if(fo.getExt().toLowerCase().equals("puml")){
-                        setNewContent(pumlGenerator.generateSVG(fo));
+                        setNewContent(PUMLGenerator.getInstance().generateIntoString(fo, FileFormat.SVG));
                     } else {
                         setDefaultContent();
                     }
@@ -579,55 +579,6 @@ public final class PUMLTopComponent extends TopComponent implements Serializable
         return (PUMLTopComponent) WindowManager.getDefault().findTopComponent("PUMLTopComponent");
     }
         
-
-//    private void modify(){
-//        if(getLookup().lookup(PUMLSavable.class) == null){
-//            instanceContent.add(new PUMLSavable());
-//        }
-//    }
-    
-    
-//    private class PUMLSavable extends AbstractSavable {
-//        
-//        PUMLSavable(){
-//            register();
-//        }
-//
-//        @Override
-//        protected String findDisplayName() {            
-//            return "Plant UML"; 
-//        }
-//
-//        @Override
-//        protected void handleSave() throws IOException {
-//            tc().instanceContent.remove(this);
-//            unregister();
-//        }
-//        
-//        PUMLTopComponent tc() {
-//            return PUMLTopComponent.this;
-//        }
-//
-//        @Override
-//        public boolean equals(Object o) {
-//            if (o instanceof PUMLSavable) {
-//                PUMLSavable m = (PUMLSavable) o;
-//                return tc() == m.tc();
-//            }
-//            return false;
-//        }
-//
-//        @Override
-//        public int hashCode() {
-//            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//        }
-//        
-//    }
-
-    public PUMLGenerator getPumlGenerator() {
-        return pumlGenerator;
-    }
-    
     public void setCurrentDataObject(DataObject currentDataObject) {
         this.currentDataObject = currentDataObject;
     }

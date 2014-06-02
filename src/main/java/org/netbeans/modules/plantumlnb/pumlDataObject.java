@@ -36,10 +36,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.SwingUtilities;
+import net.sourceforge.plantuml.FileFormat;
 import org.netbeans.core.api.multiview.MultiViews;
 import org.netbeans.core.spi.multiview.MultiViewElement;
 import org.netbeans.core.spi.multiview.text.MultiViewEditorElement;
 import org.netbeans.modules.plantumlnb.ui.PUMLTopComponent;
+import org.netbeans.modules.plantumlnb.ui.io.PUMLGenerator;
 import org.netbeans.modules.plantumlnb.ui.pumlVisualElement;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
@@ -196,7 +198,7 @@ public class pumlDataObject extends MultiDataObject implements FileChangeListene
 
                 tc.setCurrentDataObject(pumlDataObject.this);
 
-                tc.setNewContent(tc.getPumlGenerator().generateSVG(fileObject));
+                tc.setNewContent(PUMLGenerator.getInstance().generateIntoString(fileObject, FileFormat.SVG));
             }
             
         });        
