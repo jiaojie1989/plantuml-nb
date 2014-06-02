@@ -71,7 +71,7 @@ import org.openide.util.NbBundle;
         displayName = "#CTL_ExportAction"
 )
 @ActionReferences({
-    @ActionReference(path = "Loaders/text/x-puml/Actions", position = 0),
+    @ActionReference(path = "Loaders/text/x-puml/Actions", position = 110),
     @ActionReference(path = "Editors/text/x-puml/Popup", position = 400)
 })
 @NbBundle.Messages("CTL_ExportAction=Export as image...")
