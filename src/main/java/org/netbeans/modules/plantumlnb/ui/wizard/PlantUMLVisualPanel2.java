@@ -43,6 +43,7 @@ public final class PlantUMLVisualPanel2 extends JPanel {
         jTextField2.setText(org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel2.class, "PlantUMLVisualPanel2.jTextField2.text")); // NOI18N
 
         org.openide.awt.Mnemonics.setLocalizedText(helpTextLabel, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel2.class, "PlantUMLVisualPanel2.helpTextLabel.text")); // NOI18N
+        helpTextLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -58,7 +59,7 @@ public final class PlantUMLVisualPanel2 extends JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(includePatternsLabel)
                             .addComponent(excludePatternsLabel))
-                        .addGap(0, 215, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -73,8 +74,8 @@ public final class PlantUMLVisualPanel2 extends JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(helpTextLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addComponent(helpTextLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
