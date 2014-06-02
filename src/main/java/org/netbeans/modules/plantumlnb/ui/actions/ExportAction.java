@@ -36,7 +36,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.JFileChooser;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import org.netbeans.modules.plantumlnb.DataObjectAccess;
 import org.netbeans.modules.plantumlnb.pumlDataObject;
 import org.netbeans.modules.plantumlnb.ui.FileFormatable;
 import org.netbeans.modules.plantumlnb.ui.filefilter.AbstractImageFileFilter;
@@ -75,15 +77,12 @@ import org.openide.util.NbBundle;
 @NbBundle.Messages("CTL_ExportAction=Export as image...")
 public class ExportAction implements ActionListener {
 
-    private final JPanel panel;
-    private final DataObjectAccess doa;
+    private PUMLGenerator pumlGenerator = new PUMLGenerator();
+    
     private static final Logger LOG = Logger.getLogger(ExportAction.class.getName());
     private static final Collection<AbstractImageFileFilter> availableFilters = Arrays.asList(new SVGFileFilter(), new PNGFileFilter(), new EPSFileFilter());
 
-    public ExportAction(JPanel panel, DataObjectAccess doa) {
-        this.panel = panel;
-        this.doa = doa;
-    }
+    private final pumlDataObject context;
 
     public ExportAction() {
         this.context = null;
@@ -109,9 +108,9 @@ public class ExportAction implements ActionListener {
             fc.addChoosableFileFilter(filter);
         }
 
-        int returnVal = fc.showSaveDialog(panel);
+        int returnVal = fc.showSaveDialog(null);
         if(returnVal == JFileChooser.APPROVE_OPTION) {
-
+            final pumlDataObject finalDataObject = dataObject;
             SwingUtilities.invokeLater(new Runnable() {
 
                 @Override
@@ -120,7 +119,7 @@ public class ExportAction implements ActionListener {
                         File outputFile = fc.getSelectedFile().getCanonicalFile();
                         outputFile = addImageExtToFileNameIfNeeded(outputFile, fc.getFileFilter().getDescription());
                         FileFormatable f = getFileFormatableForFile(outputFile, availableFilters);
-                        new PUMLGenerator().generateFile(dataObject.getPrimaryFile(), f.getFileFormat(), outputFile);
+                        new PUMLGenerator().generateFile(finalDataObject.getPrimaryFile(), f.getFileFormat(), outputFile);
 
                         final String filePath = outputFile.getAbsolutePath();
                         String notificationText = "File " + filePath + " successully exported";
