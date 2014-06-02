@@ -131,6 +131,8 @@ public final class pumlVisualElement extends MultiViewEditorElement {
             }
         }
         
+        if(showingTC == null) return null;
+        
         pumlDataObject dataObject = showingTC.getLookup().lookup(pumlDataObject.class);
         
         return dataObject == null ? null : (pumlDataObject) dataObject;
