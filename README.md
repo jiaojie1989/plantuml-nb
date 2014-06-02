@@ -2,6 +2,19 @@
 
 Netbeans plugin that wraps PlantUML to provide its functionality from within Netbeans.
 
+### Version 1.4
+
+Most of the changes being released this time were contributed by Benno Markiewicz.So, many thanks to him. 
+( http://netbeans.dzone.com/meet-netbeans-contributor-benno-markiewicz )
+
+    ### What's new
+
+        * You can now select the UML preview window and Ctrl-C to copy the image to clipboard.
+        * Export image action is now available as a context menu on the file. 
+        * Options window has been added that now allows specification of a dot.exe file.
+        * Charset has been hardcoded to UTF-8 for now.     
+    
+
 ### Version 1.3
 
     ### What's new
