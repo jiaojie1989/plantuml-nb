@@ -72,6 +72,10 @@ public class PUMLGenerator {
                 System.clearProperty("GRAPHVIZ_DOT");
             }
 
+            /**
+             * TODO: This particular constructor seems to use UTF-8 no matter which charset is passed as an argument.
+             * Replace this to use user specified charset in the future.
+             */
             SourceStringReader reader = new SourceStringReader(inputFile.asText(), null);
             // Write the first image to "os"
             String desc = reader.generateImage(os, new FileFormatOption(fileFormat));
