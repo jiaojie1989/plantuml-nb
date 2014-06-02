@@ -72,7 +72,7 @@ public class PUMLGenerator {
                 System.clearProperty("GRAPHVIZ_DOT");
             }
 
-            SourceStringReader reader = new SourceStringReader(inputFile.asText());
+            SourceStringReader reader = new SourceStringReader(inputFile.asText(), null);
             // Write the first image to "os"
             String desc = reader.generateImage(os, new FileFormatOption(fileFormat));
             return new String(os.toByteArray());
