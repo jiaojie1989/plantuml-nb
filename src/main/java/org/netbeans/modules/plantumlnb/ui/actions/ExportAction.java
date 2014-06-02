@@ -36,9 +36,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.JFileChooser;
-import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-import org.netbeans.modules.plantumlnb.DataObjectAccess;
 import org.netbeans.modules.plantumlnb.pumlDataObject;
 import org.netbeans.modules.plantumlnb.ui.FileFormatable;
 import org.netbeans.modules.plantumlnb.ui.filefilter.AbstractImageFileFilter;
@@ -47,17 +45,34 @@ import org.netbeans.modules.plantumlnb.ui.filefilter.PNGFileFilter;
 import org.netbeans.modules.plantumlnb.ui.filefilter.SVGFileFilter;
 import org.netbeans.modules.plantumlnb.ui.io.PUMLGenerator;
 import org.netbeans.modules.plantumlnb.ui.pumlVisualElement;
+import org.openide.awt.ActionID;
+import org.openide.awt.ActionReference;
+import org.openide.awt.ActionReferences;
+import org.openide.awt.ActionRegistration;
 import org.openide.awt.NotificationDisplayer;
 import org.openide.awt.StatusDisplayer;
 import org.openide.filesystems.FileUtil;
 import org.openide.util.Exceptions;
 import org.openide.util.ImageUtilities;
+import org.openide.util.NbBundle;
 
 /**
  *
  * @author venkat
  * @author markiewb
  */
+@ActionID(
+        category = "PUML",
+        id = "org.netbeans.modules.plantumlnb.ui.actions.ExportAction"
+)
+@ActionRegistration(
+        displayName = "#CTL_ExportAction"
+)
+@ActionReferences({
+    @ActionReference(path = "Loaders/text/x-puml/Actions", position = 0),
+    @ActionReference(path = "Editors/text/x-puml/Popup", position = 400)
+})
+@NbBundle.Messages("CTL_ExportAction=Export as image...")
 public class ExportAction implements ActionListener {
 
     private final JPanel panel;
@@ -70,6 +85,10 @@ public class ExportAction implements ActionListener {
         this.doa = doa;
     }
 
+    public ExportAction() {
+        this.context = null;
+    }
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         final pumlDataObject dataObject = pumlVisualElement.getActivePUMLEditorDataObject();
