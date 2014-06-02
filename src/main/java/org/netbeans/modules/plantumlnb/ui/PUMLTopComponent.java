@@ -36,6 +36,7 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.ActionMap;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -50,6 +51,8 @@ import org.netbeans.modules.plantumlnb.pumlDataObject;
 import org.netbeans.modules.plantumlnb.ui.io.PUMLGenerator;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
+import org.openide.explorer.ExplorerManager;
+import org.openide.explorer.ExplorerUtils;
 import org.openide.filesystems.FileChangeAdapter;
 import org.openide.filesystems.FileChangeListener;
 import org.openide.filesystems.FileEvent;
@@ -59,10 +62,11 @@ import org.openide.loaders.DataObjectNotFoundException;
 import org.openide.util.Lookup;
 import org.openide.util.LookupEvent;
 import org.openide.util.LookupListener;
-import org.openide.util.NbBundle;
 import org.openide.util.NbBundle.Messages;
 import org.openide.util.RequestProcessor;
+import org.openide.util.lookup.AbstractLookup;
 import org.openide.util.lookup.InstanceContent;
+import org.openide.util.lookup.ProxyLookup;
 import org.openide.windows.TopComponent;
 import org.openide.windows.WindowManager;
 import static org.netbeans.modules.plantumlnb.ui.Bundle.*;
@@ -85,7 +89,7 @@ import static org.netbeans.modules.plantumlnb.ui.Bundle.*;
     "CTL_PUMLTopComponent=PlantUML",
     "HINT_PUMLTopComponent=This is a PlantUML window"
 })
-public final class PUMLTopComponent extends TopComponent implements Serializable {
+public final class PUMLTopComponent extends TopComponent implements Serializable, ExplorerManager.Provider {
     
     private static final long serialVersionUID = -99094945997905090L;
 
@@ -138,14 +142,23 @@ public final class PUMLTopComponent extends TopComponent implements Serializable
     private static NBImageIcon currentNBImageIcon = null;
     
     private static PUMLTopComponent self = null;
+    private final ExplorerManager em=new ExplorerManager();
     
     
-    private PUMLTopComponent() {        
+    private PUMLTopComponent() {
         initComponents();
         addCustomComponents();
         setName(Bundle.CTL_PUMLTopComponent());
         setToolTipText(Bundle.HINT_PUMLTopComponent());
-//        associateLookup(new AbstractLookup(instanceContent));
+
+        //connect standard CTRL-C action (in menu/toolbar) to own action
+        ActionMap actionMap = getActionMap();
+        actionMap.put("copy-to-clipboard",
+                org.openide.awt.Actions.forID("PlantUML", "org.netbeans.modules.plantumlnb.ui.actions.CopyToClipboard"));
+        associateLookup(new ProxyLookup(
+                ExplorerUtils.createLookup(em, actionMap),
+                new AbstractLookup(instanceContent)));
+
         WindowManager.getDefault().findMode("properties").dockInto(this);
     }
 
@@ -456,7 +469,11 @@ public final class PUMLTopComponent extends TopComponent implements Serializable
 //        
 //        return pumltc;
 //    }
-    
+
+    @Override
+    public ExplorerManager getExplorerManager() {
+        return em;
+    }
     
     /**
      * Listens to changes of context and triggers proper action
