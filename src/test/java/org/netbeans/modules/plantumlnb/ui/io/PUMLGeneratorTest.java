@@ -14,6 +14,7 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openide.util.Exceptions;
 
@@ -91,30 +92,4 @@ public class PUMLGeneratorTest {
             Exceptions.printStackTrace(ex);
         }
     }
-      
-    @Test
-    public void smokeTestATXTGeneration() {
-        ByteArrayOutputStream os = new ByteArrayOutputStream();
-        SourceStringReader reader = new SourceStringReader(sequenceUML);
-        try {
-            // Write the first image to "os"
-            String desc = reader.generateImage(os, new FileFormatOption(FileFormat.ATXT));
-        } catch (IOException ex) {
-            Exceptions.printStackTrace(ex);
-        }
-    }
-    
-    @Test
-    public void smokeTestUTXTGeneration() {
-        ByteArrayOutputStream os = new ByteArrayOutputStream();
-        SourceStringReader reader = new SourceStringReader(sequenceUML);
-        try {
-            // Write the first image to "os"
-            String desc = reader.generateImage(os, new FileFormatOption(FileFormat.UTXT));
-        } catch (IOException ex) {
-            Exceptions.printStackTrace(ex);
-        }
-    }
-       
-    
 }

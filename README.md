@@ -2,6 +2,10 @@
 
 Netbeans plugin that wraps PlantUML to provide its functionality from within Netbeans.
 
+### Version 1.5
+
+* Upgraded plantuml to 8015 from 7985.
+
 ### Version 1.4
 
 Most of the changes being released this time were contributed by Benno Markiewicz.So, many thanks to him. 
