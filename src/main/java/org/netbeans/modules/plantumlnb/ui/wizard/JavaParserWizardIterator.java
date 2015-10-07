@@ -6,34 +6,28 @@
 package org.netbeans.modules.plantumlnb.ui.wizard;
 
 import java.awt.Component;
-import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.text.ParseException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
 import javax.swing.JComponent;
 import javax.swing.event.ChangeListener;
-import net.sourceforge.plantumldependency.commoncli.exception.CommandLineException;
-//import net.sourceforge.mazix.cli.exception.CommandLineException;
 import org.netbeans.api.templates.TemplateRegistration;
-import org.netbeans.modules.plantumlnb.generate.PlantUMLDependencyService;
 import org.openide.WizardDescriptor;
-import org.openide.filesystems.FileObject;
-import org.openide.filesystems.FileUtil;
-import org.openide.util.Exceptions;
 import org.openide.util.NbBundle.Messages;
+import static ru.nosov.parserjavatoplant.ParserJavaToPlant.parseJavaPrj;
 
 // TODO define position attribute
-@TemplateRegistration(folder = "PlantUML", 
-        displayName = "#PlantUMLWizardIterator_displayName", 
-        iconBase = "org/netbeans/modules/plantumlnb/icon.png", 
-        description = "PlantUMLFromExistingSourcesDescription.html")
-@Messages("PlantUMLWizardIterator_displayName=PlantUML from existing java sources")
-public final class PlantUMLWizardIterator implements WizardDescriptor.InstantiatingIterator<WizardDescriptor> {
+@TemplateRegistration(folder = "PlantUML",
+        displayName = "#JavaParserWizardIterator_displayName",
+        iconBase = "org/netbeans/modules/plantumlnb/icon.png",
+        description = "javaParser.html")
+@Messages("JavaParserWizardIterator_displayName=Create Class diagram for project.")
+public final class JavaParserWizardIterator implements WizardDescriptor.InstantiatingIterator<WizardDescriptor> {
 
     private int index;
 
@@ -42,9 +36,8 @@ public final class PlantUMLWizardIterator implements WizardDescriptor.Instantiat
 
     private List<WizardDescriptor.Panel<WizardDescriptor>> getPanels() {
         if (panels == null) {
-            panels = new ArrayList<>();
-            panels.add(new PlantUMLWizardPanel1());
-            panels.add(new PlantUMLWizardPanel2());
+            panels = new ArrayList<WizardDescriptor.Panel<WizardDescriptor>>();
+            panels.add(new JavaParserWizardPanel1());
             String[] steps = createSteps();
             for (int i = 0; i < panels.size(); i++) {
                 Component c = panels.get(i).getComponent();
@@ -67,23 +60,19 @@ public final class PlantUMLWizardIterator implements WizardDescriptor.Instantiat
         return panels;
     }
 
-    // TODO return set of FileObject (or DataObject) you have created    
     @Override
-    public Set<?> instantiate() throws IOException {        
-        PlantUMLVisualPanel1 firstPanel = (PlantUMLVisualPanel1) panels.get(0).getComponent();
-        String destinationDirectory = firstPanel.getDestinationDirectoryTextField().getText();
-        String outputFileName = firstPanel.getPlantumlFileNameTextField().getText();
-        File outputFile = new File(destinationDirectory + "/" + outputFileName + ".puml");
-        File packageDirectory = new File(firstPanel.getPackageSelectionInputDirectory().getText());
-        try {
-            PlantUMLDependencyService.generate(packageDirectory, outputFile);
-        } catch (MalformedURLException | CommandLineException | ParseException ex) {
-            Exceptions.printStackTrace(ex);
-        }
-        
-        Set<FileObject> fileSet = new HashSet<>();
-        fileSet.add(FileUtil.toFileObject(outputFile));
-        return fileSet;
+    public Set<?> instantiate() throws IOException {
+        /**
+         * initialize - Только когда выбрали Wizard
+         * instantiate - Только когда нажали кнопку "Готово"
+         * uninitialize - Всегда когда прекращает работать Wizard (можно узнать
+         * как была закончена работа Готово или Отмена)
+         */
+        System.out.println("instantiate:"+wizard.getTitle());
+        JavaParserVisualPanel1 firstPanel = (JavaParserVisualPanel1) panels.get(0).getComponent();
+        Path p = Paths.get(firstPanel.getPrjSrc().getText());
+        parseJavaPrj(p);
+        return Collections.emptySet();
     }
 
     @Override

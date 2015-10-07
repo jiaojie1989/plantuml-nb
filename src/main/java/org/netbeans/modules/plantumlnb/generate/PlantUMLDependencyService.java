@@ -9,12 +9,18 @@ package org.netbeans.modules.plantumlnb.generate;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.text.ParseException;
-import net.sourceforge.mazix.cli.command.CommandLine;
-import net.sourceforge.mazix.cli.command.impl.CommandLineImpl;
-import net.sourceforge.mazix.cli.exception.CommandLineException;
-import net.sourceforge.mazix.cli.program.JavaProgram;
-import net.sourceforge.mazix.cli.program.execution.JavaProgramExecution;
-import net.sourceforge.plantuml.dependency.main.program.PlantUMLDependencyProgram;
+import net.sourceforge.plantumldependency.cli.main.program.PlantUMLDependencyProgram;
+//import net.sourceforge.mazix.cli.command.CommandLine;
+//import net.sourceforge.mazix.cli.command.impl.CommandLineImpl;
+//import net.sourceforge.mazix.cli.exception.CommandLineException;
+//import net.sourceforge.mazix.cli.program.JavaProgram;
+//import net.sourceforge.mazix.cli.program.execution.JavaProgramExecution;
+//import net.sourceforge.plantuml.dependency.main.program.PlantUMLDependencyProgram;
+import net.sourceforge.plantumldependency.commoncli.command.CommandLine;
+import net.sourceforge.plantumldependency.commoncli.command.impl.CommandLineImpl;
+import net.sourceforge.plantumldependency.commoncli.exception.CommandLineException;
+import net.sourceforge.plantumldependency.commoncli.program.JavaProgram;
+import net.sourceforge.plantumldependency.commoncli.program.execution.JavaProgramExecution;
 
 /**
  *
