@@ -11,15 +11,20 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Properties;
 import java.util.Set;
 import javax.swing.JComponent;
 import javax.swing.event.ChangeListener;
 import org.netbeans.api.templates.TemplateRegistration;
 import org.openide.WizardDescriptor;
 import org.openide.util.NbBundle.Messages;
-import static ru.nosov.parserjavatoplant.ParserJavaToPlant.parseJavaPrj;
+import static net.sf.parserjavatoplant.ParserJavaToPlant.parseJavaPrj;
+import net.sf.parserjavatoplant.types.TypeProperties;
+import org.openide.filesystems.FileObject;
+import org.openide.filesystems.FileUtil;
 
 // TODO define position attribute
 @TemplateRegistration(folder = "PlantUML",
@@ -68,11 +73,40 @@ public final class JavaParserWizardIterator implements WizardDescriptor.Instanti
          * uninitialize - Всегда когда прекращает работать Wizard (можно узнать
          * как была закончена работа Готово или Отмена)
          */
-        System.out.println("instantiate:"+wizard.getTitle());
+        
         JavaParserVisualPanel1 firstPanel = (JavaParserVisualPanel1) panels.get(0).getComponent();
-        Path p = Paths.get(firstPanel.getPrjSrc().getText());
-        parseJavaPrj(p);
-        return Collections.emptySet();
+        Properties prop = TypeProperties.createDefaultProperties();
+        prop.setProperty(TypeProperties.IMPLEMENTS.name(), 
+                            Boolean.toString(firstPanel.isImplements()));
+        prop.setProperty(TypeProperties.EXTENDS.name(), 
+                            Boolean.toString(firstPanel.isExtends()));
+        prop.setProperty(TypeProperties.FIELDS_PRIVATE.name(), 
+                            Boolean.toString(firstPanel.isFieldsPrivate()));
+        prop.setProperty(TypeProperties.FIELDS_PUBLIC.name(), 
+                            Boolean.toString(firstPanel.isFieldsPublic()));
+        prop.setProperty(TypeProperties.FIELDS_STATIC.name(), 
+                            Boolean.toString(firstPanel.isFieldsStatic()));
+        prop.setProperty(TypeProperties.FIELDS_FINAL.name(), 
+                            Boolean.toString(firstPanel.isFieldsFinal()));
+        prop.setProperty(TypeProperties.FIELDS_PROTECTED.name(), 
+                            Boolean.toString(firstPanel.isFieldsProtected()));
+        prop.setProperty(TypeProperties.METHODS_PRIVATE.name(), 
+                            Boolean.toString(firstPanel.isMethodsPrivate()));
+        prop.setProperty(TypeProperties.METHODS_PUBLIC.name(), 
+                            Boolean.toString(firstPanel.isMethodsPublic()));
+        prop.setProperty(TypeProperties.METHODS_STATIC.name(), 
+                            Boolean.toString(firstPanel.isMethodsStatic()));
+        prop.setProperty(TypeProperties.METHODS_FINAL.name(), 
+                            Boolean.toString(firstPanel.isMethodsFinal()));
+        prop.setProperty(TypeProperties.METHODS_PROTECTED.name(), 
+                            Boolean.toString(firstPanel.isMethodsProtected()));
+        List<Path> paths = parseJavaPrj(firstPanel.getPathSrc(), prop);
+        
+        Set<FileObject> fileSet = new HashSet<>();
+        if (paths == null) return fileSet;
+        for (Path path : paths)
+            fileSet.add(FileUtil.toFileObject(path.toFile()));
+        return fileSet;
     }
 
     @Override

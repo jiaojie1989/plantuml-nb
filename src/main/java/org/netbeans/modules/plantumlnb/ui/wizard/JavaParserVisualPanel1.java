@@ -5,12 +5,17 @@
  */
 package org.netbeans.modules.plantumlnb.ui.wizard;
 
+import java.nio.file.Path;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import org.netbeans.api.project.Project;
 import static org.openide.util.NbBundle.getMessage;
 
 public final class JavaParserVisualPanel1 extends JPanel {
 
+    private Project project;
+    private Path pathSRC;
+    
     /**
      * Creates new form JavaParserVisualPanel1
      */
@@ -18,7 +23,7 @@ public final class JavaParserVisualPanel1 extends JPanel {
         initComponents();
         
         // Future panel
-        panelUML.setVisible(false);
+        panelHide.setVisible(false);
     }
 
     @Override
@@ -44,16 +49,26 @@ public final class JavaParserVisualPanel1 extends JPanel {
         textFieldPrjSrc = new javax.swing.JTextField();
         labelPrjSrc = new javax.swing.JLabel();
         panelUML = new javax.swing.JPanel();
-        labelPackages = new javax.swing.JLabel();
-        checkBoxPublic = new javax.swing.JCheckBox();
-        checkBoxPrivate = new javax.swing.JCheckBox();
+        checkBoxFieldsPublic = new javax.swing.JCheckBox();
+        checkBoxFieldsPrivate = new javax.swing.JCheckBox();
         labelClasses = new javax.swing.JLabel();
-        checkBoxStatic = new javax.swing.JCheckBox();
+        checkBoxFieldsStatic = new javax.swing.JCheckBox();
         checkBoxImplements = new javax.swing.JCheckBox();
         labelFields = new javax.swing.JLabel();
         checkBoxExtends = new javax.swing.JCheckBox();
-        checkBoxImport = new javax.swing.JCheckBox();
+        labelMethods = new javax.swing.JLabel();
+        checkBoxMethodsStatic = new javax.swing.JCheckBox();
+        checkBoxMethodsPrivate = new javax.swing.JCheckBox();
+        checkBoxMethodsPublic = new javax.swing.JCheckBox();
+        labelSettings4Classes = new javax.swing.JLabel();
+        checkBoxFieldsFinal = new javax.swing.JCheckBox();
+        checkBoxFieldsProtected = new javax.swing.JCheckBox();
+        checkBoxMethodsFinal = new javax.swing.JCheckBox();
+        checkBoxMethodsProtected = new javax.swing.JCheckBox();
+        panelHide = new javax.swing.JPanel();
+        labelPackages = new javax.swing.JLabel();
         checkBoxPackage = new javax.swing.JCheckBox();
+        checkBoxImport = new javax.swing.JCheckBox();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -114,54 +129,48 @@ public final class JavaParserVisualPanel1 extends JPanel {
 
         panelUML.setLayout(new java.awt.GridBagLayout());
 
-        org.openide.awt.Mnemonics.setLocalizedText(labelPackages, org.openide.util.NbBundle.getMessage(JavaParserVisualPanel1.class, "JavaParserVisualPanel1.labelPackages.text")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        panelUML.add(labelPackages, gridBagConstraints);
-
-        checkBoxPublic.setSelected(true);
-        org.openide.awt.Mnemonics.setLocalizedText(checkBoxPublic, org.openide.util.NbBundle.getMessage(JavaParserVisualPanel1.class, "JavaParserVisualPanel1.checkBoxPublic.text")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        panelUML.add(checkBoxPublic, gridBagConstraints);
-
-        checkBoxPrivate.setSelected(true);
-        org.openide.awt.Mnemonics.setLocalizedText(checkBoxPrivate, org.openide.util.NbBundle.getMessage(JavaParserVisualPanel1.class, "JavaParserVisualPanel1.checkBoxPrivate.text")); // NOI18N
+        checkBoxFieldsPublic.setSelected(true);
+        org.openide.awt.Mnemonics.setLocalizedText(checkBoxFieldsPublic, org.openide.util.NbBundle.getMessage(JavaParserVisualPanel1.class, "JavaParserVisualPanel1.checkBoxFieldsPublic.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridy = 6;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        panelUML.add(checkBoxPrivate, gridBagConstraints);
+        panelUML.add(checkBoxFieldsPublic, gridBagConstraints);
+
+        checkBoxFieldsPrivate.setSelected(true);
+        org.openide.awt.Mnemonics.setLocalizedText(checkBoxFieldsPrivate, org.openide.util.NbBundle.getMessage(JavaParserVisualPanel1.class, "JavaParserVisualPanel1.checkBoxFieldsPrivate.text")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        panelUML.add(checkBoxFieldsPrivate, gridBagConstraints);
 
         org.openide.awt.Mnemonics.setLocalizedText(labelClasses, org.openide.util.NbBundle.getMessage(JavaParserVisualPanel1.class, "JavaParserVisualPanel1.labelClasses.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         panelUML.add(labelClasses, gridBagConstraints);
 
-        checkBoxStatic.setSelected(true);
-        org.openide.awt.Mnemonics.setLocalizedText(checkBoxStatic, org.openide.util.NbBundle.getMessage(JavaParserVisualPanel1.class, "JavaParserVisualPanel1.checkBoxStatic.text")); // NOI18N
+        checkBoxFieldsStatic.setSelected(true);
+        org.openide.awt.Mnemonics.setLocalizedText(checkBoxFieldsStatic, org.openide.util.NbBundle.getMessage(JavaParserVisualPanel1.class, "JavaParserVisualPanel1.checkBoxFieldsStatic.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 6;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        panelUML.add(checkBoxStatic, gridBagConstraints);
+        panelUML.add(checkBoxFieldsStatic, gridBagConstraints);
 
         checkBoxImplements.setSelected(true);
         org.openide.awt.Mnemonics.setLocalizedText(checkBoxImplements, org.openide.util.NbBundle.getMessage(JavaParserVisualPanel1.class, "JavaParserVisualPanel1.checkBoxImplements.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         panelUML.add(checkBoxImplements, gridBagConstraints);
@@ -169,7 +178,8 @@ public final class JavaParserVisualPanel1 extends JPanel {
         org.openide.awt.Mnemonics.setLocalizedText(labelFields, org.openide.util.NbBundle.getMessage(JavaParserVisualPanel1.class, "JavaParserVisualPanel1.labelFields.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         panelUML.add(labelFields, gridBagConstraints);
@@ -178,27 +188,90 @@ public final class JavaParserVisualPanel1 extends JPanel {
         org.openide.awt.Mnemonics.setLocalizedText(checkBoxExtends, org.openide.util.NbBundle.getMessage(JavaParserVisualPanel1.class, "JavaParserVisualPanel1.checkBoxExtends.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         panelUML.add(checkBoxExtends, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(checkBoxImport, org.openide.util.NbBundle.getMessage(JavaParserVisualPanel1.class, "JavaParserVisualPanel1.checkBoxImport.text")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        panelUML.add(checkBoxImport, gridBagConstraints);
-
-        checkBoxPackage.setSelected(true);
-        org.openide.awt.Mnemonics.setLocalizedText(checkBoxPackage, org.openide.util.NbBundle.getMessage(JavaParserVisualPanel1.class, "JavaParserVisualPanel1.checkBoxPackage.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(labelMethods, org.openide.util.NbBundle.getMessage(JavaParserVisualPanel1.class, "JavaParserVisualPanel1.labelMethods.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridwidth = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        panelUML.add(checkBoxPackage, gridBagConstraints);
+        panelUML.add(labelMethods, gridBagConstraints);
+
+        checkBoxMethodsStatic.setSelected(true);
+        org.openide.awt.Mnemonics.setLocalizedText(checkBoxMethodsStatic, org.openide.util.NbBundle.getMessage(JavaParserVisualPanel1.class, "JavaParserVisualPanel1.checkBoxMethodsStatic.text")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        panelUML.add(checkBoxMethodsStatic, gridBagConstraints);
+
+        checkBoxMethodsPrivate.setSelected(true);
+        org.openide.awt.Mnemonics.setLocalizedText(checkBoxMethodsPrivate, org.openide.util.NbBundle.getMessage(JavaParserVisualPanel1.class, "JavaParserVisualPanel1.checkBoxMethodsPrivate.text")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        panelUML.add(checkBoxMethodsPrivate, gridBagConstraints);
+
+        checkBoxMethodsPublic.setSelected(true);
+        org.openide.awt.Mnemonics.setLocalizedText(checkBoxMethodsPublic, org.openide.util.NbBundle.getMessage(JavaParserVisualPanel1.class, "JavaParserVisualPanel1.checkBoxMethodsPublic.text")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        panelUML.add(checkBoxMethodsPublic, gridBagConstraints);
+
+        org.openide.awt.Mnemonics.setLocalizedText(labelSettings4Classes, org.openide.util.NbBundle.getMessage(JavaParserVisualPanel1.class, "JavaParserVisualPanel1.labelSettings4Classes.text")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        panelUML.add(labelSettings4Classes, gridBagConstraints);
+
+        checkBoxFieldsFinal.setSelected(true);
+        org.openide.awt.Mnemonics.setLocalizedText(checkBoxFieldsFinal, org.openide.util.NbBundle.getMessage(JavaParserVisualPanel1.class, "JavaParserVisualPanel1.checkBoxFieldsFinal.text")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        panelUML.add(checkBoxFieldsFinal, gridBagConstraints);
+
+        checkBoxFieldsProtected.setSelected(true);
+        org.openide.awt.Mnemonics.setLocalizedText(checkBoxFieldsProtected, org.openide.util.NbBundle.getMessage(JavaParserVisualPanel1.class, "JavaParserVisualPanel1.checkBoxFieldsProtected.text")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        panelUML.add(checkBoxFieldsProtected, gridBagConstraints);
+
+        checkBoxMethodsFinal.setSelected(true);
+        org.openide.awt.Mnemonics.setLocalizedText(checkBoxMethodsFinal, org.openide.util.NbBundle.getMessage(JavaParserVisualPanel1.class, "JavaParserVisualPanel1.checkBoxMethodsFinal.text")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        panelUML.add(checkBoxMethodsFinal, gridBagConstraints);
+
+        checkBoxMethodsProtected.setSelected(true);
+        org.openide.awt.Mnemonics.setLocalizedText(checkBoxMethodsProtected, org.openide.util.NbBundle.getMessage(JavaParserVisualPanel1.class, "JavaParserVisualPanel1.checkBoxMethodsProtected.text")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        panelUML.add(checkBoxMethodsProtected, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -208,37 +281,99 @@ public final class JavaParserVisualPanel1 extends JPanel {
         gridBagConstraints.weighty = 1.0;
         panelNorth.add(panelUML, gridBagConstraints);
 
+        panelHide.setLayout(new java.awt.GridBagLayout());
+
+        org.openide.awt.Mnemonics.setLocalizedText(labelPackages, org.openide.util.NbBundle.getMessage(JavaParserVisualPanel1.class, "JavaParserVisualPanel1.labelPackages.text")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        panelHide.add(labelPackages, gridBagConstraints);
+
+        checkBoxPackage.setSelected(true);
+        org.openide.awt.Mnemonics.setLocalizedText(checkBoxPackage, org.openide.util.NbBundle.getMessage(JavaParserVisualPanel1.class, "JavaParserVisualPanel1.checkBoxPackage.text")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        panelHide.add(checkBoxPackage, gridBagConstraints);
+
+        org.openide.awt.Mnemonics.setLocalizedText(checkBoxImport, org.openide.util.NbBundle.getMessage(JavaParserVisualPanel1.class, "JavaParserVisualPanel1.checkBoxImport.text")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        panelHide.add(checkBoxImport, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
+        panelNorth.add(panelHide, gridBagConstraints);
+
         scrollPanePanel1.setViewportView(panelNorth);
 
         add(scrollPanePanel1, java.awt.BorderLayout.PAGE_START);
     }// </editor-fold>//GEN-END:initComponents
 
+    public boolean isPackage() {
+        return checkBoxPackage.isSelected();
+    }
+    
+    public boolean isImport() {
+        return checkBoxImport.isSelected();
+    }
+    
     public boolean isExtends() {
         return checkBoxExtends.isSelected();
     }
     
     public boolean isImplements() {
-        return checkBoxExtends.isSelected();
+        return checkBoxImplements.isSelected();
     }
     
-    public boolean isImport() {
-        return checkBoxExtends.isSelected();
+    public boolean isFieldsStatic() {
+        return checkBoxFieldsStatic.isSelected();
     }
     
-    public boolean isPrivate() {
-        return checkBoxExtends.isSelected();
+    public boolean isFieldsPrivate() {
+        return checkBoxFieldsPrivate.isSelected();
     }
     
-    public boolean isPublic() {
-        return checkBoxExtends.isSelected();
+    public boolean isFieldsPublic() {
+        return checkBoxFieldsPublic.isSelected();
     }
     
-    public boolean isStatic() {
-        return checkBoxExtends.isSelected();
+    public boolean isFieldsFinal() {
+        return checkBoxFieldsFinal.isSelected();
     }
     
-    public boolean isPackage() {
-        return checkBoxPackage.isSelected();
+    public boolean isFieldsProtected() {
+        return checkBoxFieldsProtected.isSelected();
+    }
+    
+    public boolean isMethodsStatic() {
+        return checkBoxMethodsStatic.isSelected();
+    }
+    
+    public boolean isMethodsPrivate() {
+        return checkBoxMethodsPrivate.isSelected();
+    }
+    
+    public boolean isMethodsPublic() {
+        return checkBoxMethodsPublic.isSelected();
+    }
+    
+    public boolean isMethodsFinal() {
+        return checkBoxMethodsFinal.isSelected();
+    }
+    
+    public boolean isMethodsProtected() {
+        return checkBoxMethodsProtected.isSelected();
     }
     
     public JTextField getPrjName() { 
@@ -249,19 +384,37 @@ public final class JavaParserVisualPanel1 extends JPanel {
         return textFieldPrjSrc;
     }
     
+    public Path getPathSrc() {
+        return pathSRC;
+    }
+    
+    public void setPathSrc(Path path) {
+        this.pathSRC = path;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox checkBoxExtends;
+    private javax.swing.JCheckBox checkBoxFieldsFinal;
+    private javax.swing.JCheckBox checkBoxFieldsPrivate;
+    private javax.swing.JCheckBox checkBoxFieldsProtected;
+    private javax.swing.JCheckBox checkBoxFieldsPublic;
+    private javax.swing.JCheckBox checkBoxFieldsStatic;
     private javax.swing.JCheckBox checkBoxImplements;
     private javax.swing.JCheckBox checkBoxImport;
+    private javax.swing.JCheckBox checkBoxMethodsFinal;
+    private javax.swing.JCheckBox checkBoxMethodsPrivate;
+    private javax.swing.JCheckBox checkBoxMethodsProtected;
+    private javax.swing.JCheckBox checkBoxMethodsPublic;
+    private javax.swing.JCheckBox checkBoxMethodsStatic;
     private javax.swing.JCheckBox checkBoxPackage;
-    private javax.swing.JCheckBox checkBoxPrivate;
-    private javax.swing.JCheckBox checkBoxPublic;
-    private javax.swing.JCheckBox checkBoxStatic;
     private javax.swing.JLabel labelClasses;
     private javax.swing.JLabel labelFields;
+    private javax.swing.JLabel labelMethods;
     private javax.swing.JLabel labelPackages;
     private javax.swing.JLabel labelPrjName;
     private javax.swing.JLabel labelPrjSrc;
+    private javax.swing.JLabel labelSettings4Classes;
+    private javax.swing.JPanel panelHide;
     private javax.swing.JPanel panelNorth;
     private javax.swing.JPanel panelPrj;
     private javax.swing.JPanel panelUML;

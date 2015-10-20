@@ -13,7 +13,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <netbeans.run.params.ide>  </netbeans.run.params.ide>
         <netbeans.platform.version>RELEASE74</netbeans.platform.version>
-        <netbeans.run.params>${netbeans.run.params.ide}</netbeans.run.params>        
+        <netbeans.run.params>${netbeans.run.params.ide}</netbeans.run.params>
     </properties>
 
     <repositories>
@@ -182,7 +182,7 @@
         <dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-netbeans-modules-projectapi</artifactId>
-            <version>${netbeans.platform.version}</version>
+            <version>RELEASE74</version>
         </dependency>
         <dependency>
             <groupId>org.netbeans.modules</groupId>
@@ -233,9 +233,15 @@
             <version>2.2.2</version>
         </dependency>
         <dependency>
-            <groupId>ru.nosov</groupId>
+            <groupId>net.sf.parserjavatoplant</groupId>
             <artifactId>ParserJavaToPlant</artifactId>
-            <version>0.1</version>
+            <version>0.2</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-netbeans-modules-java-project</artifactId>
+            <version>RELEASE74</version>
             <type>jar</type>
         </dependency>
     </dependencies>
@@ -286,5 +292,5 @@
                 </configuration>
             </plugin>
         </plugins>
-    </build>    
+    </build>
 </project>

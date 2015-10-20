@@ -5,8 +5,15 @@
  */
 package org.netbeans.modules.plantumlnb.ui.wizard;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import javax.swing.event.ChangeListener;
+import org.netbeans.api.java.project.JavaProjectConstants;
 import org.netbeans.api.project.Project;
+import org.netbeans.api.project.ProjectUtils;
+import org.netbeans.api.project.SourceGroup;
+import org.netbeans.api.project.Sources;
+import org.netbeans.spi.project.ui.templates.support.Templates;
 import org.openide.WizardDescriptor;
 import org.openide.util.HelpCtx;
 
@@ -60,13 +67,37 @@ public class JavaParserWizardPanel1 implements WizardDescriptor.Panel<WizardDesc
     public void readSettings(WizardDescriptor wiz) {
         // Если ждем, что кто то что то сказал.
         // Например произошла смена проекта.
-        System.out.println("Read "+wiz.getTitle() + "; " + component.getName());
-
-        Object obj = wiz.getProperties().get("project");
-        if (obj instanceof Project) {
-            Project p = (Project) obj;
-            component.getPrjName().setText(p.getProjectDirectory().getName());
-            component.getPrjSrc().setText(p.getProjectDirectory().getPath());
+//        System.out.println("---------------------------------------------------");
+        Project project = Templates.getProject(wiz);
+        Sources sources = (Sources) ProjectUtils.getSources(project);
+        SourceGroup[] groups = sources.getSourceGroups(JavaProjectConstants.SOURCES_TYPE_JAVA);
+        
+        String name = project.getProjectDirectory().getName();
+        String path = project.getProjectDirectory().getPath();
+//        System.out.println("PrjName:"+name +";\nPrjPath:"+path+";");
+        component.getPrjName().setText(name);
+        component.getPrjSrc().setText("");
+        
+        for (SourceGroup group : groups){
+            System.out.println("Group");
+            if ( (group.getName().endsWith("SourceRoot")) || 
+                 (group.getName().endsWith("${src.dir}")) ) {
+                String src = group.getRootFolder().getPath();
+                Path pathSRC = Paths.get(src);
+                src = src.substring(path.length());
+                component.getPrjSrc().setText(src);
+                component.setPathSrc(pathSRC);
+//                System.out.println(group.getRootFolder().getExt());
+//                System.out.println(group.getRootFolder().getName());
+//                System.out.println(group.getRootFolder().getNameExt());
+//                System.out.println(group.getRootFolder().getPath());
+//                System.out.println(group.getRootFolder().getSize());
+            }
+//            System.out.println("\t"+group.getName());
+//            if ( (group.getName().endsWith("TestSourceRoot")) ||
+//                 (group.getName().endsWith("${test.src.dir}")) ) {
+//                
+//            }
         }
         
         // use wiz.getProperty to retrieve previous panel state
