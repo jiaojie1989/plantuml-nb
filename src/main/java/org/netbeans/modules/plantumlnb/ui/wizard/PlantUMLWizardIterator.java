@@ -17,7 +17,7 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 import javax.swing.JComponent;
 import javax.swing.event.ChangeListener;
-import net.sourceforge.mazix.cli.exception.CommandLineException;
+import net.sourceforge.plantumldependency.commoncli.exception.CommandLineException;
 import org.netbeans.api.templates.TemplateRegistration;
 import org.netbeans.modules.plantumlnb.generate.PlantUMLDependencyService;
 import org.openide.WizardDescriptor;
