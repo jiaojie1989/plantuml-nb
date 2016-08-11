@@ -18,7 +18,7 @@ public final class PlantUMLVisualPanel2 extends JPanel {
 
     @Override
     public String getName() {
-        return "Choose PlantUML Dependency options";
+        return "Enter include/exclude patterns";
     }
 
     /**
