@@ -44,6 +44,7 @@ public final class PlantUMLWizardIterator implements WizardDescriptor.Instantiat
             panels = new ArrayList<>();
             panels.add(new PlantUMLWizardPanel1());
             panels.add(new PlantUMLWizardPanel2());
+            panels.add(new PlantUMLWizardPanel3());
             String[] steps = createSteps();
             for (int i = 0; i < panels.size(); i++) {
                 Component c = panels.get(i).getComponent();
