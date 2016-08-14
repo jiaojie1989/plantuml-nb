@@ -15,9 +15,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
+import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.event.ChangeListener;
 import net.sourceforge.plantumldependency.commoncli.exception.CommandLineException;
+import org.netbeans.api.project.SourceGroup;
 import org.netbeans.api.templates.TemplateRegistration;
 import org.netbeans.modules.plantumlnb.generate.PlantUMLDependencyService;
 import org.openide.WizardDescriptor;
@@ -74,7 +76,8 @@ public final class PlantUMLWizardIterator implements WizardDescriptor.Instantiat
         String destinationDirectory = firstPanel.getDestinationDirectoryTextField().getText();
         String outputFileName = firstPanel.getPlantumlFileNameTextField().getText();
         File outputFile = new File(destinationDirectory + "/" + outputFileName + ".puml");
-        File packageDirectory = new File(firstPanel.getPackageSelectionInputDirectory().getText());
+//        File packageDirectory = new File(firstPanel.getPackageSelectionInputDirectory().getText());
+        File packageDirectory = new File(getDestinationDirectory(firstPanel));
         try {
             PlantUMLDependencyService.generate(packageDirectory, outputFile);
         } catch (MalformedURLException | CommandLineException | ParseException ex) {
@@ -84,6 +87,17 @@ public final class PlantUMLWizardIterator implements WizardDescriptor.Instantiat
         Set<FileObject> fileSet = new HashSet<>();
         fileSet.add(FileUtil.toFileObject(outputFile));
         return fileSet;
+    }
+    
+    private String getDestinationDirectory(PlantUMLVisualPanel1 firstPanel) {
+        JComboBox sourceGroupsComboBox = firstPanel.getSourceGroupsComboBox();
+        SourceGroup sourceGroup = (SourceGroup) sourceGroupsComboBox.getSelectedItem();
+        
+        JComboBox packageSelectionComboBox = firstPanel.getPackageSelectionComboBox();
+        String packageName = (String) packageSelectionComboBox.getEditor().getItem();
+        packageName = packageName.replace(".", "/");
+        
+        return sourceGroup.getRootFolder().getPath() + "/" + packageName;
     }
 
     @Override

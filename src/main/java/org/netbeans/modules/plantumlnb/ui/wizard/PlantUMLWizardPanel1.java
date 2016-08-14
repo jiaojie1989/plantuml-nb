@@ -9,7 +9,11 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import org.netbeans.api.java.project.JavaProjectConstants;
 import org.netbeans.api.project.Project;
+import org.netbeans.api.project.ProjectUtils;
+import org.netbeans.api.project.SourceGroup;
+import org.netbeans.api.project.Sources;
 import org.netbeans.modules.plantumlnb.StringUtils;
 import org.netbeans.spi.project.ui.templates.support.Templates;
 import org.openide.WizardDescriptor;
@@ -116,18 +120,21 @@ public class PlantUMLWizardPanel1 implements WizardDescriptor.Panel<WizardDescri
             } else {
                 // Try to preselect a folder
                 FileObject preselectedFolder = Templates.getTargetFolder(wiz);
-
+                Project project = Templates.getProject(wiz);
+                if (project == null) throw new NullPointerException ("No project found for: " + wiz);
                 if (preselectedFolder != null) {
                     component.getPackageSelectionInputDirectory().setText(preselectedFolder.getPath());
-                    Project project = Templates.getProject(wiz);
-                    if (project != null) {
-                        component.getDestinationDirectoryTextField()
-                                .setText(project.getProjectDirectory().getPath());
-                    }
+                    
+                    component.getDestinationDirectoryTextField()
+                            .setText(project.getProjectDirectory().getPath());
                 }
 
-                // Init values
-                // initValues(Templates.getTemplate(wiz), preselectedFolder);
+                Sources sources = ProjectUtils.getSources(project);
+                SourceGroup[] groups = sources.getSourceGroups(JavaProjectConstants.SOURCES_TYPE_JAVA);
+                if(groups.length != 0) {
+                    // Init values
+                    component.initValues(Templates.getTemplate(wiz), preselectedFolder, groups);
+                }
             }
         }
         
