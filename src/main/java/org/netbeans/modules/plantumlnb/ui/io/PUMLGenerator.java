@@ -37,6 +37,7 @@ import org.netbeans.modules.plantumlnb.PrettyPrinter;
 import org.netbeans.modules.plantumlnb.ui.options.PlantUMLPanel;
 import static org.netbeans.modules.plantumlnb.ui.options.PlantUMLPanel.DOT_MANUAL_MODE_DOT_PATH;
 import org.openide.filesystems.FileObject;
+import org.openide.filesystems.FileUtil;
 import org.openide.util.NbPreferences;
 
 /**
@@ -76,7 +77,7 @@ public class PUMLGenerator {
              * TODO: This particular constructor seems to use UTF-8 no matter which charset is passed as an argument.
              * Replace this to use user specified charset in the future.
              */
-            SourceStringReader reader = new SourceStringReader(inputFile.asText(), null);
+            SourceStringReader reader = new SourceStringReader(inputFile.asText(), FileUtil.toFile(inputFile).getParentFile());
             // Write the first image to "os"
             String desc = reader.generateImage(os, new FileFormatOption(fileFormat));
             return new String(os.toByteArray());
