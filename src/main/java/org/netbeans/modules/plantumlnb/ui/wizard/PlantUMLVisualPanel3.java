@@ -28,94 +28,94 @@ public final class PlantUMLVisualPanel3 extends JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
-        jCheckBox4 = new javax.swing.JCheckBox();
-        jCheckBox5 = new javax.swing.JCheckBox();
-        jCheckBox6 = new javax.swing.JCheckBox();
-        jCheckBox7 = new javax.swing.JCheckBox();
-        jCheckBox8 = new javax.swing.JCheckBox();
-        jCheckBox9 = new javax.swing.JCheckBox();
-        jCheckBox10 = new javax.swing.JCheckBox();
+        abstractClassesCheckBox = new javax.swing.JCheckBox();
+        annotationsCheckBox = new javax.swing.JCheckBox();
+        enumsCheckBox = new javax.swing.JCheckBox();
+        classesCheckBox = new javax.swing.JCheckBox();
+        importsCheckBox = new javax.swing.JCheckBox();
+        interfacesCheckBox = new javax.swing.JCheckBox();
+        implementationsCheckBox = new javax.swing.JCheckBox();
+        extensionsCheckBox = new javax.swing.JCheckBox();
+        staticImportsCheckBox = new javax.swing.JCheckBox();
+        nativeMethodsCheckBox = new javax.swing.JCheckBox();
 
-        org.openide.awt.Mnemonics.setLocalizedText(jCheckBox1, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.jCheckBox1.text")); // NOI18N
-        jCheckBox1.setToolTipText(org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.jCheckBox1.toolTipText")); // NOI18N
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+        org.openide.awt.Mnemonics.setLocalizedText(abstractClassesCheckBox, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.abstractClassesCheckBox.text")); // NOI18N
+        abstractClassesCheckBox.setToolTipText(org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.abstractClassesCheckBox.toolTipText")); // NOI18N
+        abstractClassesCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
+                abstractClassesCheckBoxActionPerformed(evt);
             }
         });
 
-        org.openide.awt.Mnemonics.setLocalizedText(jCheckBox2, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.jCheckBox2.text")); // NOI18N
-        jCheckBox2.setToolTipText(org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.jCheckBox2.toolTipText")); // NOI18N
-        jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
+        org.openide.awt.Mnemonics.setLocalizedText(annotationsCheckBox, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.annotationsCheckBox.text")); // NOI18N
+        annotationsCheckBox.setToolTipText(org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.annotationsCheckBox.toolTipText")); // NOI18N
+        annotationsCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox2ActionPerformed(evt);
+                annotationsCheckBoxActionPerformed(evt);
             }
         });
 
-        org.openide.awt.Mnemonics.setLocalizedText(jCheckBox3, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.jCheckBox3.text")); // NOI18N
-        jCheckBox3.setToolTipText(org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.jCheckBox3.toolTipText")); // NOI18N
-        jCheckBox3.addActionListener(new java.awt.event.ActionListener() {
+        org.openide.awt.Mnemonics.setLocalizedText(enumsCheckBox, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.enumsCheckBox.text")); // NOI18N
+        enumsCheckBox.setToolTipText(org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.enumsCheckBox.toolTipText")); // NOI18N
+        enumsCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox3ActionPerformed(evt);
+                enumsCheckBoxActionPerformed(evt);
             }
         });
 
-        org.openide.awt.Mnemonics.setLocalizedText(jCheckBox4, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.jCheckBox4.text")); // NOI18N
-        jCheckBox4.setToolTipText(org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.jCheckBox4.toolTipText")); // NOI18N
-        jCheckBox4.addActionListener(new java.awt.event.ActionListener() {
+        org.openide.awt.Mnemonics.setLocalizedText(classesCheckBox, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.classesCheckBox.text")); // NOI18N
+        classesCheckBox.setToolTipText(org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.classesCheckBox.toolTipText")); // NOI18N
+        classesCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox4ActionPerformed(evt);
+                classesCheckBoxActionPerformed(evt);
             }
         });
 
-        org.openide.awt.Mnemonics.setLocalizedText(jCheckBox5, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.jCheckBox5.text")); // NOI18N
-        jCheckBox5.setToolTipText(org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.jCheckBox5.toolTipText")); // NOI18N
-        jCheckBox5.addActionListener(new java.awt.event.ActionListener() {
+        org.openide.awt.Mnemonics.setLocalizedText(importsCheckBox, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.importsCheckBox.text")); // NOI18N
+        importsCheckBox.setToolTipText(org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.importsCheckBox.toolTipText")); // NOI18N
+        importsCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox5ActionPerformed(evt);
+                importsCheckBoxActionPerformed(evt);
             }
         });
 
-        org.openide.awt.Mnemonics.setLocalizedText(jCheckBox6, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.jCheckBox6.text")); // NOI18N
-        jCheckBox6.setToolTipText(org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.jCheckBox6.toolTipText")); // NOI18N
-        jCheckBox6.addActionListener(new java.awt.event.ActionListener() {
+        org.openide.awt.Mnemonics.setLocalizedText(interfacesCheckBox, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.interfacesCheckBox.text")); // NOI18N
+        interfacesCheckBox.setToolTipText(org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.interfacesCheckBox.toolTipText")); // NOI18N
+        interfacesCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox6ActionPerformed(evt);
+                interfacesCheckBoxActionPerformed(evt);
             }
         });
 
-        org.openide.awt.Mnemonics.setLocalizedText(jCheckBox7, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.jCheckBox7.text")); // NOI18N
-        jCheckBox7.setToolTipText(org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.jCheckBox7.toolTipText")); // NOI18N
-        jCheckBox7.addActionListener(new java.awt.event.ActionListener() {
+        org.openide.awt.Mnemonics.setLocalizedText(implementationsCheckBox, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.implementationsCheckBox.text")); // NOI18N
+        implementationsCheckBox.setToolTipText(org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.implementationsCheckBox.toolTipText")); // NOI18N
+        implementationsCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox7ActionPerformed(evt);
+                implementationsCheckBoxActionPerformed(evt);
             }
         });
 
-        org.openide.awt.Mnemonics.setLocalizedText(jCheckBox8, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.jCheckBox8.text")); // NOI18N
-        jCheckBox8.setToolTipText(org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.jCheckBox8.toolTipText")); // NOI18N
-        jCheckBox8.addActionListener(new java.awt.event.ActionListener() {
+        org.openide.awt.Mnemonics.setLocalizedText(extensionsCheckBox, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.extensionsCheckBox.text")); // NOI18N
+        extensionsCheckBox.setToolTipText(org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.extensionsCheckBox.toolTipText")); // NOI18N
+        extensionsCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox8ActionPerformed(evt);
+                extensionsCheckBoxActionPerformed(evt);
             }
         });
 
-        org.openide.awt.Mnemonics.setLocalizedText(jCheckBox9, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.jCheckBox9.text")); // NOI18N
-        jCheckBox9.setToolTipText(org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.jCheckBox9.toolTipText")); // NOI18N
-        jCheckBox9.addActionListener(new java.awt.event.ActionListener() {
+        org.openide.awt.Mnemonics.setLocalizedText(staticImportsCheckBox, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.staticImportsCheckBox.text")); // NOI18N
+        staticImportsCheckBox.setToolTipText(org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.staticImportsCheckBox.toolTipText")); // NOI18N
+        staticImportsCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox9ActionPerformed(evt);
+                staticImportsCheckBoxActionPerformed(evt);
             }
         });
 
-        org.openide.awt.Mnemonics.setLocalizedText(jCheckBox10, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.jCheckBox10.text")); // NOI18N
-        jCheckBox10.setToolTipText(org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.jCheckBox10.toolTipText")); // NOI18N
-        jCheckBox10.addActionListener(new java.awt.event.ActionListener() {
+        org.openide.awt.Mnemonics.setLocalizedText(nativeMethodsCheckBox, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.nativeMethodsCheckBox.text")); // NOI18N
+        nativeMethodsCheckBox.setToolTipText(org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.nativeMethodsCheckBox.toolTipText")); // NOI18N
+        nativeMethodsCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox10ActionPerformed(evt);
+                nativeMethodsCheckBoxActionPerformed(evt);
             }
         });
 
@@ -126,95 +126,98 @@ public final class PlantUMLVisualPanel3 extends JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCheckBox1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jCheckBox2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jCheckBox4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jCheckBox3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jCheckBox8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jCheckBox7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jCheckBox5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jCheckBox6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jCheckBox10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jCheckBox9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(classesCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(abstractClassesCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, 676, Short.MAX_VALUE)
+                    .addComponent(annotationsCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(enumsCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(extensionsCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(implementationsCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(importsCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(interfacesCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(nativeMethodsCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(staticImportsCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addComponent(jCheckBox1)
+                .addComponent(abstractClassesCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBox2)
+                .addComponent(annotationsCheckBox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBox4)
+                .addComponent(classesCheckBox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBox3)
+                .addComponent(enumsCheckBox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBox8)
+                .addComponent(extensionsCheckBox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBox7)
+                .addComponent(implementationsCheckBox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBox5)
+                .addComponent(importsCheckBox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBox6)
+                .addComponent(interfacesCheckBox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBox10)
+                .addComponent(nativeMethodsCheckBox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBox9)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addComponent(staticImportsCheckBox)
+                .addContainerGap(22, Short.MAX_VALUE))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {abstractClassesCheckBox, annotationsCheckBox, classesCheckBox, enumsCheckBox, extensionsCheckBox, implementationsCheckBox, importsCheckBox, interfacesCheckBox, nativeMethodsCheckBox, staticImportsCheckBox});
+
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+    private void abstractClassesCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abstractClassesCheckBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
+    }//GEN-LAST:event_abstractClassesCheckBoxActionPerformed
 
-    private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
+    private void annotationsCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annotationsCheckBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox2ActionPerformed
+    }//GEN-LAST:event_annotationsCheckBoxActionPerformed
 
-    private void jCheckBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox3ActionPerformed
+    private void enumsCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enumsCheckBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox3ActionPerformed
+    }//GEN-LAST:event_enumsCheckBoxActionPerformed
 
-    private void jCheckBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox4ActionPerformed
+    private void classesCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_classesCheckBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox4ActionPerformed
+    }//GEN-LAST:event_classesCheckBoxActionPerformed
 
-    private void jCheckBox5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox5ActionPerformed
+    private void importsCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importsCheckBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox5ActionPerformed
+    }//GEN-LAST:event_importsCheckBoxActionPerformed
 
-    private void jCheckBox6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox6ActionPerformed
+    private void interfacesCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_interfacesCheckBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox6ActionPerformed
+    }//GEN-LAST:event_interfacesCheckBoxActionPerformed
 
-    private void jCheckBox7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox7ActionPerformed
+    private void implementationsCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_implementationsCheckBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox7ActionPerformed
+    }//GEN-LAST:event_implementationsCheckBoxActionPerformed
 
-    private void jCheckBox8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox8ActionPerformed
+    private void extensionsCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_extensionsCheckBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox8ActionPerformed
+    }//GEN-LAST:event_extensionsCheckBoxActionPerformed
 
-    private void jCheckBox9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox9ActionPerformed
+    private void staticImportsCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staticImportsCheckBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox9ActionPerformed
+    }//GEN-LAST:event_staticImportsCheckBoxActionPerformed
 
-    private void jCheckBox10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox10ActionPerformed
+    private void nativeMethodsCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nativeMethodsCheckBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox10ActionPerformed
+    }//GEN-LAST:event_nativeMethodsCheckBoxActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox10;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JCheckBox jCheckBox4;
-    private javax.swing.JCheckBox jCheckBox5;
-    private javax.swing.JCheckBox jCheckBox6;
-    private javax.swing.JCheckBox jCheckBox7;
-    private javax.swing.JCheckBox jCheckBox8;
-    private javax.swing.JCheckBox jCheckBox9;
+    private javax.swing.JCheckBox abstractClassesCheckBox;
+    private javax.swing.JCheckBox annotationsCheckBox;
+    private javax.swing.JCheckBox classesCheckBox;
+    private javax.swing.JCheckBox enumsCheckBox;
+    private javax.swing.JCheckBox extensionsCheckBox;
+    private javax.swing.JCheckBox implementationsCheckBox;
+    private javax.swing.JCheckBox importsCheckBox;
+    private javax.swing.JCheckBox interfacesCheckBox;
+    private javax.swing.JCheckBox nativeMethodsCheckBox;
+    private javax.swing.JCheckBox staticImportsCheckBox;
     // End of variables declaration//GEN-END:variables
 }

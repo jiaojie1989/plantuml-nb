@@ -53,7 +53,8 @@
         <dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-openide-filesystems</artifactId>
-            <version>${netbeans.platform.version}</version>
+            <version>RELEASE802</version>
+            <type>nbm</type>
         </dependency>
         <dependency>
             <groupId>org.netbeans.api</groupId>
@@ -205,7 +206,7 @@
         <dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-netbeans-modules-projectuiapi</artifactId>
-            <version>${netbeans.platform.version}</version>
+            <version>RELEASE802</version>
             <type>jar</type>
         </dependency>
         <dependency>

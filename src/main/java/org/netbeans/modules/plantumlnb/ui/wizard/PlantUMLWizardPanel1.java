@@ -9,8 +9,12 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import org.netbeans.api.project.Project;
+import org.netbeans.modules.plantumlnb.StringUtils;
+import org.netbeans.spi.project.ui.templates.support.Templates;
 import org.openide.WizardDescriptor;
 import org.openide.WizardValidationException;
+import org.openide.filesystems.FileObject;
 import org.openide.util.HelpCtx;
 
 public class PlantUMLWizardPanel1 implements WizardDescriptor.Panel<WizardDescriptor>, WizardDescriptor.ValidatingPanel<WizardDescriptor> {
@@ -91,11 +95,42 @@ public class PlantUMLWizardPanel1 implements WizardDescriptor.Panel<WizardDescri
         }        
     }
 
+    /**
+     * Following code was inspired from JavaTargetChooserPanel and JavaTargetChooserPanelGUI 
+     * in java.project.ui (Java Project Support UI) module of the netbeans. Take a look at 
+     * JavaTargetChooserPanel.readSettings and JavaTargetChooserPanelGUI.initValues for 
+     * further help.
+     * 
+     * @param wiz 
+     */
     @Override
     public void readSettings(WizardDescriptor wiz) {        
         component.getPlantumlFileNameTextField().setText((String) wiz.getProperty("filename"));
-        component.getPackageSelectionInputDirectory().setText((String) wiz.getProperty("packagename"));
         component.getDestinationDirectoryTextField().setText((String) wiz.getProperty("destinationdirectory"));
+        
+        String selectedPackageName = (String) wiz.getProperty("packagename");
+        
+        if (component != null) {
+            if (StringUtils.isNotEmpty(selectedPackageName)) {
+                component.getPackageSelectionInputDirectory().setText(selectedPackageName);
+            } else {
+                // Try to preselect a folder
+                FileObject preselectedFolder = Templates.getTargetFolder(wiz);
+
+                if (preselectedFolder != null) {
+                    component.getPackageSelectionInputDirectory().setText(preselectedFolder.getPath());
+                    Project project = Templates.getProject(wiz);
+                    if (project != null) {
+                        component.getDestinationDirectoryTextField()
+                                .setText(project.getProjectDirectory().getPath());
+                    }
+                }
+
+                // Init values
+                // initValues(Templates.getTemplate(wiz), preselectedFolder);
+            }
+        }
+        
     }
 
     @Override
@@ -109,5 +144,5 @@ public class PlantUMLWizardPanel1 implements WizardDescriptor.Panel<WizardDescri
     public void validate() throws WizardValidationException {
         component.validate();
     }
-      
+
 }
