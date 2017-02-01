@@ -11,9 +11,9 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <netbeans.run.params.ide>  </netbeans.run.params.ide>
-        <netbeans.platform.version>RELEASE74</netbeans.platform.version>
-        <netbeans.run.params>${netbeans.run.params.ide}</netbeans.run.params>
+        <netbeans.run.params.ide>${netbeans.installation}</netbeans.run.params.ide>
+        <netbeans.platform.version>RELEASE82</netbeans.platform.version>
+        <netbeans.run.params>${netbeans.installation}</netbeans.run.params>
     </properties>
 
     <repositories>
@@ -52,7 +52,7 @@
         <dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-openide-loaders</artifactId>
-            <version>RELEASE74</version>
+            <version>${netbeans.platform.version}</version>
         </dependency>
         <dependency>
             <groupId>org.netbeans.api</groupId>
@@ -62,7 +62,7 @@
         <dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-openide-util</artifactId>
-            <version>RELEASE74</version>
+            <version>${netbeans.platform.version}</version>
         </dependency>
         <dependency>
             <groupId>org.netbeans.api</groupId>
@@ -87,12 +87,12 @@
         <dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-openide-awt</artifactId>
-            <version>RELEASE74</version>
+            <version>${netbeans.platform.version}</version>
         </dependency>
         <dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-openide-dialogs</artifactId>
-            <version>RELEASE74</version>
+            <version>${netbeans.platform.version}</version>
         </dependency>
         <dependency>
             <groupId>org.netbeans.api</groupId>
@@ -142,6 +142,24 @@
             <type>jar</type>
         </dependency>
         <dependency>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-openide-filesystems-nb</artifactId>
+            <version>${netbeans.platform.version}</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-openide-util-ui</artifactId>
+            <version>${netbeans.platform.version}</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-netbeans-modules-projectuiapi-base</artifactId>
+            <version>${netbeans.platform.version}</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
             <groupId>org.netbeans.modules</groupId>
             <artifactId>org-netbeans-modules-editor-errorstripe</artifactId>
             <version>${netbeans.platform.version}</version>
@@ -182,7 +200,7 @@
         <dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-netbeans-modules-projectapi</artifactId>
-            <version>RELEASE74</version>
+            <version>${netbeans.platform.version}</version>
         </dependency>
         <dependency>
             <groupId>org.netbeans.modules</groupId>
@@ -228,20 +246,26 @@
             <version>1.4.0</version>
         </dependency>
         <dependency>
-            <groupId>com.github.javaparser</groupId>
-            <artifactId>javaparser-core</artifactId>
-            <version>2.2.2</version>
-        </dependency>
-        <dependency>
-            <groupId>net.sf.parserjavatoplant</groupId>
-            <artifactId>ParserJavaToPlant</artifactId>
-            <version>0.2</version>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-netbeans-modules-java-project</artifactId>
+            <version>${netbeans.platform.version}</version>
             <type>jar</type>
         </dependency>
         <dependency>
-            <groupId>org.netbeans.api</groupId>
-            <artifactId>org-netbeans-modules-java-project</artifactId>
-            <version>RELEASE74</version>
+            <groupId>net.sf.parserjavatoplant</groupId>
+            <artifactId>parserjavatoplant</artifactId>
+            <version>1.0.1</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>com.github.javaparser</groupId>
+            <artifactId>javaparser-core</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
             <type>jar</type>
         </dependency>
     </dependencies>
@@ -255,7 +279,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <useDefaultManifestFile>true</useDefaultManifestFile>
-                    <netbeansInstallation>/home/nosov/NetBeans/netbeans-7.4/</netbeansInstallation>
+                    <netbeansInstallation>${netbeans.installation}</netbeansInstallation>
                     <!--<debugAdditionalArguments>true</debugAdditionalArguments>-->
 <!--                        <nbmBuildDir>${project.build.directory}/netbeans_clusters/</nbmBuildDir>-->
                     <moduleType>normal</moduleType>
@@ -278,7 +302,7 @@
                 <configuration>
                     <source>1.7</source>
                     <target>1.7</target>
-                    <showDeprecation>false</showDeprecation>
+                    <showDeprecation>true</showDeprecation>
                 </configuration>
             </plugin>
 

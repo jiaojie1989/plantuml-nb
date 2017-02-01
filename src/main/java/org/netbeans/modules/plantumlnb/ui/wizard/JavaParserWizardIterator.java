@@ -8,9 +8,7 @@ package org.netbeans.modules.plantumlnb.ui.wizard;
 import java.awt.Component;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -18,11 +16,11 @@ import java.util.Properties;
 import java.util.Set;
 import javax.swing.JComponent;
 import javax.swing.event.ChangeListener;
+import net.sf.parserjavatoplant.ParserJavaToPlant;
+import net.sf.parserjavatoplant.types.TypeProperties;
 import org.netbeans.api.templates.TemplateRegistration;
 import org.openide.WizardDescriptor;
 import org.openide.util.NbBundle.Messages;
-import static net.sf.parserjavatoplant.ParserJavaToPlant.parseJavaPrj;
-import net.sf.parserjavatoplant.types.TypeProperties;
 import org.openide.filesystems.FileObject;
 import org.openide.filesystems.FileUtil;
 
@@ -75,6 +73,7 @@ public final class JavaParserWizardIterator implements WizardDescriptor.Instanti
          */
         
         JavaParserVisualPanel1 firstPanel = (JavaParserVisualPanel1) panels.get(0).getComponent();
+        
         Properties prop = TypeProperties.createDefaultProperties();
         prop.setProperty(TypeProperties.IMPLEMENTS.name(), 
                             Boolean.toString(firstPanel.isImplements()));
@@ -100,7 +99,19 @@ public final class JavaParserWizardIterator implements WizardDescriptor.Instanti
                             Boolean.toString(firstPanel.isMethodsFinal()));
         prop.setProperty(TypeProperties.METHODS_PROTECTED.name(), 
                             Boolean.toString(firstPanel.isMethodsProtected()));
-        List<Path> paths = parseJavaPrj(firstPanel.getPathSrc(), prop);
+        
+        
+        prop.setProperty(TypeProperties.GENERAL.name(),
+                            Boolean.toString(firstPanel.isImplements()));
+        prop.setProperty(TypeProperties.PACKAGE.name(), 
+                            Boolean.toString(firstPanel.isPackage()));
+        prop.setProperty(TypeProperties.IMPORT.name(), 
+                            Boolean.toString(firstPanel.isImport()));
+        
+        prop.setProperty(TypeProperties.PRJ_NAME.name(), 
+                            firstPanel.getPrjName().getText());
+        
+        List<Path> paths = ParserJavaToPlant.parseJavaPrj(firstPanel.getPathSrc(), prop);
         
         Set<FileObject> fileSet = new HashSet<>();
         if (paths == null) return fileSet;

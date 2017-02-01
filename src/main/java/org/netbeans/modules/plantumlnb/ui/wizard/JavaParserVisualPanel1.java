@@ -22,7 +22,6 @@ public final class JavaParserVisualPanel1 extends JPanel {
     public JavaParserVisualPanel1() {
         initComponents();
         
-        // Future panel
         panelHide.setVisible(false);
     }
 
@@ -69,6 +68,7 @@ public final class JavaParserVisualPanel1 extends JPanel {
         labelPackages = new javax.swing.JLabel();
         checkBoxPackage = new javax.swing.JCheckBox();
         checkBoxImport = new javax.swing.JCheckBox();
+        checkBoxCeneral = new javax.swing.JCheckBox();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -104,6 +104,7 @@ public final class JavaParserVisualPanel1 extends JPanel {
 
         textFieldPrjSrc.setEditable(false);
         textFieldPrjSrc.setText(org.openide.util.NbBundle.getMessage(JavaParserVisualPanel1.class, "JavaParserVisualPanel1.textFieldPrjSrc.text")); // NOI18N
+        textFieldPrjSrc.setPreferredSize(new java.awt.Dimension(500, 19));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
@@ -286,17 +287,16 @@ public final class JavaParserVisualPanel1 extends JPanel {
         org.openide.awt.Mnemonics.setLocalizedText(labelPackages, org.openide.util.NbBundle.getMessage(JavaParserVisualPanel1.class, "JavaParserVisualPanel1.labelPackages.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         panelHide.add(labelPackages, gridBagConstraints);
 
-        checkBoxPackage.setSelected(true);
         org.openide.awt.Mnemonics.setLocalizedText(checkBoxPackage, org.openide.util.NbBundle.getMessage(JavaParserVisualPanel1.class, "JavaParserVisualPanel1.checkBoxPackage.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         panelHide.add(checkBoxPackage, gridBagConstraints);
@@ -304,10 +304,18 @@ public final class JavaParserVisualPanel1 extends JPanel {
         org.openide.awt.Mnemonics.setLocalizedText(checkBoxImport, org.openide.util.NbBundle.getMessage(JavaParserVisualPanel1.class, "JavaParserVisualPanel1.checkBoxImport.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         panelHide.add(checkBoxImport, gridBagConstraints);
+
+        org.openide.awt.Mnemonics.setLocalizedText(checkBoxCeneral, org.openide.util.NbBundle.getMessage(JavaParserVisualPanel1.class, "JavaParserVisualPanel1.checkBoxCeneral.text")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        panelHide.add(checkBoxCeneral, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -387,12 +395,13 @@ public final class JavaParserVisualPanel1 extends JPanel {
     public Path getPathSrc() {
         return pathSRC;
     }
-    
+
     public void setPathSrc(Path path) {
         this.pathSRC = path;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox checkBoxCeneral;
     private javax.swing.JCheckBox checkBoxExtends;
     private javax.swing.JCheckBox checkBoxFieldsFinal;
     private javax.swing.JCheckBox checkBoxFieldsPrivate;
