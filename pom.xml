@@ -45,16 +45,6 @@
             <type>jar</type>
         </dependency>
         <dependency>
-<<<<<<<
-            <groupId>net.sourceforge.plantuml-depend</groupId>
-            <artifactId>plantuml-dependency-cli</artifactId>
-            <version>1.4.0</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-=======
-
->>>>>>>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-openide-filesystems</artifactId>
             <version>RELEASE802</version>
@@ -314,7 +304,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <useDefaultManifestFile>true</useDefaultManifestFile>
-                    <netbeansInstallation>/home/venkat/netbeans-8.1/</netbeansInstallation>
+                    <netbeansInstallation>/home/venkat/Programs/netbeans-8.2/</netbeansInstallation>
                     <!--<debugAdditionalArguments>true</debugAdditionalArguments>-->
 <!--                        <nbmBuildDir>${project.build.directory}/netbeans_clusters/</nbmBuildDir>-->
                     <moduleType>normal</moduleType>
