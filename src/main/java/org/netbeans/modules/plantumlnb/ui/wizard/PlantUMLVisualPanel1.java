@@ -6,8 +6,6 @@
 package org.netbeans.modules.plantumlnb.ui.wizard;
 
 import java.awt.Component;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.Arrays;
 import java.util.Optional;
@@ -36,7 +34,7 @@ import org.openide.filesystems.FileObject;
 import org.openide.filesystems.FileUtil;
 import org.openide.util.RequestProcessor;
 
-public final class PlantUMLVisualPanel1 extends JPanel implements ActionListener {
+public final class PlantUMLVisualPanel1 extends JPanel {
     
     private PlantUMLWizardPanel1 plantUMLWizardPanel1;
     private JFileChooser fileChooser = null;
@@ -51,8 +49,7 @@ public final class PlantUMLVisualPanel1 extends JPanel implements ActionListener
         
         this.plantUMLWizardPanel1 = plantUMLWizardPanel1;
         
-        sourceGroupsComboBox.setRenderer(new SourceGroupListCellRenderer());
-        sourceGroupsComboBox.addActionListener(this);
+        sourceGroupsComboBox.setRenderer(new SourceGroupListCellRenderer());        
         packageSelectionComboBox.setRenderer(PackageView.listRenderer());
         
         getPlantumlFileNameTextField().getDocument().addDocumentListener(new GenericDocumentListener());
@@ -134,29 +131,23 @@ public final class PlantUMLVisualPanel1 extends JPanel implements ActionListener
         }
         
         if (sourceGroups != null) {
-//            Optional<SourceGroup> javaSourceGroup = Arrays.asList(this.sourceGroups)
-//                    .stream()
-//                    .filter(sourceGroup -> sourceGroup.getName().equals("1SourceRoot")).findFirst();
-            
-            SourceGroup selectedSourceGroup = (SourceGroup) sourceGroupsComboBox.getSelectedItem();
-//            Arrays.asList(this.sourceGroups)
-//                    .stream()
-//                    .filter(sourceGroup -> {
-//                        SourceGroup selectedSourceGroup = (SourceGroup) sourceGroupsComboBox.getSelectedItem();
-//                        if (selectedSourceGroup == null) {
-//                            return false;
-//                        }                        
-//                        return sourceGroup.getDisplayName().equals(selectedSourceGroup.getDisplayName());
-//                    })
-//                    .findFirst();
+            Optional<SourceGroup> javaSourceGroup = Arrays.asList(this.sourceGroups)
+                    .stream()
+                    .filter(sourceGroup -> sourceGroup.getName().equals("1SourceRoot")).findFirst();
 
-            if (selectedSourceGroup != null) {
-                updatePackagesTask = new RequestProcessor("ComboUpdatePackages").post(() -> {
-                    final ComboBoxModel model = PackageView.createListView(selectedSourceGroup);
-                    SwingUtilities.invokeLater(() -> {
-                        model.setSelectedItem(packageSelectionComboBox.getEditor().getItem());
-                        packageSelectionComboBox.setModel(model);
-                    });
+            if (javaSourceGroup.isPresent()) {
+                updatePackagesTask = new RequestProcessor("ComboUpdatePackages").post(new Runnable() {
+                    @Override
+                    public void run() {
+                        final ComboBoxModel model = PackageView.createListView((SourceGroup) javaSourceGroup.get());
+                        SwingUtilities.invokeLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                model.setSelectedItem(packageSelectionComboBox.getEditor().getItem());
+                                packageSelectionComboBox.setModel(model);
+                            }
+                        });
+                    }
                 });
             }
         }
@@ -391,13 +382,6 @@ public final class PlantUMLVisualPanel1 extends JPanel implements ActionListener
 
     public void setSourceGroupsComboBox(JComboBox<String> sourceGroupsComboBox) {
         this.sourceGroupsComboBox = sourceGroupsComboBox;
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (sourceGroupsComboBox == e.getSource()) {
-            updatePackages();
-        }
     }
     
     class GenericDocumentListener implements DocumentListener {
