@@ -11,9 +11,9 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <netbeans.run.params.ide>${netbeans.installation}</netbeans.run.params.ide>
-        <netbeans.platform.version>RELEASE82</netbeans.platform.version>
-        <netbeans.run.params>${netbeans.installation}</netbeans.run.params>
+        <netbeans.run.params.ide>  </netbeans.run.params.ide>
+        <netbeans.platform.version>RELEASE81</netbeans.platform.version>
+        <netbeans.run.params>${netbeans.run.params.ide}</netbeans.run.params>        
     </properties>
 
     <repositories>
@@ -42,6 +42,12 @@
             <groupId>net.sourceforge.plantuml</groupId>
             <artifactId>plantuml</artifactId>
             <version>8046</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>net.sourceforge.plantuml-depend</groupId>
+            <artifactId>plantuml-dependency-cli</artifactId>
+            <version>1.4.0</version>
             <type>jar</type>
         </dependency>
         <dependency>
@@ -143,24 +149,6 @@
             <type>jar</type>
         </dependency>
         <dependency>
-            <groupId>org.netbeans.api</groupId>
-            <artifactId>org-openide-filesystems-nb</artifactId>
-            <version>${netbeans.platform.version}</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>org.netbeans.api</groupId>
-            <artifactId>org-openide-util-ui</artifactId>
-            <version>${netbeans.platform.version}</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>org.netbeans.api</groupId>
-            <artifactId>org-netbeans-modules-projectuiapi-base</artifactId>
-            <version>${netbeans.platform.version}</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
             <groupId>org.netbeans.modules</groupId>
             <artifactId>org-netbeans-modules-editor-errorstripe</artifactId>
             <version>${netbeans.platform.version}</version>
@@ -255,44 +243,6 @@
             <version>RELEASE802</version>
             <type>nbm</type>
         </dependency>
-        <dependency>
-            <groupId>net.sourceforge.plantuml-depend</groupId>
-            <artifactId>plantuml-dependency-cli</artifactId>
-            <version>1.4.0</version>
-        </dependency>
-        <dependency>
-            <groupId>net.sourceforge.plantuml-depend</groupId>
-            <artifactId>plantuml-dependency-common</artifactId>
-            <version>1.4.0</version>
-        </dependency>
-        <dependency>
-            <groupId>net.sourceforge.plantuml-depend</groupId>
-            <artifactId>plantuml-dependency-common-cli</artifactId>
-            <version>1.4.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.netbeans.api</groupId>
-            <artifactId>org-netbeans-modules-java-project</artifactId>
-            <version>${netbeans.platform.version}</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>net.sf.parserjavatoplant</groupId>
-            <artifactId>parserjavatoplant</artifactId>
-            <version>1.0.1</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>com.github.javaparser</groupId>
-            <artifactId>javaparser-core</artifactId>
-            <version>3.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.17</version>
-            <type>jar</type>
-        </dependency>
     </dependencies>
 
     <build>
@@ -345,5 +295,5 @@
                 <version>2.15</version>
             </plugin>
         </plugins>
-    </build>
+    </build>    
 </project>

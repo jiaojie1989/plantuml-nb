@@ -24,7 +24,7 @@
 package org.netbeans.modules.plantumlnb.ui;
 
 import java.awt.image.BufferedImage;
-//import java.awt.peer.ComponentPeer;
+import java.awt.peer.ComponentPeer;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.IOException;
@@ -547,7 +547,7 @@ public final class PUMLTopComponent extends TopComponent implements Serializable
             if(evt.getPropertyName().toLowerCase().equals(TopComponent.Registry.PROP_OPENED) 
                     && evt.getNewValue() instanceof TopComponent){
                 TopComponent tc = (TopComponent) evt.getNewValue();
-//                ComponentPeer cp = tc.getPeer();                
+                ComponentPeer cp = tc.getPeer();                
 //                String displayName = ((Node[]) evt.getNewValue())[0].getDisplayName();            
 
 //                if(displayName.toLowerCase().endsWith("puml")){

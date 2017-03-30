@@ -4,7 +4,7 @@
 <application xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.zeroturnaround.com"
              txsi:schemaLocation="http://www.zeroturnaround.com http://www.zeroturnaround.com/alderaan/rebel-2_0.xsd">
 	<classpath>
-		<dir name="/media/nosov/WorkDisk/java/plugins/plantumlnb-code/target/classes"/>
+		<dir name="/home/venkat/Projects/plantumlnb/target/classes"/>
 
 	</classpath>
   
