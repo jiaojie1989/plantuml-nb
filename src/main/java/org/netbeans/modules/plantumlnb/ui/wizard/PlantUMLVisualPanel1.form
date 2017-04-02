@@ -16,41 +16,34 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="packageSelectionComboBox" max="32767" attributes="0"/>
+                  <Component id="generatedFileNameDisplayTextField" alignment="1" max="32767" attributes="0"/>
+                  <Component id="existingSourcesPaneLabel" alignment="0" max="32767" attributes="0"/>
+                  <Component id="plantumlFileNameTextField" alignment="0" max="32767" attributes="0"/>
+                  <Component id="generatedFileNameLabel" alignment="0" max="32767" attributes="0"/>
+                  <Component id="packageSelectionLabel" alignment="0" max="32767" attributes="0"/>
+                  <Component id="destinationDirectoryLabel" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="generatedFileNameDisplayTextField" alignment="1" max="32767" attributes="0"/>
-                          <Component id="existingSourcesPaneLabel" alignment="0" max="32767" attributes="0"/>
-                          <Component id="plantumlFileNameTextField" alignment="0" max="32767" attributes="0"/>
-                          <Component id="generatedFileNameLabel" alignment="0" max="32767" attributes="0"/>
-                          <Component id="packageSelectionLabel" alignment="0" max="32767" attributes="0"/>
-                          <Component id="destinationDirectoryLabel" alignment="0" max="32767" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="destinationDirectoryTextField" max="32767" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="destinationDirectoryButton" min="-2" pref="140" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="packageSelectionInputDirectory" max="32767" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="packageSelectionButton" min="-2" pref="140" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Component id="pumlFileNameLabel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
+                      <Component id="destinationDirectoryTextField" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
+                      <Component id="destinationDirectoryButton" min="-2" pref="30" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="packageSelectionInputDirectory" max="32767" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="packageSelectionButton" min="-2" pref="45" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="packageSelectionComboBox" min="-2" pref="233" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="sourceGroupsComboBox" min="-2" pref="244" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                      <Component id="pumlFileNameLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
+                  <Component id="sourceGroupsComboBox" alignment="0" max="32767" attributes="0"/>
               </Group>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -70,11 +63,11 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="destinationDirectoryLabel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="destinationDirectoryButton" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="destinationDirectoryTextField" alignment="0" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="destinationDirectoryTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="destinationDirectoryButton" alignment="3" pref="0" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               <Component id="packageSelectionLabel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -82,11 +75,10 @@
                   <Component id="packageSelectionButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="packageSelectionComboBox" max="32767" attributes="0"/>
-                  <Component id="sourceGroupsComboBox" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace pref="20" max="32767" attributes="0"/>
+              <Component id="sourceGroupsComboBox" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="17" max="32767" attributes="0"/>
+              <Component id="packageSelectionComboBox" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -195,6 +187,9 @@
           <StringArray count="0"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="handleSourceGroupChange"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>

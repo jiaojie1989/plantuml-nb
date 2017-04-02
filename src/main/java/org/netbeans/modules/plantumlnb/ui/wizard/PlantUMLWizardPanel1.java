@@ -127,6 +127,8 @@ public class PlantUMLWizardPanel1 implements WizardDescriptor.Panel<WizardDescri
                     
                     component.getDestinationDirectoryTextField()
                             .setText(project.getProjectDirectory().getPath());
+                    component.getDestinationDirectoryTextField()
+                            .setToolTipText(project.getProjectDirectory().getPath());
                 }
 
                 Sources sources = ProjectUtils.getSources(project);
