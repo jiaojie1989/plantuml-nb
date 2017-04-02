@@ -255,6 +255,7 @@
                 <configuration>
                     <useDefaultManifestFile>true</useDefaultManifestFile>
                     <netbeansInstallation>/home/venkat/Programs/netbeans-8.2/</netbeansInstallation>
+                    <additionalArguments>-J-XXaltjvm=dcevm</additionalArguments>
                     <!--<debugAdditionalArguments>true</debugAdditionalArguments>-->
 <!--                        <nbmBuildDir>${project.build.directory}/netbeans_clusters/</nbmBuildDir>-->
                     <moduleType>normal</moduleType>
