@@ -28,7 +28,7 @@ public class PlantUMLWizardPanel1 implements WizardDescriptor.Panel<WizardDescri
      * getComponent().
      */
     private PlantUMLVisualPanel1 component;
-    private final Set<ChangeListener> listeners = new HashSet<ChangeListener>(1);
+    private final Set<ChangeListener> listeners = new HashSet<>(1);
 
     // Get the visual component for the panel. In this template, the component
     // is kept separate. This can be more efficient: if the wizard is created
@@ -57,17 +57,13 @@ public class PlantUMLWizardPanel1 implements WizardDescriptor.Panel<WizardDescri
      */
     @Override
     public boolean isValid() {
-        
         String fileName = component.getPlantumlFileNameTextField().getText();
-        String packageName = component.getPackageSelectionInputDirectory().getText();
         String destinationDirectory = component.getDestinationDirectoryTextField().getText();
 
-        if(fileName.equals("") || fileName == null
-                || packageName.equals("") || packageName == null
-                || destinationDirectory.equals("") || destinationDirectory == null) {
-            return false;
-        }
-        return true;
+        return StringUtils.isNotEmpty(fileName)
+                && component.getSourceGroupsComboBox().getSelectedIndex() > -1
+                && component.getPackageSelectionComboBox().getSelectedIndex() > -1
+                && StringUtils.isNotEmpty(destinationDirectory);
         // If it depends on some condition (form filled out...) and
         // this condition changes (last form field filled in...) then
         // use ChangeSupport to implement add/removeChangeListener below.
@@ -94,9 +90,9 @@ public class PlantUMLWizardPanel1 implements WizardDescriptor.Panel<WizardDescri
             ls = new HashSet();
         }
         ChangeEvent ev = new ChangeEvent(this);
-        for(ChangeListener l: listeners) {
+        listeners.forEach((l) -> {
             l.stateChanged(ev);
-        }        
+        });        
     }
 
     /**
@@ -116,14 +112,14 @@ public class PlantUMLWizardPanel1 implements WizardDescriptor.Panel<WizardDescri
         
         if (component != null) {
             if (StringUtils.isNotEmpty(selectedPackageName)) {
-                component.getPackageSelectionInputDirectory().setText(selectedPackageName);
+                component.getPackageSelectionComboBox().setSelectedItem(selectedPackageName);
             } else {
                 // Try to preselect a folder
                 FileObject preselectedFolder = Templates.getTargetFolder(wiz);
                 Project project = Templates.getProject(wiz);
                 if (project == null) throw new NullPointerException ("No project found for: " + wiz);
                 if (preselectedFolder != null) {
-                    component.getPackageSelectionInputDirectory().setText(preselectedFolder.getPath());
+                    component.getPackageSelectionComboBox().setSelectedItem(selectedPackageName);
                     
                     component.getDestinationDirectoryTextField()
                             .setText(project.getProjectDirectory().getPath());
@@ -145,7 +141,7 @@ public class PlantUMLWizardPanel1 implements WizardDescriptor.Panel<WizardDescri
     @Override
     public void storeSettings(WizardDescriptor wiz) {
         wiz.putProperty("filename", component.getPlantumlFileNameTextField().getText());
-        wiz.putProperty("packagename", component.getPackageSelectionInputDirectory().getText());
+        wiz.putProperty("packagename", component.getPackageSelectionComboBox().getSelectedItem().toString());
         wiz.putProperty("destinationdirectory", component.getDestinationDirectoryTextField().getText());
     }
 

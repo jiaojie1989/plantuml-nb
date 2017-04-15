@@ -1,9 +1,11 @@
 Version 1.6
 ============
 + __[ DONE ]__ Change the package dropdown when the sourceGroup dropdown changes.
-+ Wire the package and sourceGroup dropdowns.
-+ Remove the package text box.
++ __[ DONE ]__ Wire the package and sourceGroup dropdowns.
++ __[ DONE ]__ Add labels for Package & SourceGroup combo boxes.
++ __[ DONE ]__ Remove the package text box.
 + Wire the Enter file filters wizard panel.
++ Fix tooltip texts for sourceGroup & package dropdowns & destination directory text field.
 + Wire the Choose Display Type Options wizard panel.
 + Create wizard panel for [Display package name and Display name options](http://plantuml-depend.sourceforge.net/display_option/display_option.html)
 + __[ DONE ]__ Add a encoding picker dropdown to options pane. 

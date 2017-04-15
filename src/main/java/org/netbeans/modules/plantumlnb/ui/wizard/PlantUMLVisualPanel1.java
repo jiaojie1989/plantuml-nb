@@ -20,10 +20,10 @@ import javax.swing.JFileChooser;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.ListModel;
 import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import net.sourceforge.plantumldependency.common.constants.CharacterConstants;
 import org.netbeans.api.project.Project;
 import org.netbeans.api.project.SourceGroup;
 import org.netbeans.api.project.ui.OpenProjects;
@@ -53,7 +53,6 @@ public final class PlantUMLVisualPanel1 extends JPanel {
         packageSelectionComboBox.setRenderer(PackageView.listRenderer());
         
         getPlantumlFileNameTextField().getDocument().addDocumentListener(new GenericDocumentListener());
-        getPackageSelectionInputDirectory().getDocument().addDocumentListener(new GenericDocumentListener());
         getDestinationDirectoryTextField().getDocument().addDocumentListener(new GenericDocumentListener());
     }
 
@@ -71,12 +70,12 @@ public final class PlantUMLVisualPanel1 extends JPanel {
         if (getPlantumlFileNameTextField().getDocument() == e.getDocument()) {
             firePropertyChange(DESTINATION_DIRECTORY, null, destinationDirectoryTextField.getText());
         }
-        if (getPackageSelectionInputDirectory().getDocument() == e.getDocument()) {
-            firePropertyChange(PLANTUML_FILE_NAME, null, plantumlFileNameTextField.getText());
-        }
-        if (getPackageSelectionInputDirectory().getDocument() == e.getDocument()) {
-            firePropertyChange(PACKAGE_SELECTION, null, packageSelectionInputDirectory.getText());
-        }
+//        if (getPackageSelectionInputDirectory().getDocument() == e.getDocument()) {
+//            firePropertyChange(PLANTUML_FILE_NAME, null, plantumlFileNameTextField.getText());
+//        }
+//        if (getPackageSelectionInputDirectory().getDocument() == e.getDocument()) {
+//            firePropertyChange(PACKAGE_SELECTION, null, packageSelectionInputDirectory.getText());
+//        }
     }
 
     public void initValues( FileObject template, FileObject preselectedFolder, SourceGroup[] sourceGroups ) {
@@ -193,8 +192,6 @@ public final class PlantUMLVisualPanel1 extends JPanel {
     private void initComponents() {
 
         existingSourcesPaneLabel = new javax.swing.JLabel();
-        packageSelectionButton = new javax.swing.JButton();
-        packageSelectionInputDirectory = new javax.swing.JTextField();
         plantumlFileNameTextField = new javax.swing.JTextField();
         destinationDirectoryTextField = new javax.swing.JTextField();
         destinationDirectoryButton = new javax.swing.JButton();
@@ -202,20 +199,14 @@ public final class PlantUMLVisualPanel1 extends JPanel {
         generatedFileNameLabel = new javax.swing.JLabel();
         packageSelectionLabel = new javax.swing.JLabel();
         destinationDirectoryLabel = new javax.swing.JLabel();
-        generatedFileNameDisplayTextField = new javax.swing.JTextField();
         packageSelectionComboBox = new javax.swing.JComboBox<>();
         sourceGroupsComboBox = new javax.swing.JComboBox<>();
+        packageSelectionLabel1 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        generatedFileNameDisplayTextArea = new javax.swing.JTextArea();
 
         org.openide.awt.Mnemonics.setLocalizedText(existingSourcesPaneLabel, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel1.class, "PlantUMLVisualPanel1.existingSourcesPaneLabel.text")); // NOI18N
-
-        org.openide.awt.Mnemonics.setLocalizedText(packageSelectionButton, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel1.class, "PlantUMLVisualPanel1.packageSelectionButton.text")); // NOI18N
-        packageSelectionButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                packageSelectionButtonActionPerformed(evt);
-            }
-        });
-
-        packageSelectionInputDirectory.setText(org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel1.class, "PlantUMLVisualPanel1.packageSelectionInputDirectory.text")); // NOI18N
 
         plantumlFileNameTextField.setText(org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel1.class, "PlantUMLVisualPanel1.plantumlFileNameTextField.text")); // NOI18N
         plantumlFileNameTextField.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -241,8 +232,11 @@ public final class PlantUMLVisualPanel1 extends JPanel {
 
         org.openide.awt.Mnemonics.setLocalizedText(destinationDirectoryLabel, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel1.class, "PlantUMLVisualPanel1.destinationDirectoryLabel.text")); // NOI18N
 
-        generatedFileNameDisplayTextField.setEditable(false);
-        generatedFileNameDisplayTextField.setText(org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel1.class, "PlantUMLVisualPanel1.generatedFileNameDisplayTextField.text")); // NOI18N
+        packageSelectionComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                packageSelectionComboBoxActionPerformed(evt);
+            }
+        });
 
         sourceGroupsComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -250,33 +244,40 @@ public final class PlantUMLVisualPanel1 extends JPanel {
             }
         });
 
+        org.openide.awt.Mnemonics.setLocalizedText(packageSelectionLabel1, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel1.class, "PlantUMLVisualPanel1.packageSelectionLabel1.text")); // NOI18N
+
+        generatedFileNameDisplayTextArea.setColumns(20);
+        generatedFileNameDisplayTextArea.setRows(5);
+        generatedFileNameDisplayTextArea.setWrapStyleWord(true);
+        jScrollPane1.setViewportView(generatedFileNameDisplayTextArea);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(packageSelectionComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(generatedFileNameDisplayTextField)
-                    .addComponent(existingSourcesPaneLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(plantumlFileNameTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(generatedFileNameLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(packageSelectionLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(destinationDirectoryLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(packageSelectionComboBox, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(existingSourcesPaneLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(plantumlFileNameTextField)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(packageSelectionLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(275, 275, 275))
+                    .addComponent(destinationDirectoryLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(destinationDirectoryTextField)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(destinationDirectoryButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(2, 2, 2))
+                    .addComponent(packageSelectionLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(generatedFileNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSeparator1)
+                    .addComponent(sourceGroupsComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(packageSelectionInputDirectory)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(packageSelectionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(pumlFileNameLabel)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(sourceGroupsComboBox, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -288,27 +289,27 @@ public final class PlantUMLVisualPanel1 extends JPanel {
                 .addComponent(pumlFileNameLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(plantumlFileNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(generatedFileNameLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(generatedFileNameDisplayTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(9, 9, 9)
                 .addComponent(destinationDirectoryLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(destinationDirectoryTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(destinationDirectoryButton, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                    .addComponent(destinationDirectoryButton, javax.swing.GroupLayout.PREFERRED_SIZE, 21, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(packageSelectionLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(packageSelectionInputDirectory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(packageSelectionButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(sourceGroupsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(packageSelectionLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(packageSelectionComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
+                .addGap(18, 18, 18)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(generatedFileNameLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
    
@@ -321,17 +322,19 @@ public final class PlantUMLVisualPanel1 extends JPanel {
         }
     }//GEN-LAST:event_destinationDirectoryButtonActionPerformed
 
-    @NbBundle.Messages("PlantUMLVisualPanel1.packageSelectionButton.text=...")
-    private void packageSelectionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_packageSelectionButtonActionPerformed
-        String returnVal = showOpenDialog(PlantUMLVisualPanel1_packageSelectionButton_text());
-        if(returnVal != null) {
-            packageSelectionInputDirectory.setText(returnVal);
-            packageSelectionInputDirectory.setToolTipText(returnVal);
-        }
-    }//GEN-LAST:event_packageSelectionButtonActionPerformed
-
     private void updateGeneratedFileNameDisplayLabel(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_updateGeneratedFileNameDisplayLabel
-        generatedFileNameDisplayTextField.setText(plantumlFileNameTextField.getText() + ".puml");
+        if (destinationDirectoryTextField.getText() != null && plantumlFileNameTextField.getText() != null) {
+            String destDir = destinationDirectoryTextField.getText();
+            if (System.getProperty("os.name").toLowerCase().contains("windows")) {
+                destDir += destDir.endsWith(CharacterConstants.BACK_SLASH_CHAR) ? "" : CharacterConstants.BACK_SLASH_CHAR;
+            } else {
+                destDir += destDir.endsWith(CharacterConstants.SLASH_CHAR) ? "" : CharacterConstants.SLASH_CHAR;
+            }
+            
+            String fqFileName = destDir + plantumlFileNameTextField.getText() + ".puml";
+            generatedFileNameDisplayTextArea.setText(fqFileName);
+            generatedFileNameDisplayTextArea.setToolTipText(fqFileName);
+        }
     }//GEN-LAST:event_updateGeneratedFileNameDisplayLabel
 
     private void handleSourceGroupChange(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_handleSourceGroupChange
@@ -339,17 +342,23 @@ public final class PlantUMLVisualPanel1 extends JPanel {
         updatePackages(selectedSourceGroup);
     }//GEN-LAST:event_handleSourceGroupChange
 
+    private void packageSelectionComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_packageSelectionComboBoxActionPerformed
+        plantUMLWizardPanel1.fireChangeEvent();
+        updateUI();
+    }//GEN-LAST:event_packageSelectionComboBoxActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton destinationDirectoryButton;
     private javax.swing.JLabel destinationDirectoryLabel;
     private javax.swing.JTextField destinationDirectoryTextField;
     private javax.swing.JLabel existingSourcesPaneLabel;
-    private javax.swing.JTextField generatedFileNameDisplayTextField;
+    private javax.swing.JTextArea generatedFileNameDisplayTextArea;
     private javax.swing.JLabel generatedFileNameLabel;
-    private javax.swing.JButton packageSelectionButton;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JComboBox<String> packageSelectionComboBox;
-    private javax.swing.JTextField packageSelectionInputDirectory;
     private javax.swing.JLabel packageSelectionLabel;
+    private javax.swing.JLabel packageSelectionLabel1;
     private javax.swing.JTextField plantumlFileNameTextField;
     private javax.swing.JLabel pumlFileNameLabel;
     private javax.swing.JComboBox<String> sourceGroupsComboBox;
@@ -366,14 +375,6 @@ public final class PlantUMLVisualPanel1 extends JPanel {
 
     public void setDestinationDirectoryTextField(JTextField destinationDirectoryTextField) {
         this.destinationDirectoryTextField = destinationDirectoryTextField;
-    }
-
-    public JTextField getPackageSelectionInputDirectory() {
-        return packageSelectionInputDirectory;
-    }
-
-    public void setPackageSelectionInputDirectory(JTextField packageSelectionInputDirectory) {
-        this.packageSelectionInputDirectory = packageSelectionInputDirectory;
     }
 
     public JTextField getPlantumlFileNameTextField() {
@@ -437,6 +438,7 @@ public final class PlantUMLVisualPanel1 extends JPanel {
                 Icon icon = g.getIcon(false);
                 super.getListCellRendererComponent(list, name, index, isSelected, cellHasFocus);
                 setIcon(icon);
+                setToolTipText(name);
             }
             return this;
         }
