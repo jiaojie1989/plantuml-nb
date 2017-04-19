@@ -215,7 +215,7 @@ public final class PlantUMLVisualPanel1 extends JPanel {
         plantumlFileNameTextField.setText(org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel1.class, "PlantUMLVisualPanel1.plantumlFileNameTextField.text")); // NOI18N
         plantumlFileNameTextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                updateGeneratedFileNameDisplayLabel(evt);
+                updateGeneratedFileNameDisplayLabel();
             }
         });
 
@@ -324,10 +324,11 @@ public final class PlantUMLVisualPanel1 extends JPanel {
         if(returnVal != null) {
             destinationDirectoryTextField.setText(returnVal);
             destinationDirectoryTextField.setToolTipText(returnVal);
+            updateGeneratedFileNameDisplayLabel();
         }
     }//GEN-LAST:event_destinationDirectoryButtonActionPerformed
 
-    private void updateGeneratedFileNameDisplayLabel(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_updateGeneratedFileNameDisplayLabel
+    private void updateGeneratedFileNameDisplayLabel() {//GEN-FIRST:event_updateGeneratedFileNameDisplayLabel
         if (destinationDirectoryTextField.getText() != null && plantumlFileNameTextField.getText() != null) {
             String destDir = destinationDirectoryTextField.getText();
             if (System.getProperty("os.name").toLowerCase().contains("windows")) {
