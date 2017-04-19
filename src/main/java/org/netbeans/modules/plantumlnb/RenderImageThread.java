@@ -58,12 +58,15 @@ public class RenderImageThread extends Thread {
          * Window System: Window System API is required to be called from AWT 
          * thread only, see http://core.netbeans.org/proposals/threading/
          */
-        SwingUtilities.invokeLater(new Runnable(){
-            @Override
-            public void run() {
-                topComponent.setDisplayName(((pumlDataObject) topComponent.getCurrentDataObject()).getPrimaryFile().getName());
-            }
-        });
+        synchronized (topComponent) {
+            SwingUtilities.invokeLater(() -> {
+                // TODO: Remove the next two lines after thorough testing of the synchronized block.
+                // This happens when there are multiple puml filed opened & they are all closed in quick succession before this thread completes excution.
+                //if (topComponent.getCurrentDataObject() != null)  {
+                    topComponent.setDisplayName(((pumlDataObject) topComponent.getCurrentDataObject()).getPrimaryFile().getName());
+                //}
+            });
+        }
         
         topComponent.repaint();
     }
