@@ -34,11 +34,17 @@ public final class PlantUMLVisualPanel2 extends JPanel {
         excludePatternsLabel = new javax.swing.JLabel();
         includePatternTextField = new javax.swing.JTextField();
         helpTextLabel = new javax.swing.JLabel();
+        excludePatternsLabel1 = new javax.swing.JLabel();
+        excludePatternsLabel2 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JSeparator();
 
+        includePatternsLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         org.openide.awt.Mnemonics.setLocalizedText(includePatternsLabel, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel2.class, "PlantUMLVisualPanel2.includePatternsLabel.text")); // NOI18N
 
         excludePatternTextField.setText(org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel2.class, "PlantUMLVisualPanel2.excludePatternTextField.text")); // NOI18N
 
+        excludePatternsLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         org.openide.awt.Mnemonics.setLocalizedText(excludePatternsLabel, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel2.class, "PlantUMLVisualPanel2.excludePatternsLabel.text")); // NOI18N
 
         includePatternTextField.setText(org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel2.class, "PlantUMLVisualPanel2.includePatternTextField.text")); // NOI18N
@@ -46,21 +52,31 @@ public final class PlantUMLVisualPanel2 extends JPanel {
         org.openide.awt.Mnemonics.setLocalizedText(helpTextLabel, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel2.class, "PlantUMLVisualPanel2.helpTextLabel.text")); // NOI18N
         helpTextLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
+        excludePatternsLabel1.setFont(new java.awt.Font("Dialog", 2, 11)); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(excludePatternsLabel1, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel2.class, "PlantUMLVisualPanel2.excludePatternsLabel1.text")); // NOI18N
+
+        excludePatternsLabel2.setFont(new java.awt.Font("Dialog", 2, 11)); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(excludePatternsLabel2, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel2.class, "PlantUMLVisualPanel2.excludePatternsLabel2.text")); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(helpTextLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(excludePatternTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(includePatternTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(helpTextLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE)
+                    .addComponent(excludePatternTextField)
+                    .addComponent(jSeparator1)
+                    .addComponent(includePatternTextField)
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(includePatternsLabel)
-                            .addComponent(excludePatternsLabel))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(excludePatternsLabel1)
+                            .addComponent(excludePatternsLabel)
+                            .addComponent(excludePatternsLabel2))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jSeparator2))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -70,22 +86,34 @@ public final class PlantUMLVisualPanel2 extends JPanel {
                 .addComponent(includePatternsLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(excludePatternTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(excludePatternsLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(excludePatternsLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(includePatternTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(helpTextLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(excludePatternsLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(helpTextLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(42, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField excludePatternTextField;
     private javax.swing.JLabel excludePatternsLabel;
+    private javax.swing.JLabel excludePatternsLabel1;
+    private javax.swing.JLabel excludePatternsLabel2;
     private javax.swing.JLabel helpTextLabel;
     private javax.swing.JTextField includePatternTextField;
     private javax.swing.JLabel includePatternsLabel;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     // End of variables declaration//GEN-END:variables
 
     public String getIncludePattern() {
