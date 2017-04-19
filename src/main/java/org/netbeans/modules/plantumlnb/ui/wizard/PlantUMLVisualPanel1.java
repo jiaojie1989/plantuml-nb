@@ -153,6 +153,10 @@ public final class PlantUMLVisualPanel1 extends JPanel {
     }
     
     private SourceGroup getPreselectedGroup(FileObject folder) {
+        if (folder == null) {
+            return sourceGroups[0];
+        }
+        
         Optional<SourceGroup> selectedSourceGroup = Arrays.asList(sourceGroups).stream().filter(sourceGroup -> {
             FileObject root = ((SourceGroup) sourceGroup).getRootFolder();
             return root.equals(folder) || FileUtil.isParentOf(root, folder);
@@ -246,6 +250,7 @@ public final class PlantUMLVisualPanel1 extends JPanel {
 
         org.openide.awt.Mnemonics.setLocalizedText(packageSelectionLabel1, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel1.class, "PlantUMLVisualPanel1.packageSelectionLabel1.text")); // NOI18N
 
+        generatedFileNameDisplayTextArea.setEditable(false);
         generatedFileNameDisplayTextArea.setColumns(20);
         generatedFileNameDisplayTextArea.setRows(5);
         generatedFileNameDisplayTextArea.setWrapStyleWord(true);

@@ -9,6 +9,10 @@ package org.netbeans.modules.plantumlnb.generate;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import net.sourceforge.plantuml.StringUtils;
 import net.sourceforge.plantumldependency.cli.main.program.PlantUMLDependencyProgram;
 import net.sourceforge.plantumldependency.commoncli.command.CommandLine;
 import net.sourceforge.plantumldependency.commoncli.command.impl.CommandLineImpl;
@@ -32,7 +36,35 @@ public class PlantUMLDependencyService {
             "-b", directory.getAbsolutePath(), 
             "-e", "**/package-info.java"
         });
-
+        
+        generate(commandLineArguments);
+    }
+    
+    public static void generate(final PlantUMLGenerationRequest request) throws MalformedURLException, CommandLineException, ParseException {
+        List<String> commandLineArgs = new ArrayList<>();
+        commandLineArgs.addAll(Arrays.asList(
+            "-o", request.getOutputFile().getAbsolutePath(),
+            "-b", request.getSourcesDirectoryFile().getAbsolutePath(),
+            "-dt", request.getDisplayTypeOptionsString()
+        ));
+        
+        // Default "**/package-info.java" if unspecified.
+        if (StringUtils.isNotEmpty(request.getExcludePatterns())) {
+            commandLineArgs.addAll(Arrays.asList("-e", request.getExcludePatterns()));
+        }
+        
+        // Default "**/*.java" if unspecified
+        if (StringUtils.isNotEmpty(request.getIncludePatterns())) {
+            commandLineArgs.addAll(Arrays.asList("-i", request.getIncludePatterns()));
+        }
+        
+        final CommandLine commandLineArguments = new CommandLineImpl(commandLineArgs.toArray(new String[commandLineArgs.size()]));
+        
+        generate(commandLineArguments);
+    }
+    
+    private static void generate(final CommandLine commandLineArguments) throws MalformedURLException, CommandLineException, ParseException {
+        
         // Creates the PlantUML Dependency program instance
         final JavaProgram plantumlDependencyProgram = new PlantUMLDependencyProgram();
 
@@ -42,6 +74,4 @@ public class PlantUMLDependencyService {
         // Executes the PlantUML Dependency program
         plantumlDependencyProgramExecution.execute();
     }
-    
-    
 }

@@ -22,6 +22,7 @@ import net.sourceforge.plantumldependency.commoncli.exception.CommandLineExcepti
 import org.netbeans.api.project.SourceGroup;
 import org.netbeans.api.templates.TemplateRegistration;
 import org.netbeans.modules.plantumlnb.generate.PlantUMLDependencyService;
+import org.netbeans.modules.plantumlnb.generate.PlantUMLGenerationRequest;
 import org.openide.WizardDescriptor;
 import org.openide.filesystems.FileObject;
 import org.openide.filesystems.FileUtil;
@@ -73,23 +74,55 @@ public final class PlantUMLWizardIterator implements WizardDescriptor.Instantiat
     @Override
     public Set<?> instantiate() throws IOException {        
         PlantUMLVisualPanel1 firstPanel = (PlantUMLVisualPanel1) panels.get(0).getComponent();
-        String destinationDirectory = firstPanel.getDestinationDirectoryTextField().getText();
-        String outputFileName = firstPanel.getPlantumlFileNameTextField().getText();
-        File outputFile = new File(destinationDirectory + "/" + outputFileName + ".puml");
+        PlantUMLVisualPanel2 secondPanel = (PlantUMLVisualPanel2) panels.get(1).getComponent();
+        PlantUMLVisualPanel3 thirdPanel = (PlantUMLVisualPanel3) panels.get(2).getComponent();
+        
+        PlantUMLGenerationRequest request = new PlantUMLGenerationRequest();
+        loadFirstPanelData(firstPanel, request);
+        loadSecondPanelData(secondPanel, request);
+        loadThirdPanelData(thirdPanel, request);
+        
 //        File packageDirectory = new File(firstPanel.getPackageSelectionInputDirectory().getText());
-        File packageDirectory = new File(getDestinationDirectory(firstPanel));
         try {
-            PlantUMLDependencyService.generate(packageDirectory, outputFile);
+            //PlantUMLDependencyService.generate(packageDirectory, outputFile);
+            PlantUMLDependencyService.generate(request);
         } catch (MalformedURLException | CommandLineException | ParseException ex) {
             Exceptions.printStackTrace(ex);
         }
         
         Set<FileObject> fileSet = new HashSet<>();
-        fileSet.add(FileUtil.toFileObject(outputFile));
+        if(request.getOutputFile() != null) {
+            fileSet.add(FileUtil.toFileObject(request.getOutputFile()));
+        }
+        
         return fileSet;
     }
+        
+    private void loadFirstPanelData(final PlantUMLVisualPanel1 firstPanel, final PlantUMLGenerationRequest request) {
+        request.setDestinationDirectory(firstPanel.getDestinationDirectoryTextField().getText());
+        request.setOutputFileName(firstPanel.getPlantumlFileNameTextField().getText());
+        request.setSourcesDirectory(getSourcesDirectory(firstPanel));
+    }
     
-    private String getDestinationDirectory(PlantUMLVisualPanel1 firstPanel) {
+    private void loadSecondPanelData(final PlantUMLVisualPanel2 secondPanel, final PlantUMLGenerationRequest request) {
+        request.setIncludePatterns(secondPanel.getIncludePattern());
+        request.setExcludePatterns(secondPanel.getExcludePattern());
+    }
+    
+    private void loadThirdPanelData(final PlantUMLVisualPanel3 thirdPanel, final PlantUMLGenerationRequest request) {
+        request.setAbstractClasses(thirdPanel.getAbstractClasses());
+        request.setAnnotations(thirdPanel.getAnnotations());
+        request.setClasses(thirdPanel.getClasses());
+        request.setEnums(thirdPanel.getEnums());
+        request.setExtensions(thirdPanel.getExtensions());
+        request.setImplementations(thirdPanel.getImplementations());
+        request.setImports(thirdPanel.getImports());
+        request.setInterfaces(thirdPanel.getInterfaces());
+        request.setNativeMethods(thirdPanel.getNativeMethods());
+        request.setStaticImports(thirdPanel.getStaticImports());
+    }
+    
+    private String getSourcesDirectory(PlantUMLVisualPanel1 firstPanel) {
         JComboBox sourceGroupsComboBox = firstPanel.getSourceGroupsComboBox();
         SourceGroup sourceGroup = (SourceGroup) sourceGroupsComboBox.getSelectedItem();
         

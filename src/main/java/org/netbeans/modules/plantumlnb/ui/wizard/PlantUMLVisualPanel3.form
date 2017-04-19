@@ -65,6 +65,7 @@
   <SubComponents>
     <Component class="javax.swing.JCheckBox" name="abstractClassesCheckBox">
       <Properties>
+        <Property name="selected" type="boolean" value="true"/>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
           <ResourceString bundle="org/netbeans/modules/plantumlnb/ui/wizard/Bundle.properties" key="PlantUMLVisualPanel3.abstractClassesCheckBox.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
         </Property>
@@ -78,6 +79,7 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="annotationsCheckBox">
       <Properties>
+        <Property name="selected" type="boolean" value="true"/>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
           <ResourceString bundle="org/netbeans/modules/plantumlnb/ui/wizard/Bundle.properties" key="PlantUMLVisualPanel3.annotationsCheckBox.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
         </Property>
@@ -91,6 +93,7 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="enumsCheckBox">
       <Properties>
+        <Property name="selected" type="boolean" value="true"/>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
           <ResourceString bundle="org/netbeans/modules/plantumlnb/ui/wizard/Bundle.properties" key="PlantUMLVisualPanel3.enumsCheckBox.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
         </Property>
@@ -104,6 +107,7 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="classesCheckBox">
       <Properties>
+        <Property name="selected" type="boolean" value="true"/>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
           <ResourceString bundle="org/netbeans/modules/plantumlnb/ui/wizard/Bundle.properties" key="PlantUMLVisualPanel3.classesCheckBox.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
         </Property>
@@ -117,6 +121,7 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="importsCheckBox">
       <Properties>
+        <Property name="selected" type="boolean" value="true"/>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
           <ResourceString bundle="org/netbeans/modules/plantumlnb/ui/wizard/Bundle.properties" key="PlantUMLVisualPanel3.importsCheckBox.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
         </Property>
@@ -130,6 +135,7 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="interfacesCheckBox">
       <Properties>
+        <Property name="selected" type="boolean" value="true"/>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
           <ResourceString bundle="org/netbeans/modules/plantumlnb/ui/wizard/Bundle.properties" key="PlantUMLVisualPanel3.interfacesCheckBox.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
         </Property>
@@ -143,6 +149,7 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="implementationsCheckBox">
       <Properties>
+        <Property name="selected" type="boolean" value="true"/>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
           <ResourceString bundle="org/netbeans/modules/plantumlnb/ui/wizard/Bundle.properties" key="PlantUMLVisualPanel3.implementationsCheckBox.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
         </Property>
@@ -156,6 +163,7 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="extensionsCheckBox">
       <Properties>
+        <Property name="selected" type="boolean" value="true"/>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
           <ResourceString bundle="org/netbeans/modules/plantumlnb/ui/wizard/Bundle.properties" key="PlantUMLVisualPanel3.extensionsCheckBox.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
         </Property>
@@ -169,6 +177,7 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="staticImportsCheckBox">
       <Properties>
+        <Property name="selected" type="boolean" value="true"/>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
           <ResourceString bundle="org/netbeans/modules/plantumlnb/ui/wizard/Bundle.properties" key="PlantUMLVisualPanel3.staticImportsCheckBox.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
         </Property>
@@ -182,6 +191,7 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="nativeMethodsCheckBox">
       <Properties>
+        <Property name="selected" type="boolean" value="true"/>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
           <ResourceString bundle="org/netbeans/modules/plantumlnb/ui/wizard/Bundle.properties" key="PlantUMLVisualPanel3.nativeMethodsCheckBox.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
         </Property>

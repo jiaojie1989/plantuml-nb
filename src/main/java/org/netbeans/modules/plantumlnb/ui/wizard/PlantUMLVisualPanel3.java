@@ -5,6 +5,7 @@
  */
 package org.netbeans.modules.plantumlnb.ui.wizard;
 
+import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 
 public final class PlantUMLVisualPanel3 extends JPanel {
@@ -39,6 +40,7 @@ public final class PlantUMLVisualPanel3 extends JPanel {
         staticImportsCheckBox = new javax.swing.JCheckBox();
         nativeMethodsCheckBox = new javax.swing.JCheckBox();
 
+        abstractClassesCheckBox.setSelected(true);
         org.openide.awt.Mnemonics.setLocalizedText(abstractClassesCheckBox, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.abstractClassesCheckBox.text")); // NOI18N
         abstractClassesCheckBox.setToolTipText(org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.abstractClassesCheckBox.toolTipText")); // NOI18N
         abstractClassesCheckBox.addActionListener(new java.awt.event.ActionListener() {
@@ -47,6 +49,7 @@ public final class PlantUMLVisualPanel3 extends JPanel {
             }
         });
 
+        annotationsCheckBox.setSelected(true);
         org.openide.awt.Mnemonics.setLocalizedText(annotationsCheckBox, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.annotationsCheckBox.text")); // NOI18N
         annotationsCheckBox.setToolTipText(org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.annotationsCheckBox.toolTipText")); // NOI18N
         annotationsCheckBox.addActionListener(new java.awt.event.ActionListener() {
@@ -55,6 +58,7 @@ public final class PlantUMLVisualPanel3 extends JPanel {
             }
         });
 
+        enumsCheckBox.setSelected(true);
         org.openide.awt.Mnemonics.setLocalizedText(enumsCheckBox, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.enumsCheckBox.text")); // NOI18N
         enumsCheckBox.setToolTipText(org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.enumsCheckBox.toolTipText")); // NOI18N
         enumsCheckBox.addActionListener(new java.awt.event.ActionListener() {
@@ -63,6 +67,7 @@ public final class PlantUMLVisualPanel3 extends JPanel {
             }
         });
 
+        classesCheckBox.setSelected(true);
         org.openide.awt.Mnemonics.setLocalizedText(classesCheckBox, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.classesCheckBox.text")); // NOI18N
         classesCheckBox.setToolTipText(org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.classesCheckBox.toolTipText")); // NOI18N
         classesCheckBox.addActionListener(new java.awt.event.ActionListener() {
@@ -71,6 +76,7 @@ public final class PlantUMLVisualPanel3 extends JPanel {
             }
         });
 
+        importsCheckBox.setSelected(true);
         org.openide.awt.Mnemonics.setLocalizedText(importsCheckBox, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.importsCheckBox.text")); // NOI18N
         importsCheckBox.setToolTipText(org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.importsCheckBox.toolTipText")); // NOI18N
         importsCheckBox.addActionListener(new java.awt.event.ActionListener() {
@@ -79,6 +85,7 @@ public final class PlantUMLVisualPanel3 extends JPanel {
             }
         });
 
+        interfacesCheckBox.setSelected(true);
         org.openide.awt.Mnemonics.setLocalizedText(interfacesCheckBox, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.interfacesCheckBox.text")); // NOI18N
         interfacesCheckBox.setToolTipText(org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.interfacesCheckBox.toolTipText")); // NOI18N
         interfacesCheckBox.addActionListener(new java.awt.event.ActionListener() {
@@ -87,6 +94,7 @@ public final class PlantUMLVisualPanel3 extends JPanel {
             }
         });
 
+        implementationsCheckBox.setSelected(true);
         org.openide.awt.Mnemonics.setLocalizedText(implementationsCheckBox, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.implementationsCheckBox.text")); // NOI18N
         implementationsCheckBox.setToolTipText(org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.implementationsCheckBox.toolTipText")); // NOI18N
         implementationsCheckBox.addActionListener(new java.awt.event.ActionListener() {
@@ -95,6 +103,7 @@ public final class PlantUMLVisualPanel3 extends JPanel {
             }
         });
 
+        extensionsCheckBox.setSelected(true);
         org.openide.awt.Mnemonics.setLocalizedText(extensionsCheckBox, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.extensionsCheckBox.text")); // NOI18N
         extensionsCheckBox.setToolTipText(org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.extensionsCheckBox.toolTipText")); // NOI18N
         extensionsCheckBox.addActionListener(new java.awt.event.ActionListener() {
@@ -103,6 +112,7 @@ public final class PlantUMLVisualPanel3 extends JPanel {
             }
         });
 
+        staticImportsCheckBox.setSelected(true);
         org.openide.awt.Mnemonics.setLocalizedText(staticImportsCheckBox, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.staticImportsCheckBox.text")); // NOI18N
         staticImportsCheckBox.setToolTipText(org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.staticImportsCheckBox.toolTipText")); // NOI18N
         staticImportsCheckBox.addActionListener(new java.awt.event.ActionListener() {
@@ -111,6 +121,7 @@ public final class PlantUMLVisualPanel3 extends JPanel {
             }
         });
 
+        nativeMethodsCheckBox.setSelected(true);
         org.openide.awt.Mnemonics.setLocalizedText(nativeMethodsCheckBox, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.nativeMethodsCheckBox.text")); // NOI18N
         nativeMethodsCheckBox.setToolTipText(org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.nativeMethodsCheckBox.toolTipText")); // NOI18N
         nativeMethodsCheckBox.addActionListener(new java.awt.event.ActionListener() {
@@ -220,4 +231,45 @@ public final class PlantUMLVisualPanel3 extends JPanel {
     private javax.swing.JCheckBox nativeMethodsCheckBox;
     private javax.swing.JCheckBox staticImportsCheckBox;
     // End of variables declaration//GEN-END:variables
+
+    public boolean getAbstractClasses() {
+        return abstractClassesCheckBox.isSelected();
+    }
+
+    public boolean getAnnotations() {
+        return annotationsCheckBox.isSelected();
+    }
+
+    public boolean getClasses() {
+        return classesCheckBox.isSelected();
+    }
+
+    public boolean getEnums() {
+        return enumsCheckBox.isSelected();
+    }
+
+    public boolean getExtensions() {
+        return extensionsCheckBox.isSelected();
+    }
+
+    public boolean getImplementations() {
+        return implementationsCheckBox.isSelected();
+    }
+
+    public boolean getImports() {
+        return importsCheckBox.isSelected();
+    }
+
+    public boolean getInterfaces() {
+        return interfacesCheckBox.isSelected();
+    }
+
+    public boolean getNativeMethods() {
+        return nativeMethodsCheckBox.isSelected();
+    }
+
+    public boolean getStaticImports() {
+        return staticImportsCheckBox.isSelected();
+    }
+
 }
