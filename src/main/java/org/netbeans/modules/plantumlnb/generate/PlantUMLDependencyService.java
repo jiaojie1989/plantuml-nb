@@ -28,9 +28,6 @@ public class PlantUMLDependencyService {
     
 
     public static void generate(File directory, File outputFile) throws MalformedURLException, CommandLineException, ParseException {
-
-        // Creates the PlantUML Dependency arguments as they would be written in the command line
-//        final CommandLine commandLineArguments = new CommandLineImpl(new String[] {"-o", "plantuml-jdk-1.7.0.45.txt", "-b", "C:\\jdk-1.7.0.45-src", "-e", "**/package-info.java"});
         final CommandLine commandLineArguments = new CommandLineImpl(new String[] {
             "-o", outputFile.getAbsolutePath(), 
             "-b", directory.getAbsolutePath(), 

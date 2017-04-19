@@ -18,19 +18,24 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="classesCheckBox" max="32767" attributes="0"/>
-                  <Component id="abstractClassesCheckBox" pref="676" max="32767" attributes="0"/>
-                  <Component id="annotationsCheckBox" alignment="0" max="32767" attributes="0"/>
-                  <Component id="enumsCheckBox" alignment="0" max="32767" attributes="0"/>
-                  <Component id="extensionsCheckBox" alignment="0" max="32767" attributes="0"/>
-                  <Component id="implementationsCheckBox" alignment="0" max="32767" attributes="0"/>
-                  <Component id="importsCheckBox" alignment="0" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="staticImportsCheckBox" max="32767" attributes="0"/>
+                  <Component id="nativeMethodsCheckBox" alignment="0" max="32767" attributes="0"/>
                   <Component id="interfacesCheckBox" alignment="0" max="32767" attributes="0"/>
-                  <Component id="nativeMethodsCheckBox" max="32767" attributes="0"/>
-                  <Component id="staticImportsCheckBox" alignment="0" max="32767" attributes="0"/>
+                  <Component id="importsCheckBox" alignment="0" max="32767" attributes="0"/>
+                  <Component id="implementationsCheckBox" alignment="0" max="32767" attributes="0"/>
+                  <Component id="extensionsCheckBox" alignment="0" max="32767" attributes="0"/>
+                  <Component id="enumsCheckBox" alignment="0" max="32767" attributes="0"/>
+                  <Component id="classesCheckBox" alignment="0" max="32767" attributes="0"/>
+                  <Component id="annotationsCheckBox" alignment="0" max="32767" attributes="0"/>
+                  <Component id="abstractClassesCheckBox" alignment="0" pref="369" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="uncheckAllButton" max="32767" attributes="0"/>
+                  <Component id="checkAllButton" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace pref="207" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -39,14 +44,30 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
               <Component id="abstractClassesCheckBox" linkSize="5" max="32767" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="annotationsCheckBox" linkSize="5" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="classesCheckBox" linkSize="5" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="enumsCheckBox" linkSize="5" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="extensionsCheckBox" linkSize="5" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="annotationsCheckBox" linkSize="5" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="classesCheckBox" linkSize="5" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                      <Component id="checkAllButton" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="enumsCheckBox" linkSize="5" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="extensionsCheckBox" linkSize="5" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                      <Component id="uncheckAllButton" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="implementationsCheckBox" linkSize="5" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -201,6 +222,26 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nativeMethodsCheckBoxActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="checkAllButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="org/netbeans/modules/plantumlnb/ui/wizard/Bundle.properties" key="PlantUMLVisualPanel3.checkAllButton.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="checkAllButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="uncheckAllButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="org/netbeans/modules/plantumlnb/ui/wizard/Bundle.properties" key="PlantUMLVisualPanel3.uncheckAllButton.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="uncheckAllButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

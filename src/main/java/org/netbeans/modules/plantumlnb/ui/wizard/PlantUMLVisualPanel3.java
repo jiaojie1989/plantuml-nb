@@ -39,6 +39,8 @@ public final class PlantUMLVisualPanel3 extends JPanel {
         extensionsCheckBox = new javax.swing.JCheckBox();
         staticImportsCheckBox = new javax.swing.JCheckBox();
         nativeMethodsCheckBox = new javax.swing.JCheckBox();
+        checkAllButton = new javax.swing.JButton();
+        uncheckAllButton = new javax.swing.JButton();
 
         abstractClassesCheckBox.setSelected(true);
         org.openide.awt.Mnemonics.setLocalizedText(abstractClassesCheckBox, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.abstractClassesCheckBox.text")); // NOI18N
@@ -130,38 +132,66 @@ public final class PlantUMLVisualPanel3 extends JPanel {
             }
         });
 
+        org.openide.awt.Mnemonics.setLocalizedText(checkAllButton, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.checkAllButton.text")); // NOI18N
+        checkAllButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkAllButtonActionPerformed(evt);
+            }
+        });
+
+        org.openide.awt.Mnemonics.setLocalizedText(uncheckAllButton, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel3.class, "PlantUMLVisualPanel3.uncheckAllButton.text")); // NOI18N
+        uncheckAllButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uncheckAllButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(classesCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(abstractClassesCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, 676, Short.MAX_VALUE)
-                    .addComponent(annotationsCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(enumsCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(extensionsCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(implementationsCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(importsCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(interfacesCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(staticImportsCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(nativeMethodsCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(staticImportsCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(interfacesCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(importsCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(implementationsCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(extensionsCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(enumsCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(classesCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(annotationsCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(abstractClassesCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(uncheckAllButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(checkAllButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(207, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(abstractClassesCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(annotationsCheckBox)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(classesCheckBox)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(enumsCheckBox)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(extensionsCheckBox)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(annotationsCheckBox)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(classesCheckBox))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(checkAllButton)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(enumsCheckBox)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(extensionsCheckBox))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(13, 13, 13)
+                        .addComponent(uncheckAllButton)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(implementationsCheckBox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -180,48 +210,57 @@ public final class PlantUMLVisualPanel3 extends JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void abstractClassesCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abstractClassesCheckBoxActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_abstractClassesCheckBoxActionPerformed
 
     private void annotationsCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annotationsCheckBoxActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_annotationsCheckBoxActionPerformed
 
     private void enumsCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enumsCheckBoxActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_enumsCheckBoxActionPerformed
 
     private void classesCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_classesCheckBoxActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_classesCheckBoxActionPerformed
 
     private void importsCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importsCheckBoxActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_importsCheckBoxActionPerformed
 
     private void interfacesCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_interfacesCheckBoxActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_interfacesCheckBoxActionPerformed
 
     private void implementationsCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_implementationsCheckBoxActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_implementationsCheckBoxActionPerformed
 
     private void extensionsCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_extensionsCheckBoxActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_extensionsCheckBoxActionPerformed
 
     private void staticImportsCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staticImportsCheckBoxActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_staticImportsCheckBoxActionPerformed
 
     private void nativeMethodsCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nativeMethodsCheckBoxActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_nativeMethodsCheckBoxActionPerformed
+
+    private void checkAllButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkAllButtonActionPerformed
+        checkAll();
+    }//GEN-LAST:event_checkAllButtonActionPerformed
+
+    private void uncheckAllButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uncheckAllButtonActionPerformed
+        uncheckAll();
+    }//GEN-LAST:event_uncheckAllButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox abstractClassesCheckBox;
     private javax.swing.JCheckBox annotationsCheckBox;
+    private javax.swing.JButton checkAllButton;
     private javax.swing.JCheckBox classesCheckBox;
     private javax.swing.JCheckBox enumsCheckBox;
     private javax.swing.JCheckBox extensionsCheckBox;
@@ -230,8 +269,35 @@ public final class PlantUMLVisualPanel3 extends JPanel {
     private javax.swing.JCheckBox interfacesCheckBox;
     private javax.swing.JCheckBox nativeMethodsCheckBox;
     private javax.swing.JCheckBox staticImportsCheckBox;
+    private javax.swing.JButton uncheckAllButton;
     // End of variables declaration//GEN-END:variables
 
+    private void checkAll() {
+        abstractClassesCheckBox.setSelected(true);
+        annotationsCheckBox.setSelected(true);
+        classesCheckBox.setSelected(true);
+        enumsCheckBox.setSelected(true);
+        extensionsCheckBox.setSelected(true);
+        implementationsCheckBox.setSelected(true);
+        importsCheckBox.setSelected(true);
+        interfacesCheckBox.setSelected(true);
+        nativeMethodsCheckBox.setSelected(true);
+        staticImportsCheckBox.setSelected(true);
+    }
+    
+    private void uncheckAll() {
+        abstractClassesCheckBox.setSelected(false);
+        annotationsCheckBox.setSelected(false);
+        classesCheckBox.setSelected(false);
+        enumsCheckBox.setSelected(false);
+        extensionsCheckBox.setSelected(false);
+        implementationsCheckBox.setSelected(false);
+        importsCheckBox.setSelected(false);
+        interfacesCheckBox.setSelected(false);
+        nativeMethodsCheckBox.setSelected(false);
+        staticImportsCheckBox.setSelected(false);
+    }
+    
     public boolean getAbstractClasses() {
         return abstractClassesCheckBox.isSelected();
     }
