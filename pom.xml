@@ -265,7 +265,7 @@
                     <!--<debugAdditionalArguments>true</debugAdditionalArguments>-->
 <!--                        <nbmBuildDir>${project.build.directory}/netbeans_clusters/</nbmBuildDir>-->
                     <moduleType>normal</moduleType>
-                    <licenseName> Apache License, Version 2.0</licenseName>
+                    <licenseName>MIT</licenseName>
                     <licenseFile>license.txt</licenseFile>
                     <requiresRestart>true</requiresRestart>
                     <codeNameBase>org.netbeans.modules.plantumlnb/1</codeNameBase>
