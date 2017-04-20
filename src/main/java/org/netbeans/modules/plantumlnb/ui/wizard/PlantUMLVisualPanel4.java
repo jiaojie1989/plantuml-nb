@@ -29,23 +29,21 @@ public final class PlantUMLVisualPanel4 extends JPanel {
     private void initComponents() {
 
         displayPackageNameTextExpressionScrollPane1 = new javax.swing.JScrollPane();
-        displayPackageNameTextExpressionArea1 = new javax.swing.JTextArea();
-        displayPackageNameTitle3 = new javax.swing.JLabel();
-        displayPackageNameTitle4 = new javax.swing.JLabel();
+        displayPackageNameTextExpressionArea = new javax.swing.JTextArea();
+        displayPackageNameInformationTitle = new javax.swing.JLabel();
+        displayPackageNameTitle = new javax.swing.JLabel();
 
-        setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        displayPackageNameTextExpressionArea.setColumns(20);
+        displayPackageNameTextExpressionArea.setRows(5);
+        displayPackageNameTextExpressionScrollPane1.setViewportView(displayPackageNameTextExpressionArea);
 
-        displayPackageNameTextExpressionArea1.setColumns(20);
-        displayPackageNameTextExpressionArea1.setRows(5);
-        displayPackageNameTextExpressionScrollPane1.setViewportView(displayPackageNameTextExpressionArea1);
+        displayPackageNameInformationTitle.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(displayPackageNameInformationTitle, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel4.class, "PlantUMLVisualPanel4.displayPackageNameInformationTitle.text")); // NOI18N
+        displayPackageNameInformationTitle.setToolTipText(org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel4.class, "PlantUMLVisualPanel4.displayPackageNameInformationTitle.toolTipText")); // NOI18N
+        displayPackageNameInformationTitle.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
-        displayPackageNameTitle3.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        org.openide.awt.Mnemonics.setLocalizedText(displayPackageNameTitle3, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel4.class, "PlantUMLVisualPanel4.displayPackageNameTitle3.text")); // NOI18N
-        displayPackageNameTitle3.setToolTipText(org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel4.class, "PlantUMLVisualPanel4.displayPackageNameTitle3.toolTipText")); // NOI18N
-
-        displayPackageNameTitle4.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        org.openide.awt.Mnemonics.setLocalizedText(displayPackageNameTitle4, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel4.class, "PlantUMLVisualPanel4.displayPackageNameTitle4.text")); // NOI18N
-        displayPackageNameTitle4.setToolTipText(org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel4.class, "PlantUMLVisualPanel4.displayPackageNameTitle4.toolTipText")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(displayPackageNameTitle, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel4.class, "PlantUMLVisualPanel4.displayPackageNameTitle.text")); // NOI18N
+        displayPackageNameTitle.setToolTipText(org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel4.class, "PlantUMLVisualPanel4.displayPackageNameTitle.toolTipText")); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -54,29 +52,32 @@ public final class PlantUMLVisualPanel4 extends JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(displayPackageNameTitle4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(displayPackageNameTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(displayPackageNameTextExpressionScrollPane1)
-                    .addComponent(displayPackageNameTitle3, javax.swing.GroupLayout.DEFAULT_SIZE, 576, Short.MAX_VALUE))
+                    .addComponent(displayPackageNameInformationTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 576, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(displayPackageNameTitle4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(displayPackageNameTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(displayPackageNameTextExpressionScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(displayPackageNameTitle3, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addComponent(displayPackageNameInformationTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextArea displayPackageNameTextExpressionArea1;
+    private javax.swing.JLabel displayPackageNameInformationTitle;
+    private javax.swing.JTextArea displayPackageNameTextExpressionArea;
     private javax.swing.JScrollPane displayPackageNameTextExpressionScrollPane1;
-    private javax.swing.JLabel displayPackageNameTitle3;
-    private javax.swing.JLabel displayPackageNameTitle4;
+    private javax.swing.JLabel displayPackageNameTitle;
     // End of variables declaration//GEN-END:variables
 
+    public String getDisplayPackageNameRegex() {
+        return displayPackageNameTextExpressionArea.getText(); // TODO: Fix this.
+    }
 }

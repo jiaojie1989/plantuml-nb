@@ -60,6 +60,12 @@ public class PlantUMLGenerationRequest {
     @Setter @Getter
     private boolean staticImports = true;
     // End Display type options
+    
+    @Setter @Getter
+    private String displayNameRegex = "";
+    
+    @Setter @Getter
+    private String displayPackageNameRegex = "";
 
     public PlantUMLGenerationRequest() {
     }

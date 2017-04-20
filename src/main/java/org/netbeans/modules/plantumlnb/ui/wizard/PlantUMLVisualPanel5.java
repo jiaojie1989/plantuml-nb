@@ -37,10 +37,10 @@ public final class PlantUMLVisualPanel5 extends JPanel {
         displayPackageNameTextExpressionArea.setRows(5);
         displayPackageNameTextExpressionScrollPane.setViewportView(displayPackageNameTextExpressionArea);
 
-        displayPackageNameExamplesLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        displayPackageNameExamplesLabel.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         org.openide.awt.Mnemonics.setLocalizedText(displayPackageNameExamplesLabel, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel5.class, "PlantUMLVisualPanel5.displayPackageNameExamplesLabel.text_3")); // NOI18N
+        displayPackageNameExamplesLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
-        displayPackageNameTitle.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         org.openide.awt.Mnemonics.setLocalizedText(displayPackageNameTitle, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel5.class, "PlantUMLVisualPanel5.displayPackageNameTitle.text")); // NOI18N
         displayPackageNameTitle.setToolTipText(org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel5.class, "PlantUMLVisualPanel5.displayPackageNameTitle.toolTipText")); // NOI18N
 
@@ -64,8 +64,8 @@ public final class PlantUMLVisualPanel5 extends JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(displayPackageNameTextExpressionScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(displayPackageNameExamplesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addComponent(displayPackageNameExamplesLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -75,5 +75,9 @@ public final class PlantUMLVisualPanel5 extends JPanel {
     private javax.swing.JScrollPane displayPackageNameTextExpressionScrollPane;
     private javax.swing.JLabel displayPackageNameTitle;
     // End of variables declaration//GEN-END:variables
+
+    public String getDisplayNameRegex() {
+        return displayPackageNameTextExpressionArea.getText();
+    }
 
 }

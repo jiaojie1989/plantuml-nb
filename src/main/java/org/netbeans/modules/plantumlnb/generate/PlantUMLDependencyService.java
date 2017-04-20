@@ -55,6 +55,14 @@ public class PlantUMLDependencyService {
             commandLineArgs.addAll(Arrays.asList("-i", request.getIncludePatterns()));
         }
         
+        if (StringUtils.isNotEmpty(request.getDisplayNameRegex())) {
+            commandLineArgs.addAll(Arrays.asList("-dn", request.getDisplayNameRegex()));
+        }
+        
+        if (StringUtils.isNotEmpty(request.getDisplayPackageNameRegex())) {
+            commandLineArgs.addAll(Arrays.asList("-dp", request.getDisplayPackageNameRegex()));
+        }
+        
         final CommandLine commandLineArguments = new CommandLineImpl(commandLineArgs.toArray(new String[commandLineArgs.size()]));
         
         generate(commandLineArguments);

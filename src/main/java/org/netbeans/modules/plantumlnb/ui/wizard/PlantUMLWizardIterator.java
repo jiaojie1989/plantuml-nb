@@ -6,7 +6,6 @@
 package org.netbeans.modules.plantumlnb.ui.wizard;
 
 import java.awt.Component;
-import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.text.ParseException;
@@ -78,15 +77,17 @@ public final class PlantUMLWizardIterator implements WizardDescriptor.Instantiat
         PlantUMLVisualPanel1 firstPanel = (PlantUMLVisualPanel1) panels.get(0).getComponent();
         PlantUMLVisualPanel2 secondPanel = (PlantUMLVisualPanel2) panels.get(1).getComponent();
         PlantUMLVisualPanel3 thirdPanel = (PlantUMLVisualPanel3) panels.get(2).getComponent();
+        PlantUMLVisualPanel4 fourthPanel = (PlantUMLVisualPanel4) panels.get(3).getComponent();
+        PlantUMLVisualPanel5 fifthPanel = (PlantUMLVisualPanel5) panels.get(4).getComponent();
         
         PlantUMLGenerationRequest request = new PlantUMLGenerationRequest();
         loadFirstPanelData(firstPanel, request);
         loadSecondPanelData(secondPanel, request);
         loadThirdPanelData(thirdPanel, request);
+        loadFourthPanelData(fourthPanel, request);
+        loadFifthPanelData(fifthPanel, request);
         
-//        File packageDirectory = new File(firstPanel.getPackageSelectionInputDirectory().getText());
         try {
-            //PlantUMLDependencyService.generate(packageDirectory, outputFile);
             PlantUMLDependencyService.generate(request);
         } catch (MalformedURLException | CommandLineException | ParseException ex) {
             Exceptions.printStackTrace(ex);
@@ -122,6 +123,14 @@ public final class PlantUMLWizardIterator implements WizardDescriptor.Instantiat
         request.setInterfaces(thirdPanel.getInterfaces());
         request.setNativeMethods(thirdPanel.getNativeMethods());
         request.setStaticImports(thirdPanel.getStaticImports());
+    }
+    
+    private void loadFourthPanelData(final PlantUMLVisualPanel4 fourthPanel, final PlantUMLGenerationRequest request) {
+        request.setDisplayPackageNameRegex(fourthPanel.getDisplayPackageNameRegex());
+    }
+    
+    private void loadFifthPanelData(final PlantUMLVisualPanel5 fifthPanel, final PlantUMLGenerationRequest request) {
+        request.setDisplayNameRegex(fifthPanel.getDisplayNameRegex());
     }
     
     private String getSourcesDirectory(PlantUMLVisualPanel1 firstPanel) {
