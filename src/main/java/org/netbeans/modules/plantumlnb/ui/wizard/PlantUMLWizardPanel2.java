@@ -9,7 +9,7 @@ import javax.swing.event.ChangeListener;
 import org.openide.WizardDescriptor;
 import org.openide.util.HelpCtx;
 
-public class PlantUMLWizardPanel2 implements WizardDescriptor.Panel<WizardDescriptor> {
+public class PlantUMLWizardPanel2 implements WizardDescriptor.Panel<WizardDescriptor>, WizardDescriptor.FinishablePanel<WizardDescriptor> {
 
     /**
      * The visual component that displays this panel. If you need to access the component from this class, just use
@@ -63,6 +63,11 @@ public class PlantUMLWizardPanel2 implements WizardDescriptor.Panel<WizardDescri
     @Override
     public void storeSettings(WizardDescriptor wiz) {
         // use wiz.putProperty to remember current panel state
+    }
+
+    @Override
+    public boolean isFinishPanel() {
+        return true;
     }
 
 }
