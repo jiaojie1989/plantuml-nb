@@ -7,8 +7,10 @@ Version 1.6
 + Wire the Enter file filters wizard panel.
 + Fix tooltip texts for sourceGroup & package dropdowns & destination directory text field.
 + __[ DONE ]__ Wire the Choose Display Type Options wizard panel.
-+ Wire the Display Package Name & Display Name options.
-+ Add validations for Ant Path Patterns & regex pattern.
++ __[ DONE ]__ Wire the Display Package Name & Display Name options.
++ __[ DONE ]__ Add validations for Ant Path Patterns & regex pattern.
++ Add validation error messages to the forms on the wizard.
++ Add error message notifications if file generation fails.
 + __[ DONE ]__ Create wizard panel for [Display package name and Display name options](http://plantuml-depend.sourceforge.net/display_option/display_option.html)
 + __[ DONE ]__ Add a encoding picker dropdown to options pane. 
     + https://docs.oracle.com/javase/7/docs/api/java/nio/charset/Charset.html
