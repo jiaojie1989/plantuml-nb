@@ -21,6 +21,8 @@ public final class PlantUMLVisualPanel4 extends JPanel implements GenericDocumen
     @Override
     public void init(final PlantUMLWizardPanel4 plantUMLWizardPanel4) {
         this.plantUMLWizardPanel4 = plantUMLWizardPanel4;
+
+        displayPackageNameTextExpressionArea.getDocument().addDocumentListener(this);
     }
 
     @Override
@@ -90,7 +92,6 @@ public final class PlantUMLVisualPanel4 extends JPanel implements GenericDocumen
 
     @Override
     public void updateUI(DocumentEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

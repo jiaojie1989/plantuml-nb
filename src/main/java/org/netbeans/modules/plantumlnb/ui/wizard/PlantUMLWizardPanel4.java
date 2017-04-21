@@ -5,7 +5,6 @@
  */
 package org.netbeans.modules.plantumlnb.ui.wizard;
 
-import javax.swing.event.ChangeListener;
 import org.netbeans.modules.plantumlnb.StringUtils;
 import org.netbeans.modules.plantumlnb.Utils;
 import org.openide.WizardDescriptor;
@@ -27,7 +26,7 @@ public class PlantUMLWizardPanel4 implements WizardDescriptor.Panel<WizardDescri
     @Override
     public PlantUMLVisualPanel4 getComponent() {
         if (component == null) {
-            component = new PlantUMLVisualPanel4();
+            component = PlantUMLVisualPanel4.createInstance(this);
         }
         return component;
     }
@@ -57,14 +56,6 @@ public class PlantUMLWizardPanel4 implements WizardDescriptor.Panel<WizardDescri
         // this condition changes (last form field filled in...) then
         // use ChangeSupport to implement add/removeChangeListener below.
         // WizardDescriptor.ERROR/WARNING/INFORMATION_MESSAGE will also be useful.
-    }
-
-    @Override
-    public void addChangeListener(ChangeListener l) {
-    }
-
-    @Override
-    public void removeChangeListener(ChangeListener l) {
     }
 
     @Override

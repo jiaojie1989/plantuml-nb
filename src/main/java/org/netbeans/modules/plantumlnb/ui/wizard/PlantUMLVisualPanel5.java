@@ -8,20 +8,22 @@ package org.netbeans.modules.plantumlnb.ui.wizard;
 import javax.swing.JPanel;
 import javax.swing.event.DocumentEvent;
 
-public final class PlantUMLVisualPanel5 extends JPanel implements GenericDocumentListener, Initializable<PlantUMLWizardPanel3> {
+public final class PlantUMLVisualPanel5 extends JPanel implements GenericDocumentListener, Initializable<PlantUMLWizardPanel5> {
 
     private PlantUMLWizardPanel5 plantUMLWizardPanel5;
 
     /**
-     * Creates new form PlantUMLVisualPanel4
+     * Creates new form PlantUMLVisualPanel5
      */
     public PlantUMLVisualPanel5() {
         initComponents();
     }
     
     @Override
-    public void init(PlantUMLWizardPanel3 initializable) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void init(PlantUMLWizardPanel5 plantUMLWizardPanel5) {
+        this.plantUMLWizardPanel5 = plantUMLWizardPanel5;
+        
+        displayNameTextExpressionArea.getDocument().addDocumentListener(this);
     }
 
     @Override
@@ -36,21 +38,21 @@ public final class PlantUMLVisualPanel5 extends JPanel implements GenericDocumen
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        displayPackageNameTextExpressionScrollPane = new javax.swing.JScrollPane();
-        displayPackageNameTextExpressionArea = new javax.swing.JTextArea();
-        displayPackageNameExamplesLabel = new javax.swing.JLabel();
-        displayPackageNameTitle = new javax.swing.JLabel();
+        displayNameTextExpressionScrollPane = new javax.swing.JScrollPane();
+        displayNameTextExpressionArea = new javax.swing.JTextArea();
+        displayNameExamplesLabel = new javax.swing.JLabel();
+        displayNameTitle = new javax.swing.JLabel();
 
-        displayPackageNameTextExpressionArea.setColumns(20);
-        displayPackageNameTextExpressionArea.setRows(5);
-        displayPackageNameTextExpressionScrollPane.setViewportView(displayPackageNameTextExpressionArea);
+        displayNameTextExpressionArea.setColumns(20);
+        displayNameTextExpressionArea.setRows(5);
+        displayNameTextExpressionScrollPane.setViewportView(displayNameTextExpressionArea);
 
-        displayPackageNameExamplesLabel.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        org.openide.awt.Mnemonics.setLocalizedText(displayPackageNameExamplesLabel, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel5.class, "PlantUMLVisualPanel5.displayPackageNameExamplesLabel.text_3")); // NOI18N
-        displayPackageNameExamplesLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        displayNameExamplesLabel.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(displayNameExamplesLabel, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel5.class, "PlantUMLVisualPanel5.displayNameExamplesLabel.text_3")); // NOI18N
+        displayNameExamplesLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
-        org.openide.awt.Mnemonics.setLocalizedText(displayPackageNameTitle, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel5.class, "PlantUMLVisualPanel5.displayPackageNameTitle.text")); // NOI18N
-        displayPackageNameTitle.setToolTipText(org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel5.class, "PlantUMLVisualPanel5.displayPackageNameTitle.toolTipText")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(displayNameTitle, org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel5.class, "PlantUMLVisualPanel5.displayNameTitle.text")); // NOI18N
+        displayNameTitle.setToolTipText(org.openide.util.NbBundle.getMessage(PlantUMLVisualPanel5.class, "PlantUMLVisualPanel5.displayNameTitle.toolTipText")); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -59,33 +61,33 @@ public final class PlantUMLVisualPanel5 extends JPanel implements GenericDocumen
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(displayPackageNameExamplesLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 576, Short.MAX_VALUE)
-                    .addComponent(displayPackageNameTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(displayPackageNameTextExpressionScrollPane))
+                    .addComponent(displayNameExamplesLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 576, Short.MAX_VALUE)
+                    .addComponent(displayNameTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(displayNameTextExpressionScrollPane))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(displayPackageNameTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(displayNameTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(displayPackageNameTextExpressionScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(displayNameTextExpressionScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(displayPackageNameExamplesLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
+                .addComponent(displayNameExamplesLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel displayPackageNameExamplesLabel;
-    private javax.swing.JTextArea displayPackageNameTextExpressionArea;
-    private javax.swing.JScrollPane displayPackageNameTextExpressionScrollPane;
-    private javax.swing.JLabel displayPackageNameTitle;
+    private javax.swing.JLabel displayNameExamplesLabel;
+    private javax.swing.JTextArea displayNameTextExpressionArea;
+    private javax.swing.JScrollPane displayNameTextExpressionScrollPane;
+    private javax.swing.JLabel displayNameTitle;
     // End of variables declaration//GEN-END:variables
 
     public String getDisplayNameRegex() {
-        return displayPackageNameTextExpressionArea.getText();
+        return displayNameTextExpressionArea.getText();
     }
 
     @Override
@@ -96,6 +98,12 @@ public final class PlantUMLVisualPanel5 extends JPanel implements GenericDocumen
     @Override
     public ValidatingWizardPanel getValidatingWizardPanel() {
         return plantUMLWizardPanel5;
+    }
+
+    public static PlantUMLVisualPanel5 createInstance(final PlantUMLWizardPanel5 plantUMLWizardPanel5) {
+        PlantUMLVisualPanel5 plantUMLVisualPanel5 = new PlantUMLVisualPanel5();
+        plantUMLVisualPanel5.init(plantUMLWizardPanel5);
+        return plantUMLVisualPanel5;
     }
 
 }
