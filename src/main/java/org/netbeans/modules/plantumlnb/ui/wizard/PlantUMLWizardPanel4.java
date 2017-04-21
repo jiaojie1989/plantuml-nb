@@ -6,10 +6,13 @@
 package org.netbeans.modules.plantumlnb.ui.wizard;
 
 import javax.swing.event.ChangeListener;
+import org.netbeans.modules.plantumlnb.StringUtils;
+import org.netbeans.modules.plantumlnb.Utils;
 import org.openide.WizardDescriptor;
+import org.openide.WizardValidationException;
 import org.openide.util.HelpCtx;
 
-public class PlantUMLWizardPanel4 implements WizardDescriptor.Panel<WizardDescriptor> {
+public class PlantUMLWizardPanel4 implements WizardDescriptor.Panel<WizardDescriptor>, ValidatingWizardPanel {
 
     /**
      * The visual component that displays this panel. If you need to access the component from this class, just use
@@ -37,10 +40,19 @@ public class PlantUMLWizardPanel4 implements WizardDescriptor.Panel<WizardDescri
         // return new HelpCtx("help.key.here");
     }
 
+    /**
+     * If it is always OK to press Next or Finish, then:
+     * @return 
+     */
     @Override
     public boolean isValid() {
-        // If it is always OK to press Next or Finish, then:
-        return true;
+        String displayPackageNameRegex = component.getDisplayPackageNameRegex();
+        
+        if (StringUtils.isEmpty(displayPackageNameRegex)) {
+            return true;
+        } else {
+            return Utils.isRegexPattern(displayPackageNameRegex);
+        }
         // If it depends on some condition (form filled out...) and
         // this condition changes (last form field filled in...) then
         // use ChangeSupport to implement add/removeChangeListener below.
@@ -63,6 +75,11 @@ public class PlantUMLWizardPanel4 implements WizardDescriptor.Panel<WizardDescri
     @Override
     public void storeSettings(WizardDescriptor wiz) {
         // use wiz.putProperty to remember current panel state
+    }
+
+    @Override
+    public void validate() throws WizardValidationException {
+        component.validate();
     }
 
 }

@@ -6,14 +6,22 @@
 package org.netbeans.modules.plantumlnb.ui.wizard;
 
 import javax.swing.JPanel;
+import javax.swing.event.DocumentEvent;
 
-public final class PlantUMLVisualPanel5 extends JPanel {
+public final class PlantUMLVisualPanel5 extends JPanel implements GenericDocumentListener, Initializable<PlantUMLWizardPanel3> {
+
+    private PlantUMLWizardPanel5 plantUMLWizardPanel5;
 
     /**
      * Creates new form PlantUMLVisualPanel4
      */
     public PlantUMLVisualPanel5() {
         initComponents();
+    }
+    
+    @Override
+    public void init(PlantUMLWizardPanel3 initializable) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -78,6 +86,16 @@ public final class PlantUMLVisualPanel5 extends JPanel {
 
     public String getDisplayNameRegex() {
         return displayPackageNameTextExpressionArea.getText();
+    }
+
+    @Override
+    public void updateUI(DocumentEvent e) {
+        
+    }
+
+    @Override
+    public ValidatingWizardPanel getValidatingWizardPanel() {
+        return plantUMLWizardPanel5;
     }
 
 }

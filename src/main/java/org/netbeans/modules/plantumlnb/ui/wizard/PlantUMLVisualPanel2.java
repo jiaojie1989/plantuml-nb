@@ -6,15 +6,33 @@
 package org.netbeans.modules.plantumlnb.ui.wizard;
 
 import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
-public final class PlantUMLVisualPanel2 extends JPanel {
+@Accessors
+public final class PlantUMLVisualPanel2 extends JPanel implements GenericDocumentListener, Initializable<PlantUMLWizardPanel2> {
+
+    @Setter
+    @Getter
+    private PlantUMLWizardPanel2 plantUMLWizardPanel2;
 
     /**
      * Creates new form PlantUMLVisualPanel2
      */
-    public PlantUMLVisualPanel2() {
+    private PlantUMLVisualPanel2() {
         initComponents();
+    }
+
+    @Override
+    public void init(final PlantUMLWizardPanel2 plantUMLWizardPanel2) {
+        this.plantUMLWizardPanel2 = plantUMLWizardPanel2;
+
+        excludePatternTextField.getDocument()
+                .addDocumentListener(this);
+        includePatternTextField.getDocument()
+                .addDocumentListener(this);
     }
 
     @Override
@@ -122,6 +140,21 @@ public final class PlantUMLVisualPanel2 extends JPanel {
     
     public String getExcludePattern() {
         return excludePatternTextField.getText();
+    }
+
+    @Override
+    public ValidatingWizardPanel getValidatingWizardPanel() {
+        return plantUMLWizardPanel2;
+    }
+
+    public static PlantUMLVisualPanel2 createInstance(final PlantUMLWizardPanel2 plantUMLWizardPanel2) {
+        PlantUMLVisualPanel2 plantUMLVisualPanel2 = new PlantUMLVisualPanel2();
+        plantUMLVisualPanel2.init(plantUMLWizardPanel2);
+        return plantUMLVisualPanel2;
+    }
+
+    @Override
+    public void updateUI(DocumentEvent e) {
     }
     
 }

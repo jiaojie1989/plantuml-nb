@@ -5,10 +5,12 @@
  */
 package org.netbeans.modules.plantumlnb.ui.wizard;
 
-import javax.swing.JCheckBox;
 import javax.swing.JPanel;
+import javax.swing.event.DocumentEvent;
 
-public final class PlantUMLVisualPanel3 extends JPanel {
+public final class PlantUMLVisualPanel3 extends JPanel implements GenericDocumentListener, Initializable<PlantUMLWizardPanel3> {
+
+    private PlantUMLWizardPanel3 plantUMLWizardPanel3;
 
     /**
      * Creates new form PlantUMLVisualPanel3
@@ -18,8 +20,25 @@ public final class PlantUMLVisualPanel3 extends JPanel {
     }
 
     @Override
+    public void init(final PlantUMLWizardPanel3 plantUMLWizardPanel3) {
+    }
+
+    @Override
     public String getName() {
         return "Choose display type options";
+    }
+    
+    public boolean isAtleastOneDisplayTypeOptionSelected() {
+        return abstractClassesCheckBox.isSelected() ||
+                annotationsCheckBox.isSelected() ||
+                classesCheckBox.isSelected() ||
+                enumsCheckBox.isSelected() ||
+                extensionsCheckBox.isSelected() ||
+                implementationsCheckBox.isSelected() ||
+                importsCheckBox.isSelected() ||
+                interfacesCheckBox.isSelected() ||
+                nativeMethodsCheckBox.isSelected() ||
+                staticImportsCheckBox.isSelected();
     }
 
     /**
@@ -336,6 +355,22 @@ public final class PlantUMLVisualPanel3 extends JPanel {
 
     public boolean getStaticImports() {
         return staticImportsCheckBox.isSelected();
+    }
+
+    @Override
+    public void updateUI(DocumentEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ValidatingWizardPanel getValidatingWizardPanel() {
+        return plantUMLWizardPanel3;
+    }
+
+    public static PlantUMLVisualPanel3 createInstance(final PlantUMLWizardPanel3 plantUMLWizardPanel3) {
+        PlantUMLVisualPanel3 plantUMLVisualPanel3 = new PlantUMLVisualPanel3();
+        plantUMLVisualPanel3.init(plantUMLWizardPanel3);
+        return plantUMLVisualPanel3;
     }
 
 }

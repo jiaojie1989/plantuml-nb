@@ -6,14 +6,21 @@
 package org.netbeans.modules.plantumlnb.ui.wizard;
 
 import javax.swing.JPanel;
+import javax.swing.event.DocumentEvent;
 
-public final class PlantUMLVisualPanel4 extends JPanel {
+public final class PlantUMLVisualPanel4 extends JPanel implements GenericDocumentListener, Initializable<PlantUMLWizardPanel4> {
 
+    private PlantUMLWizardPanel4 plantUMLWizardPanel4;
     /**
      * Creates new form PlantUMLVisualPanel4
      */
     public PlantUMLVisualPanel4() {
         initComponents();
+    }
+
+    @Override
+    public void init(final PlantUMLWizardPanel4 plantUMLWizardPanel4) {
+        this.plantUMLWizardPanel4 = plantUMLWizardPanel4;
     }
 
     @Override
@@ -80,4 +87,21 @@ public final class PlantUMLVisualPanel4 extends JPanel {
     public String getDisplayPackageNameRegex() {
         return displayPackageNameTextExpressionArea.getText(); // TODO: Fix this.
     }
+
+    @Override
+    public void updateUI(DocumentEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ValidatingWizardPanel getValidatingWizardPanel() {
+        return plantUMLWizardPanel4;
+    }
+    
+    public static PlantUMLVisualPanel4 createInstance(final PlantUMLWizardPanel4 plantUMLWizardPanel4) {
+        PlantUMLVisualPanel4 plantUMLVisualPanel4 = new PlantUMLVisualPanel4();
+        plantUMLVisualPanel4.init(plantUMLWizardPanel4);
+        return plantUMLVisualPanel4;
+    }
+
 }

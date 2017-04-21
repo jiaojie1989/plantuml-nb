@@ -5,11 +5,15 @@
  */
 package org.netbeans.modules.plantumlnb.ui.wizard;
 
-import javax.swing.event.ChangeListener;
+import static org.netbeans.modules.plantumlnb.StringUtils.isEmpty;
+import static org.netbeans.modules.plantumlnb.StringUtils.isNotEmpty;
+import static org.netbeans.modules.plantumlnb.Utils.isAntStylePathPattern;
 import org.openide.WizardDescriptor;
+import org.openide.WizardValidationException;
 import org.openide.util.HelpCtx;
 
-public class PlantUMLWizardPanel2 implements WizardDescriptor.Panel<WizardDescriptor>, WizardDescriptor.FinishablePanel<WizardDescriptor> {
+public class PlantUMLWizardPanel2 implements WizardDescriptor.Panel<WizardDescriptor>, ValidatingWizardPanel,
+        WizardDescriptor.FinishablePanel<WizardDescriptor> {
 
     /**
      * The visual component that displays this panel. If you need to access the component from this class, just use
@@ -24,7 +28,7 @@ public class PlantUMLWizardPanel2 implements WizardDescriptor.Panel<WizardDescri
     @Override
     public PlantUMLVisualPanel2 getComponent() {
         if (component == null) {
-            component = new PlantUMLVisualPanel2();
+            component = PlantUMLVisualPanel2.createInstance(this);
         }
         return component;
     }
@@ -39,20 +43,22 @@ public class PlantUMLWizardPanel2 implements WizardDescriptor.Panel<WizardDescri
 
     @Override
     public boolean isValid() {
-        // If it is always OK to press Next or Finish, then:
-        return true;
+        String ip = component.getIncludePattern();
+        String ep = component.getExcludePattern();
+        
+        if(isNotEmpty(ip) && isEmpty(ep)) {
+            return isAntStylePathPattern(ip);
+        } else if (isEmpty(ip) && isNotEmpty(ep)) {
+            return isAntStylePathPattern(ep);
+        } else if (isNotEmpty(ip) && isNotEmpty(ep)) {
+            return isAntStylePathPattern(ip) && isAntStylePathPattern(ep);
+        } else {
+            return true;
+        }
         // If it depends on some condition (form filled out...) and
         // this condition changes (last form field filled in...) then
         // use ChangeSupport to implement add/removeChangeListener below.
         // WizardDescriptor.ERROR/WARNING/INFORMATION_MESSAGE will also be useful.
-    }
-
-    @Override
-    public void addChangeListener(ChangeListener l) {
-    }
-
-    @Override
-    public void removeChangeListener(ChangeListener l) {
     }
 
     @Override
@@ -68,6 +74,11 @@ public class PlantUMLWizardPanel2 implements WizardDescriptor.Panel<WizardDescri
     @Override
     public boolean isFinishPanel() {
         return true;
+    }
+
+    @Override
+    public void validate() throws WizardValidationException {
+        component.validate();
     }
 
 }
