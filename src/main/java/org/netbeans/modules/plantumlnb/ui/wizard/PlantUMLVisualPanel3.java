@@ -5,10 +5,13 @@
  */
 package org.netbeans.modules.plantumlnb.ui.wizard;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JPanel;
 import javax.swing.event.DocumentEvent;
 
-public final class PlantUMLVisualPanel3 extends JPanel implements GenericDocumentListener, Initializable<PlantUMLWizardPanel3> {
+public final class PlantUMLVisualPanel3 extends JPanel implements GenericDocumentListener,
+        Initializable<PlantUMLWizardPanel3>, ActionListener {
 
     private PlantUMLWizardPanel3 plantUMLWizardPanel3;
 
@@ -21,6 +24,18 @@ public final class PlantUMLVisualPanel3 extends JPanel implements GenericDocumen
 
     @Override
     public void init(final PlantUMLWizardPanel3 plantUMLWizardPanel3) {
+        this.plantUMLWizardPanel3 = plantUMLWizardPanel3;
+
+        abstractClassesCheckBox.addActionListener(this);
+        annotationsCheckBox.addActionListener(this);
+        classesCheckBox.addActionListener(this);
+        enumsCheckBox.addActionListener(this);
+        extensionsCheckBox.addActionListener(this);
+        implementationsCheckBox.addActionListener(this);
+        importsCheckBox.addActionListener(this);
+        interfacesCheckBox.addActionListener(this);
+        nativeMethodsCheckBox.addActionListener(this);
+        staticImportsCheckBox.addActionListener(this);
     }
 
     @Override
@@ -359,7 +374,6 @@ public final class PlantUMLVisualPanel3 extends JPanel implements GenericDocumen
 
     @Override
     public void updateUI(DocumentEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -371,6 +385,11 @@ public final class PlantUMLVisualPanel3 extends JPanel implements GenericDocumen
         PlantUMLVisualPanel3 plantUMLVisualPanel3 = new PlantUMLVisualPanel3();
         plantUMLVisualPanel3.init(plantUMLWizardPanel3);
         return plantUMLVisualPanel3;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        getValidatingWizardPanel().fireChangeEvent();
     }
 
 }

@@ -9,7 +9,7 @@ import org.openide.WizardDescriptor;
 import org.openide.WizardValidationException;
 import org.openide.util.HelpCtx;
 
-public class PlantUMLWizardPanel3 implements WizardDescriptor.Panel<WizardDescriptor>, ValidatingWizardPanel {
+public class PlantUMLWizardPanel3 implements WizardDescriptor.Panel<WizardDescriptor>, ValidatingWizardPanel, WizardDescriptor.FinishablePanel<WizardDescriptor> {
 
     /**
      * The visual component that displays this panel. If you need to access the component from this class, just use
@@ -59,6 +59,11 @@ public class PlantUMLWizardPanel3 implements WizardDescriptor.Panel<WizardDescri
     @Override
     public void validate() throws WizardValidationException {
         component.validate();
+    }
+
+    @Override
+    public boolean isFinishPanel() {
+        return true;
     }
 
 }
