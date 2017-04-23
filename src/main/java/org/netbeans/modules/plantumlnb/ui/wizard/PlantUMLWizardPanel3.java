@@ -23,17 +23,25 @@
  */
 package org.netbeans.modules.plantumlnb.ui.wizard;
 
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import org.openide.WizardDescriptor;
 import org.openide.WizardValidationException;
+import org.openide.util.ChangeSupport;
 import org.openide.util.HelpCtx;
 
-public class PlantUMLWizardPanel3 implements WizardDescriptor.Panel<WizardDescriptor>, ValidatingWizardPanel, WizardDescriptor.FinishablePanel<WizardDescriptor> {
+public class PlantUMLWizardPanel3 implements WizardDescriptor.Panel<WizardDescriptor>, ValidatingWizardPanel,
+        WizardDescriptor.FinishablePanel<WizardDescriptor>, ChangeListener, ErrorNotifiable {
 
     /**
      * The visual component that displays this panel. If you need to access the component from this class, just use
      * getComponent().
      */
     private PlantUMLVisualPanel3 component;
+
+    private final ChangeSupport changeSupport = new ChangeSupport(this);
+
+    private WizardDescriptor wizard;
 
     // Get the visual component for the panel. In this template, the component
     // is kept separate. This can be more efficient: if the wizard is created
@@ -66,6 +74,7 @@ public class PlantUMLWizardPanel3 implements WizardDescriptor.Panel<WizardDescri
 
     @Override
     public void readSettings(WizardDescriptor wiz) {
+        this.wizard = wiz;
         // use wiz.getProperty to retrieve previous panel state
     }
 
@@ -82,6 +91,20 @@ public class PlantUMLWizardPanel3 implements WizardDescriptor.Panel<WizardDescri
     @Override
     public boolean isFinishPanel() {
         return true;
+    }
+
+    @Override
+    public void stateChanged(ChangeEvent e) {
+        fireChangeEvent();
+    }
+
+    @Override
+    public ChangeSupport getChangeSupport() {
+        return changeSupport;
+    }
+
+    public WizardDescriptor getWizard() {
+        return wizard;
     }
 
 }

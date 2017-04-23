@@ -23,12 +23,19 @@
  */
 package org.netbeans.modules.plantumlnb.ui.wizard;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JPanel;
+import javax.swing.event.ChangeListener;
 import javax.swing.event.DocumentEvent;
 
-public final class PlantUMLVisualPanel4 extends JPanel implements GenericDocumentListener, Initializable<PlantUMLWizardPanel4> {
+public final class PlantUMLVisualPanel4 extends JPanel implements GenericDocumentListener,
+        Initializable<PlantUMLWizardPanel4>, GenericChangeListener {
 
     private PlantUMLWizardPanel4 plantUMLWizardPanel4;
+
+    private final List<ChangeListener> listeners = new ArrayList<>();
+
     /**
      * Creates new form PlantUMLVisualPanel4
      */
@@ -121,6 +128,11 @@ public final class PlantUMLVisualPanel4 extends JPanel implements GenericDocumen
         PlantUMLVisualPanel4 plantUMLVisualPanel4 = new PlantUMLVisualPanel4();
         plantUMLVisualPanel4.init(plantUMLWizardPanel4);
         return plantUMLVisualPanel4;
+    }
+
+    @Override
+    public List<ChangeListener> getChangeListeners() {
+        return listeners;
     }
 
 }

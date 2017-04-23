@@ -23,12 +23,18 @@
  */
 package org.netbeans.modules.plantumlnb.ui.wizard;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JPanel;
+import javax.swing.event.ChangeListener;
 import javax.swing.event.DocumentEvent;
 
-public final class PlantUMLVisualPanel5 extends JPanel implements GenericDocumentListener, Initializable<PlantUMLWizardPanel5> {
+public final class PlantUMLVisualPanel5 extends JPanel implements GenericDocumentListener,
+        Initializable<PlantUMLWizardPanel5>, GenericChangeListener {
 
     private PlantUMLWizardPanel5 plantUMLWizardPanel5;
+
+    private final List<ChangeListener> listeners = new ArrayList<>();
 
     /**
      * Creates new form PlantUMLVisualPanel5
@@ -76,12 +82,12 @@ public final class PlantUMLVisualPanel5 extends JPanel implements GenericDocumen
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(displayNameExamplesLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 576, Short.MAX_VALUE)
-                    .addComponent(displayNameTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(displayNameTextExpressionScrollPane))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(displayNameExamplesLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 576, Short.MAX_VALUE)
+                    .addComponent(displayNameTitle, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(displayNameTextExpressionScrollPane, javax.swing.GroupLayout.Alignment.LEADING))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -91,8 +97,8 @@ public final class PlantUMLVisualPanel5 extends JPanel implements GenericDocumen
                 .addComponent(displayNameTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(displayNameTextExpressionScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(displayNameExamplesLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(displayNameExamplesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -124,4 +130,8 @@ public final class PlantUMLVisualPanel5 extends JPanel implements GenericDocumen
         return plantUMLVisualPanel5;
     }
 
+    @Override
+    public List<ChangeListener> getChangeListeners() {
+        return listeners;
+    }
 }

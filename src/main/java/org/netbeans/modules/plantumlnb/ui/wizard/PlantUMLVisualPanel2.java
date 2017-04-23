@@ -23,18 +23,24 @@
  */
 package org.netbeans.modules.plantumlnb.ui.wizard;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JPanel;
+import javax.swing.event.ChangeListener;
 import javax.swing.event.DocumentEvent;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
 @Accessors
-public final class PlantUMLVisualPanel2 extends JPanel implements GenericDocumentListener, Initializable<PlantUMLWizardPanel2> {
+public final class PlantUMLVisualPanel2 extends JPanel implements GenericDocumentListener,
+        Initializable<PlantUMLWizardPanel2>, GenericChangeListener {
 
     @Setter
     @Getter
     private PlantUMLWizardPanel2 plantUMLWizardPanel2;
+
+    private final List<ChangeListener> listeners = new ArrayList<>();
 
     /**
      * Creates new form PlantUMLVisualPanel2
@@ -173,6 +179,11 @@ public final class PlantUMLVisualPanel2 extends JPanel implements GenericDocumen
 
     @Override
     public void updateUI(DocumentEvent e) {
+    }
+
+    @Override
+    public List<ChangeListener> getChangeListeners() {
+        return listeners;
     }
     
 }

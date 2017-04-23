@@ -1,7 +1,7 @@
-/* 
+/*
  * The MIT License
  *
- * Copyright 2017 Venkat Ram Akkineni.
+ * Copyright 2017 venkat.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,32 +23,27 @@
  */
 package org.netbeans.modules.plantumlnb.ui.wizard;
 
-import javax.swing.event.ChangeListener;
 import org.openide.WizardDescriptor;
-import org.openide.util.ChangeSupport;
+import org.openide.util.NbBundle;
 
 /**
  *
  * @author venkat
  */
-public interface ValidatingWizardPanel extends WizardDescriptor.ValidatingPanel<WizardDescriptor> {
+public interface ErrorNotifiable {
 
-    @Override
-    default void addChangeListener(ChangeListener l) {
-        getChangeSupport()
-                .addChangeListener(l);
+    default void setErrorMessage(String key) {
+        if (key == null) {
+            getWizard()
+                    .getNotificationLineSupport()
+                    .clearMessages();
+        } else {
+            getWizard()
+                    .getNotificationLineSupport()
+                    .setErrorMessage(NbBundle.getMessage(PlantUMLVisualPanel5.class, key));
+        }
     }
 
-    @Override
-    default void removeChangeListener(ChangeListener l) {
-        getChangeSupport()
-                .removeChangeListener(l);
-    }
+    WizardDescriptor getWizard();
 
-    default void fireChangeEvent() {
-        getChangeSupport()
-                .fireChange();
-    }
-
-    ChangeSupport getChangeSupport();
 }

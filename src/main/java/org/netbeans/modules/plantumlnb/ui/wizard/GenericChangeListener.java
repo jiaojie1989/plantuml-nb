@@ -1,7 +1,7 @@
-/* 
+/*
  * The MIT License
  *
- * Copyright 2017 Venkat Ram Akkineni.
+ * Copyright 2017 venkat.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,32 +23,34 @@
  */
 package org.netbeans.modules.plantumlnb.ui.wizard;
 
+import java.util.List;
+import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import org.openide.WizardDescriptor;
-import org.openide.util.ChangeSupport;
 
 /**
  *
  * @author venkat
  */
-public interface ValidatingWizardPanel extends WizardDescriptor.ValidatingPanel<WizardDescriptor> {
+public interface GenericChangeListener {
 
-    @Override
     default void addChangeListener(ChangeListener l) {
-        getChangeSupport()
-                .addChangeListener(l);
+        getChangeListeners()
+                .add(l);
     }
 
-    @Override
     default void removeChangeListener(ChangeListener l) {
-        getChangeSupport()
-                .removeChangeListener(l);
+        getChangeListeners()
+                .remove(l);
     }
 
-    default void fireChangeEvent() {
-        getChangeSupport()
-                .fireChange();
+    default void fireChange() {
+        ChangeEvent e = new ChangeEvent(this);
+        getChangeListeners()
+                .forEach((l) -> {
+            l.stateChanged(e);
+        });
     }
 
-    ChangeSupport getChangeSupport();
+    List<ChangeListener> getChangeListeners();
+
 }

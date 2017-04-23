@@ -25,13 +25,18 @@ package org.netbeans.modules.plantumlnb.ui.wizard;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JPanel;
+import javax.swing.event.ChangeListener;
 import javax.swing.event.DocumentEvent;
 
 public final class PlantUMLVisualPanel3 extends JPanel implements GenericDocumentListener,
-        Initializable<PlantUMLWizardPanel3>, ActionListener {
+        Initializable<PlantUMLWizardPanel3>, ActionListener, GenericChangeListener {
 
     private PlantUMLWizardPanel3 plantUMLWizardPanel3;
+
+    private final List<ChangeListener> listeners = new ArrayList<>();
 
     /**
      * Creates new form PlantUMLVisualPanel3
@@ -408,6 +413,11 @@ public final class PlantUMLVisualPanel3 extends JPanel implements GenericDocumen
     @Override
     public void actionPerformed(ActionEvent e) {
         getValidatingWizardPanel().fireChangeEvent();
+    }
+
+    @Override
+    public List<ChangeListener> getChangeListeners() {
+        return listeners;
     }
 
 }
