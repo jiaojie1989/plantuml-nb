@@ -32,6 +32,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.Icon;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.event.ChangeListener;
@@ -41,9 +44,11 @@ import org.netbeans.api.templates.TemplateRegistration;
 import org.netbeans.modules.plantumlnb.generate.PlantUMLDependencyService;
 import org.netbeans.modules.plantumlnb.generate.PlantUMLGenerationRequest;
 import org.openide.WizardDescriptor;
+import org.openide.awt.NotificationDisplayer;
+import org.openide.awt.StatusDisplayer;
 import org.openide.filesystems.FileObject;
 import org.openide.filesystems.FileUtil;
-import org.openide.util.Exceptions;
+import org.openide.util.ImageUtilities;
 import org.openide.util.NbBundle.Messages;
 
 // TODO define position attribute
@@ -53,6 +58,8 @@ import org.openide.util.NbBundle.Messages;
         description = "PlantUMLFromExistingSourcesDescription.html")
 @Messages("PlantUMLWizardIterator_displayName=PlantUML from existing java sources")
 public final class PlantUMLWizardIterator implements WizardDescriptor.InstantiatingIterator<WizardDescriptor> {
+
+    private static final Logger LOG = Logger.getLogger(PlantUMLWizardIterator.class.getName());
 
     private int index;
 
@@ -108,7 +115,15 @@ public final class PlantUMLWizardIterator implements WizardDescriptor.Instantiat
         try {
             PlantUMLDependencyService.generate(request);
         } catch (MalformedURLException | CommandLineException | ParseException ex) {
-            Exceptions.printStackTrace(ex);
+            LOG.log(Level.INFO, "PlantUML file creation from existing java sources failed.", ex);
+            String failNotificationText = "Creation of " + request.getOutputFileName() + " PlantUML file for java files in " + request
+                    .getSourcesDirectory() + " failed. ";
+            StatusDisplayer.getDefault()
+                    .setStatusText(failNotificationText);
+            Icon failIcon = ImageUtilities.loadImageIcon("org/netbeans/modules/plantumlnb/ui/actions/close_delete.png",
+                    true);
+            NotificationDisplayer.getDefault()
+                    .notify("PlantUML File From Java Sources", failIcon, failNotificationText, null);
         }
         
         Set<FileObject> fileSet = new HashSet<>();
