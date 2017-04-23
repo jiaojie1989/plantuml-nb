@@ -72,13 +72,39 @@ public class PlantUMLWizardPanel2 implements WizardDescriptor.Panel<WizardDescri
         String ip = component.getIncludePattern();
         String ep = component.getExcludePattern();
         
-        if(isNotEmpty(ip) && isEmpty(ep)) {
-            return isAntStylePathPattern(ip);
+        if (isNotEmpty(ip) && isEmpty(ep)) {
+            if (isAntStylePathPattern(ip)) {
+                setErrorMessage(null);
+                return true;
+            } else {
+                setErrorMessage("PlantUMLVisualPanel2.includePatternTextField.errorText");
+                return false;
+            }
         } else if (isEmpty(ip) && isNotEmpty(ep)) {
-            return isAntStylePathPattern(ep);
+            if (isAntStylePathPattern(ep)) {
+                setErrorMessage(null);
+                return true;
+            } else {
+                setErrorMessage("PlantUMLVisualPanel2.excludePatternTextField.errorText");
+                return false;
+            }
         } else if (isNotEmpty(ip) && isNotEmpty(ep)) {
-            return isAntStylePathPattern(ip) && isAntStylePathPattern(ep);
+            if (isAntStylePathPattern(ip) && isAntStylePathPattern(ep)) {
+                setErrorMessage(null);
+                return true;
+            } else {
+                if (!isAntStylePathPattern(ip)) {
+                    setErrorMessage("PlantUMLVisualPanel2.includePatternTextField.errorText");
+                } else if (!isAntStylePathPattern(ep)) {
+                    setErrorMessage("PlantUMLVisualPanel2.excludePatternTextField.errorText");
+                } else if (!isAntStylePathPattern(ip) && !isAntStylePathPattern(ep)) {
+                    setErrorMessage("PlantUMLVisualPanel2.patternTextField.errorText");
+                }
+
+                return false;
+            }
         } else {
+            setErrorMessage(null);
             return true;
         }
         // If it depends on some condition (form filled out...) and

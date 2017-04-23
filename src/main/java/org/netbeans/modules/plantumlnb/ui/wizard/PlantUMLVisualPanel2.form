@@ -25,10 +25,10 @@
                   <Component id="includePatternTextField" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="includePatternsLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="excludePatternsLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="excludePatternsLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="excludePatternsLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="sampleExcludePatternsLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="includePatternsLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="sampleIncludePatternsLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
@@ -42,19 +42,19 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="includePatternsLabel" min="-2" max="-2" attributes="0"/>
+              <Component id="excludePatternsLabel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="excludePatternTextField" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="excludePatternsLabel1" min="-2" max="-2" attributes="0"/>
+              <Component id="sampleExcludePatternsLabel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="excludePatternsLabel" min="-2" max="-2" attributes="0"/>
+              <Component id="includePatternsLabel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="includePatternTextField" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="excludePatternsLabel2" min="-2" max="-2" attributes="0"/>
+              <Component id="sampleIncludePatternsLabel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jSeparator2" min="-2" pref="10" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -65,13 +65,16 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="includePatternsLabel">
+    <Component class="javax.swing.JLabel" name="excludePatternsLabel">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="12" style="1"/>
         </Property>
+        <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="excludePatternTextField"/>
+        </Property>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="org/netbeans/modules/plantumlnb/ui/wizard/Bundle.properties" key="PlantUMLVisualPanel2.includePatternsLabel.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+          <ResourceString bundle="org/netbeans/modules/plantumlnb/ui/wizard/Bundle.properties" key="PlantUMLVisualPanel2.excludePatternsLabel.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
         </Property>
       </Properties>
     </Component>
@@ -82,13 +85,16 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="excludePatternsLabel">
+    <Component class="javax.swing.JLabel" name="includePatternsLabel">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="12" style="1"/>
         </Property>
+        <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="includePatternTextField"/>
+        </Property>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="org/netbeans/modules/plantumlnb/ui/wizard/Bundle.properties" key="PlantUMLVisualPanel2.excludePatternsLabel.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+          <ResourceString bundle="org/netbeans/modules/plantumlnb/ui/wizard/Bundle.properties" key="PlantUMLVisualPanel2.includePatternsLabel.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
         </Property>
       </Properties>
     </Component>
@@ -107,23 +113,29 @@
         <Property name="verticalAlignment" type="int" value="1"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="excludePatternsLabel1">
+    <Component class="javax.swing.JLabel" name="sampleExcludePatternsLabel">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="11" style="2"/>
         </Property>
+        <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="excludePatternTextField"/>
+        </Property>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="org/netbeans/modules/plantumlnb/ui/wizard/Bundle.properties" key="PlantUMLVisualPanel2.excludePatternsLabel1.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+          <ResourceString bundle="org/netbeans/modules/plantumlnb/ui/wizard/Bundle.properties" key="PlantUMLVisualPanel2.sampleExcludePatternsLabel.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="excludePatternsLabel2">
+    <Component class="javax.swing.JLabel" name="sampleIncludePatternsLabel">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="11" style="2"/>
         </Property>
+        <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="includePatternTextField"/>
+        </Property>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="org/netbeans/modules/plantumlnb/ui/wizard/Bundle.properties" key="PlantUMLVisualPanel2.excludePatternsLabel2.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+          <ResourceString bundle="org/netbeans/modules/plantumlnb/ui/wizard/Bundle.properties" key="PlantUMLVisualPanel2.sampleIncludePatternsLabel.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
         </Property>
       </Properties>
     </Component>

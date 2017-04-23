@@ -65,7 +65,13 @@ public class PlantUMLWizardPanel3 implements WizardDescriptor.Panel<WizardDescri
 
     @Override
     public boolean isValid() {
-        return component.isAtleastOneDisplayTypeOptionSelected();
+        if (component.isAtleastOneDisplayTypeOptionSelected()) {
+            setErrorMessage(null);
+            return true;
+        }
+
+        setErrorMessage("PlantUMLVisualPanel3.displayType.errorText");
+        return false;
         // If it depends on some condition (form filled out...) and
         // this condition changes (last form field filled in...) then
         // use ChangeSupport to implement add/removeChangeListener below.

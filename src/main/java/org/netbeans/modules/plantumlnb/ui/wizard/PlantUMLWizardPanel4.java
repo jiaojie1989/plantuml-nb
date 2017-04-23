@@ -72,11 +72,16 @@ public class PlantUMLWizardPanel4 implements WizardDescriptor.Panel<WizardDescri
     @Override
     public boolean isValid() {
         String displayPackageNameRegex = component.getDisplayPackageNameRegex();
-        
+
         if (StringUtils.isEmpty(displayPackageNameRegex)) {
             return true;
         } else {
-            return Utils.isRegexPattern(displayPackageNameRegex);
+            if (!Utils.isRegexPattern(displayPackageNameRegex)) {
+                setErrorMessage("PlantUMLVisualPanel4.displayPackageNameTextExpressionArea.errorText");
+                return false;
+            }
+            setErrorMessage(null);
+            return true;
         }
         // If it depends on some condition (form filled out...) and
         // this condition changes (last form field filled in...) then
