@@ -272,7 +272,7 @@
                     <keystore>nbproject/private/keystore</keystore>
                     <keystorealias>venkat</keystorealias>
                     <keystorepassword>plantumlnb</keystorepassword>
-                    <author>Venkat R Akkineni</author>
+                    <author>Venkat Ram Akkineni</author>
                 </configuration>
             </plugin>
 
