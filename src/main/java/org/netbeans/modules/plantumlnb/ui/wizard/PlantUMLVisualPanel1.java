@@ -175,6 +175,7 @@ public final class PlantUMLVisualPanel1 extends JPanel {
                 final ComboBoxModel model = PackageView.createListView(sourceGroup);
 
                 SwingUtilities.invokeLater(() -> {
+                    model.setSelectedItem(""); // A work around to make sure selection works everytime.
                     model.setSelectedItem(isNotEmpty(selDir) ? selDir : packageSelectionComboBox.getEditor().getItem());
                     packageSelectionComboBox.setModel(model);
                 });
