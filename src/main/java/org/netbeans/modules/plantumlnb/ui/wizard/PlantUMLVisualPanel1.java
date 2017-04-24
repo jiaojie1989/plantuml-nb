@@ -29,6 +29,7 @@ import java.util.Arrays;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.IntStream;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListCellRenderer;
@@ -45,12 +46,14 @@ import net.sourceforge.plantumldependency.common.constants.CharacterConstants;
 import org.netbeans.api.project.Project;
 import org.netbeans.api.project.SourceGroup;
 import org.netbeans.api.project.ui.OpenProjects;
-import org.openide.util.NbBundle;
-import static org.netbeans.modules.plantumlnb.ui.wizard.Bundle.*;
 import org.netbeans.spi.java.project.support.ui.PackageView;
 import org.openide.filesystems.FileObject;
 import org.openide.filesystems.FileUtil;
+import org.openide.util.NbBundle;
 import org.openide.util.RequestProcessor;
+
+import static org.netbeans.modules.plantumlnb.StringUtils.isNotEmpty;
+import static org.netbeans.modules.plantumlnb.ui.wizard.Bundle.PlantUMLVisualPanel1_destinationDirectoryButton_text;
 
 public final class PlantUMLVisualPanel1 extends JPanel {
     
@@ -103,9 +106,10 @@ public final class PlantUMLVisualPanel1 extends JPanel {
         SourceGroup preselectedGroup = getPreselectedGroup(preselectedFolder);
         sourceGroupsComboBox.setSelectedItem(preselectedGroup);
         sourceGroupsComboBox.setToolTipText(preselectedGroup.getDisplayName());
-        updatePackages(preselectedGroup);
+        updatePackages(preselectedGroup, getSelectedPackage(preselectedFolder)
+                .orElse(""));
 
-        setSelectedPackage(preselectedFolder);
+//        setSelectedPackage(preselectedFolder);
     }
     
     private String showOpenDialog(String dialogTitle) {
@@ -142,13 +146,23 @@ public final class PlantUMLVisualPanel1 extends JPanel {
     ); 
     
     private void setSelectedPackage(final FileObject selectedDirectory) {
-        Optional<String> selectedPackage = getSelectedPackage(selectedDirectory);        
-        packageSelectionComboBox.getEditor().setItem(selectedPackage.orElse(""));
+        Optional<String> selectedPackage = getSelectedPackage(selectedDirectory);
+
+        if (selectedPackage != null) {
+            int selectedIndex = IntStream.of(packageSelectionComboBox.getItemCount())
+                .filter(index -> packageSelectionComboBox.getItemAt(index)
+                .equals(selectedPackage.orElse("")))
+                .findFirst()
+                .getAsInt();
+
+            packageSelectionComboBox.setSelectedIndex(selectedIndex);
+        }
         packageSelectionComboBox.setToolTipText(selectedPackage.orElse(""));
     }
     
-    private void updatePackages(final SourceGroup selectedSourceGroup) {
-        WAIT_MODEL.setSelectedItem( packageSelectionComboBox.getEditor().getItem() );
+    private void updatePackages(final SourceGroup selectedSourceGroup, final String selDir) {
+        WAIT_MODEL.setSelectedItem(packageSelectionComboBox.getEditor()
+                .getItem());
         packageSelectionComboBox.setModel( WAIT_MODEL );
         if ( updatePackagesTask != null) {
             updatePackagesTask.cancel();
@@ -156,14 +170,12 @@ public final class PlantUMLVisualPanel1 extends JPanel {
         
         if (sourceGroups != null && sourceGroups.length > 0) {
             SourceGroup sourceGroup = selectedSourceGroup == null ? sourceGroups[0] : selectedSourceGroup;
-//                Optional<SourceGroup> javaSourceGroup = Arrays.asList(this.sourceGroups)
-//                        .stream()
-//                        .filter(sourceGroup -> sourceGroup.getName().equals("1SourceRoot")).findFirst();
 
             updatePackagesTask = new RequestProcessor("ComboUpdatePackages").post(() -> {
                 final ComboBoxModel model = PackageView.createListView(sourceGroup);
+
                 SwingUtilities.invokeLater(() -> {
-                    model.setSelectedItem(packageSelectionComboBox.getEditor().getItem());
+                    model.setSelectedItem(isNotEmpty(selDir) ? selDir : packageSelectionComboBox.getEditor().getItem());
                     packageSelectionComboBox.setModel(model);
                 });
             });
@@ -363,7 +375,7 @@ public final class PlantUMLVisualPanel1 extends JPanel {
 
     private void handleSourceGroupChange(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_handleSourceGroupChange
         SourceGroup selectedSourceGroup = (SourceGroup) ((JComboBox) evt.getSource()).getSelectedItem();
-        updatePackages(selectedSourceGroup);
+        updatePackages(selectedSourceGroup, null);
     }//GEN-LAST:event_handleSourceGroupChange
 
     private void packageSelectionComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_packageSelectionComboBoxActionPerformed
@@ -389,7 +401,6 @@ public final class PlantUMLVisualPanel1 extends JPanel {
     // End of variables declaration//GEN-END:variables
 
     private static final String DESTINATION_DIRECTORY = "destinationDirectoryTextField";
-    private static final String PLANTUML_FILE_NAME = "plantumlFileNameTextField"; 
     private static final String PACKAGE_SELECTION = "packageSelectionInputDirectory";
     
     

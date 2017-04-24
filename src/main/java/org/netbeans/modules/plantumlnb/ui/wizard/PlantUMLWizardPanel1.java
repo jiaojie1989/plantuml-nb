@@ -39,6 +39,8 @@ import org.openide.WizardValidationException;
 import org.openide.filesystems.FileObject;
 import org.openide.util.HelpCtx;
 
+import static org.netbeans.modules.plantumlnb.StringUtils.isNotEmpty;
+
 public class PlantUMLWizardPanel1 implements WizardDescriptor.Panel<WizardDescriptor>, WizardDescriptor.ValidatingPanel<WizardDescriptor> {
 
     /**
@@ -80,7 +82,8 @@ public class PlantUMLWizardPanel1 implements WizardDescriptor.Panel<WizardDescri
 
         return StringUtils.isNotEmpty(fileName)
                 && component.getSourceGroupsComboBox().getSelectedIndex() > -1
-                && component.getPackageSelectionComboBox().getSelectedIndex() > -1
+                && component.getPackageSelectionComboBox().getSelectedItem() != null
+                && isNotEmpty((String) component.getPackageSelectionComboBox().getSelectedItem())
                 && StringUtils.isNotEmpty(destinationDirectory);
         // If it depends on some condition (form filled out...) and
         // this condition changes (last form field filled in...) then
