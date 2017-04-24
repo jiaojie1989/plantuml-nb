@@ -53,7 +53,6 @@ public final class PlantUMLPanel extends javax.swing.JPanel {
         this.controller = controller;
         initComponents();
 
-        txtDotPathWarn.setVisible(false);
         txtDotPath.getDocument().addDocumentListener(new DocumentListener() {
 
             @Override
@@ -126,6 +125,9 @@ public final class PlantUMLPanel extends javax.swing.JPanel {
         });
 
         txtDotPath.setText(org.openide.util.NbBundle.getMessage(PlantUMLPanel.class, "PlantUMLPanel.txtDotPath.text")); // NOI18N
+        txtDotPath.setMaximumSize(new java.awt.Dimension(450, 19));
+        txtDotPath.setMinimumSize(new java.awt.Dimension(450, 19));
+        txtDotPath.setPreferredSize(new java.awt.Dimension(450, 19));
 
         org.openide.awt.Mnemonics.setLocalizedText(lblGraphviz, org.openide.util.NbBundle.getMessage(PlantUMLPanel.class, "PlantUMLPanel.lblGraphviz.text")); // NOI18N
         lblGraphviz.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -157,8 +159,12 @@ public final class PlantUMLPanel extends javax.swing.JPanel {
             }
         });
 
-        txtDotPathWarn.setForeground(javax.swing.UIManager.getDefaults().getColor("nb.errorForeground"));
+        txtDotPathWarn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/netbeans/modules/plantumlnb/ui/options/info.png"))); // NOI18N
         org.openide.awt.Mnemonics.setLocalizedText(txtDotPathWarn, org.openide.util.NbBundle.getMessage(PlantUMLPanel.class, "PlantUMLPanel.txtDotPathWarn.text")); // NOI18N
+        txtDotPathWarn.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        txtDotPathWarn.setMaximumSize(new java.awt.Dimension(530, 30));
+        txtDotPathWarn.setMinimumSize(new java.awt.Dimension(530, 30));
+        txtDotPathWarn.setPreferredSize(new java.awt.Dimension(530, 30));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -167,24 +173,22 @@ public final class PlantUMLPanel extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblGraphviz)
-                            .addComponent(cbManual)
-                            .addComponent(lblPlanUml, javax.swing.GroupLayout.PREFERRED_SIZE, 458, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbDefault))
-                        .addContainerGap())
+                    .addComponent(lblGraphviz)
+                    .addComponent(cbManual)
+                    .addComponent(lblPlanUml, javax.swing.GroupLayout.PREFERRED_SIZE, 458, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbDefault)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lblDotPath)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(33, 33, 33)
-                                .addComponent(txtDotPathWarn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtDotPath)
+                                .addComponent(txtDotPath, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnDotPath, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                .addComponent(btnDotPath, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(txtDotPathWarn, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 30, Short.MAX_VALUE)))))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,15 +205,20 @@ public final class PlantUMLPanel extends javax.swing.JPanel {
                     .addComponent(btnDotPath, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblDotPath)
                     .addComponent(txtDotPath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txtDotPathWarn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtDotPathWarn, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+                .addGap(24, 24, 24))
         );
 
         add(jPanel1);
 
         plantumlOptionsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(PlantUMLPanel.class, "PlantUMLPanel.plantumlOptionsPanel.border.title"))); // NOI18N
 
+        encodingLabel.setLabelFor(encodingComboBox);
         org.openide.awt.Mnemonics.setLocalizedText(encodingLabel, org.openide.util.NbBundle.getMessage(PlantUMLPanel.class, "PlantUMLPanel.encodingLabel.text")); // NOI18N
+        encodingLabel.setMaximumSize(new java.awt.Dimension(200, 15));
+        encodingLabel.setMinimumSize(new java.awt.Dimension(200, 15));
+        encodingLabel.setPreferredSize(new java.awt.Dimension(200, 15));
 
         encodingComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "US-ASCII", "ISO-8859-1", "UTF-8", "UTF-16BE", "UTF-16LE", "UTF-16" }));
 
@@ -219,19 +228,19 @@ public final class PlantUMLPanel extends javax.swing.JPanel {
             plantumlOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(plantumlOptionsPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(encodingLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(encodingLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(encodingComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(encodingComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(374, Short.MAX_VALUE))
         );
         plantumlOptionsPanelLayout.setVerticalGroup(
             plantumlOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(plantumlOptionsPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(plantumlOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(encodingLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(encodingLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(encodingComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         add(plantumlOptionsPanel);
@@ -265,7 +274,9 @@ public final class PlantUMLPanel extends javax.swing.JPanel {
     private void updateConditionallyEnabledControl() {
         lblDotPath.setEnabled(cbManual.isSelected());
         txtDotPath.setEnabled(cbManual.isSelected());
+        txtDotPathWarn.setEnabled(cbManual.isSelected());
         btnDotPath.setEnabled(cbManual.isSelected());
+        updateUI();
     }
 
     private void cbDefaultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDefaultActionPerformed
@@ -279,6 +290,7 @@ public final class PlantUMLPanel extends javax.swing.JPanel {
         updateConditionallyEnabledControl();
         final String encoding = NbPreferences.forModule(PlantUMLPanel.class).get(PLANTUML_ENCODING, DEFAULT_UTF8_ENCODING);
         encodingComboBox.setSelectedItem(encoding);
+        updateUI();
     }
 
     void store() {
@@ -288,17 +300,13 @@ public final class PlantUMLPanel extends javax.swing.JPanel {
     }
 
     boolean valid() {
-        txtDotPathWarn.setVisible(false);
-
         if (cbManual.isSelected()) {
             final File file = new File(txtDotPath.getText());
             if (!file.exists()) {
-                txtDotPathWarn.setVisible(true);
                 return false;
             }
             FileObject fileObject = FileUtil.toFileObject(FileUtil.normalizeFile(file));
             boolean isDot = "dot".equalsIgnoreCase(fileObject.getName());
-            txtDotPathWarn.setVisible(!isDot);
             return isDot;
         } else {
             return true;
