@@ -2,6 +2,15 @@
 
 Netbeans plugin that wraps PlantUML to provide its functionality from within Netbeans.
 
+### Version 1.6
+
+This version of PlantUML-NB includes
+
+    * latest version (1.4.0) of PlantUML-dependency.
+    * latest version of PlantUML (2017.11).
+    * a new wizard to create PlantUML from existing java sources. 
+    * a new encoding drop down in options panel.
+
 ### Version 1.5
 
 * Upgraded plantuml to 8015 from 7985.

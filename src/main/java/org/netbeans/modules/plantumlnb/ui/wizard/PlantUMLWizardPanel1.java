@@ -80,11 +80,17 @@ public class PlantUMLWizardPanel1 implements WizardDescriptor.Panel<WizardDescri
         String fileName = component.getPlantumlFileNameTextField().getText();
         String destinationDirectory = component.getDestinationDirectoryTextField().getText();
 
-        return StringUtils.isNotEmpty(fileName)
+        if (StringUtils.isNotEmpty(fileName)
                 && component.getSourceGroupsComboBox().getSelectedIndex() > -1
-                && component.getPackageSelectionComboBox().getSelectedItem() != null
-                && isNotEmpty((String) component.getPackageSelectionComboBox().getSelectedItem())
-                && StringUtils.isNotEmpty(destinationDirectory);
+                && StringUtils.isNotEmpty(destinationDirectory)
+                && component.getPackageSelectionComboBox().getSelectedItem() != null) {
+            if (component.getPackageSelectionComboBox().getSelectedItem() instanceof String) {
+                return isNotEmpty((String) component.getPackageSelectionComboBox().getSelectedItem());
+            }
+            return true;
+        }
+
+        return false;
         // If it depends on some condition (form filled out...) and
         // this condition changes (last form field filled in...) then
         // use ChangeSupport to implement add/removeChangeListener below.

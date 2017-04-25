@@ -5,7 +5,8 @@ Version 1.6
 + __[ DONE ]__ Add labels for Package & SourceGroup combo boxes.
 + __[ DONE ]__ Remove the package text box.
 + Wire the Enter file filters wizard panel.
-+ Fix tooltip texts for sourceGroup & package dropdowns & destination directory text field.
++ __[ WON'T FIX ]__ Fix tooltip texts for sourceGroup & package dropdowns & destination directory text field.
+    - This doesn't work in package drop down in "New Java File" wizard.
 + __[ DONE ]__ Wire the Choose Display Type Options wizard panel.
 + __[ DONE ]__ Wire the Display Package Name & Display Name options.
 + __[ DONE ]__ Add validations for Ant Path Patterns & regex pattern.
