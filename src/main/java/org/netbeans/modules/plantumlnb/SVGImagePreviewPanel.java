@@ -49,7 +49,6 @@ import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
 import org.apache.batik.dom.svg.SAXSVGDocumentFactory;
 import org.apache.batik.swing.gvt.GVTTreeRendererEvent;
 import org.apache.batik.swing.gvt.GVTTreeRendererListener;
@@ -128,9 +127,10 @@ public class SVGImagePreviewPanel extends JPanel {
     public SVGDocument createSVGDocument(StringReader sr) {
         String parser = XMLResourceDescriptor.getXMLParserClassName();
         SAXSVGDocumentFactory f = new SAXSVGDocumentFactory(parser);                     
-               
+
         try {
-            currentDocument = f.createSVGDocument("http://www.w3.org/2000/svg",sr);
+            currentDocument = f.createSVGDocument("http://www.w3.org/2000/svg", sr);
+            currentDocument.getRootElement().getAttributes().removeNamedItem("preserveAspectRatio");
         } catch (IOException ex) {
             Exceptions.printStackTrace(ex);
         }

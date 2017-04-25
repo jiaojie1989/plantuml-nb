@@ -10,11 +10,11 @@ import java.io.IOException;
 import net.sourceforge.plantuml.FileFormat;
 import net.sourceforge.plantuml.FileFormatOption;
 import net.sourceforge.plantuml.SourceStringReader;
+import net.sourceforge.plantuml.core.DiagramDescription;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.openide.util.Exceptions;
 
@@ -63,7 +63,7 @@ public class PUMLGeneratorTest {
         SourceStringReader reader = new SourceStringReader(sequenceUML);
         try {
             // Write the first image to "os"
-            String desc = reader.generateImage(os, new FileFormatOption(FileFormat.SVG));
+            DiagramDescription desc = reader.outputImage(os, new FileFormatOption(FileFormat.SVG));
         } catch (IOException ex) {
             Exceptions.printStackTrace(ex);
         }
@@ -75,7 +75,7 @@ public class PUMLGeneratorTest {
         SourceStringReader reader = new SourceStringReader(sequenceUML);
         try {
             // Write the first image to "os"
-            String desc = reader.generateImage(os, new FileFormatOption(FileFormat.PNG));
+            DiagramDescription desc = reader.outputImage(os, new FileFormatOption(FileFormat.PNG));
         } catch (IOException ex) {
             Exceptions.printStackTrace(ex);
         }
@@ -87,7 +87,7 @@ public class PUMLGeneratorTest {
         SourceStringReader reader = new SourceStringReader(sequenceUML);
         try {
             // Write the first image to "os"
-            String desc = reader.generateImage(os, new FileFormatOption(FileFormat.EPS));
+            DiagramDescription desc = reader.outputImage(os, new FileFormatOption(FileFormat.EPS));
         } catch (IOException ex) {
             Exceptions.printStackTrace(ex);
         }
