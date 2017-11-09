@@ -14,7 +14,7 @@
                 <goal>nbm:run-ide</goal>
             </goals>
             <properties>
-                <Env.JAVA_HOME>/home/venkat/Programs/Java/jdk1.8.0_65</Env.JAVA_HOME>
+                <Env.JAVA_HOME>/opt/jdk</Env.JAVA_HOME>
             </properties>
         </action>
     </actions>

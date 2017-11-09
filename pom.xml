@@ -4,7 +4,7 @@
 
     <groupId>org.netbeans.modules</groupId>
     <artifactId>PlantUML-NB</artifactId>
-    <version>1.6</version>
+    <version>1.7</version>
     <packaging>nbm</packaging>
 
     <name>PlantUML-NB</name>
@@ -37,12 +37,6 @@
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-netbeans-api-annotations-common</artifactId>
             <version>${netbeans.platform.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>net.sourceforge.plantuml</groupId>
-            <artifactId>plantuml</artifactId>
-            <version>2017.11</version>
-            <type>jar</type>
         </dependency>
         <dependency>
             <groupId>net.sourceforge.plantuml-depend</groupId>
@@ -249,6 +243,11 @@
             <version>1.16.16</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>net.sourceforge.plantuml</groupId>
+            <artifactId>plantuml</artifactId>
+            <version>1.2017.18</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -260,7 +259,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <useDefaultManifestFile>true</useDefaultManifestFile>
-                    <netbeansInstallation>/home/venkat/Programs/netbeans-8.2/</netbeansInstallation>
+                    <netbeansInstallation>/home/jiaojie/netbeans-8.2/</netbeansInstallation>
                     <additionalArguments>-J-XXaltjvm=dcevm</additionalArguments>
                     <!--<debugAdditionalArguments>true</debugAdditionalArguments>-->
 <!--                        <nbmBuildDir>${project.build.directory}/netbeans_clusters/</nbmBuildDir>-->
