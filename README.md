@@ -4,6 +4,10 @@ Netbeans plugin that wraps PlantUML to provide its functionality from within Net
 
 ### Version 1.7
 
+    * latest version of PlantUML (2018.3).
+
+### Version 1.7
+
     * latest version of PlantUML (2017.18).
 
 ### Version 1.6
