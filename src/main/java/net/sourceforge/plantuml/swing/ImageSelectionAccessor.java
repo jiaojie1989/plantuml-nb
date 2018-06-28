@@ -25,6 +25,7 @@ package net.sourceforge.plantuml.swing;
 
 import java.awt.Image;
 import java.awt.datatransfer.Transferable;
+import net.sourceforge.plantuml.ImageSelection;
 
 /**
  * Accessor for ImageSelection which is package-private in
