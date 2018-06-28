@@ -2,6 +2,11 @@
 
 Netbeans plugin that wraps PlantUML to provide its functionality from within Netbeans.
 
+### Version 1.9
+
+    * latest version of PlantUML (2018.8).
+    * PlantUML Version 2018.8 supports stdlib icons.See [plantuml stdlib](http://plantuml.com/stdlib).
+
 ### Version 1.8
 
     * latest version of PlantUML (2018.3).
