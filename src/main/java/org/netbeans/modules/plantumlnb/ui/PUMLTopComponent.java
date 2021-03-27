@@ -364,14 +364,11 @@ public final class PUMLTopComponent extends TopComponent implements Serializable
 
             @Override
             public void run() {
-                InputStream inputStream = null;
-                BufferedImage image = null;
-                                                    
                 Set fss = dataObject.files();
                 Iterator iter = fss.iterator();
                 while (iter.hasNext()) {
                     FileObject fo = (FileObject) iter.next();
-                    setNewContent(PUMLGenerator.getInstance().generateIntoString(fo, FileFormat.SVG));
+                    setNewContent(PUMLGenerator.getInstance().generateSvgString(fo));
                 }
 
                 if (panelUI == null) {
@@ -529,7 +526,7 @@ public final class PUMLTopComponent extends TopComponent implements Serializable
                 while (iter.hasNext()) {
                     FileObject fo = (FileObject) iter.next();
                     if(fo.getExt().toLowerCase().equals("puml")){
-                        setNewContent(PUMLGenerator.getInstance().generateIntoString(fo, FileFormat.SVG));
+                        setNewContent(PUMLGenerator.getInstance().generateSvgString(fo));
                     } else {
                         setDefaultContent();
                     }

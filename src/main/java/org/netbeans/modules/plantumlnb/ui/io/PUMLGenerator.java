@@ -23,11 +23,12 @@
  */
 package org.netbeans.modules.plantumlnb.ui.io;
 
-import java.io.BufferedWriter;
+import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -65,67 +66,61 @@ public class PUMLGenerator {
     private PUMLGenerator() {
     }
 
-    public String generateIntoString(FileObject inputFile, FileFormat fileFormat) {
-        ByteArrayOutputStream os = new ByteArrayOutputStream();
-        try {
+    private String generateImage(FileObject inputFile, OutputStream os, FileFormat fileFormat) throws IOException {
+        final boolean manual = NbPreferences.forModule(PlantUMLPanel.class).getBoolean(PlantUMLPanel.DOT_MANUAL_MODE, false);
+        if (manual) {
+            String path = NbPreferences.forModule(PlantUMLPanel.class).get(DOT_MANUAL_MODE_DOT_PATH, "");
+            System.setProperty("GRAPHVIZ_DOT", path);
+        } else {
+            System.clearProperty("GRAPHVIZ_DOT");
+        }
 
-            final boolean manual = NbPreferences.forModule(PlantUMLPanel.class).getBoolean(PlantUMLPanel.DOT_MANUAL_MODE, false);
-            if (manual) {
-                String path = NbPreferences.forModule(PlantUMLPanel.class).get(DOT_MANUAL_MODE_DOT_PATH, "");
-                System.setProperty("GRAPHVIZ_DOT", path);
-            } else {
-                System.clearProperty("GRAPHVIZ_DOT");
-            }
-
-            /**
-             * TODO: This particular constructor seems to use UTF-8 no matter which charset is passed as an argument.
-             * Replace this to use user specified charset in the future.
-             */
+        /**
+         * TODO: This particular constructor seems to use UTF-8 no matter which
+         * charset is passed as an argument. Replace this to use user specified
+         * charset in the future.
+         */
 //            SourceStringReader reader = new SourceStringReader(inputFile.asText(), FileUtil.toFile(inputFile).getParentFile());
-            String charset = NbPreferences.forModule(PlantUMLPanel.class).get(PLANTUML_ENCODING, DEFAULT_UTF8_ENCODING);
-            SourceStringReader reader = new SourceStringReader(new Defines(), 
-                    inputFile.asText(), 
-                    charset, 
-                    Collections.<String>emptyList(), 
-                    FileUtil.toFile(inputFile).getParentFile());
-            // Write the first image to "os"
-            String desc = reader.generateImage(os, new FileFormatOption(fileFormat));
-            return new String(os.toByteArray());
+        String charset = NbPreferences.forModule(PlantUMLPanel.class).get(PLANTUML_ENCODING, DEFAULT_UTF8_ENCODING);
+        SourceStringReader reader = new SourceStringReader(new Defines(),
+                inputFile.asText(),
+                charset,
+                Collections.<String>emptyList(),
+                FileUtil.toFile(inputFile).getParentFile());
+        // Write the first image to "os"
+        return reader.generateImage(os, new FileFormatOption(fileFormat));
+
+    }
+
+    public String generateSvgString(FileObject inputFile) {
+        try (ByteArrayOutputStream os = new ByteArrayOutputStream();) {
+            generateImage(inputFile, os, FileFormat.SVG);
+            // It was observed, that PlantUML returns SVG encoded as UTF-8
+            // as this is also the XML default, it is assumed, that this is
+            // always the case
+            return os.toString("UTF-8");
         } catch (IOException ex) {
             logger.log(Level.WARNING, ex.getMessage());
-        } finally {
-            try {
-                os.close();
-            } catch (IOException ex) {
-                logger.log(Level.WARNING, ex.getMessage());
-            }
         }
         return null;
     }
 
-
-public void generateIntoFile(FileObject inputFile, File outputFile, FileFormat fileFormat) {
-        String content = generateIntoString(inputFile, fileFormat);
-        FileWriter fw = null;
-        BufferedWriter bw = null;
-        try {
-
-            outputFile.createNewFile();
-            fw = new FileWriter(outputFile);
-            bw = new BufferedWriter(fw);
-            bw.write(PrettyPrinter.formatXml(content));
-            bw.flush();
-
-        } catch (IOException ex) {
-            logger.log(Level.WARNING, ex.getMessage());
-        } finally {
-            try {
-                if (fw != null) {
-                    fw.close();
-                }
-                if (bw != null) {
-                    bw.close();
-                }
+    public void generateIntoFile(FileObject inputFile, File outputFile, FileFormat fileFormat) {
+        if (fileFormat == FileFormat.SVG) {
+            try (ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    FileOutputStream fos = new FileOutputStream(outputFile, false);
+                    BufferedOutputStream bw = new BufferedOutputStream(fos)) {
+                generateImage(inputFile, baos, FileFormat.SVG);
+                bw.write(PrettyPrinter.formatXml(baos.toByteArray()));
+                bw.flush();
+            } catch (IOException ex) {
+                logger.log(Level.WARNING, ex.getMessage());
+            }
+        } else {
+            try (FileOutputStream fos = new FileOutputStream(outputFile, false);
+                    BufferedOutputStream bw = new BufferedOutputStream(fos)) {
+                generateImage(inputFile, bw, fileFormat);
+                bw.flush();
             } catch (IOException ex) {
                 logger.log(Level.WARNING, ex.getMessage());
             }
