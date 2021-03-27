@@ -31,14 +31,15 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.geom.AffineTransform;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.StringReader;
-import java.io.UnsupportedEncodingException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.List;
@@ -59,6 +60,9 @@ import org.openide.util.Exceptions;
 import org.openide.util.Lookup;
 import org.openide.util.Utilities;
 import org.w3c.dom.svg.SVGDocument;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
+import static java.nio.file.StandardOpenOption.TRUNCATE_EXISTING;
 
 /**
  *
@@ -316,31 +320,24 @@ public class SVGImagePreviewPanel extends JPanel {
 
         @Override
         public void actionPerformed(ActionEvent ae) {
-            File tmpFile = null;
-            try {
-                String tempDir = System.getProperty("java.io.tmpdir");  
-                tmpFile = new File(tempDir, UUID.randomUUID().toString() + ".png");  
-                PrintWriter writer = new PrintWriter(tmpFile, "UTF-8");
-                
-                writer.write(currentImageContent); 
-                writer.close();
-            } catch (    FileNotFoundException | UnsupportedEncodingException ex) {
-                logger.log(Level.SEVERE, ex.getLocalizedMessage());// TODO: Add a user notification
-            } 
+             try {
+                 Path tmpFile = Files.createTempFile("", ".svg");
+                 try (BufferedWriter bw = Files.newBufferedWriter(tmpFile, UTF_8, TRUNCATE_EXISTING)) {
+                     bw.write(currentImageContent);
+                 }
 
-            if(tmpFile != null) {
-                Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
+                 Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
 
-                if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
-                    try {
-                        desktop.browse(Utilities.toURI(tmpFile));
-                    } catch (IOException e) {
-                        logger.log(Level.SEVERE, e.getLocalizedMessage());
-                    }
-                }
-            } else {
-                // TODO: Add a user notification                
-            }
+                 if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
+                     try {
+                         desktop.browse(tmpFile.toUri());
+                     } catch (IOException e) {
+                         logger.log(Level.SEVERE, e.getLocalizedMessage());
+                     }
+                 }
+             } catch (IOException ex) {
+                 logger.log(Level.SEVERE, ex.getLocalizedMessage());// TODO: Add a user notification
+             }
         }
          
      }
