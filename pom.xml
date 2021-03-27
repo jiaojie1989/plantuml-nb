@@ -227,12 +227,6 @@
             <type>nbm</type>
         </dependency>
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.16</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
             <groupId>net.sourceforge.plantuml-depend</groupId>
             <artifactId>plantuml-dependency-cli</artifactId>
             <version>1.4.0</version>

@@ -67,9 +67,6 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="excludePatternsLabel">
       <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Dialog" size="12" style="1"/>
-        </Property>
         <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
           <ComponentRef name="excludePatternTextField"/>
         </Property>
@@ -87,9 +84,6 @@
     </Component>
     <Component class="javax.swing.JLabel" name="includePatternsLabel">
       <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Dialog" size="12" style="1"/>
-        </Property>
         <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
           <ComponentRef name="includePatternTextField"/>
         </Property>
