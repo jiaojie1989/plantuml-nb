@@ -37,6 +37,7 @@ import net.sourceforge.plantuml.FileFormat;
 import net.sourceforge.plantuml.FileFormatOption;
 import net.sourceforge.plantuml.SourceStringReader;
 import net.sourceforge.plantuml.preproc.Defines;
+import net.sourceforge.plantuml.security.SFile;
 import org.netbeans.api.queries.FileEncodingQuery;
 import org.netbeans.modules.plantumlnb.PrettyPrinter;
 import org.netbeans.modules.plantumlnb.ui.options.PlantUMLPanel;
@@ -82,7 +83,7 @@ public class PUMLGenerator {
                 inputFile.asText(charset.name()),
                 charset.name(),
                 Collections.<String>emptyList(),
-                FileUtil.toFile(inputFile).getParentFile());
+                new SFile(inputFile.getParent().getPath()));
         // Write the first image to "os"
         return reader.generateImage(os, new FileFormatOption(fileFormat));
 
