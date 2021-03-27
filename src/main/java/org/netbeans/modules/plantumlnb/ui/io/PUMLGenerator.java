@@ -29,6 +29,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.charset.Charset;
 import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,11 +37,12 @@ import net.sourceforge.plantuml.FileFormat;
 import net.sourceforge.plantuml.FileFormatOption;
 import net.sourceforge.plantuml.SourceStringReader;
 import net.sourceforge.plantuml.preproc.Defines;
+import org.netbeans.api.queries.FileEncodingQuery;
 import org.netbeans.modules.plantumlnb.PrettyPrinter;
 import org.netbeans.modules.plantumlnb.ui.options.PlantUMLPanel;
-import static org.netbeans.modules.plantumlnb.ui.options.PlantUMLPanel.DEFAULT_UTF8_ENCODING;
+
 import static org.netbeans.modules.plantumlnb.ui.options.PlantUMLPanel.DOT_MANUAL_MODE_DOT_PATH;
-import static org.netbeans.modules.plantumlnb.ui.options.PlantUMLPanel.PLANTUML_ENCODING;
+
 import org.openide.filesystems.FileObject;
 import org.openide.filesystems.FileUtil;
 import org.openide.util.NbPreferences;
@@ -75,16 +77,10 @@ public class PUMLGenerator {
             System.clearProperty("GRAPHVIZ_DOT");
         }
 
-        /**
-         * TODO: This particular constructor seems to use UTF-8 no matter which
-         * charset is passed as an argument. Replace this to use user specified
-         * charset in the future.
-         */
-//            SourceStringReader reader = new SourceStringReader(inputFile.asText(), FileUtil.toFile(inputFile).getParentFile());
-        String charset = NbPreferences.forModule(PlantUMLPanel.class).get(PLANTUML_ENCODING, DEFAULT_UTF8_ENCODING);
+        Charset charset = FileEncodingQuery.getEncoding(inputFile);
         SourceStringReader reader = new SourceStringReader(new Defines(),
-                inputFile.asText(),
-                charset,
+                inputFile.asText(charset.name()),
+                charset.name(),
                 Collections.<String>emptyList(),
                 FileUtil.toFile(inputFile).getParentFile());
         // Write the first image to "os"
