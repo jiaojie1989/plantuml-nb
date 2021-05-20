@@ -198,7 +198,7 @@ public class pumlDataObject extends MultiDataObject implements FileChangeListene
 
                 tc.setCurrentDataObject(pumlDataObject.this);
 
-                tc.setNewContent(PUMLGenerator.getInstance().generateIntoString(fileObject, FileFormat.SVG));
+                tc.setNewContent(PUMLGenerator.getInstance().generateSvgString(fileObject));
             }
             
         });        

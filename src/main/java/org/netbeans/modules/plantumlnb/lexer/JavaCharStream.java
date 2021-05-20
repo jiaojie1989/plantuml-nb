@@ -1,4 +1,4 @@
-/* 
+/*
  * The MIT License
  *
  * Copyright 2013 Venkat Ram Akkineni.
@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.netbeans.modules.plantumlnb.pumllexer;
+package org.netbeans.modules.plantumlnb.lexer;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -51,11 +51,11 @@ public class JavaCharStream {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
-    char BeginToken() throws IOException {
+    char beginToken() throws IOException {
         return readChar();
     }
 
-    String GetImage() {
+    String getImage() {
         return input.readText().toString();
     }
 
@@ -66,11 +66,11 @@ public class JavaCharStream {
         return input.readText(input.readLength() - len, input.readLength()).toString().toCharArray();
     }
 
-    void ReInit(Reader stream, int i, int i0) {
+    void reInit(Reader stream, int i, int i0) {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
-    void ReInit(InputStream stream, String encoding, int i, int i0) throws UnsupportedEncodingException {
+    void reInit(InputStream stream, String encoding, int i, int i0) throws UnsupportedEncodingException {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
@@ -103,4 +103,3 @@ public class JavaCharStream {
     }
 
 }
-/* JavaCC - OriginalChecksum=510159e44264a542b2c847d45b11c3a9 (do not edit this line) */

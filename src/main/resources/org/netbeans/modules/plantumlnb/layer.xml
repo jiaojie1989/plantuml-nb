@@ -25,7 +25,7 @@
     <folder name="OptionsDialog">
         <folder name="PreviewExamples">
             <folder name="text">
-                <file name="x-puml" url="PUMLTemplate.puml"/>
+                <file name="x-puml" url="PUMLSample.puml"/>
             </folder>
         </folder>
     </folder>

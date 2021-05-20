@@ -171,7 +171,7 @@ public final class PlantUMLWizardIterator implements WizardDescriptor.Instantiat
         SourceGroup sourceGroup = (SourceGroup) sourceGroupsComboBox.getSelectedItem();
         
         JComboBox packageSelectionComboBox = firstPanel.getPackageSelectionComboBox();
-        String packageName = (String) packageSelectionComboBox.getEditor().getItem();
+        String packageName = packageSelectionComboBox.getEditor().getItem().toString();
         packageName = packageName.replace(".", "/");
         
         return sourceGroup.getRootFolder().getPath() + "/" + packageName;

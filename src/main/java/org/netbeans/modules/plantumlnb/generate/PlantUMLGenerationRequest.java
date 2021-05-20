@@ -25,69 +25,48 @@ package org.netbeans.modules.plantumlnb.generate;
 
 import java.io.File;
 import java.util.StringJoiner;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.experimental.Accessors;
 import org.netbeans.modules.plantumlnb.StringUtils;
 
 /**
  *
  * @author venkat
  */
-@Accessors
 public class PlantUMLGenerationRequest {
     
-    @Setter @Getter
     private String destinationDirectory;
     
-    @Setter @Getter
     private String outputFileName;
 
-    @Setter @Getter
     private String sourcesDirectory;
     
-    @Setter @Getter
     private String includePatterns;
     
-    @Setter @Getter
     private String excludePatterns;
     
     // Display type options
-    @Setter @Getter
     private boolean abstractClasses = true;
     
-    @Setter @Getter
     private boolean annotations = true;
     
-    @Setter @Getter
     private boolean classes = true;
     
-    @Setter @Getter
     private boolean enums = true;
     
-    @Setter @Getter
     private boolean extensions = true;
     
-    @Setter @Getter
     private boolean implementations = true;
     
-    @Setter @Getter
     private boolean imports = true;
     
-    @Setter @Getter
     private boolean interfaces = true;
     
-    @Setter @Getter
     private boolean nativeMethods = true;
     
-    @Setter @Getter
     private boolean staticImports = true;
     // End Display type options
     
-    @Setter @Getter
     private String displayNameRegex = "";
     
-    @Setter @Getter
     private String displayPackageNameRegex = "";
 
     public PlantUMLGenerationRequest() {
@@ -153,5 +132,141 @@ public class PlantUMLGenerationRequest {
         }
         
         return new File(sourcesDirectory);
+    }
+
+    public String getDestinationDirectory() {
+        return destinationDirectory;
+    }
+
+    public void setDestinationDirectory(String destinationDirectory) {
+        this.destinationDirectory = destinationDirectory;
+    }
+
+    public String getOutputFileName() {
+        return outputFileName;
+    }
+
+    public void setOutputFileName(String outputFileName) {
+        this.outputFileName = outputFileName;
+    }
+
+    public String getSourcesDirectory() {
+        return sourcesDirectory;
+    }
+
+    public void setSourcesDirectory(String sourcesDirectory) {
+        this.sourcesDirectory = sourcesDirectory;
+    }
+
+    public String getIncludePatterns() {
+        return includePatterns;
+    }
+
+    public void setIncludePatterns(String includePatterns) {
+        this.includePatterns = includePatterns;
+    }
+
+    public String getExcludePatterns() {
+        return excludePatterns;
+    }
+
+    public void setExcludePatterns(String excludePatterns) {
+        this.excludePatterns = excludePatterns;
+    }
+
+    public boolean isAbstractClasses() {
+        return abstractClasses;
+    }
+
+    public void setAbstractClasses(boolean abstractClasses) {
+        this.abstractClasses = abstractClasses;
+    }
+
+    public boolean isAnnotations() {
+        return annotations;
+    }
+
+    public void setAnnotations(boolean annotations) {
+        this.annotations = annotations;
+    }
+
+    public boolean isClasses() {
+        return classes;
+    }
+
+    public void setClasses(boolean classes) {
+        this.classes = classes;
+    }
+
+    public boolean isEnums() {
+        return enums;
+    }
+
+    public void setEnums(boolean enums) {
+        this.enums = enums;
+    }
+
+    public boolean isExtensions() {
+        return extensions;
+    }
+
+    public void setExtensions(boolean extensions) {
+        this.extensions = extensions;
+    }
+
+    public boolean isImplementations() {
+        return implementations;
+    }
+
+    public void setImplementations(boolean implementations) {
+        this.implementations = implementations;
+    }
+
+    public boolean isImports() {
+        return imports;
+    }
+
+    public void setImports(boolean imports) {
+        this.imports = imports;
+    }
+
+    public boolean isInterfaces() {
+        return interfaces;
+    }
+
+    public void setInterfaces(boolean interfaces) {
+        this.interfaces = interfaces;
+    }
+
+    public boolean isNativeMethods() {
+        return nativeMethods;
+    }
+
+    public void setNativeMethods(boolean nativeMethods) {
+        this.nativeMethods = nativeMethods;
+    }
+
+    public boolean isStaticImports() {
+        return staticImports;
+    }
+
+    public void setStaticImports(boolean staticImports) {
+        this.staticImports = staticImports;
+    }
+
+    public String getDisplayNameRegex() {
+        return displayNameRegex;
+    }
+
+    public void setDisplayNameRegex(String displayNameRegex) {
+        this.displayNameRegex = displayNameRegex;
+    }
+
+    public String getDisplayPackageNameRegex() {
+        return displayPackageNameRegex;
+    }
+
+    public void setDisplayPackageNameRegex(String displayPackageNameRegex) {
+        this.displayPackageNameRegex = displayPackageNameRegex;
     }
 }
