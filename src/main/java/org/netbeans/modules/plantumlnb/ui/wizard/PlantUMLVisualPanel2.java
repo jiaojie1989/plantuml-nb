@@ -28,16 +28,10 @@ import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.DocumentEvent;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.experimental.Accessors;
 
-@Accessors
 public final class PlantUMLVisualPanel2 extends JPanel implements GenericDocumentListener,
         Initializable<PlantUMLWizardPanel2>, GenericChangeListener {
 
-    @Setter
-    @Getter
     private PlantUMLWizardPanel2 plantUMLWizardPanel2;
 
     private final List<ChangeListener> listeners = new ArrayList<>();

@@ -24,7 +24,6 @@
 package org.netbeans.modules.plantumlnb.ui;
 
 import java.awt.image.BufferedImage;
-import java.awt.peer.ComponentPeer;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.IOException;
@@ -365,14 +364,11 @@ public final class PUMLTopComponent extends TopComponent implements Serializable
 
             @Override
             public void run() {
-                InputStream inputStream = null;
-                BufferedImage image = null;
-                                                    
                 Set fss = dataObject.files();
                 Iterator iter = fss.iterator();
                 while (iter.hasNext()) {
                     FileObject fo = (FileObject) iter.next();
-                    setNewContent(PUMLGenerator.getInstance().generateIntoString(fo, FileFormat.SVG));
+                    setNewContent(PUMLGenerator.getInstance().generateSvgString(fo));
                 }
 
                 if (panelUI == null) {
@@ -530,7 +526,7 @@ public final class PUMLTopComponent extends TopComponent implements Serializable
                 while (iter.hasNext()) {
                     FileObject fo = (FileObject) iter.next();
                     if(fo.getExt().toLowerCase().equals("puml")){
-                        setNewContent(PUMLGenerator.getInstance().generateIntoString(fo, FileFormat.SVG));
+                        setNewContent(PUMLGenerator.getInstance().generateSvgString(fo));
                     } else {
                         setDefaultContent();
                     }
@@ -547,7 +543,7 @@ public final class PUMLTopComponent extends TopComponent implements Serializable
             if(evt.getPropertyName().toLowerCase().equals(TopComponent.Registry.PROP_OPENED) 
                     && evt.getNewValue() instanceof TopComponent){
                 TopComponent tc = (TopComponent) evt.getNewValue();
-                ComponentPeer cp = tc.getPeer();                
+//                ComponentPeer cp = tc.getPeer();
 //                String displayName = ((Node[]) evt.getNewValue())[0].getDisplayName();            
 
 //                if(displayName.toLowerCase().endsWith("puml")){

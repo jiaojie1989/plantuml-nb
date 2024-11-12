@@ -45,29 +45,31 @@ public class RenderImageThread extends Thread {
     public void run() {
         // TODO: This line causes the problem below.
         // http://stackoverflow.com/questions/16502071/netbeans-save-hangs
-        
+        pumlDataObject dataObject = (pumlDataObject) topComponent.getCurrentDataObject();
+
+        if(dataObject == null) {
+            return;
+        }
+
         SVGImagePreviewPanel panelUI = SVGImagePreviewPanel.getInstance();
-        panelUI.setCurrentDataObject((pumlDataObject) topComponent.getCurrentDataObject());
+        panelUI.setCurrentDataObject(dataObject);
         panelUI.renderSVGFileOnTabSwitch(imageContent);
         Toolbar.instance().setSvgImagePreviewPanel(panelUI);
-        
+
         /**
          * This needs to be in awt thread, otherwise netbeans complains.
          * 
          * java.lang.IllegalStateException: Problem in some module which uses 
          * Window System: Window System API is required to be called from AWT 
          * thread only, see http://core.netbeans.org/proposals/threading/
+         *
+         * @todo: All Swing Interaction should be on the EDT, so calling into
+         * repaint from another threads looks doubious
          */
-        synchronized (topComponent) {
-            SwingUtilities.invokeLater(() -> {
-                // TODO: Remove the next two lines after thorough testing of the synchronized block.
-                // This happens when there are multiple puml filed opened & they are all closed in quick succession before this thread completes excution.
-                //if (topComponent.getCurrentDataObject() != null)  {
-                    topComponent.setDisplayName(((pumlDataObject) topComponent.getCurrentDataObject()).getPrimaryFile().getName());
-                //}
-            });
-        }
-        
+        SwingUtilities.invokeLater(() -> {
+            topComponent.setDisplayName(dataObject.getPrimaryFile().getName());
+        });
+
         topComponent.repaint();
     }
 

@@ -2,6 +2,22 @@
 
 Netbeans plugin that wraps PlantUML to provide its functionality from within Netbeans.
 
+### Version 1.10
+
+    * Bugfix: Image export creates defect files
+    * Bugfix: Encoding handling is buggy and not integrated into the NetBeans
+              infrastructure
+    * Bugfix: Open in Browser does not work
+    * Bugfix: Selecting text in preview window raises NoSuchMethodError
+    * Bugfix: Invoking "PlantUML from existing java sources" raises exception
+    * Bugfix: Scaling with right mouse click is not correctly ended
+    * Bugfix: Prevent NullPointerException from preview window
+    * Feature: Update bundled PlantUML (2021.3)
+    * Feature: Remove need for project for creating PlantUML diagrams
+    * Feature: Ensure project can be build on recent netbeans and JDK versions.
+    * Feature: Remove lombok usage
+    * Feature: Cleanup code generation from the javcc grammar
+
 ### Version 1.9
 
     * latest version of PlantUML (2018.8).

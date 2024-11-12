@@ -21,10 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-@TemplateRegistration(folder = "PlantUML", 
+@TemplateRegistration(
+        folder = "PlantUML",
         displayName = "New PlantUML Diagram",
-        content = "pumlTemplate.puml", 
-        description = "NewTemplateDescription.html")
+        content = "pumlTemplate.puml",
+        description = "NewTemplateDescription.html",
+        requireProject = false
+)
 package org.netbeans.modules.plantumlnb;
 
 import org.netbeans.api.templates.TemplateRegistration;

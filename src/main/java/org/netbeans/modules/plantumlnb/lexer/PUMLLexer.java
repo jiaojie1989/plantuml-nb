@@ -23,9 +23,6 @@
  */
 package org.netbeans.modules.plantumlnb.lexer;
 
-import org.netbeans.modules.plantumlnb.pumllexer.JavaCharStream;
-import org.netbeans.modules.plantumlnb.pumllexer.PUMLParserTokenManager;
-import org.netbeans.modules.plantumlnb.pumllexer.Token;
 import org.netbeans.spi.lexer.Lexer;
 import org.netbeans.spi.lexer.LexerRestartInfo;
 
@@ -41,8 +38,14 @@ class PUMLLexer implements Lexer<PUMLTokenId> {
 
     PUMLLexer(LexerRestartInfo<PUMLTokenId> info) {
         this.info = info;
-        JavaCharStream stream = new JavaCharStream(info.input());
-        javaParserTokenManager = new PUMLParserTokenManager(stream);
+        if (info.state() != null) {
+            PUMLLexerState lexState = (PUMLLexerState) info.state();
+            JavaCharStream stream = new JavaCharStream(info.input());
+            javaParserTokenManager = new PUMLParserTokenManager(stream, lexState.curLexState);
+        } else {
+            JavaCharStream stream = new JavaCharStream(info.input());
+            javaParserTokenManager = new PUMLParserTokenManager(stream);
+        }
     }
 
     @Override
@@ -56,10 +59,27 @@ class PUMLLexer implements Lexer<PUMLTokenId> {
 
     @Override
     public Object state() {
-        return null;
+        return new PUMLLexerState(this.javaParserTokenManager.curLexState);
     }
 
     @Override
     public void release() {
+    }
+
+    private static class PUMLLexerState {
+        private int curLexState;
+
+        public PUMLLexerState(int curLexState) {
+            this.curLexState = curLexState;
+        }
+
+        public int getCurLexState() {
+            return curLexState;
+        }
+
+        public void setCurLexState(int curLexState) {
+            this.curLexState = curLexState;
+        }
+
     }
 }
